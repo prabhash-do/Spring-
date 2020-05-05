@@ -3,12 +3,12 @@ package com.grailsapplication
 import grails.config.Config
 import grails.core.support.GrailsConfigurationAware
 import grails.plugin.springsecurity.annotation.Secured
+import org.springframework.security.web.WebAttributes
 
 @Secured('permitAll')
 class LoginController extends grails.plugin.springsecurity.LoginController implements GrailsConfigurationAware {
 
     List<String> coordinatePositions
-
 
     def auth() {
 
@@ -22,7 +22,7 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
         Collections.shuffle(coordinatePositions)
         String position = coordinatePositions.first()
 
-
+        System.out.println("Parameters"+params)
         String postUrl = request.contextPath + conf.apf.filterProcessesUrl
         render view: 'auth', model: [postUrl            : postUrl,
                                      rememberMeParameter: conf.rememberMe.parameter,
@@ -30,6 +30,12 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
                                      passwordParameter  : conf.apf.passwordParameter,
                                      gspLayout          : conf.gsp.layoutAuth,
                                      position           : position]
+    }
+
+    def authfail(){
+
+        flash.message = "Invalid coordinates value or Wrong Credentials"
+        redirect action: "auth"
     }
 
     @Override
