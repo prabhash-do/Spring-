@@ -3,6 +3,20 @@
 <head>
     <meta name="layout" content="main"/>
     <title>${message(code: 'welcome.utils.tool')}</title>
+    <style type="text/css">
+    #progressStatus {
+        width: 0%;
+        background-color: #ddd;
+    }
+    #progressBar {
+        width: 0%;
+        height: 35px;
+        background-color: #4CAF50;
+        text-align: center;
+        line-height: 32px;
+        color: white;
+    }
+    </style>
 </head>
 
 <body onload="setup()">
@@ -20,6 +34,9 @@
     <fieldset class="buttons">
         <ul>
             <li>
+                <div id="progressStatus">
+                    <div id="progressBar"></div>
+                </div>
                 <g:form controller="upload" action="doUpload" method="POST" enctype="multipart/form-data"
                         useToken="true">
                     <span class="button">
@@ -67,10 +84,31 @@
         function savefname() {
             var filename = $('#file').val();
             if (filename != null && filename != '') {
+                updateProgressBar();
                 return true;
             } else {
                 alert("${message(code: 'alert.while.uploading')}")
                 return false;
+            }
+        }
+
+        function updateProgressBar() {
+            var progressBar = document.getElementById("progressBar");
+            var progressStatus = document.getElementById("progressStatus");
+            progressStatus.style.width = "auto";
+            var width = 1;
+            var identity = setInterval(scene, 10);
+
+            function scene() {
+                if (width >= 100) {
+                    clearInterval(identity);
+                    progressBar.hidden = true;
+                    progressStatus.hidden = true;
+                } else {
+                    width++;
+                    progressBar.style.width = width + '%';
+                    progressBar.innerHTML = width  + '%';
+                }
             }
         }
     </g:javascript>
