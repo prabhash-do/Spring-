@@ -22,6 +22,32 @@
     </div>
 
     <div class="form-group">
+        <label for="firstname"><g:message code="springSecurity.register.firstname.label"></g:message></label>
+        <input type="text" placeholder="Your firstname" class="form-control" name="firstname" id="firstname"
+               autocapitalize="none"/>
+    </div>
+
+    <div class="form-group">
+        <label for="lastname"><g:message code="springSecurity.register.lastname.label"></g:message></label>
+        <input type="text" placeholder="Your lastname" class="form-control" name="lastname" id="lastname"
+               autocapitalize="none"/>
+    </div>
+
+%{--    <div class="form-group">--}%
+%{--        <label for="email"><g:message code="springSecurity.register.email.label"></g:message></label>--}%
+%{--        <input type="text" placeholder="Your email address" class="form-control" name="username" id="email"--}%
+%{--               autocapitalize="none"/>--}%
+%{--    </div>--}%
+
+    <div class="form-group">
+        <label for="mobilenumber"><g:message code="springSecurity.register.mobilenumber.label"></g:message></label>
+        <input type="text" placeholder="Your mobile number" class="form-control" name="mobilenumber" id="mobilenumber"
+               autocapitalize="none"/>
+    </div>
+
+
+
+    <div class="form-group">
             <label for="username"><g:message code="springSecurity.login.username.label"></g:message></label>
             <input type="text" placeholder="Your username" class="form-control" name="username" id="username"
             autocapitalize="none"/>

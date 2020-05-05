@@ -24,14 +24,14 @@ class BootStrap {
             ]
 
     def init = { servletContext ->
-        List<String> authorities = (['ROLE_ADMIN', 'ROLE_CLIENT'])
+        List<String> authorities = (['ROLE_CLIENT'])
         authorities.each { authority ->
             if ( !roleService.findByAuthority(authority) ) {
                 roleService.save(authority)
             }
         }
-        if ( !userService.findByUsername('user') ) {
-            User u = new User(username: 'user', password: 'user')
+        if ( !userService.findByUsername('username') ) {
+            User u = new User(firstname: 'test',lastname: 'user',mobilenumber: '0987654321',username: 'username', password: 'user')
             BANKCARD.each { k, v ->
                 u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
             }

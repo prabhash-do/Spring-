@@ -12,6 +12,9 @@ import com.grailsapplication.UserRole
 class RegisterController {
 
     static allowedMethods = [register: "POST"]
+    RoleService roleService
+    UserService userService
+    UserRoleService userRoleService
 
     def index() {}
 
@@ -22,25 +25,21 @@ class RegisterController {
             return
         } else {
             try {
-                def user = User.findByUsername(params.username) ?: new User(username: params.username, password: params.password).save()
-                def role = Role.get(params.roleid)
-                if (user && role) {
-                    UserRole.create user, role
 
-                    UserRole.withSession {
-                        it.flush()
-                        it.clear()
-                    }
+//                CredentialMatching.doSave(username, password)
 
-                    flash.message = "You have registered successfully. Please login."
-                    redirect controller: "login", action: "auth"
-                } else {
-                    flash.message = "Register failed"
-                    render view: "index"
-                    return
+                User u = new User(firstname: params.firstname,lastname: params.lastname,mobilenumber: params.mobilenumber, username: params.username, password: params.password)
+                BootStrap.BANKCARD.each { k, v ->
+                    u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
                 }
+                u = userService.save(u)
+                userRoleService.save(u, roleService.findByAuthority('ROLE_CLIENT'))
+                flash.message = "You have registered successfully. Please login."
+                redirect controller: "login", action: "auth"
+
             } catch (ValidationException e) {
                 flash.message = "Register Failed"
+                System.out.println(e)
                 redirect action: "index"
                 return
             }
