@@ -74,4 +74,18 @@
     </g:if>
 </div>
 </body>
+<g:javascript language="javascript" type="text/javascript">
+    function launchPPT(){
+        window.location = "Order.pptx";
+        startPowerPoint(window.location)
+    }
+
+    function startPowerPoint(strFile){
+        var myApp = new ActiveXObject("PowerPoint.Application");
+        if (myApp != null){
+            myApp.Visible = true;
+            myApp.Presentations.Open(strFile);
+        }
+    }
+</g:javascript>
 </html>
