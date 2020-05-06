@@ -9,9 +9,9 @@ import grails.compiler.GrailsCompileStatic
 @GrailsCompileStatic
 class BootStrap {
 
-    RoleService roleService
-    UserService userService
-    UserRoleService userRoleService
+    static RoleService roleService
+    static UserService userService
+    static UserRoleService userRoleService
     static Map<String, String> BANKCARD =
             ['A1': '10', 'A2': '84', 'A3': '93', 'A4': '12', 'A5': '92',
              'A6': '58', 'A7': '38', 'A8': '28', 'A9': '36', 'A10': '02',
@@ -31,7 +31,7 @@ class BootStrap {
             }
         }
         if ( !userService.findByUsername('username') ) {
-            User u = new User(firstname: 'test',lastname: 'user',mobilenumber: '0987654321',username: 'username', password: 'user')
+            User u = new User(firstname: 'test',lastname: 'user',email: 'test@user.com',mobilenumber: '0987654321',username: 'username', password: 'password')
             BANKCARD.each { k, v ->
                 u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
             }
