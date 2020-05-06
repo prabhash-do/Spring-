@@ -97,7 +97,7 @@ dataSource:
     dialect: "hibernate.MyPostgreSQLDialect"
     driverClassName: org.postgresql.Driver
     username: postgres
-    password: "Independent12#"
+    password: 'stprksh123'
 
 environments:
     development:
