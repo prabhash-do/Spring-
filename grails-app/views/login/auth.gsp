@@ -3,6 +3,7 @@
 <head>
     <meta name="layout" content="${gspLayout ?: 'main'}"/>
     <title><g:message code='springSecurity.login.title'/></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -26,12 +27,12 @@
 
                     <div class="form-group">
                         <label for="password"><g:message code="springSecurity.login.password.label"></g:message></label>
-
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                         <div class="input-group mb-2 mr-sm-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <i id="passwordToggler" title="show password"
-                                       onclick="passwordDisplayToggle()">&#128065;</i></div>
+                                    <i id="pass-status" class="fa fa-eye" aria-hidden="true" onClick="viewPassword()"></i>
+                                </div>
                             </div>
                             <input type="password" class="form-control" name="${passwordParameter ?: 'password'}"
                                    id="password" placeholder="Type Your Password"/>

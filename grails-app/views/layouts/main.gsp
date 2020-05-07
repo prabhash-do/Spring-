@@ -36,9 +36,7 @@
                 <g:form controller="changePassword">
                     <input type='submit' id="submit" value="${message(code: 'default.button.change')}"/>
                 </g:form>
-                <g:form controller="resetPassword">
-                    <input type='submit' id="submit" value="${message(code: 'default.button.reset')}"/>
-                </g:form>
+
                 <g:form controller="logout">
                     <input type='submit' id="submit" value="${message(code: 'default.button.logout')}"/>
                 </g:form>
