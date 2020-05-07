@@ -22,7 +22,6 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
         Collections.shuffle(coordinatePositions)
         String position = coordinatePositions.first()
 
-        System.out.println("Parameters"+params)
         String postUrl = request.contextPath + conf.apf.filterProcessesUrl
         render view: 'auth', model: [postUrl            : postUrl,
                                      rememberMeParameter: conf.rememberMe.parameter,
