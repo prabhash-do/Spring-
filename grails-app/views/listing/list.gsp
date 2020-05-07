@@ -1,7 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+
 <html>
 <head>
+    <style type="text/css">
+    .file-preview {
+        background:#ccc;
+        border:5px solid #fff;
+        box-shadow:0 0 4px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow:0 0 4px rgba(0, 0, 0, 0.5);
+        -webkit-box-shadow:0 0 4px rgba(0, 0, 0, 0.5);
+        display:inline-block;
+        float:left;
+        margin-right:1em;
+        width:60px;
+        height:60px;
+        text-align:center;
+    }
+    </style>
     <meta name="layout" content="main"/>
+    <asset:javascript src='jquery-3.3.1.min.js'/>
     <title>${message(code: 'perform.file.listing')}</title>
 </head>
 
@@ -19,8 +36,9 @@
     </section>
 </div>
 
-<div id="design" role="main">
+<div id="design" role="main" >
     <g:each in="${remotelist}">
+
         <ul>
             <li>
                 <div class="row">
@@ -31,7 +49,9 @@
                             <video style="height: 50px ; width: 50px" src="${resource(dir: 'upload/videos', file: it)}" alt="Video" loop preload="auto"/>
                         </div>
                     </div>
-
+                    <div class="file-preview">
+                        <img style="height:50px ;width:50px" src="${resource(dir: 'images', file: 'Capture.png')}"  alt="Image"/>
+                    </div>
                     <div>
                         <g:link controller="delete" action="doDelete" params="[filename: it]"
                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><g:message
@@ -73,19 +93,6 @@
         </g:each>
     </g:if>
 </div>
-</body>
-<g:javascript language="javascript" type="text/javascript">
-    function launchPPT(){
-        window.location = "Order.pptx";
-        startPowerPoint(window.location)
-    }
 
-    function startPowerPoint(strFile){
-        var myApp = new ActiveXObject("PowerPoint.Application");
-        if (myApp != null){
-            myApp.Visible = true;
-            myApp.Presentations.Open(strFile);
-        }
-    }
-</g:javascript>
+</body>
 </html>
