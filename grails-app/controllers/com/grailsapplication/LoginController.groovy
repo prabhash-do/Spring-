@@ -16,6 +16,7 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
 
         if (springSecurityService.isLoggedIn()) {
             redirect uri: conf.successHandler.defaultTargetUrl
+            System.out.println("User is logged in")
             return
         }
 
