@@ -26,7 +26,7 @@
             <li>
                 <div class="row">
                     <div class="column">
-                        ${it}
+                        <a href=${it.value} target="_blank">${it.value}</a>
                     </div>
 
                     <div>
