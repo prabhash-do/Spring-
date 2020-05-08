@@ -36,8 +36,8 @@ dependencies {
     compile "postgresql:postgresql:8.4-702.jdbc4"
     compile 'org.grails.plugins:quartz:2.0.13'
     compile 'org.grails.plugins:spring-security-core:3.3.1'
+    compile 'domurtag.plugins:grails-simple-captcha:1.0.0-grails3'
     
-
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"
