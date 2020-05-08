@@ -10,20 +10,17 @@ class PreviewController {
     def preview() {
         def filename = params.filename
         def ex = filename.substring(filename.lastIndexOf("."));
-        if (ex.equalsIgnoreCase(".pdf")) {
+        if (ex.equalsIgnoreCase(".pdf")|| ex.equalsIgnoreCase(".txt")) {
 
-            /*render to pdf viewer.*/
-            redirect controller: "preview", action: "pdf"
+            render view: "/pdfReader/pdfReader"   /*render to pdf viewer.*/
 
         } else if (ex.equalsIgnoreCase(".pptx")) {
             /*render to ppt  player.*/
 
         } else if (ex.equalsIgnoreCase(".mp4")) {
-            println("mp4444444444444")
-            def vedioflag = "true"
+            def vedioflag = "true"   /*render to video player.*/
 
-            /*render to video player.*/
-//            render view: "../listing/list", model: [filename: filename, vedioflag: vedioflag]
+
             render template: "/templates/play", model: [filename: filename, vedioflag: vedioflag]
         } else {
             redirect controller: "listing", action: "doListing"
