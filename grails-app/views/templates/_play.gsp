@@ -96,7 +96,7 @@
     }
 
     // Update source of existing video
-    setVideoSource('#video', 'https://www.w3schools.com/html/mov_bbb.mp4')
+    setVideoSource('#video', '${resource(dir: 'upload', file: filename)}')
 </script>
 </body>
 </html>

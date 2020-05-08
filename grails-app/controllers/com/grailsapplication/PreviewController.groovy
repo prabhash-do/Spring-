@@ -26,9 +26,10 @@ class PreviewController {
 //            render view: "../listing/list", model: [filename: filename, vedioflag: vedioflag]
             render template: "/templates/play", model: [filename: filename, vedioflag: vedioflag]
         } else {
-            println("file cannot be previewed")
+            redirect controller: "listing", action: "doListing"
+            flash.error = g.message(code: "flash.message.file.cannot.previewed")
+            println(g.message(code: "flash.message.file.cannot.previewed"))
         }
     }
-
 
 }
