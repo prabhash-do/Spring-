@@ -93,6 +93,5 @@
         </g:each>
     </g:if>
 </div>
-
 </body>
 </html>
