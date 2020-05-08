@@ -7,7 +7,6 @@
 
 <body>
 <g:render template="/templates/grailstemplates"/>
-
 <div id="content" role="main">
     <content tag="nav">
         <g:link controller="secured">
@@ -33,6 +32,9 @@
                         <g:link controller="delete" action="doDelete" params="[filename: it]"
                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><g:message
                                 code="default.delete.label"/></g:link>
+
+                        <g:link controller="preview" action="preview" params="[filename: it]"><g:message
+                                code="default.preview.label"/></g:link>
                     </div>
                 </div>
             </li>
