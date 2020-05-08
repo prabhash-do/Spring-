@@ -16,6 +16,16 @@
         height:60px;
         text-align:center;
     }
+    .row{
+        margin-top: 40px;
+        margin-bottom: 15px;
+    }
+
+    .file-preview:hover {
+        -ms-transform: scale(2.5); /* IE 9 */
+        -webkit-transform: scale(2.5); /* Safari 3-8 */
+        transform: scale(2.5);
+    }
     </style>
     <meta name="layout" content="main"/>
     <asset:javascript src='jquery-3.3.1.min.js'/>
@@ -50,8 +60,9 @@
                         </div>
                     </div>
                     <div class="file-preview">
-                        <img style="height:50px ;width:50px" src="${resource(dir: 'images', file: 'Capture.png')}"  alt="Image"/>
-                    </div>
+                        <a href="${resource(dir: 'images', file: 'error.png')}">
+                        <img style="height:50px ;width:50px" src="${resource(dir: 'images', file: 'error.png')}"  alt="Image"/>
+                        </a></div>
                     <div>
                         <g:link controller="delete" action="doDelete" params="[filename: it]"
                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><g:message
