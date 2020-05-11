@@ -6,39 +6,60 @@ import grails.validation.ValidationException
 @Secured(['ROLE_CLIENT'])
 class ChangePasswordController {
 
+    def passwordEncoder
     def springSecurityService
 
     def index() {
         render view: '/changePassword/change'
     }
-
+/**
+ * Allow user to change password
+ * @return true
+ */
     def changepassword() {
         ResourceBundle message = ResourceBundle.getBundle("messages")
         User user = springSecurityService.currentUser
-        def passwordCurrent = params.currentpassword
-        def passwordNew = params.newpassword
-        def passwordConfirm = params.confirmpassword
 
-        if (!passwordNew.equals(passwordConfirm)) {
-            flash.message = message.getString("flash.message.new.password.mismatch")
-            redirect action: 'index'
-        } else {
-            try {
-                if (passwordNew.equals(passwordCurrent)) {
-                    flash.message = message.getString('flash.message.choose.different.password')
-                    render view: '/changePassword/change'
-                } else {
-                    passwordCurrent = passwordNew
-                    user.password = passwordCurrent
-                    BootStrap.userService.save(user)
+        if (user != null) {
+            if (user.password.isEmpty()) {
+                flash.warnmessage = g.message(code: "flash.message.user.warn")
+                log.info("No User Details Found")
+            } else {
+                def passwordCurrent = params.currentpassword
+                def passwordNew = params.newpassword
+                def passwordConfirm = params.confirmpassword
+                try {
+                    if (!passwordEncoder.isPasswordValid(user.password,
+                            passwordCurrent, null /*salt*/)) {
+                        log.info("Current password is incorrect")
+                        flash.warnmessage = message.getString('flash.message.incorrect.current.password')
+                        render view: '/changePassword/change', model: [currentpassword: passwordCurrent]
+                    } else if (!passwordNew.equals(passwordConfirm)) {
+                        log.info("New Pasword and Confirm password did not match")
+                        flash.warnmessage = message.getString("flash.message.new.password.mismatch")
+                        render view: '/changePassword/change', model: [currentpassword: passwordCurrent]
+                    } else if (passwordEncoder.isPasswordValid(user.password, passwordNew,
+                            null /*salt*/)) {
+                        log.info("Please choose a different password from current one")
+                        flash.warnmessage = message.getString('flash.message.choose.different.password')
+                        render view: '/changePassword/change', model: [currentpassword: passwordCurrent]
+                    } else {
+                        passwordCurrent = passwordNew
+                        user.password = passwordCurrent
+                        BootStrap.userService.save(user)
 
-                    flash.message = message.getString("springsecurity.change.password.success")
+                        log.info("Pasword changed Successfully")
+                        flash.successmessage = message.getString("springsecurity.change.password.success")
+                        redirect action: "index"
+                    }
+                } catch (ValidationException e) {
+                    log.error("Exception occured while Changing password:\n", e)
+                    flash.warnmessage = message.getString("springsecurity.change.password.fail")
                     redirect action: "index"
                 }
-            } catch (ValidationException e) {
-                flash.message = message.getString("springsecurity.change.password.fail")
-                redirect action: "index"
             }
         }
     }
 }
+
+

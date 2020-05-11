@@ -2,18 +2,21 @@
     <div class="msg-box successfully">
         <asset:image src="done.png"/>
         <span class="bold-txt"><g:message code="flash.message.success"/></span>
+
         <p>${flash.message}</p></div>
 </g:if>
 <g:if test="${flash.messageemail}">
     <div class="msg-box successfully">
         <asset:image src="done.png"/>
         <span class="bold-txt"><g:message code="flash.message.success"/></span>
+
         <p>${flash.messageemail}</p></div>
 </g:if>
 <g:if test="${flash.messagesms}">
     <div class="msg-box successfully">
         <asset:image src="done.png"/>
         <span class="bold-txt"><g:message code="flash.message.success"/></span>
+
         <p>${flash.messagesms}</p></div>
 </g:if>
 <g:if test="${flash.warn}">
@@ -33,4 +36,10 @@
         <asset:image src="cross.png"/>
         <span class="bold-txt">${flash.error}</span>
     </div>
+</g:if>
+<g:if test='${flash.warnmessage}'>
+    <div class="alert alert-danger" role="alert">${flash.warnmessage}</div>
+</g:if>
+<g:if test='${flash.successmessage}'>
+    <div class="alert alert-success" role="alert">${flash.successmessage}</div>
 </g:if>
