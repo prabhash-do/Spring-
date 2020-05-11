@@ -15,8 +15,21 @@ class ListRemoteFiles {
         ResourceBundle config = ResourceBundle.getBundle("config")
         HashMap<String, String> hmap = new HashMap<Integer, String>();
         String path = new File(".").getCanonicalPath();
-        String destinationPath= path+ config.getString("destination")
+        String destinationPath= path + config.getString("destinationPath")
         File folder = new File(destinationPath);
+
+        File folderImage = new File(destinationPath.concat("images\\"));
+        if (!folderImage.exists()){
+            folderImage.mkdir();
+        }
+        File folderPpt = new File(destinationPath.concat("ppts\\"));
+        if (!folderPpt.exists()){
+            folderPpt.mkdir();
+        }
+        File folderVideo = new File(destinationPath.concat("videos\\"));
+        if (!folderVideo.exists()){
+            folderVideo.mkdir();
+        }
 
         File[] files = folder.listFiles();
 
@@ -25,13 +38,35 @@ class ListRemoteFiles {
             if (file.isFile())
             {
                 URL url = file.toURI().toURL();
-                /*hmap.put("filename",file.getName())
-                hmap.put("url",url)*/
-                hmap.put(file.getName(), url)
+                hmap.put(file.getName(), url as String)
             }
             else if (file.isDirectory())
             {
-                list(file.getAbsolutePath());
+                /*list(file.getAbsolutePath());*/
+                //image
+                File[] filesImage = folderImage.listFiles();
+                for (File fileImage : filesImage) {
+                    if (fileImage.isFile()) {
+                        URL url = fileImage.toURI().toURL();
+                        hmap.put(fileImage.getName(), url as String)
+                    }
+                }
+                //ppt
+                File[] filesPpt = folderPpt.listFiles();
+                for (File filePpt : filesPpt) {
+                    if (filePpt.isFile()) {
+                        URL url = filePpt.toURI().toURL();
+                        hmap.put(filePpt.getName(), url as String)
+                    }
+                }
+                //video
+                File[] filesVideo = folderVideo.listFiles();
+                for (File fileVideo : filesVideo) {
+                    if (fileVideo.isFile()) {
+                        URL url = fileVideo.toURI().toURL();
+                        hmap.put(fileVideo.getName(), url as String)
+                    }
+                }
             }
         }
 

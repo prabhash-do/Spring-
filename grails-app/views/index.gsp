@@ -34,10 +34,9 @@
     <fieldset class="buttons">
         <ul>
             <li>
-                <div id="progressStatus">
-                    <div id="progressBar"></div>
-                </div>
-                <g:form controller="upload" action="doUpload" method="POST" enctype="multipart/form-data"
+                <asset:image src="upload.png"/>
+                <g:link controller='insert' action='insert'><g:message code="default.upload.label"/></g:link>
+                %{--<g:form controller="upload" action="doUpload" method="POST" enctype="multipart/form-data"
                         useToken="true">
                     <span class="button">
                         <asset:image src="select.jpg"/>
@@ -56,7 +55,7 @@
                                onclick="return savefname()"/>
                         <input type="hidden" id="refreshed" value="no">
                     </span>
-                </g:form>
+                </g:form>--}%
             </li>
         </ul>
         <ul>
@@ -84,7 +83,6 @@
         function savefname() {
             var filename = $('#file').val();
             if (filename != null && filename != '') {
-                updateProgressBar();
                 return true;
             } else {
                 alert("${message(code: 'alert.while.uploading')}")
@@ -92,25 +90,6 @@
             }
         }
 
-        function updateProgressBar() {
-            var progressBar = document.getElementById("progressBar");
-            var progressStatus = document.getElementById("progressStatus");
-            progressStatus.style.width = "auto";
-            var width = 1;
-            var identity = setInterval(scene, 10);
-
-            function scene() {
-                if (width >= 100) {
-                    clearInterval(identity);
-                    progressBar.hidden = true;
-                    progressStatus.hidden = true;
-                } else {
-                    width++;
-                    progressBar.style.width = width + '%';
-                    progressBar.innerHTML = width  + '%';
-                }
-            }
-        }
     </g:javascript>
 </body>
 </html>

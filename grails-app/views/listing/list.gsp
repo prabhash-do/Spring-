@@ -25,7 +25,8 @@
             <li>
                 <div class="row">
                     <div class="column">
-                        <a href=${it.value} target="_blank">${it.value}</a>
+                        %{--${it.key}--}%
+                        ${it.key as String}
                     </div>
 
                     <div>

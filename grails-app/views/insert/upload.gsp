@@ -26,7 +26,7 @@
         color: white;
     }
 
-    #progressStatus1 {
+    /*#progressStatus1 {
         width: 0%;
         background-color: #ddd;
     }
@@ -52,7 +52,7 @@
         text-align: center;
         line-height: 32px;
         color: white;
-    }
+    }*/
     </style>
 
 </head>
@@ -62,6 +62,25 @@
     <div class="container">
         <g:form controller="Upload" action="doUpload" method="POST" enctype="multipart/form-data">
             <div class="row space-rows" id="animated-cards">
+                <div class="col">
+                    <div class="card cards-shadown cards-hover">
+                        <div class="card-header"><span class="space"><i class="fab fa-angular service-icon" id="service-icon-1"></i></span>
+                            <div class="cardheader-text">
+                                <p id="cardheader-subtext-1" class="cardheader-subtext">Choose Files</p>
+
+                                    <input type="file" name="file" id="file0" accept="image/*,application/*,audio/*,video/*,.pptx,.jar">
+                                    <div id="progressStatus0">
+                        <div id="progressBar0"></div>
+                    </div>
+
+                            </div>
+                        </div>
+
+                        <input type="submit" id="submit0" value="${message(code: 'default.upload.label', default: 'Upload')}" disabled="disabled"
+                           onclick="return savefname0()"/></span>
+                </div>
+            </div>
+            %{--<div class="row space-rows" id="animated-cards">
                 <div class="col">
                     <div class="card cards-shadown cards-hover">
                         <div class="card-header"><span class="space"><i class="fab fa-angular service-icon" id="service-icon-1"></i></span>
@@ -126,7 +145,7 @@
                            onclick="return savefname2()"/>
                     <input type="hidden" id="refreshed" value="no">
                 </div>
-            </div>
+            </div>--}%
 
         </g:form>
     </div>
@@ -150,7 +169,7 @@
                 return false;
             }
         }
-         function savefname1() {
+         %{--function savefname1() {
             var filename = $('#file1').val();
             if (filename != null && filename != '') {
                 updateProgressBar1();
@@ -185,7 +204,7 @@
                 alert("${message(code: 'alert.while.uploading')}")
                 return false;
             }
-        }
+        }--}%
 
         function updateProgressBar0() {
             var progressBar = document.getElementById("progressBar0");
@@ -207,7 +226,7 @@
                 }
             }
         }
-            function updateProgressBar1() {
+            /*function updateProgressBar1() {
             var progressBar = document.getElementById("progressBar1");
             var progressStatus = document.getElementById("progressStatus1");
             progressStatus.style.width = "auto";
@@ -246,7 +265,7 @@
                     progressBar.innerHTML = width  + '%';
                 }
             }
-        }
+        }*/
         </g:javascript>
     </div>
     <script type="text/javascript">
@@ -254,7 +273,7 @@
             $('#submit0').removeAttr('disabled')
         })
     </script>
-    <script type="text/javascript">
+    %{--<script type="text/javascript">
         $('#file1').change(function () {
             $('#submit1').removeAttr('disabled')
         })
@@ -262,7 +281,7 @@
     <script type="text/javascript">
         $('#file2').change(function () {
             $('#submit2').removeAttr('disabled')
-        })</script>
+        })</script>--}%
     %{--<script type="text/javascript">
         $("#submit0").one('click', function (event) {
             event.preventDefault();
