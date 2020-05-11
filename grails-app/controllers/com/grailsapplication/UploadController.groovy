@@ -49,6 +49,59 @@ class UploadController {
         try {
             def userName = config.getString("userName")
             def password = Decrypt.getDecryptedPassword(config.getString("password"))
+
+            def file = request.getFile('file')
+            String fileName = file.originalFilename
+            String path = new File(".").getCanonicalPath();
+            def destinationPath = path + config.getString("destinationPath")
+            def extension = fileName.substring(fileName.lastIndexOf("."))
+            if (extension.equalsIgnoreCase(".png")||extension.equalsIgnoreCase("jpg")||extension.equalsIgnoreCase("jpeg")) {
+                destinationPath = destinationPath.concat("images\\")
+            }
+            else if (extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".jar")) {
+                destinationPath = destinationPath.concat("ppts\\")
+            }
+            else if (extension.equalsIgnoreCase(".mp4")||extension.equalsIgnoreCase(".mov")||extension.equalsIgnoreCase(".3gp")) {
+                destinationPath = destinationPath.concat("videos\\")
+            }
+            def files = ListRemoteFiles.list()
+            File fileDest = new File(destinationPath + fileName)
+            file.transferTo(fileDest)
+
+            if (Checkconnetivity.internetConnection()) {
+                if (!files.containsKey(fileName)) {
+                    log.info("File " + fileName + " has been uploaded successfully!")
+                    flash.message = g.message(code: "flash.message.file.upload")
+                } else {
+                    log.warn("File is already there in remote location ")
+                    flash.message = g.message(code: "flash.message.replace.file")
+                }
+
+                doDataBaseEntry(fileName)
+
+                boolean isemailchecked = params.email
+                if (isemailchecked) {
+                    doMail(fileName)
+                }
+                boolean issmschecked = params.sms
+                if (issmschecked) {
+                    //doSMS(fileName)
+                }
+
+            } else {
+                flash.error = g.message(code: "flash.message.check.connectivity")
+            }
+        } catch (Exception e) {
+            log.error("Exception occured while Uploading file:\n", e)
+        }
+        redirect view: "index"
+    }
+
+    /*def doUpload = {
+        ResourceBundle config = ResourceBundle.getBundle("config")
+        try {
+            def userName = config.getString("userName")
+            def password = Decrypt.getDecryptedPassword(config.getString("password"))
             def destinationPath = config.getString("destinationPath")
             def path = g.message(code: "default.path")
             def file = request.getFile('file')
@@ -94,6 +147,6 @@ class UploadController {
             log.error("Exception occured while Uploading file:\n", e)
         }
         redirect view: "index"
-    }
+    }*/
 
 }

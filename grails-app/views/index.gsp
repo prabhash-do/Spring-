@@ -3,6 +3,20 @@
 <head>
     <meta name="layout" content="main"/>
     <title>${message(code: 'welcome.utils.tool')}</title>
+    <style type="text/css">
+    #progressStatus {
+        width: 0%;
+        background-color: #ddd;
+    }
+    #progressBar {
+        width: 0%;
+        height: 35px;
+        background-color: #4CAF50;
+        text-align: center;
+        line-height: 32px;
+        color: white;
+    }
+    </style>
 </head>
 
 <body onload="setup()">
@@ -20,7 +34,9 @@
     <fieldset class="buttons">
         <ul>
             <li>
-                <g:form controller="upload" action="doUpload" method="POST" enctype="multipart/form-data"
+                <asset:image src="upload.png"/>
+                <g:link controller='insert' action='insert'><g:message code="default.upload.label"/></g:link>
+                %{--<g:form controller="upload" action="doUpload" method="POST" enctype="multipart/form-data"
                         useToken="true">
                     <span class="button">
                         <asset:image src="select.jpg"/>
@@ -39,7 +55,7 @@
                                onclick="return savefname()"/>
                         <input type="hidden" id="refreshed" value="no">
                     </span>
-                </g:form>
+                </g:form>--}%
             </li>
         </ul>
         <ul>
@@ -73,6 +89,7 @@
                 return false;
             }
         }
+
     </g:javascript>
 </body>
 </html>
