@@ -43,9 +43,3 @@
 <g:if test='${flash.successmessage}'>
     <div class="alert alert-success" role="alert">${flash.successmessage}</div>
 </g:if>
-<g:if test='${flash.warnmessage}'>
-    <div class="alert alert-danger" role="alert">${flash.warnmessage}</div>
-</g:if>
-<g:if test='${flash.successmessage}'>
-    <div class="alert alert-success" role="alert">${flash.successmessage}</div>
-</g:if>
