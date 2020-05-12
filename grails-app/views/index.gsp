@@ -72,24 +72,18 @@
                 </g:link>
             </li>
         </ul>
+        <ul>
+            <li>
+                <g:link controller="userManagement"><g:message code="default.user.listing.label"/>
+                </g:link>
+            </li>
+        </ul>
     </fieldset>
 
     <div class="footer row" role="contentinfo">
-        %{--        <p><g:message code="default.admin.user.role"></g:message></p>--}%
         <p><g:message code="default.client.user.role"></g:message></p>
     </div>
+    <asset:javascript src="validator.js"/>
 
-    <g:javascript>
-        function savefname() {
-            var filename = $('#file').val();
-            if (filename != null && filename != '') {
-                return true;
-            } else {
-                alert("${message(code: 'alert.while.uploading')}")
-                return false;
-            }
-        }
-
-    </g:javascript>
 </body>
 </html>

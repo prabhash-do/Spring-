@@ -16,7 +16,6 @@ class PreviewController {
             render view: "/pdfReader/pdfReader", model: [filename: filename]  /*render to pdf viewer.*/
         } else if (ex.equalsIgnoreCase(".pptx")) {
             /*render to ppt  player.*/
-            render view: "/pdfReader/pdfReader"
 
         } else if (ex.equalsIgnoreCase(".mp4")) {
             def videoflag = "true"   /*render to video player.*/
