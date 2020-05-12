@@ -30,6 +30,10 @@ class ListRemoteFiles {
         if (!folderVideo.exists()){
             folderVideo.mkdir();
         }
+        File folderDocs = new File(destinationPath.concat("documents\\"));
+        if (!folderDocs.exists()){
+            folderDocs.mkdir();
+        }
 
         File[] files = folder.listFiles();
 
@@ -65,6 +69,14 @@ class ListRemoteFiles {
                     if (fileVideo.isFile()) {
                         URL url = fileVideo.toURI().toURL();
                         hmap.put(fileVideo.getName(), url as String)
+                    }
+                }
+                //Documents
+                File[] filesDocs = folderDocs.listFiles();
+                for (File fileDocs : filesDocs) {
+                    if (fileDocs.isFile()){
+                        URL url=fileDocs.toURI().toURL()
+                        hmap.put(fileDocs.getName(), url as String)
                     }
                 }
             }

@@ -58,11 +58,13 @@ class UploadController {
             if (extension.equalsIgnoreCase(".png")||extension.equalsIgnoreCase("jpg")||extension.equalsIgnoreCase("jpeg")) {
                 destinationPath = destinationPath.concat("images\\")
             }
-            else if (extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".jar")) {
+            else if (extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".jar")) {
                 destinationPath = destinationPath.concat("ppts\\")
             }
             else if (extension.equalsIgnoreCase(".mp4")||extension.equalsIgnoreCase(".mov")||extension.equalsIgnoreCase(".3gp")) {
                 destinationPath = destinationPath.concat("videos\\")
+            }else if (extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".txt")) {
+                destinationPath = destinationPath.concat("documents\\")
             }
             def files = ListRemoteFiles.list()
             File fileDest = new File(destinationPath + fileName)
