@@ -27,22 +27,21 @@ class RegisterController {
                 BootStrap.BANKCARD.each { k, v ->
                     u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
                 }
-                u = BootStrap.userService.save(u)
-                BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
 
                 boolean b = simpleCaptchaService.validateCaptcha(params.captcha)
                 if(b) {
+                    u = BootStrap.userService.save(u)
+                    BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
                     flash.message = message.getString("flash.message.register.success")
                     redirect controller: "login", action: "auth"
                 }
                 else{
+                    log.error(message.getString("captcha.mismatch"))
                     flash.message = message.getString("flash.message.incorrect.captcha")
                     redirect action:'index'
                 }
             } catch (ValidationException e) {
-                System.out.println("Validation Exception "+e)
                 flash.message = message.getString("flash.message.register.fail")
-                System.out.println(e)
                 redirect action: "index"
                 return
             }

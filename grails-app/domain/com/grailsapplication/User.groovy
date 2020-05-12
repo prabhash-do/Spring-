@@ -3,6 +3,8 @@ package com.grailsapplication
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 
+import javax.validation.groups.Default
+
 @EqualsAndHashCode(includes='username')
 @ToString(includes='username', includeNames=true, includePackage=false)
 class User implements Serializable {
@@ -44,12 +46,12 @@ class User implements Serializable {
     static transients = ['springSecurityService']
 
     static constraints = {
-        firstname nullable: false, blank:true
-        lastname nullable: false,blank:true
-        email nullable: false,blank: false
-        mobilenumber nullable: false,blank: true
-        username nullable: false, blank: false, unique: true
-        password nullable: false, blank: false, password: true
+        firstname nullable: false, blank:false
+        lastname blank: true, nullable:true
+        mobilenumber blank: true,nullable:true
+        email email: true,blank: false
+        username  blank: false, unique: true
+        password blank: false, password: true
     }
 
     static mapping = {
