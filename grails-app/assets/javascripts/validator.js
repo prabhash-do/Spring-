@@ -52,3 +52,27 @@ this is just a simple reload; you can safely remove it; remember to remove it fr
 function reloadCaptcha() {
     document.getElementById('captcha').src = document.getElementById('captcha').src + '?' + new Date();
 }
+
+/*
+Hide and Show a pop up box on Button Click
+ */
+$('#show').on('click', function () {
+    $('.center').show();
+    $(this).hide();
+})
+
+$('#close').on('click', function () {
+    $('.center').hide();
+    $('#show').show();
+})
+/*
+ this is to mark an input field as disabled
+ */
+document.getElementById("disabled").disabled = true;
+
+/*
+this is just a simple reload; you can safely remove it; remember to remove it from the image too
+ */
+function reloadCaptcha() {
+    document.getElementById('captcha').src = document.getElementById('captcha').src + '?' + new Date();
+}

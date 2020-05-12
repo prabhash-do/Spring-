@@ -2368,6 +2368,12 @@ fieldset:disabled a.btn {
   border-color: #007bff;
 }
 
+.butn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
 .btn-primary:hover {
   color: #fff;
   background-color: #0069d9;
@@ -2938,6 +2944,13 @@ fieldset:disabled a.btn {
 .btn-lg, .btn-group-lg > .btn {
   padding: 0.5rem 1rem;
   font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+
+.butn-lg, .butn-group-lg > .butn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
   line-height: 1.5;
   border-radius: 0.3rem;
 }
