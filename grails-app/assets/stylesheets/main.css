@@ -12,10 +12,10 @@ h1, h2, h3, h4, h5, h6 {
 
 html {
     background-color: #ddd;
-    background-image: -moz-linear-gradient(center top, #aaa, #ddd);
+   /*background-image: -moz-linear-gradient(center top, #aaa, #ddd);*/
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aaa), color-stop(1, #ddd));
     background-image: linear-gradient(to bottom, #aaa, #ddd);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#aaaaaa', EndColorStr = '#dddddd');
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#aaaaaa', EndColorStr='#dddddd');
     background-repeat: no-repeat;
     height: 100%;
     /* change the box model to exclude the padding from the calculation of 100% height (IE8+) */
@@ -114,7 +114,7 @@ img {
 }
 
 .spinner {
-    background: url(../images/spinner.gif) 50% 50% no-repeat transparent;
+   /*background: url(../images/spinner.gif) 50% 50% no-repeat transparent;*/
     height: 16px;
     width: 16px;
     padding: 0.5em;
@@ -183,15 +183,15 @@ img {
 }
 
 .nav a.home {
-    background-image: url(../images/skin/house.png);
+  /*background-image: url(../images/skin/house.png);*/
 }
 
 .nav a.list {
-    background-image: url(../images/skin/database_table.png);
+    /*background-image: url(../images/skin/database_table.png);*/
 }
 
 .nav a.create {
-    background-image: url(../images/skin/database_add.png);
+    /*background-image: url(../images/skin/database_add.png);*/
 }
 
 .nav li.dropdown.show ul.dropdown-menu {
@@ -242,7 +242,7 @@ label {
 }
 
 input, select, textarea {
-    background-color: #d1ecf1;
+    /*background-color: #d1ecf1;*/
     border: 1px solid #cccccc;
     font-size: 1em;
     padding: 0.2em 0.4em;
@@ -350,12 +350,12 @@ fieldset.embedded legend {
 
 .errors li {
     list-style: none;
-    background: transparent url(../images/skin/exclamation.png) 0.5em 50% no-repeat;
+    /*background: transparent url(../images/skin/exclamation.png) 0.5em 50% no-repeat;*/
     text-indent: 2.2em;
 }
 
 .message {
-    background: transparent url(../images/skin/information.png) 0.5em 50% no-repeat;
+    /*background: transparent url(../images/skin/information.png) 0.5em 50% no-repeat;*/
     text-indent: 2.2em;
 }
 
@@ -376,8 +376,8 @@ fieldset.embedded legend {
 /* same effects for browsers that support HTML5 client-side validation (these have to be specified separately or IE will ignore the entire rule) */
 
 input:invalid, select:invalid, textarea:invalid {
-    background: #fff3f3;
-    border-color: #ffaaaa;
+    /*background: #fff3f3;*/
+    /*border-color: #ffaaaa;*/
     color: #cc0000;
 }
 
@@ -400,11 +400,11 @@ tr {
     border: 0;
 }
 
-tr>td:first-child, tr>th:first-child {
+tr > td:first-child, tr > th:first-child {
     padding-left: 1.25em;
 }
 
-tr>td:last-child, tr>th:last-child {
+tr > td:last-child, tr > th:last-child {
     padding-right: 1.25em;
 }
 
@@ -419,7 +419,7 @@ th {
     background-color: #efefef;
     background-image: -moz-linear-gradient(top, #ffffff, #eaeaea);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #eaeaea));
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#ffffff', EndColorStr = '#eaeaea');
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eaeaea');
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eaeaea')";
     color: #666666;
     font-weight: bold;
@@ -451,11 +451,11 @@ th.sortable a {
 }
 
 th.asc a {
-    background-image: url(../images/skin/sorted_asc.gif);
+    /*background-image: url(../images/skin/sorted_asc.gif);*/
 }
 
 th.desc a {
-    background-image: url(../images/skin/sorted_desc.gif);
+    /*background-image: url(../images/skin/sorted_desc.gif);*/
 }
 
 .odd {
@@ -513,7 +513,7 @@ th:hover, tr:hover {
 /* ACTION BUTTONS */
 
 .buttons {
-    background-color:#BFC9CA ;
+    background-color: #BFC9CA;
     overflow: hidden;
     padding: 0.3em;
     -moz-box-shadow: 0 0 3px 1px #aaaaaa;
@@ -565,15 +565,15 @@ th:hover, tr:hover {
 }
 
 .buttons .delete {
-    background-image: url(../images/skin/database_delete.png);
+    /*background-image: url(../images/skin/database_delete.png);*/
 }
 
 .buttons .edit {
-    background-image: url(../images/skin/database_edit.png);
+    /*background-image: url(../images/skin/database_edit.png);*/
 }
 
 .buttons .save {
-    background-image: url(../images/skin/database_save.png);
+    /*background-image: url(../images/skin/database_save.png);*/
 }
 
 a.skip {
@@ -585,18 +585,17 @@ a.skip {
     background: #7c7c7c no-repeat 50% 30%;
     margin-bottom: 20px;
     color: white;
-    height:300px;
-    text-align:center;
+    height: 300px;
+    text-align: center;
 }
 
 img.grails-logo {
-    height:340px;
-    margin-top:-10px;
+    height: 340px;
+    margin-top: -10px;
 }
 
-#fileLoader
-{
-    display:none;
+#fileLoader {
+    display: none;
 }
 
 #animated-cards .card-header {

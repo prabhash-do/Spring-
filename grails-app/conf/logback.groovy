@@ -37,5 +37,5 @@ if (targetDir != null) {
 
 logger("grailsapplication", ALL, ['FULL_STACKTRACE'], false)
 logger("com.company", ALL, ['FULL_STACKTRACE'], false)
-
+logger("com.grailsapplication", ALL, ['FULL_STACKTRACE'], false)
 root(ERROR, ['STDOUT'])
