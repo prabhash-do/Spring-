@@ -71,7 +71,7 @@ class UploadController {
             file.transferTo(fileDest)
 
             if (Checkconnetivity.internetConnection()) {
-                if (!files.containsKey(fileName)) {
+                if (!files.contains(fileName)) {
                     log.info("File " + fileName + " has been uploaded successfully!")
                     flash.message = g.message(code: "flash.message.file.upload")
                 } else {
