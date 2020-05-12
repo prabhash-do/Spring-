@@ -11,7 +11,7 @@ import java.nio.file.Path
 
 class ListRemoteFiles {
 
-    static HashMap<String, String> list() {
+    static List<String> list() {
         ResourceBundle config = ResourceBundle.getBundle("config")
         HashMap<String, String> hmap = new HashMap<Integer, String>();
         String path = new File(".").getCanonicalPath();
@@ -70,7 +70,8 @@ class ListRemoteFiles {
             }
         }
 
-        return hmap;
+        List<String> keys = new ArrayList<>(hmap.keySet());
+        return keys;
         /* ResourceBundle config = ResourceBundle.getBundle("config");
 
          String userName = config.getString("userName")

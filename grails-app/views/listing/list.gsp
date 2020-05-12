@@ -25,8 +25,7 @@
             <li>
                 <div class="row">
                     <div class="column">
-                        %{--${it.key}--}%
-                        ${it.key as String}
+                        ${it}
                     </div>
 
                     <div>
