@@ -4,6 +4,9 @@ import grails.plugin.simplecaptcha.SimpleCaptchaService
 import grails.validation.ValidationException
 import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.annotation.Secured
+import com.grailsapplication.User
+import com.grailsapplication.Role
+import com.grailsapplication.UserRole
 
 @Transactional
 @Secured('permitAll')
@@ -27,21 +30,21 @@ class RegisterController {
                 BootStrap.BANKCARD.each { k, v ->
                     u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
                 }
-
                 boolean b = simpleCaptchaService.validateCaptcha(params.captcha)
-                if(b) {
+                if (b) {
                     u = BootStrap.userService.save(u)
                     BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
-                    flash.message = message.getString("flash.message.register.success")
+                    log.info('You have Successfully registered')
+                    flash.successmessage = message.getString("flash.message.register.success")
                     redirect controller: "login", action: "auth"
-                }
-                else{
-                    log.error(message.getString("captcha.mismatch"))
-                    flash.message = message.getString("flash.message.incorrect.captcha")
-                    redirect action:'index'
+                } else {
+                    log.warn('please provide a valid Captcha')
+                    flash.warnmessage = message.getString("flash.message.incorrect.captcha")
+                    redirect action: 'index'
                 }
             } catch (ValidationException e) {
-                flash.message = message.getString("flash.message.register.fail")
+                log.error('Error occured.Unable to Register')
+                flash.warnmessage = message.getString("flash.message.register.fail")
                 redirect action: "index"
                 return
             }

@@ -18,7 +18,7 @@
 
                     <div class="form-group">
                         <label for="firstname"><g:message
-                                code="springSecurity.register.firstname.label"></g:message></label><span class="required">*</span>
+                                code="springSecurity.register.firstname.label"></g:message></label>
                         <input type="text" placeholder="Your firstname" class="form-control" name="firstname"
                                id="firstname"
                                autocapitalize="none"/>
@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email"><g:message code="springSecurity.register.email.label"></g:message></label><span class="required">*</span>
+                        <label for="email"><g:message code="springSecurity.register.email.label"></g:message></label>
                         <input type="text" placeholder="Your email address" class="form-control" name="email" id="email"
                                autocapitalize="none"/>
                     </div>
@@ -48,23 +48,23 @@
 
 
                     <div class="form-group">
-                        <label for="username"><g:message code="springSecurity.login.username.label"></g:message></label><span class="required">*</span>
+                        <label for="username"><g:message code="springSecurity.login.username.label"></g:message></label>
                         <input type="text"placeholder="Your username" class="form-control" name="username"
                                id="username"
-                               autocapitalize="none"/>
+                               autocapitalize="none" required="true"/>
                     </div>
 
                     <div class="form-group">
-                        <label for="password"><g:message code="springSecurity.login.password.label"></g:message></label><span class="required">*</span>
+                        <label for="password"><g:message code="springSecurity.login.password.label"></g:message></label>
                         <input type="password" placeholder="Your password" class="form-control" name="password"
-                               id="password"/>
+                               id="password" required="true"/>
                     </div>
 
                     <div class="form-group">
                         <label for="password"><g:message
                                 code="springSecurity.login.reenter.password.label"></g:message></label>
                         <input type="password"  placeholder="Re-enter password" class="form-control" name="repassword"
-                               id="repassword"/>
+                               id="repassword" required="true"/>
                     </div>
 
                     <div >
@@ -87,5 +87,6 @@
     </div>
 </div>
 <asset:javascript src="validator.js"/>
-</body>
-</html>
+
+        </body>
+        </html>

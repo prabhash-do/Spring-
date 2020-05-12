@@ -28,8 +28,3 @@ function viewPassword()
         passStatus.className='fa fa-eye';
     }
 }
-
-function reloadCaptcha()
-{
-    document.getElementById('captcha').src = document.getElementById('captcha').src+ '?' +new Date();
-}

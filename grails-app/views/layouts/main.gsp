@@ -30,13 +30,12 @@
 
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-               Choose Action
+                <g:message code="default.dropdown.choose.action"></g:message>
                 </a>
                 <div class="dropdown-menu navbar-dark">
-                <g:form controller="changePassword">
-                    <input type='submit' id="submit" value="${message(code: 'default.button.change')}"/>
+                <g:form controller="myProfile" action="showProfileDetails">
+                    <input type='submit' id="submit" value="${message(code: 'default.button.myprofile')}"/>
                 </g:form>
-
                 <g:form controller="logout">
                     <input type='submit' id="submit" value="${message(code: 'default.button.logout')}"/>
                 </g:form>
@@ -46,11 +45,7 @@
     </div>
 
 </nav>
-
 <g:layoutBody/>
-
-
 <asset:javascript src="application.js"/>
-
 </body>
 </html>

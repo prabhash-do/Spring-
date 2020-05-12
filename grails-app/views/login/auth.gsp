@@ -14,35 +14,37 @@
         <div class="card card-signin my-5">
             <div class="card-body ">
                 <h5 class="card-title text-center"><g:message code="springSecurity.login.header"></g:message></h5>
-                <g:if test='${flash.message}'>
-                    <div class="alert alert-danger" role="alert">${flash.message}</div>
-                </g:if>
+                <g:render template="/templates/grailstemplates"/>
                 <form class="form-signin" action="${postUrl ?: '/login/authenticate'}" method="POST" id="loginForm"
                       autocomplete="off">
                     <div class="form-group">
                         <label for="username"><g:message code="springSecurity.login.username.label"></g:message></label>
                         <input type="text" class="form-control" name="${usernameParameter ?: 'username'}" id="username"
-                               autocapitalize="none" />
+                               placeholder="Type Your Username" autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
                         <label for="password"><g:message code="springSecurity.login.password.label"></g:message></label>
-                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                        <link rel="stylesheet"
+                              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
                         <div class="input-group mb-2 mr-sm-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <i id="pass-status" class="fa fa-eye" aria-hidden="true" onClick="viewPassword()"></i>
+                                    <i id="pass-status" class="fa fa-eye" aria-hidden="true"
+                                       onClick="viewPassword()"></i>
                                 </div>
                             </div>
                             <input type="password" class="form-control" name="${passwordParameter ?: 'password'}"
-                                   id="password" placeholder="Type Your Password"/>
+                                   id="password" placeholder="Type Your Password" required/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="coordinateValue">${position}</label>
                         <input type="hidden" name="coordinatePosition" id="coordinatePosition" value="${position}"/>
-                        <input type="text" class="form-control" name="coordinateValue" id="coordinateValue"/>
+                        <input type="text" class="form-control" name="coordinateValue" id="coordinateValue"
+                               placeholder="Enter Coordinate value" required/>
                     </div>
 
                     <div class="form-group form-check">
@@ -66,5 +68,10 @@
     </div>
 </div>
 <asset:javascript src="validator.js"/>
+<g:javascript>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        document.forms['loginForm'].elements['username'].focus();
+    });
+</g:javascript>
 </body>
 </html>`
