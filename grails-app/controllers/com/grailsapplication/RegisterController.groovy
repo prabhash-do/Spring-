@@ -4,9 +4,7 @@ import grails.plugin.simplecaptcha.SimpleCaptchaService
 import grails.validation.ValidationException
 import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.annotation.Secured
-import com.grailsapplication.User
-import com.grailsapplication.Role
-import com.grailsapplication.UserRole
+
 
 @Transactional
 @Secured('permitAll')
@@ -33,7 +31,7 @@ class RegisterController {
                 boolean b = simpleCaptchaService.validateCaptcha(params.captcha)
                 if (b) {
                     u = BootStrap.userService.save(u)
-                    BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
+                    BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_ADMIN'))
                     log.info('You have Successfully registered')
                     flash.successmessage = message.getString("flash.message.register.success")
                     redirect controller: "login", action: "auth"
