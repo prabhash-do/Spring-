@@ -47,23 +47,21 @@ class UploadController {
     def doUpload = {
         ResourceBundle config = ResourceBundle.getBundle("config")
         try {
-            def userName = config.getString("userName")
-            def password = Decrypt.getDecryptedPassword(config.getString("password"))
-
             def file = request.getFile('file')
             String fileName = file.originalFilename
             String path = new File(".").getCanonicalPath();
             def destinationPath = path + config.getString("destinationPath")
             def extension = fileName.substring(fileName.lastIndexOf("."))
-            if (extension.equalsIgnoreCase(".png")||extension.equalsIgnoreCase("jpg")||extension.equalsIgnoreCase("jpeg")) {
+            if (extension.equalsIgnoreCase(".png")||extension.equalsIgnoreCase(".jpg")||extension.equalsIgnoreCase(".jpeg")) {
                 destinationPath = destinationPath.concat("images\\")
             }
-            else if (extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".jar")) {
+            else if (extension.equalsIgnoreCase(".ppt")||extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".jar")) {
                 destinationPath = destinationPath.concat("ppts\\")
             }
             else if (extension.equalsIgnoreCase(".mp4")||extension.equalsIgnoreCase(".mov")||extension.equalsIgnoreCase(".3gp")) {
                 destinationPath = destinationPath.concat("videos\\")
-            }else if (extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".txt")) {
+            }
+            else if (extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".txt")) {
                 destinationPath = destinationPath.concat("documents\\")
             }
             def files = ListRemoteFiles.list()

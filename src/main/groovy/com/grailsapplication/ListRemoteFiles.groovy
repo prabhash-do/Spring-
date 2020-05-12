@@ -13,9 +13,9 @@ class ListRemoteFiles {
 
     static List<String> list() {
         ResourceBundle config = ResourceBundle.getBundle("config")
-        HashMap<String, String> hmap = new HashMap<Integer, String>();
+        List<String> listFiles = new ArrayList<String>();
         String path = new File(".").getCanonicalPath();
-        String destinationPath= path + config.getString("destinationPath")
+        String destinationPath = path + config.getString("destinationPath")
         File folder = new File(destinationPath);
 
         File folderImage = new File(destinationPath.concat("images\\"));
@@ -37,65 +37,51 @@ class ListRemoteFiles {
 
         File[] files = folder.listFiles();
 
-        for (File file : files)
-        {
-            if (file.isFile())
-            {
-                URL url = file.toURI().toURL();
-                hmap.put(file.getName(), url as String)
+        for (File file : files) {
+            if (file.isFile()) {
+                if (!listFiles.contains(file.getName())) {
+                    listFiles.add(file.getName())
+                }
             }
-            else if (file.isDirectory())
-            {
-                /*list(file.getAbsolutePath());*/
+            else if (file.isDirectory()) {
                 //image
                 File[] filesImage = folderImage.listFiles();
                 for (File fileImage : filesImage) {
                     if (fileImage.isFile()) {
-                        URL url = fileImage.toURI().toURL();
-                        hmap.put(fileImage.getName(), url as String)
+                        if (!listFiles.contains(fileImage.getName())) {
+                            listFiles.add(fileImage.getName())
+                        }
                     }
                 }
                 //ppt
                 File[] filesPpt = folderPpt.listFiles();
                 for (File filePpt : filesPpt) {
                     if (filePpt.isFile()) {
-                        URL url = filePpt.toURI().toURL();
-                        hmap.put(filePpt.getName(), url as String)
+                        if (!listFiles.contains(filePpt.getName())) {
+                            listFiles.add(filePpt.getName())
+                        }
                     }
                 }
                 //video
                 File[] filesVideo = folderVideo.listFiles();
                 for (File fileVideo : filesVideo) {
                     if (fileVideo.isFile()) {
-                        URL url = fileVideo.toURI().toURL();
-                        hmap.put(fileVideo.getName(), url as String)
+                        if (!listFiles.contains(fileVideo.getName())) {
+                            listFiles.add(fileVideo.getName())
+                        }
                     }
                 }
                 //Documents
                 File[] filesDocs = folderDocs.listFiles();
-                for (File fileDocs : filesDocs) {
-                    if (fileDocs.isFile()){
-                        URL url=fileDocs.toURI().toURL()
-                        hmap.put(fileDocs.getName(), url as String)
+                for (File fileDoc : filesDocs) {
+                    if (fileDoc.isFile()){
+                        if (!listFiles.contains(fileDoc.getName())) {
+                            listFiles.add(fileDoc.getName())
+                        }
                     }
                 }
             }
         }
-
-        List<String> keys = new ArrayList<>(hmap.keySet());
-        return keys;
-        /* ResourceBundle config = ResourceBundle.getBundle("config");
-
-         String userName = config.getString("userName")
-         String password = Decrypt.getDecryptedPassword(config.getString("password"))
-         String destinationPath = config.getString("destinationPath")
-
-
-         if (Checkconnetivity.internetConnection()) {
-             def files = Listfile.listFileUsingJcifs(userName, password, destinationPath)
-             return files
-         }else {
-             return null
-         }*/
+        return listFiles;
     }
 }
