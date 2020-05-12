@@ -24,8 +24,12 @@
         <ul>
             <li>
                 <div class="row">
-                    <div class="column">
+                    <div class="column" id="thumbnail">
                         ${it}
+                        <div class="video" id="videosList">
+                            <a href="${resource(dir: 'upload/videos', file: it)}"/>
+                            <video style="height: 50px ; width: 50px" src="${resource(dir: 'upload/videos', file: it)}" alt="Video" loop preload="auto"/>
+                        </div>
                     </div>
 
                     <div>

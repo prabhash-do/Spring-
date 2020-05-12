@@ -9,15 +9,14 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Play vedio</title>
+    <title>Play video</title>
 </head>
 
 <body>
 <asset:javascript src='jquery-3.3.1.min.js'/>
 <fieldset>
-    <g:if test="${vedioflag}">
+    <g:if test="${videoflag}">
         <video id="video" controls preload="metadata" style="width:100%; height:100%">
-            <source src="~/Content/Videos/Sample_Vid.mp4" type="video/mp4">
         </video>
     </g:if>
 </fieldset>
@@ -96,7 +95,7 @@
     }
 
     // Update source of existing video
-    setVideoSource('#video', '${resource(dir: 'upload', file: filename)}')
+    setVideoSource('#video', '${resource(dir: 'upload/videos', file: filename)}')
 </script>
 </body>
 </html>

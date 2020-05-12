@@ -8,6 +8,7 @@ class PreviewController {
     def index() {}
 
     def preview() {
+        def errorMessage
         def filename = params.filename
         def ex = filename.substring(filename.lastIndexOf("."));
         if (ex.equalsIgnoreCase(".pdf")|| ex.equalsIgnoreCase(".txt")) {
@@ -19,12 +20,12 @@ class PreviewController {
 
         } else if (ex.equalsIgnoreCase(".mp4")) {
             def videoflag = "true"   /*render to video player.*/
-
             render template: "/templates/play", model: [filename: filename, videoflag: videoflag]
         } else {
             redirect controller: "listing", action: "doListing"
-            flash.error = g.message(code: "flash.message.file.cannot.previewed")
-            println(g.message(code: "flash.message.file.cannot.previewed"))
+            errorMessage = g.message(code: 'flash.message.file.cannot.previewed');
+            flash.error = errorMessage
         }
     }
+
 }
