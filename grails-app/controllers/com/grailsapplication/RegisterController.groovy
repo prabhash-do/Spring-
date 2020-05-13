@@ -4,25 +4,24 @@ import grails.plugin.simplecaptcha.SimpleCaptchaService
 import grails.validation.ValidationException
 import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.annotation.Secured
-import com.grailsapplication.User
-import com.grailsapplication.Role
-import com.grailsapplication.UserRole
+
 
 @Transactional
 @Secured('permitAll')
 class RegisterController {
 
     SimpleCaptchaService simpleCaptchaService
+
     static allowedMethods = [register: "POST"]
 
-    def index(){}
+    def index() {}
 
     def register() {
         ResourceBundle message = ResourceBundle.getBundle("messages");
         if (!params.password.equals(params.repassword)) {
-            log.warn('Password and Confirm Password are not match')
-            flash.warnmessage = message.getString("flash.message.password.mismatch")
+            flash.message = message.getString("flash.message.password.mismatch")
             redirect action: "index"
+            return
         } else {
             try {
                 User u = new User(firstname: params.firstname, lastname: params.lastname, email: params.email, mobilenumber: params.mobilenumber, username: params.username, password: params.password)
@@ -45,6 +44,7 @@ class RegisterController {
                 log.error('Error occured.Unable to Register')
                 flash.warnmessage = message.getString("flash.message.register.fail")
                 redirect action: "index"
+                return
             }
         }
     }

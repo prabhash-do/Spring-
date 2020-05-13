@@ -15,14 +15,14 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 class LoginController extends grails.plugin.springsecurity.LoginController implements GrailsConfigurationAware {
 
     List<String> coordinatePositions
-
-
+    ResourceBundle message = ResourceBundle.getBundle("messages");
     def auth() {
 
         ConfigObject conf = getConf()
 
         if (springSecurityService.isLoggedIn()) {
             redirect uri: conf.successHandler.defaultTargetUrl
+            System.out.println("User is logged in")
             return
         }
 
@@ -38,42 +38,14 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
                                      gspLayout          : conf.gsp.layoutAuth,
                                      position           : position]
     }
-/**
- * Check Authentication for User login
- * @return
- */
-    def authfail() {
 
-        String msg = ''
-        def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
-        if (exception) {
-            if (exception instanceof AccountExpiredException) {
-                msg = messageSource.getMessage('springSecurity.errors.login.expired', null, "Account Expired", request.locale)
-            } else if (exception instanceof CredentialsExpiredException) {
-                msg = messageSource.getMessage('springSecurity.errors.login.passwordExpired', null, "Password Expired", request.locale)
-            } else if (exception instanceof DisabledException) {
-                msg = messageSource.getMessage('springSecurity.errors.login.disabled', null, "Account Disabled", request.locale)
-            } else if (exception instanceof LockedException) {
-                msg = messageSource.getMessage('springSecurity.errors.login.locked', null, "Account Locked", request.locale)
-            } else if (exception instanceof SessionAuthenticationException) {
-                msg = messageSource.getMessage('springSecurity.errors.login.max.sessions.exceeded', null, "Sorry, you have exceeded your maximum number of open sessions.", request.locale)
-            } else {
-                msg = messageSource.getMessage('springSecurity.errors.login.fail', null, "Authentication Failure", request.locale)
-            }
-        }
+    def authfail(){
 
-        if (springSecurityService.isAjax(request)) {
-            render([error: msg] as JSON)
-        } else {
-            log.error('An Error occured.Unable to Login')
-            flash.warnmessage = msg
-            redirect action: 'auth', params: params
-        }
+        flash.message = message.getString("login.failed")
+        log.error(message.getString("login.failed"))
+        redirect action: "auth"
     }
-/**
- * Fetch the list of co-ordinate positions available in the card
- * @param co
- */
+
     @Override
     void setConfiguration(Config co) {
         coordinatePositions = co.getProperty('security.coordinate.positions', List, []) as List<String>

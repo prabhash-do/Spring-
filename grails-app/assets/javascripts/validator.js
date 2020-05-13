@@ -1,6 +1,7 @@
-/*
-This method validates the input field for Email address with Regex Expression
- */
+document.addEventListener("DOMContentLoaded", function(event) {
+    document.forms['loginForm'].elements['firstname'].focus();
+});
+
 function validateEmailByRegex() {
 
     var email = document.getElementById('email');
@@ -12,67 +13,22 @@ function validateEmailByRegex() {
     }
 }
 
-/*
-This method validates the password toggle eye-icon
- */
-function viewPassword() {
+function viewPassword()
+{
     var passwordInput = document.getElementById('password');
     var passStatus = document.getElementById('pass-status');
 
-    if (passwordInput.type == 'password') {
-        passwordInput.type = 'text';
-        passStatus.className = 'fa fa-eye-slash';
+    if (passwordInput.type == 'password'){
+        passwordInput.type='text';
+        passStatus.className='fa fa-eye-slash';
 
-    } else {
-        passwordInput.type = 'password';
-        passStatus.className = 'fa fa-eye';
+    }
+    else{
+        passwordInput.type='password';
+        passStatus.className='fa fa-eye';
     }
 }
-
-/*
-Hide and Show a pop up box on Button Click
- */
-$('#show').on('click', function () {
-    $('.center').show();
-    $(this).hide();
-})
-
-$('#close').on('click', function () {
-    $('.center').hide();
-    $('#show').show();
-})
-/*
- this is to mark an input field as disabled
- */
-document.getElementById("disabled").disabled = true;
-
-/*
-this is just a simple reload; you can safely remove it; remember to remove it from the image too
- */
-function reloadCaptcha() {
-    document.getElementById('captcha').src = document.getElementById('captcha').src + '?' + new Date();
-}
-
-/*
-Hide and Show a pop up box on Button Click
- */
-$('#show').on('click', function () {
-    $('.center').show();
-    $(this).hide();
-})
-
-$('#close').on('click', function () {
-    $('.center').hide();
-    $('#show').show();
-})
-/*
- this is to mark an input field as disabled
- */
-document.getElementById("disabled").disabled = true;
-
-/*
-this is just a simple reload; you can safely remove it; remember to remove it from the image too
- */
-function reloadCaptcha() {
-    document.getElementById('captcha').src = document.getElementById('captcha').src + '?' + new Date();
+function reloadCaptcha()
+{
+    document.getElementById('captcha').src = document.getElementById('captcha').src+ '?' +new Date();
 }

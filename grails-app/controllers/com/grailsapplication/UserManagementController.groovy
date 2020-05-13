@@ -2,10 +2,12 @@ package com.grailsapplication
 
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured(['ROLE_CLIENT','ROLE_ADMIN'])
+@Secured(['ROLE_ADMIN'])
 class UserManagementController {
 
-    def index = {
-        render view: '/userManagement/user'
+    def index (){
+
+        def listuser = User.list()
+        render view: '/userManagement/user',model:[listuser : listuser]
     }
 }

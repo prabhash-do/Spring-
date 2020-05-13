@@ -2,6 +2,7 @@
 <head>
     <meta name="layout" content="${gspLayout ?: 'main'}"/>
     <title><g:message code="springSecurity.register.title"></g:message></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -10,7 +11,9 @@
         <div class="card card-signin my-5">
             <div class="card-body">
                 <h5 class="card-title text-center"><g:message code="springSecurity.register.header"></g:message></h5>
-                <g:render template="/templates/grailstemplates"/>
+                <g:if test='${flash.message}'>
+                    <div class="alert alert-danger" role="alert">${flash.message}</div>
+                </g:if>
                 <form class="form-signin" onsubmit="return (validateEmailByRegex('email'))" action="register"
                       method="POST" id="registerForm" autocomplete="off">
 
@@ -19,7 +22,7 @@
                                 code="springSecurity.register.firstname.label"></g:message></label>
                         <input type="text" placeholder="Your firstname" class="form-control" name="firstname"
                                id="firstname"
-                               autocapitalize="none" required/>
+                               autocapitalize="none"/>
                     </div>
 
                     <div class="form-group">

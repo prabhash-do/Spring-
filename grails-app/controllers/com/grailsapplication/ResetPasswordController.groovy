@@ -9,6 +9,7 @@ class ResetPasswordController {
 
     def springSecurityService
     static allowedMethods = [resetpassword: "POST"]
+    def username = params.username
     def index() {
         render view: '/resetPassword/reset'
     }
@@ -18,12 +19,7 @@ class ResetPasswordController {
  */
     def resetpassword() {
         ResourceBundle message = ResourceBundle.getBundle("messages")
-        User user = springSecurityService.currentUser
-        if (user != null) {
-            if (user.password.isEmpty()) {
-                flash.warnmessage = g.message(code: "flash.message.user.warn")
-                log.info("No User Details Found")
-            } else {
+        User user = User.findByUsername(username)
                 def passwordNew = params.newpassword
                 if (!params.newpassword.equals(params.confirmpassword)) {
                     log.info("New password and Confirm password not match")
@@ -46,6 +42,5 @@ class ResetPasswordController {
                     }
                 }
             }
-        }
+
     }
-}
