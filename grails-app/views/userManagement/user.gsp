@@ -12,7 +12,7 @@
         <h1><b>${message(code: 'default.listuser.header')}</b>
         </h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <g:form controller="register">
+        <g:form controller="createUser">
             <button id="submit" class="butn butn-lg butn-primary butn-blk text-uppercase" type="submit"><g:message
                     code="default.button.createuser"></g:message></button>
         </g:form>
@@ -27,20 +27,6 @@
     </section>
 </div>
 
-%{--<div id="myDIV" class="shadowbox" role="main">--}%
 
-%{--    <div class="row">--}%
-%{--        <g:form controller="myProfile" action="editUserDetails">--}%
-%{--            <button id="submit" class="butn butn-lg butn-primary butn-blk text-uppercase" type="submit"><g:message--}%
-%{--                    code="default.button.edit.user"></g:message></button>--}%
-%{--        </g:form>--}%
-%{--    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--}%
-%{--        <g:form controller="secured">--}%
-%{--            <button id="submit" class="butn butn-lg butn-primary butn-blk text-uppercase" type="submit"><g:message--}%
-%{--                    code="default.button.cancel"></g:message></button>--}%
-
-%{--        </g:form>--}%
-%{--    </div>--}%
-%{--</div>--}%
 </body>
 </html>

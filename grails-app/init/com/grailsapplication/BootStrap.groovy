@@ -24,7 +24,7 @@ class BootStrap {
             ]
 
     def init = { servletContext ->
-        List<String> authorities = (['ROLE_CLIENT'])
+        List<String> authorities = (['ROLE_CLIENT','ROLE_ADMIN'])
         authorities.each { authority ->
             if ( !roleService.findByAuthority(authority) ) {
                 roleService.save(authority)
@@ -36,7 +36,7 @@ class BootStrap {
                 u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
             }
             u = userService.save(u)
-            userRoleService.save(u, roleService.findByAuthority('ROLE_CLIENT'))
+            userRoleService.save(u, roleService.findByAuthority('ROLE_ADMIN'))
         }
 
     }

@@ -2,11 +2,13 @@ package com.grailsapplication
 
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured(['ROLE_CLIENT'])
+@Secured('permitAll')
 class MyProfileController {
 
     def springSecurityService
+    static allowedMethods = [showProfileDetails: "POST",editUserDetails: "POST"]
     ResourceBundle message = ResourceBundle.getBundle("messages")
+
 /**
  * Show Current user details from Database
  */
@@ -18,15 +20,15 @@ class MyProfileController {
         def mobileNumber = user.mobilenumber
         def userName = user.username
 
-        if (user != null) {
-            if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || mobileNumber.isEmpty() || userName.isEmpty()) {
+
+            if (firstName!=null || email!=null || userName!=null) {
+                log.info("User Details are shown")
+            } else {
                 flash.warnmessage = g.message(code: "flash.message.user.warn")
                 log.info("No User Details Found")
-            } else {
-                log.info("User Details are shown")
             }
             render view: "myprofile", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName]
-        }
+
     }
 /**
  * Allow Current user to update it's details

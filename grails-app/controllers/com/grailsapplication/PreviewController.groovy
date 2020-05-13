@@ -2,7 +2,7 @@ package com.grailsapplication
 
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured(['ROLE_CLIENT'])
+@Secured('permitAll')
 class PreviewController {
 
     def index() {}
