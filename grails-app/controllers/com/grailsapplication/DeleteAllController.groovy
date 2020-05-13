@@ -7,7 +7,7 @@ import com.company.Checkconnetivity
 import com.company.Deleteallfile
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured(['ROLE_CLIENT'])
+@Secured('permitAll')
 class DeleteAllController {
 
 

@@ -45,9 +45,9 @@ class User implements Serializable {
 
     static constraints = {
         firstname nullable: false, blank:true
-        lastname nullable: false,blank:true
+        lastname nullable: true,blank:true
         email nullable: false,blank: false
-        mobilenumber nullable: false,blank: true
+        mobilenumber nullable: true,blank: true
         username nullable: false, blank: false, unique: true
         password nullable: false, blank: false, password: true
     }

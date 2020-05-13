@@ -44,7 +44,7 @@
                             code="springSecurity.submit.button"></g:message></button>
                     <hr class="my-4">
                 </form>
-                <g:form controller="secured">
+                <g:form controller="myProfile" action="showProfileDetails">
                     <button id="cancel" class="btn btn-lg btn-primary btn-block text-uppercase"
                             type="submit"><g:message code="default.button.cancel"></g:message></button>
                 </g:form>
