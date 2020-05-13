@@ -4,11 +4,11 @@ import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import grails.plugin.springsecurity.SpringSecurityService
 
-@Secured(['ROLE_CLIENT'])
+@Secured(['ROLE_ADMIN'])
 class ResetPasswordController {
 
     def springSecurityService
-
+    static allowedMethods = [resetpassword: "POST"]
     def index() {
         render view: '/resetPassword/reset'
     }

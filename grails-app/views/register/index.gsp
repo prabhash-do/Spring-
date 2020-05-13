@@ -2,7 +2,6 @@
 <head>
     <meta name="layout" content="${gspLayout ?: 'main'}"/>
     <title><g:message code="springSecurity.register.title"></g:message></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -16,11 +15,11 @@
                       method="POST" id="registerForm" autocomplete="off">
 
                     <div class="form-group">
-                        <label for="firstname"><g:message
+                        <label for="firstname">*<g:message
                                 code="springSecurity.register.firstname.label"></g:message></label>
                         <input type="text" placeholder="Your firstname" class="form-control" name="firstname"
                                id="firstname"
-                               autocapitalize="none"/>
+                               autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
@@ -32,11 +31,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email"><g:message
+                        <label for="email">*<g:message
                                 code="springSecurity.register.email.label"></g:message></label>
                         <input type="text" placeholder="Your email address" class="form-control" name="email"
                                id="email"
-                               autocapitalize="none"/>
+                               autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
@@ -50,35 +49,39 @@
 
 
                     <div class="form-group">
-                        <label for="username"><g:message
+                        <label for="username">*<g:message
                                 code="springSecurity.login.username.label"></g:message></label>
                         <input type="text" placeholder="Your username" class="form-control" name="username"
                                id="username"
-                               autocapitalize="none" required="true"/>
+                               autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="password"><g:message
+                        <label for="password">*<g:message
                                 code="springSecurity.login.password.label"></g:message></label>
+                        <link rel="stylesheet"
+                              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                         <input type="password" placeholder="Your password" class="form-control" name="password"
-                               id="password" required="true"/>
+                               id="password" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="password"><g:message
+                        <label for="password">*<g:message
                                 code="springSecurity.login.reenter.password.label"></g:message></label>
                         <input type="password" placeholder="Re-enter password" class="form-control"
                                name="repassword"
-                               id="repassword" required="true"/>
+                               id="repassword" required/>
                     </div>
 
-                <div class="form-group">
-                    <label for="captcha"></label>
-                    <img src="${createLink(controller: 'simpleCaptcha', action: 'captcha')}"  id="captcha" name ='captcha'/>
-                    <asset:image src="Reload.png" class="glyphicon glyphicon-refresh" alt="Click to reload image" title="Click to reload image"  onclick="reloadCaptcha()"/>
-                    <i class="material-icons" style="font-size:48px;color:red"></i>
-                    <g:textField name="captcha" placeholder="Enter captcha" class="form-control1"/>
-                </div>
+                    <div class="form-group">
+                        <label for="captcha"></label>
+                        <img src="${createLink(controller: 'simpleCaptcha', action: 'captcha')}" id="captcha"
+                             name='captcha'/>
+                        <asset:image src="Reload.png" class="glyphicon glyphicon-refresh" alt="Click to reload image"
+                                     title="Click to reload image" onclick="reloadCaptcha()"/>
+                        <i class="material-icons" style="font-size:48px;color:red"></i>
+                        <g:textField name="captcha" placeholder="Enter captcha" class="form-control1"/>
+                    </div>
                     <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase"
                             type="submit"><g:message code="springSecurity.register.button"></g:message></button>
                 </form>

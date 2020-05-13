@@ -5,8 +5,7 @@ package com.grailsapplication
 
 import grails.plugin.springsecurity.annotation.Secured
 
-//@Secured(['ROLE_ADMIN', 'ROLE_CLIENT'])
-@Secured(['ROLE_CLIENT'])
+@Secured('permitAll')
 class ListingController {
 
 

@@ -32,7 +32,7 @@ class RegisterController {
                 boolean b = simpleCaptchaService.validateCaptcha(params.captcha)
                 if (b) {
                     u = BootStrap.userService.save(u)
-                    BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
+                    BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_ADMIN'))
                     log.info('You have Successfully registered')
                     flash.successmessage = message.getString("flash.message.register.success")
                     redirect controller: "login", action: "auth"
