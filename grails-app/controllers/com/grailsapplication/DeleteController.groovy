@@ -27,4 +27,12 @@ class DeleteController {
             redirect controller: "listing", action: "doListing"
         }
     }
+
+    def userdelete(){
+
+        def user = User.findById(params.userid)
+        def userrole = UserRole.findByUser_Id(params.userid)
+        user.delete(flush:true)
+        redirect controller: "userManagement", action: "index"
+    }
 }

@@ -389,87 +389,46 @@ input:invalid:focus, select:invalid:focus, textarea:invalid:focus {
 
 /* TABLES */
 
-table {
-    border-top: 1px solid #DFDFDF;
-    border-collapse: collapse;
+table,th,td {
+    border-color: #0c5460;
     width: 100%;
-    margin-bottom: 1em;
+    padding : 0.2em;
+    font-size: 20px;
+    background-color: #f8f9fa;
 }
-
-tr {
-    border: 0;
-}
-
-tr > td:first-child, tr > th:first-child {
-    padding-left: 1.25em;
-}
-
-tr > td:last-child, tr > th:last-child {
-    padding-right: 1.25em;
-}
-
-td, th {
-    line-height: 1.5em;
-    padding: 0.5em 0.6em;
-    text-align: left;
-    vertical-align: top;
-}
-
-th {
-    background-color: #efefef;
-    background-image: -moz-linear-gradient(top, #ffffff, #eaeaea);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #eaeaea));
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eaeaea');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eaeaea')";
-    color: #666666;
-    font-weight: bold;
-    line-height: 1.7em;
-    padding: 0.2em 0.6em;
-}
-
 thead th {
     white-space: nowrap;
-}
 
-th a {
-    display: block;
-    text-decoration: none;
-}
-
+}th a {
+     display: block;
+     text-decoration: none;
+ }
 th a:link, th a:visited {
-    color: #666666;
+    color: #663810;
 }
-
 th a:hover, th a:focus {
     color: #333333;
 }
-
 th.sortable a {
     background-position: right;
     background-repeat: no-repeat;
     padding-right: 1.1em;
 }
-
 th.asc a {
-    /*background-image: url(../images/skin/sorted_asc.gif);*/
+    background-image: url(skin/sorted_asc-df23e44c4c4999383e95e9c8bf5da156.gif);
 }
-
 th.desc a {
-    /*background-image: url(../images/skin/sorted_desc.gif);*/
+    background-image: url(skin/sorted_desc-b85986b88116c4b0ef7571a1c4f3cfa3.gif);
 }
-
 .odd {
     background: #f7f7f7;
 }
-
 .even {
     background: #ffffff;
 }
-
 th:hover, tr:hover {
     background: #f5f5f5;
 }
-
 /* PAGINATION */
 
 .pagination {

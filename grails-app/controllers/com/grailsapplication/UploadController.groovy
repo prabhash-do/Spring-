@@ -13,7 +13,7 @@ import com.company.Sendmail
 import com.company.Sendsms
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured(['ROLE_ADMIN', 'ROLE_CLIENT'])
+@Secured(['permitAll'])
 class UploadController {
 
 
