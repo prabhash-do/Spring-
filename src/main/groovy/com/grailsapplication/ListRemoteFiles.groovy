@@ -6,6 +6,7 @@ package com.grailsapplication
 import com.company.Checkconnetivity
 import com.company.Decrypt
 import com.company.Listfile
+import com.util.BaseConstants
 
 import java.nio.file.Path
 
@@ -15,22 +16,22 @@ class ListRemoteFiles {
         ResourceBundle config = ResourceBundle.getBundle("config")
         List<String> listFiles = new ArrayList<String>();
         String path = new File(".").getCanonicalPath();
-        String destinationPath = path + config.getString("destinationPath")
+        String destinationPath = path + config.getString(BaseConstants.DESTINATION_PATH)
         File folder = new File(destinationPath);
 
-        File folderImage = new File(destinationPath.concat("images\\"));
+        File folderImage = new File(destinationPath.concat(BaseConstants.IMAGES));
         if (!folderImage.exists()){
             folderImage.mkdir();
         }
-        File folderPpt = new File(destinationPath.concat("ppts\\"));
+        File folderPpt = new File(destinationPath.concat(BaseConstants.PPTS));
         if (!folderPpt.exists()){
             folderPpt.mkdir();
         }
-        File folderVideo = new File(destinationPath.concat("videos\\"));
+        File folderVideo = new File(destinationPath.concat(BaseConstants.VIDEOS));
         if (!folderVideo.exists()){
             folderVideo.mkdir();
         }
-        File folderDocs = new File(destinationPath.concat("documents\\"));
+        File folderDocs = new File(destinationPath.concat(BaseConstants.DOCUMENTS));
         if (!folderDocs.exists()){
             folderDocs.mkdir();
         }
