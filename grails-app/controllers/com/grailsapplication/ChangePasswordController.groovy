@@ -3,11 +3,12 @@ package com.grailsapplication
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 
-@Secured(['ROLE_CLIENT'])
+@Secured('permitAll')
 class ChangePasswordController {
 
     def passwordEncoder
     def springSecurityService
+    static allowedMethods = [changepassword: "POST"]
 
     def index() {
         render view: '/changePassword/change'

@@ -8,7 +8,7 @@ import grails.plugin.springsecurity.SpringSecurityService
 class ResetPasswordController {
 
     def springSecurityService
-
+    static allowedMethods = [resetpassword: "POST"]
     def index() {
         render view: '/resetPassword/reset'
     }
