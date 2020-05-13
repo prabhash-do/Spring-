@@ -4,21 +4,21 @@
 <head>
     <style type="text/css">
     .file-preview {
-        background:#ccc;
-        border:5px solid #fff;
+        background: #ff9892;
+        border:5px solid #fffff7;
         box-shadow:0 0 4px rgba(0, 0, 0, 0.5);
         -moz-box-shadow:0 0 4px rgba(0, 0, 0, 0.5);
         -webkit-box-shadow:0 0 4px rgba(0, 0, 0, 0.5);
         display:inline-block;
-        float:left;
-        margin-right:1em;
+        float:right;
+        margin-right:3em;
         width:60px;
         height:60px;
         text-align:center;
     }
     .row{
-        margin-top: 40px;
-        margin-bottom: 15px;
+        margin-top: 35px;
+        margin-bottom: 35px;
     }
 
     .file-preview:hover {
@@ -54,22 +54,43 @@
                 <div class="row">
                     <div class="column" id="thumbnail">
                         ${it}
-                        <div class="video" id="videosList">
+
+                        %{--<div class="video" id="videosList">
                             <a href="${resource(dir: 'upload/videos', file: it)}"/>
                             <video style="height: 50px ; width: 50px" src="${resource(dir: 'upload/videos', file: it)}" alt="Video" loop preload="auto"/>
-                        </div>
-                    </div>
-                    <div class="file-preview">
-                        <a href="${resource(dir: 'images', file: 'error.png')}">
-                        <img style="height:50px ;width:50px" src="${resource(dir: 'images', file: 'error.png')}"  alt="Image"/>
-                        </a></div>
-                    <div>
+                        </div>--}%
+                        <g:if test="${it.contains(".mp4")||it.contains(".mov")||it.contains(".3gp")}">
+                            <div class="file-preview">
+                                <a href="${resource(dir: 'upload/videos', file: it)}"/>
+                                <video style="height: 50px ; width: 50px" src="${resource(dir: 'upload/videos', file: it)}" alt="Video" loop preload="auto"/>
+                            </div>
+                        </g:if>
+                        <g:if test="${it.contains(".png")||it.contains(".jpg")||it.contains(".jpeg")}">
+                            <div class="file-preview">
+                                <a href="${resource(dir: 'upload/images', file: it)}"/>
+                                <img style="height:50px ;width:50px" src="${resource(dir: 'upload/images', file: it)}"  alt="Image"/>
+                            </div>
+                        </g:if>
+                        <g:if test="${it.contains(".pdf")}">
+                            <div class="file-preview">
+                                <a href='<g:createLink controller="preview" action="preview" params="[filename: it]" />'/>
+                                <img style="height:50px ;width:50px" src="${resource(dir: 'images', file: 'pdf.png')}"  alt="Image"/>
+                            </div>
+                        </g:if>
+                        <g:if test="${it.contains(".pptx")||it.contains(".ppt")}">`
+                            <div class="file-preview">
+                                <a href='<g:createLink controller="preview" action="preview" params="[filename: it]" />'/>
+                                <img style="height:50px ;width:50px" src="${resource(dir: 'images', file: 'pptx.png')}"  alt="Image"/>
+                            </div>
+                        </g:if>
+                        <div>
                         <g:link controller="delete" action="doDelete" params="[filename: it]"
                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><g:message
                                 code="default.delete.label"/></g:link>
-                        <div>
+                       %{-- <div>
                             <g:link controller="preview" action="preview" params="[filename: it]"><g:message
                                     code="default.preview.label"/></g:link>
+                        </div>--}%
                         </div>
                     </div>
                 </div>

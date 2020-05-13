@@ -22,7 +22,7 @@
 
         $("#slide-resolte-contaniner").pptxToHtml({
 
-            pptxFileUrl:src="${resource(dir: 'upload', file: 'Order.pptx')}",
+            pptxFileUrl:src="${resource(dir: 'upload/ppts', file: filename)}",
             slidesScale: "50%",
             slideMode: true,
             keyBoardShortCut: true,
