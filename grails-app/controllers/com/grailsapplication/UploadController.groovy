@@ -11,6 +11,7 @@ import com.company.Checkcopyfile
 import com.company.Decrypt
 import com.company.Sendmail
 import com.company.Sendsms
+import com.util.BaseConstants
 import grails.plugin.springsecurity.annotation.Secured
 
 @Secured(['ROLE_ADMIN', 'ROLE_CLIENT'])
@@ -47,24 +48,22 @@ class UploadController {
     def doUpload = {
         ResourceBundle config = ResourceBundle.getBundle("config")
         try {
-            def userName = config.getString("userName")
-            def password = Decrypt.getDecryptedPassword(config.getString("password"))
-
             def file = request.getFile('file')
             String fileName = file.originalFilename
             String path = new File(".").getCanonicalPath();
-            def destinationPath = path + config.getString("destinationPath")
+            def destinationPath = path + config.getString(BaseConstants.DESTINATION_PATH)
             def extension = fileName.substring(fileName.lastIndexOf("."))
-            if (extension.equalsIgnoreCase(".png")||extension.equalsIgnoreCase("jpg")||extension.equalsIgnoreCase("jpeg")) {
-                destinationPath = destinationPath.concat("images\\")
+            if (extension.equalsIgnoreCase(".png")||extension.equalsIgnoreCase(".jpg")||extension.equalsIgnoreCase(".jpeg")) {
+                destinationPath = destinationPath.concat(BaseConstants.IMAGES)
             }
-            else if (extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".jar")) {
-                destinationPath = destinationPath.concat("ppts\\")
+            else if (extension.equalsIgnoreCase(".ppt")||extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".jar")) {
+                destinationPath = destinationPath.concat(BaseConstants.PPTS)
             }
             else if (extension.equalsIgnoreCase(".mp4")||extension.equalsIgnoreCase(".mov")||extension.equalsIgnoreCase(".3gp")) {
-                destinationPath = destinationPath.concat("videos\\")
-            }else if (extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".txt")) {
-                destinationPath = destinationPath.concat("documents\\")
+                destinationPath = destinationPath.concat(BaseConstants.VIDEOS)
+            }
+            else if (extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".txt")) {
+                destinationPath = destinationPath.concat(BaseConstants.DOCUMENTS)
             }
             def files = ListRemoteFiles.list()
             File fileDest = new File(destinationPath + fileName)
