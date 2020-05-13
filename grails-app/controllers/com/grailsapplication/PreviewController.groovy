@@ -14,7 +14,7 @@ class PreviewController {
         if (ex.equalsIgnoreCase(".pdf")|| ex.equalsIgnoreCase(".txt")) {
 
             render view: "/pdfReader/pdfReader", model: [filename: filename]  /*render to pdf viewer.*/
-        } else if (ex.equalsIgnoreCase(".pptx")) {
+        } else if (ex.equalsIgnoreCase(".pptx")||ex.equalsIgnoreCase(".ppt")) {
             render view: "/pptReader/pptReader", model: [filename: filename]/*render to ppt  player.*/
 
         } else if (ex.equalsIgnoreCase(".mp4")) {
