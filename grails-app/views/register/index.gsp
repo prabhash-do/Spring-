@@ -10,9 +10,7 @@
         <div class="card card-signin my-5">
             <div class="card-body">
                 <h5 class="card-title text-center"><g:message code="springSecurity.register.header"></g:message></h5>
-                <g:if test='${flash.message}'>
-                    <div class="alert alert-danger" role="alert">${flash.message}</div>
-                </g:if>
+                <g:render template="/templates/grailstemplates"/>
                 <form class="form-signin" onsubmit="return (validateEmailByRegex('email'))" action="register"
                       method="POST" id="registerForm" autocomplete="off">
 

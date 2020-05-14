@@ -6,4 +6,5 @@ import grails.gorm.services.Service
 interface UserRoleService {
 
     UserRole save(User user, Role role)
+    UserRole delete(User user)
 }
