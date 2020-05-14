@@ -20,11 +20,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="firstname"><g:message
+                        <label for="firstname">*<g:message
                                 code="springSecurity.register.firstname.label"></g:message></label>
                         <input type="text" placeholder="Your firstname" class="form-control" name="firstname"
                                id="firstname"
-                               autocapitalize="none"/>
+                               autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
@@ -35,11 +35,11 @@
                                autocapitalize="none"/>
                     </div>
 
-                        <div class="form-group">
-                            <label for="email"><g:message code="springSecurity.register.email.label"></g:message></label>
-                            <input type="text" placeholder="Your email address" class="form-control" name="email" id="email"
-                                   autocapitalize="none"/>
-                        </div>
+                    <div class="form-group">
+                        <label for="email">*<g:message code="springSecurity.register.email.label"></g:message></label>
+                        <input type="text" placeholder="Your email address" class="form-control" name="email" id="email"
+                               autocapitalize="none" required/>
+                    </div>
 
                     <div class="form-group">
                         <label for="mobilenumber"><g:message
@@ -51,16 +51,29 @@
 
 
                     <div class="form-group">
-                        <label for="username"><g:message code="springSecurity.login.username.label"></g:message></label>
+                        <label for="username">*<g:message
+                                code="springSecurity.login.username.label"></g:message></label>
                         <input type="text" placeholder="Your username" class="form-control" name="username"
                                id="username"
-                               autocapitalize="none"/>
+                               autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="password"><g:message code="springSecurity.login.password.label"></g:message></label>
-                        <input type="password" placeholder="Your password" class="form-control" name="password"
-                               id="password"/>
+                        <label for="password">*<g:message
+                                code="springSecurity.login.password.label"></g:message></label>
+                        <link rel="stylesheet"
+                              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i id="pass-status" class="fa fa-eye" aria-hidden="true"
+                                       onClick="viewPassword()"></i>
+                                </div>
+                            </div>
+                            <input type="password" class="form-control" name="password" value=""
+                                   id="password" required/>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -78,10 +91,13 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
+<asset:javascript src="validator.js"/>
+<g:javascript>
     document.addEventListener("DOMContentLoaded", function (event) {
         document.forms['createUserForm'].elements['firstname'].focus();
     });
-</script>
+    var randomstring = Math.random().toString(36).slice(-8);
+    document.getElementById("password").setAttribute('value', randomstring);
+</g:javascript>
 </body>
 </html>
