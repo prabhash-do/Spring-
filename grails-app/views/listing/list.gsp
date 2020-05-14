@@ -92,8 +92,14 @@
                         </g:if>
                         <g:if test="${it.contains(".docx")}">
                             <div class="file-preview">
-                                <a href='<g:createLink controller="preview" action="preview" params="[filename: it]" />'/>
+                                <a href="${resource(dir: 'upload', file: it)}" download/>
                                 <img style="height:50px ;width:50px" src="${resource(dir: 'images', file: 'docx.png')}"  alt="Image"/>
+                            </div>
+                        </g:if>
+                        <g:if test="${it.contains(".xlsx")||it.contains(".xls")||it.contains(".csv")}">
+                            <div class="file-preview">
+                                <a href="${resource(dir: 'upload', file: it)}" download/>
+                                <img style="height:50px ;width:50px" src="${resource(dir: 'images', file: 'xls.jpg')}"  alt="Image"/>
                             </div>
                         </g:if>
                         <g:if test="${it.contains(".pptx")||it.contains(".ppt")}">
@@ -102,7 +108,7 @@
                                 <img style="height:50px ;width:50px" src="${resource(dir: 'images', file: 'pptx.png')}"  alt="Image"/>
                             </div>
                         </g:if>
-                        <div>
+                        <div class="delete_test">
                         <g:link controller="delete" action="doDelete" params="[filename: it]"
                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><g:message
                                 code="default.delete.label"/></g:link>
