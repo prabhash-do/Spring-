@@ -8,7 +8,6 @@ import javax.xml.bind.ValidationException
 class CreateUserController {
 
     static allowedMethods = [createUser: "POST"]
-//    ResourceBundle message = ResourceBundle.getBundle("messages");
 
     def index() {
         render view: '/userManagement/createUser'
@@ -16,10 +15,10 @@ class CreateUserController {
 /**
  * This method allows to create a new User of ROLE_CLIENT
  */
-    def createUser={
+    def createUser = {
         if (!params.password.equals(params.repassword)) {
             log.info("New Pasword and Confirm password did not match")
-            flash.warnmessage = message.getString("flash.message.password.mismatch")
+            flash.warnmessage = g.message("flash.message.password.mismatch")
             redirect action: "index"
         } else {
             try {
@@ -30,13 +29,12 @@ class CreateUserController {
                 u = BootStrap.userService.save(u)
                 BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
                 log.info("New user has been created Successfully")
-                flash.successmessage = message.getString("flash.message.create.user.sucess")
+                flash.successmessage = g.message("flash.message.create.user.sucess")
                 redirect controller: "userManagement", action: "index"
 
             } catch (ValidationException e) {
                 log.info("Fail to create new user")
-                flash.warnmessage = message.getString("flash.message.create.user.fail")
-                System.out.println(e)
+                flash.warnmessage = g.message("flash.message.create.user.fail")
                 redirect action: "index"
             }
         }

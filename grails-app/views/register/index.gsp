@@ -2,7 +2,6 @@
 <head>
     <meta name="layout" content="${gspLayout ?: 'main'}"/>
     <title><g:message code="springSecurity.register.title"></g:message></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -60,12 +59,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password">*<g:message
+                        <label for="password"><g:message
                                 code="springSecurity.login.password.label"></g:message></label>
-                        <link rel="stylesheet"
-                              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                         <input type="password" placeholder="Your password" class="form-control" name="password"
-                               id="password" required/>
+                               id="password" required="true"/>
                     </div>
 
                     <div class="form-group">
@@ -82,7 +79,6 @@
                              name='captcha'/>
                         <asset:image src="Reload.png" class="glyphicon glyphicon-refresh" alt="Click to reload image"
                                      title="Click to reload image" onclick="reloadCaptcha()"/>
-                        <i class="material-icons" style="font-size:48px;color:red"></i>
                         <g:textField name="captcha" placeholder="Enter captcha" class="form-control1"/>
                     </div>
                     <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase"

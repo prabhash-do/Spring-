@@ -6,9 +6,6 @@ import grails.plugin.springsecurity.annotation.Secured
 class MyProfileController {
 
     def springSecurityService
-    static allowedMethods = [showProfileDetails: "POST",editUserDetails: "POST"]
-//    ResourceBundle message = ResourceBundle.getBundle("messages")
-
 /**
  * Show Current user details from Database
  */
@@ -21,13 +18,13 @@ class MyProfileController {
         def userName = user.username
 
 
-            if (firstName!=null || email!=null || userName!=null) {
-                log.info("User Details are shown")
-            } else {
-                flash.warnmessage = g.message(code: "flash.message.user.warn")
-                log.info("No User Details Found")
-            }
-            render view: "myprofile", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName]
+        if (firstName != null || email != null || userName != null) {
+            log.info("User Details are shown")
+        } else {
+            flash.warnmessage = g.message(code: "flash.message.user.warn")
+            log.info("No User Details Found")
+        }
+        render view: "myprofile", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName]
 
     }
 /**
@@ -36,15 +33,26 @@ class MyProfileController {
     def editUserDetails = {
 
         User user = springSecurityService.currentUser
+        def firstname = params.firstname
+        def lastname = params.lastname
+        def email = params.email
+        def mobilenumber = params.mobilenumber
 
-        user.firstname = params.firstname
-        user.lastname = params.lastname
-        user.email = params.email
-        user.mobilenumber = params.mobilenumber
-        BootStrap.userService.save(user)
-        log.info("User Details are updated")
-        flash.successmessage = message.getString("myprofile.update.user.success")
+        if (user != null) {
 
-        redirect controller: 'myProfile', action: 'showProfileDetails'
+            if (firstname.isEmpty() || email.isEmpty()) {
+                flash.warnmessage = g.message(code: "flash.message.edituser.warn")
+                log.info("Unable to save user details.Some mandatory fields are left blank")
+            } else {
+                user.firstname = firstname
+                user.lastname = lastname
+                user.email = email
+                user.mobilenumber = mobilenumber
+                BootStrap.userService.save(user)
+                log.info("User Details are updated")
+                flash.successmessage = g.message(code: "myprofile.update.user.success")
+            }
+        }
+        redirect controller: "myProfile", action: "showProfileDetails"
     }
 }
