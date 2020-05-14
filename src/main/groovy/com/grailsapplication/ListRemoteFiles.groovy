@@ -19,19 +19,19 @@ class ListRemoteFiles {
         String destinationPath = path + config.getString(BaseConstants.DESTINATION_PATH)
         File folder = new File(destinationPath);
 
-        File folderImage = new File(destinationPath.concat(BaseConstants.IMAGES));
+        File folderImage = new File(destinationPath.concat(BaseConstants.IMAGES).concat(File.separator));
         if (!folderImage.exists()){
             folderImage.mkdir();
         }
-        File folderPpt = new File(destinationPath.concat(BaseConstants.PPTS));
+        File folderPpt = new File(destinationPath.concat(BaseConstants.PPTS).concat(File.separator));
         if (!folderPpt.exists()){
             folderPpt.mkdir();
         }
-        File folderVideo = new File(destinationPath.concat(BaseConstants.VIDEOS));
+        File folderVideo = new File(destinationPath.concat(BaseConstants.VIDEOS).concat(File.separator));
         if (!folderVideo.exists()){
             folderVideo.mkdir();
         }
-        File folderDocs = new File(destinationPath.concat(BaseConstants.DOCUMENTS));
+        File folderDocs = new File(destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator));
         if (!folderDocs.exists()){
             folderDocs.mkdir();
         }
