@@ -11,18 +11,18 @@ class SearchController {
         if (searchName != null ) {
 
             if (filelist.contains(searchName)){
-                println ("file found")
+                log.info ("file found")
                  def searchList =[searchName]
-                println (searchList)
+                log.info (searchList)
                 render view: "/listing/list", model:[remotelist: searchList]
             }else{
                 flash.error = g.message(code: "flash.message.search.not.found.warn")
                 render view: "/listing/list", model:[remotelist:filelist ]
-                println ("file not found")
+                log.info ("file not found")
             }
         } else {
             flash.warn = g.message(code: "flash.message.file.name.empty.warn")
-            println ("specify the file name to search")
+            log.info ("the file name to search is not specified")
             render view: "/listing/list", model:[remotelist:filelist ]
         }
     }
