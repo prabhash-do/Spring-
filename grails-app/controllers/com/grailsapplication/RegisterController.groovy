@@ -17,7 +17,7 @@ class RegisterController {
     def index() {}
 
     def register() {
-        ResourceBundle message = ResourceBundle.getBundle("messages");
+//        ResourceBundle message = ResourceBundle.getBundle("messages");
         if (!params.password.equals(params.repassword)) {
             flash.message = message.getString("flash.message.password.mismatch")
             redirect action: "index"

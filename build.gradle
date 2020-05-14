@@ -33,7 +33,7 @@ dependencies {
     compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-core', version: '8.5.43'
     providedCompile group: 'javax.servlet', name: 'servlet-api', version: '2.4'
     compile files(fileTree(dir: 'lib', includes: ['*.jar']))
-    compile "postgresql:postgresql:8.4-702.jdbc4"
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.8'
     compile 'org.grails.plugins:quartz:2.0.13'
     compile 'org.grails.plugins:spring-security-core:3.3.1'
     compile 'domurtag.plugins:grails-simple-captcha:1.0.0-grails3'
@@ -91,4 +91,12 @@ tasks.withType(Test) {
 assets {
     minifyJs = true
     minifyCss = true
+}
+war {
+    archiveName = "solutionsd.war"
+    rootSpec.exclude("/tomcat-embed-logging-log4j-8.5.2.jar")
+    rootSpec.exclude("/tomcat-juli-8.5.43.jar")
+    rootSpec.exclude("/tomcat-jdbc-8.5.43.jar")
+    rootSpec.exclude("/datasource.groovy")
+    rootSpec.exclude("/logback.groovy")
 }

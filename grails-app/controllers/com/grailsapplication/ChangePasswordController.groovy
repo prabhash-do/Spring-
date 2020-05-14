@@ -18,7 +18,7 @@ class ChangePasswordController {
  * @return true
  */
     def changepassword() {
-        ResourceBundle message = ResourceBundle.getBundle("messages")
+//        ResourceBundle message = ResourceBundle.getBundle("messages")
         User user = springSecurityService.currentUser
 
         if (user != null) {

@@ -163,7 +163,7 @@
             }else {
                 return true;
             }
-                return true;
+
             } else {
                 alert("${message(code: 'alert.while.uploading')}")
                 return false;

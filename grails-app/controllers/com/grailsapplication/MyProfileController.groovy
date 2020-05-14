@@ -7,7 +7,7 @@ class MyProfileController {
 
     def springSecurityService
     static allowedMethods = [showProfileDetails: "POST",editUserDetails: "POST"]
-    ResourceBundle message = ResourceBundle.getBundle("messages")
+//    ResourceBundle message = ResourceBundle.getBundle("messages")
 
 /**
  * Show Current user details from Database

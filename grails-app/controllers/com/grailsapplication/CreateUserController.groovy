@@ -8,7 +8,7 @@ import javax.xml.bind.ValidationException
 class CreateUserController {
 
     static allowedMethods = [createUser: "POST"]
-    ResourceBundle message = ResourceBundle.getBundle("messages");
+//    ResourceBundle message = ResourceBundle.getBundle("messages");
 
     def index() {
         render view: '/userManagement/createUser'

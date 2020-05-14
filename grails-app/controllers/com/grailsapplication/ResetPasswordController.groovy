@@ -18,7 +18,7 @@ class ResetPasswordController {
  * @return true
  */
     def resetpassword() {
-        ResourceBundle message = ResourceBundle.getBundle("messages")
+//        ResourceBundle message = ResourceBundle.getBundle("messages")
         User user = User.findByUsername(username)
                 def passwordNew = params.newpassword
                 if (!params.newpassword.equals(params.confirmpassword)) {
