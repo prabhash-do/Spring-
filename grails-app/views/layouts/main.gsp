@@ -17,7 +17,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
-    <a class="navbar-brand" href="/#"><asset:image src="file.jpg" alt="Files Logo"/></a>
+    <a class="navbar-brand" href="${g.createLink(controller: "secured")}"><asset:image src="file.jpg" alt="Files Logo"/></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,8 +27,7 @@
         <ul class="nav navbar-nav ml-auto">
             <g:pageProperty name="page.nav"/>
             <sec:ifLoggedIn>
-
-                <li class="nav-item dropdown">
+                <li>
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                 <g:message code="default.dropdown.choose.action"></g:message>
                 </a>
@@ -39,7 +38,8 @@
                 <g:form controller="logout">
                     <input type='submit' id="submit" value="${message(code: 'default.button.logout')}"/>
                 </g:form>
-
+                </div>
+                </li>
             </sec:ifLoggedIn>
         </ul>
     </div>

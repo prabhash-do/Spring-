@@ -10,7 +10,6 @@ class ResetPasswordController {
     def springSecurityService
     static allowedMethods = [resetpassword: "POST"]
     def username = params.username
-
     def index() {
         render view: '/resetPassword/reset'
     }
