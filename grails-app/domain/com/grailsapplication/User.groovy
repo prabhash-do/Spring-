@@ -3,7 +3,6 @@ package com.grailsapplication
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 
-import javax.validation.groups.Default
 
 @EqualsAndHashCode(includes='username')
 @ToString(includes='username', includeNames=true, includePackage=false)

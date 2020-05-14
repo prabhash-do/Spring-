@@ -2,12 +2,16 @@ package com.grailsapplication
 
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured(['ROLE_ADMIN'])
+@Secured(['permitAll'])
 class UserManagementController {
 
+    def springSecurityService
     def index (){
 
         def listuser = User.list()
-        render view: '/userManagement/user',model:[listuser : listuser]
+        User user = springSecurityService.currentUser
+        def currentuser = [user]
+        listuser.remove(user)
+        render view: '/userManagement/user',model:[listuser : listuser,currentuser: currentuser]
     }
 }
