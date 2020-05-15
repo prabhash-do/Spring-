@@ -15,8 +15,16 @@ class ListRemoteFiles {
     static List<String> list() {
         ResourceBundle config = ResourceBundle.getBundle("config")
         List<String> listFiles = new ArrayList<String>();
-        String path = new File(".").getCanonicalPath();
-        String destinationPath = path + config.getString(BaseConstants.DESTINATION_PATH)
+        def appHome = System.getProperty("APP_HOME") ?: System.getenv("APP_HOME")
+        String destinationPath
+        if (appHome) {
+            String path = new File(appHome);
+            destinationPath = path + config.getString("destinationPathTomcat")
+        }
+        else {
+            String path = new File(".").getCanonicalPath();
+            destinationPath = path + config.getString(BaseConstants.DESTINATION_PATH)
+        }
         File folder = new File(destinationPath);
 
         File folderImage = new File(destinationPath.concat(BaseConstants.IMAGES).concat(File.separator));

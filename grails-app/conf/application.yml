@@ -86,55 +86,9 @@ endpoints:
         unique-names: true
 
 ---
-hibernate:
-    cache:
-        queries: false
-        use_second_level_cache: false
-        use_query_cache: false
-dataSource:
-    pooled: true
-    jmxExport: true
-    dialect: "hibernate.MyPostgreSQLDialect"
-    driverClassName: org.postgresql.Driver
-    username: postgres
-    password: 'stprksh123'
-
-environments:
-    development:
-        dataSource:
-            dbCreate: update
-            url: "jdbc:postgresql://localhost:5432/Grails_application"
-    test:
-        dataSource:
-            dbCreate: update
-            url: "jdbc:postgresql://localhost:5432/Grails_application"
-    production:
-        dataSource:
-            dbCreate: update
-            url: "jdbc:postgresql://localhost:5432/Grails_application"
-            properties:
-                jmxEnabled: true
-                initialSize: 5
-                maxActive: 50
-                minIdle: 5
-                maxIdle: 25
-                maxWait: 10000
-                maxAge: 600000
-                timeBetweenEvictionRunsMillis: 5000
-                minEvictableIdleTimeMillis: 60000
-                validationQuery: SELECT 1
-                validationQueryTimeout: 3
-                validationInterval: 15000
-                testOnBorrow: true
-                testWhileIdle: true
-                testOnReturn: false
-                jdbcInterceptors: ConnectionState
-                defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
-
----
                 server:
-                        port: 8051
-                        context-path: '/secured'
+                        port: 8050
+                        contextPath: '/solutionsd/secured'
 ---
 security:
     coordinate:

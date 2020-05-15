@@ -23,14 +23,14 @@ class UploadController {
     }
 
     def doMail(def fileName) {
-        ResourceBundle message = ResourceBundle.getBundle("messages");
+//        ResourceBundle message = ResourceBundle.getBundle("messages");
         Sendmail.mail(fileName)
         log.info("Mail has been sent successfully!")
         flash.messageemail = message.getString("flash.message.email")
     }
 
     def doSMS(def fileName) {
-        ResourceBundle message = ResourceBundle.getBundle("messages");
+//        ResourceBundle message = ResourceBundle.getBundle("messages");
         Sendsms.sendsms(fileName)
         log.info("SMS has been sent successfully!")
         flash.messagesms = message.getString("flash.message.sms")
@@ -50,8 +50,16 @@ class UploadController {
         try {
             def file = request.getFile('file')
             String fileName = file.originalFilename
-            String path = new File(".").getCanonicalPath();
-            def destinationPath = path + config.getString(BaseConstants.DESTINATION_PATH)
+            def appHome = System.getProperty("APP_HOME") ?: System.getenv("APP_HOME")
+            def destinationPath
+            if (appHome) {
+                String path = new File(appHome);
+                destinationPath = path + config.getString("destinationPathTomcat")
+            }
+            else {
+                String path = new File(".").getCanonicalPath();
+                destinationPath = path + config.getString(BaseConstants.DESTINATION_PATH)
+            }
             def extension = fileName.substring(fileName.lastIndexOf("."))
             if (extension.equalsIgnoreCase(".png")||extension.equalsIgnoreCase(".jpg")||extension.equalsIgnoreCase(".jpeg")) {
                 destinationPath = destinationPath.concat(BaseConstants.IMAGES).concat(File.separator)
@@ -68,6 +76,18 @@ class UploadController {
             def files = ListRemoteFiles.list()
             File fileDest = new File(destinationPath + fileName)
             file.transferTo(fileDest)
+
+            /*File fileDelete = new File(destinationPath);
+            FileDeleteStrategy.FORCE.delete(fileDelete);
+
+            def files = ListRemoteFiles.list()
+            File fileDest = new File(destinationPath)
+            boolean isCreated = fileDest.createNewFile()
+
+            if (!file.isEmpty() && isCreated) {
+                file.transferTo(fileDest);
+            }
+            fileDest.setWritable(true);*/
 
             if (Checkconnetivity.internetConnection()) {
                 if (!files.contains(fileName)) {
