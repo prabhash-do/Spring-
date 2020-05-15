@@ -59,20 +59,8 @@ class UploadController {
                 destinationPath = destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator)
             }
             def files = ListRemoteFiles.list()
-            File fileDest = new File(destinationPath + fileName)
+            File fileDest = new File(destinationPath.concat(fileName))
             file.transferTo(fileDest)
-
-            /*File fileDelete = new File(destinationPath);
-            FileDeleteStrategy.FORCE.delete(fileDelete);
-
-            def files = ListRemoteFiles.list()
-            File fileDest = new File(destinationPath)
-            boolean isCreated = fileDest.createNewFile()
-
-            if (!file.isEmpty() && isCreated) {
-                file.transferTo(fileDest);
-            }
-            fileDest.setWritable(true);*/
 
             if (CheckConnectivity.internetConnection()) {
                 if (!files.contains(fileName)) {
@@ -85,14 +73,14 @@ class UploadController {
 
                 doDataBaseEntry(fileName)
 
-                boolean isemailchecked = params.email
+                /*boolean isemailchecked = params.email
                 if (isemailchecked) {
                     doMail(fileName)
                 }
                 boolean issmschecked = params.sms
                 if (issmschecked) {
-                    //doSMS(fileName)
-                }
+                    doSMS(fileName)
+                }*/
 
             } else {
                 flash.error = g.message(code: "flash.message.check.connectivity")
@@ -102,57 +90,5 @@ class UploadController {
         }
         redirect view: "index"
     }
-
-    /*def doUpload = {
-        ResourceBundle config = ResourceBundle.getBundle("config")
-        try {
-            def userName = config.getString("userName")
-            def password = Decrypt.getDecryptedPassword(config.getString("password"))
-            def destinationPath = config.getString("destinationPath")
-            def path = g.message(code: "default.path")
-            def file = request.getFile('file')
-            String fileName = file.originalFilename
-            def sourcePath = path.concat(fileName)
-
-            File fileDest = new File(path + fileName)
-            file.transferTo(fileDest)
-
-            if (CheckConnetivity.internetConnection()) {
-
-                def files = ListRemoteFiles.list()
-                def insertFile = CheckCopyFile.copyFile(userName, password, destinationPath, sourcePath, fileName)
-                if (insertFile) {
-
-                    if (!files.contains(fileName)) {
-                        log.info("File " + fileName + " has been uploaded successfully!")
-                        flash.message = g.message(code: "flash.message.file.upload")
-                    } else {
-                        log.warn("File is already there in remote location ")
-                        flash.message = g.message(code: "flash.message.replace.file")
-                    }
-
-                    doDataBaseEntry(fileName)
-
-                    boolean isemailchecked = params.email
-                    if (isemailchecked) {
-                        doMail(fileName)
-                    }
-                    boolean issmschecked = params.sms
-                    if (issmschecked) {
-                        //doSMS(fileName)
-                    }
-                } else {
-                    flash.warn = g.message(code: "flash.message.invalid.file")
-                    log.warn("Invalid File size or check file format . file will be in .pdf, .csv, .xlsx, .xml, .txt Format only !")
-                }
-
-            } else {
-                flash.error = g.message(code: "flash.message.check.connectivity")
-            }
-        } catch (Exception e) {
-            log.error("Exception occured while Uploading file:\n", e)
-        }
-        redirect view: "index"
-    }*/
 
 }
