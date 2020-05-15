@@ -15,10 +15,10 @@ class CreateUserController {
 /**
  * This method allows to create a new User of ROLE_CLIENT
  */
-    def createUser = {
+    def createUser () {
         if (!params.password.equals(params.repassword)) {
-            log.info("New Pasword and Confirm password did not match")
-            flash.warnmessage = g.message("flash.message.password.mismatch")
+            log.warn("New Pasword and Confirm password did not match")
+            flash.errormessage = g.message(code:"flash.message.new.password.mismatch")
             redirect action: "index"
         } else {
             try {
@@ -29,12 +29,12 @@ class CreateUserController {
                 u = BootStrap.userService.save(u)
                 BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
                 log.info("New user has been created Successfully")
-                flash.successmessage = g.message("flash.message.create.user.sucess")
+                flash.successmessage = g.message(code:"flash.message.create.user.sucess")
                 redirect controller: "userManagement", action: "index"
 
             } catch (ValidationException e) {
-                log.info("Fail to create new user")
-                flash.warnmessage = g.message("flash.message.create.user.fail")
+                log.error("Fail to create new user")
+                flash.errormessage = g.message(code:"flash.message.create.user.fail")
                 redirect action: "index"
             }
         }

@@ -15,14 +15,14 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 class LoginController extends grails.plugin.springsecurity.LoginController implements GrailsConfigurationAware {
 
     List<String> coordinatePositions
-//    ResourceBundle message = ResourceBundle.getBundle("messages");
+
     def auth() {
 
         ConfigObject conf = getConf()
 
         if (springSecurityService.isLoggedIn()) {
             redirect uri: conf.successHandler.defaultTargetUrl
-            System.out.println("User is logged in")
+            log.info("User is logged in")
             return
         }
 
@@ -41,8 +41,8 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
 
     def authfail(){
 
-        flash.message = message.getString("login.failed")
-        log.error(message.getString("login.failed"))
+        flash.errormessage = g.message(code:"login.failed")
+        log.error(g.message(code:"login.failed"))
         redirect action: "auth"
     }
 

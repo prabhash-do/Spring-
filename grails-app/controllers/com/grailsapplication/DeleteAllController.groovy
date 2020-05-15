@@ -16,7 +16,7 @@ class DeleteAllController {
         render view: '../index'
     }
 
-    def doAllDelete = {
+    def doAllDelete() {
 
         ResourceBundle config = ResourceBundle.getBundle("config")
         String path = new File(".").getCanonicalPath();

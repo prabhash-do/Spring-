@@ -16,7 +16,7 @@
 
                     <div class="form-group">
                         <label for="newpassword"><g:message
-                                code="springSecurity.login.password.label"></g:message></label>
+                                code="springSecurity.new.password.label"></g:message></label>
                         <input type="password" placeholder="Your password" class="form-control" name="newpassword"
                                id="newpassword" required/>
                     </div>

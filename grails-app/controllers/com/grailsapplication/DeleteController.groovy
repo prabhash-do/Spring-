@@ -14,7 +14,7 @@ class DeleteController {
     def index() {
     }
 
-    def doDelete = {
+    def doDelete(){
 
         ResourceBundle config = ResourceBundle.getBundle("config")
         String path = new File(".").getCanonicalPath();
