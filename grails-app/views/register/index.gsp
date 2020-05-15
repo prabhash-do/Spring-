@@ -10,9 +10,7 @@
         <div class="card card-signin my-5">
             <div class="card-body">
                 <h5 class="card-title text-center"><g:message code="springSecurity.register.header"></g:message></h5>
-                <g:if test='${flash.message}'>
-                    <div class="alert alert-danger" role="alert">${flash.message}</div>
-                </g:if>
+                <g:render template="/templates/grailstemplates"/>
                 <form class="form-signin" onsubmit="return (validateEmailByRegex('email'))" action="register"
                       method="POST" id="registerForm" autocomplete="off">
 
@@ -21,7 +19,7 @@
                                 code="springSecurity.register.firstname.label"></g:message></label>
                         <input type="text" placeholder="Your firstname" class="form-control" name="firstname"
                                id="firstname"
-                               autocapitalize="none"/>
+                               autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
@@ -59,16 +57,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password"><g:message
+                        <label for="password">*<g:message
                                 code="springSecurity.login.password.label"></g:message></label>
                         <input type="password" placeholder="Your password" class="form-control" name="password"
-                               id="password" required="true"/>
+                               id="password" required/>
                     </div>
 
                     <div class="form-group">
                         <label for="password">*<g:message
-                                code="springSecurity.login.reenter.password.label"></g:message></label>
-                        <input type="password" placeholder="Re-enter password" class="form-control"
+                                code="springSecurity.confirm.password.label"></g:message></label>
+                        <input type="password" placeholder="confirm password" class="form-control"
                                name="repassword"
                                id="repassword" required/>
                     </div>
@@ -79,7 +77,7 @@
                              name='captcha'/>
                         <asset:image src="Reload.png" class="glyphicon glyphicon-refresh" alt="Click to reload image"
                                      title="Click to reload image" onclick="reloadCaptcha()"/>
-                        <g:textField name="captcha" placeholder="Enter captcha" class="form-control1"/>
+                        <g:textField name="captcha" placeholder="Enter captcha" class="form-control1" required="true"/>
                     </div>
                     <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase"
                             type="submit"><g:message code="springSecurity.register.button"></g:message></button>

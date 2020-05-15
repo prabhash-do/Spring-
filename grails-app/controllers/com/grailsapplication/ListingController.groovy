@@ -9,7 +9,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class ListingController {
 
 
-    def doListing = {
+    def doListing(){
 
         Uploadfile uploadfile = new Uploadfile()
         def dblist = uploadfile.list()

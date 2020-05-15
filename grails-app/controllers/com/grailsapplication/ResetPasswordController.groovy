@@ -7,9 +7,9 @@ import grails.plugin.springsecurity.SpringSecurityService
 @Secured(['ROLE_ADMIN'])
 class ResetPasswordController {
 
-    def springSecurityService
     static allowedMethods = [resetpassword: "POST"]
-    def username = params.username
+    String username = params.username
+
     def index() {
         render view: '/resetPassword/reset'
     }
@@ -20,10 +20,10 @@ class ResetPasswordController {
     def resetpassword() {
 
         User user = User.findByUsername(username)
-        def passwordNew = params.newpassword
+        String passwordNew = params.newpassword
         if (!params.newpassword.equals(params.confirmpassword)) {
-            log.info("New password and Confirm password not match")
-            flash.warnmessage = g.message("flash.message.new.password.mismatch")
+            log.warn("New password and Confirm password not match")
+            flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
             redirect action: "index"
 
         } else {
@@ -31,12 +31,11 @@ class ResetPasswordController {
                 user.password = passwordNew
                 BootStrap.userService.save(user)
                 log.info("Password reset Successfully")
-                flash.successmessage = g.message("springsecurity.reset.password.success")
+                flash.successmessage = g.message(code: "springsecurity.reset.password.success")
                 redirect action: 'index'
             } catch (ValidationException e) {
                 log.error("Exception occured while Changing password:\n", e)
-                flash.warnmessage = g.message("springsecurity.reset.password.fail")
-                System.out.println(e)
+                flash.errormessage = g.message(code: "springsecurity.reset.password.fail")
                 redirect action: "index"
             }
         }
