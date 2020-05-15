@@ -5,13 +5,11 @@ package com.grailsapplication
 
 import com.company.CheckConnectivity
 import com.company.DeleteFile
+import com.util.BaseConstants
 import grails.plugin.springsecurity.annotation.Secured
 
 @Secured('permitAll')
 class DeleteController {
-
-    def springSecurityService
-
     def index() {
     }
 
@@ -78,12 +76,10 @@ class DeleteController {
     }
 
     def userdelete(){
-
         User user = User.findById(params.userid)
         BootStrap.userRoleService.delete(user)
         user.delete(flush: true)
         flash.successmessage = user.username + " " + g.message(code: "flash.message.user.delete")
         redirect controller: "userManagement", action: "index"
-
     }
 }
