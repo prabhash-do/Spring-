@@ -75,18 +75,6 @@ class UploadController {
             File fileDest = new File(destinationPath.concat(fileName))
             file.transferTo(fileDest)
 
-            /*File fileDelete = new File(destinationPath);
-            FileDeleteStrategy.FORCE.delete(fileDelete);
-
-            def files = ListRemoteFiles.list()
-            File fileDest = new File(destinationPath)
-            boolean isCreated = fileDest.createNewFile()
-
-            if (!file.isEmpty() && isCreated) {
-                file.transferTo(fileDest);
-            }
-            fileDest.setWritable(true);*/
-
             if (CheckConnectivity.internetConnection()) {
                 if (!files.contains(fileName)) {
                     log.info("File " + fileName + " has been uploaded successfully!")

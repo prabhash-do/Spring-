@@ -41,17 +41,6 @@ class DeleteController {
             destinationPath = destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator)
         }
 
-        def filename = params.filename
-        if (CheckConnectivity.internetConnection()) {
-            if (DeleteFile.deleteFileUsingJcifs(filename)) {
-                log.info("File has been deleted successfully from Remote Location!")
-                flash.message = g.message(code: "flash.message.file.delete")
-                redirect controller: "listing", action: "doListing"
-            }
-        } else {
-            flash.error = g.message(code: "flash.message.check.connectivity")
-            redirect controller: "listing", action: "doListing"
-        }
         File file = new File(destinationPath.concat(fileName));
 
         try {
