@@ -3,26 +3,30 @@
  */
 package com.grailsapplication
 
-import com.company.Checkconnetivity
-import com.company.Deletefile
+import com.company.CheckConnectivity
+import com.company.DeleteFile
 import com.util.BaseConstants
-import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 
 @Secured('permitAll')
 class DeleteController {
-
-    def springSecurityService
-
     def index() {
     }
 
     def doDelete() {
 
         ResourceBundle config = ResourceBundle.getBundle("config")
-        String path = new File(".").getCanonicalPath();
-        String destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH))
         String fileName = params.filename
+        def appHome = System.getProperty("APP_HOME") ?: System.getenv("APP_HOME")
+        String destinationPath
+        if (appHome) {
+            String path = new File(appHome);
+            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH_TOMCAT))
+        }
+        else {
+            String path = new File(".").getCanonicalPath();
+            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH))
+        }
         String extension = fileName.substring(fileName.lastIndexOf("."))
         if (extension.equalsIgnoreCase(".png")||extension.equalsIgnoreCase(".jpg")||extension.equalsIgnoreCase(".jpeg")) {
             destinationPath = destinationPath.concat(BaseConstants.IMAGES).concat(File.separator)
@@ -37,6 +41,17 @@ class DeleteController {
             destinationPath = destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator)
         }
 
+        def filename = params.filename
+        if (CheckConnectivity.internetConnection()) {
+            if (DeleteFile.deleteFileUsingJcifs(filename)) {
+                log.info("File has been deleted successfully from Remote Location!")
+                flash.message = g.message(code: "flash.message.file.delete")
+                redirect controller: "listing", action: "doListing"
+            }
+        } else {
+            flash.error = g.message(code: "flash.message.check.connectivity")
+            redirect controller: "listing", action: "doListing"
+        }
         File file = new File(destinationPath.concat(fileName));
 
         try {
@@ -60,13 +75,11 @@ class DeleteController {
         }
     }
 
-    def userdelete = {
-
+    def userdelete(){
         User user = User.findById(params.userid)
         BootStrap.userRoleService.delete(user)
         user.delete(flush: true)
         flash.successmessage = user.username + " " + g.message(code: "flash.message.user.delete")
         redirect controller: "userManagement", action: "index"
-
     }
 }

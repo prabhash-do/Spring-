@@ -6,11 +6,9 @@
  */
 package com.grailsapplication
 
-import com.company.Checkconnetivity
-import com.company.Checkcopyfile
-import com.company.Decrypt
-import com.company.Sendmail
-import com.company.Sendsms
+import com.company.CheckConnectivity
+import com.company.SendMail
+
 import com.util.BaseConstants
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -23,21 +21,21 @@ class UploadController {
     }
 
     def doMail(def fileName) {
-//        ResourceBundle message = ResourceBundle.getBundle("messages");
-        Sendmail.mail(fileName)
+
+        SendMail.mail(fileName)
         log.info("Mail has been sent successfully!")
-        flash.messageemail = message.getString("flash.message.email")
+        flash.messageemail = g.message(code:"flash.message.email")
     }
 
     def doSMS(def fileName) {
-//        ResourceBundle message = ResourceBundle.getBundle("messages");
+
         Sendsms.sendsms(fileName)
         log.info("SMS has been sent successfully!")
-        flash.messagesms = message.getString("flash.message.sms")
+        flash.messagesms = g.message(code:"flash.message.sms")
     }
 
     def doDataBaseEntry(fileName) {
-        ResourceBundle message = ResourceBundle.getBundle("messages");
+
         Uploadfile uploadfile = new Uploadfile()
         uploadfile.fileName = fileName
         uploadfile.status = true
@@ -89,7 +87,7 @@ class UploadController {
             }
             fileDest.setWritable(true);*/
 
-            if (Checkconnetivity.internetConnection()) {
+            if (CheckConnectivity.internetConnection()) {
                 if (!files.contains(fileName)) {
                     log.info("File " + fileName + " has been uploaded successfully!")
                     flash.message = g.message(code: "flash.message.file.upload")

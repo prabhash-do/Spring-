@@ -77,9 +77,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password"><g:message
-                                code="springSecurity.login.reenter.password.label"></g:message></label>
-                        <input type="password" placeholder="Re-enter password" class="form-control" name="repassword"
+                        <label for="password">*<g:message
+                                code="springSecurity.confirm.password.label"></g:message></label>
+                        <input type="password" placeholder="confirm password" class="form-control" name="repassword"
                                id="repassword"/>
                     </div>
 

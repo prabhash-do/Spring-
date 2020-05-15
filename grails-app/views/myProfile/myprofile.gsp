@@ -3,7 +3,6 @@
 <head>
     <meta name="layout" content="main"/>
     <title>${message(code: 'default.user.details')}</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 
 <body onload="setup()">
@@ -21,46 +20,81 @@
 </div>
 
 <div class="row">
-    <div id="shadowbox">
-        <div class="center hideform">
-            <button id="close" style="float: right;">X</button><br><br>
-            <g:form controller="myProfile" action="editUserDetails">
-                <b>${message(code: 'default.myprofile.firstname')}</b>
-                <input type="text" name="firstname"
-                       value="${firstName}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <b>${message(code: 'default.myprofile.lastname')}</b>
-                <input type="text" name="lastname"
-                       value="${lastName}">&nbsp;&nbsp;&nbsp;
-                <b>${message(code: 'default.myprofile.email')}</b>
-                <input type="text" name="email"
-                       value="${email}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <b>${message(code: 'default.myprofile.mobilenumber')}</b>
-                <input type="text" name="mobilenumber"
-                       value="${mobileNumber}">
-                <b>${message(code: 'default.myprofile.username')}</b>
-                <input type="text" id="disabled" name="disabledusername"
-                       value="${userName}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="submit" style="float:right " class=" butn-lg butn-primary butn-blk text-uppercase"
-                        type="submit"><g:message
-                        code="default.button.ok"></g:message></button>
-            </g:form>
-        </div>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <g:form controller="myProfile" action="editUserDetails">
+                    <div class="modal-header">
+                        <h5 class="modal-title"
+                            id="exampleModalCenterTitle">${message(code: 'default.myprofile.dialog.title')}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 
-        <div>
-            <b>${message(code: 'default.myprofile.firstname')}</b> ${firstName}<br>
-            <b>${message(code: 'default.myprofile.lastname')}</b> ${lastName}<br>
-            <b>${message(code: 'default.myprofile.email')}</b> ${email}<br>
-            <b>${message(code: 'default.myprofile.mobilenumber')}</b> ${mobileNumber}<br>
-            <b>${message(code: 'default.myprofile.username')}</b> ${userName}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="firstname"
+                                   class="col-form-label">${message(code: 'default.myprofile.firstname')}</label>
+                            <input type="text" class="form-control" id="firstname" name="firstname"
+                                   value="${firstName}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastname"
+                                   class="col-form-label">${message(code: 'default.myprofile.lastname')}</label>
+                            <input type="text" class="form-control" id="lastname" name="lastname" value="${lastName}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email"
+                                   class="col-form-label">${message(code: 'default.myprofile.email')}</label>
+                            <input type="text" class="form-control" id="email" name="email" value="${email}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mobilenumber"
+                                   class="col-form-label">${message(code: 'default.myprofile.mobilenumber')}</label>
+                            <input type="text" class="form-control" id="mobilenumber" name="mobilenumber"
+                                   value="${mobileNumber}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="disabled"
+                                   class="col-form-label">${message(code: 'default.myprofile.username')}</label>
+                            <input type="text" class="form-control" id="disabled" name="username" value="${userName}">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary text-uppercase"
+                                data-dismiss="modal">${message(code: 'default.myprofile.dialog.close')}</button>
+                        <button type="submit"
+                                class="btn btn-primary text-uppercase">${message(code: 'default.myprofile.dialog.save')}</button>
+                    </div>
+                </g:form>
+            </div>
         </div>
     </div>
 </div>
-<button id="show" class="butn butn-lg butn-primary butn-blk text-uppercase" type="submit"><g:message
-        code="default.button.edit.label"></g:message></button>
-<g:form controller="secured">
-    <button id="submit" class="butn butn-lg butn-primary butn-blk text-uppercase" type="submit"><g:message
-            code="default.button.cancel"></g:message></button>
-</g:form>
+
+<div class="container">
+    <div>
+        <b>${message(code: 'default.myprofile.firstname')}</b> ${firstName}<br>
+        <b>${message(code: 'default.myprofile.lastname')}</b> ${lastName}<br>
+        <b>${message(code: 'default.myprofile.email')}</b> ${email}<br>
+        <b>${message(code: 'default.myprofile.mobilenumber')}</b> ${mobileNumber}<br>
+        <b>${message(code: 'default.myprofile.username')}</b> ${userName}
+    </div>
+    <button type="button" class="btn btn-primary text-uppercase " data-toggle="modal"
+            data-target=".bd-example-modal-lg"><g:message
+            code="default.button.edit.label"></g:message></button>
+    <g:form controller="secured">
+        <button id="submit" class="btn btn-secondary text-uppercase" type="submit"><g:message
+                code="default.button.cancel"></g:message></button>
+    </g:form>
+</div>
 <asset:javascript src="validator.js"/>
 </body>
 </html>

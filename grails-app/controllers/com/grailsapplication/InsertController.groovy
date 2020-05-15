@@ -7,6 +7,5 @@ class InsertController {
 
     def insert() {
         render view :"upload"
-
     }
 }

@@ -3,8 +3,7 @@
  */
 package com.grailsapplication
 
-import com.company.Checkconnetivity
-import com.company.Deleteallfile
+
 import com.util.BaseConstants
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -19,8 +18,17 @@ class DeleteAllController {
     def doAllDelete() {
 
         ResourceBundle config = ResourceBundle.getBundle("config")
-        String path = new File(".").getCanonicalPath();
-        String destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH))
+        def appHome = System.getProperty("APP_HOME") ?: System.getenv("APP_HOME")
+        String destinationPath
+        if (appHome) {
+            String path = new File(appHome);
+            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH_TOMCAT))
+        }
+        else {
+            String path = new File(".").getCanonicalPath();
+            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH))
+        }
+
         File folder = new File(destinationPath);
         File[] files = folder.listFiles();
 
@@ -87,10 +95,10 @@ class DeleteAllController {
             log.error("Exception occurred while deleting file:\n", e);
             return false;
         }
-        /*if (Checkconnetivity.internetConnection()) {
-            def delete = Deleteallfile.deleteAllFileUsingJcifs()
+        /*if (CheckConnetivity.internetConnection()) {
+            def delete = DeleteAllFile.deleteAllFileUsingJcifs()
             if (delete) {
-                int length = Deleteallfile.length
+                int length = DeleteAllFile.length
                 log.info(length + "files from Remote Location are deleted successfully!")
                 redirect view: "index"
                 flash.message = length + " " + g.message(code: "flash.message.all.files.delete")

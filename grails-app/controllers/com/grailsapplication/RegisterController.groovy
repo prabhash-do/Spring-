@@ -17,8 +17,9 @@ class RegisterController {
     def index() {}
 
     def register() {
-       if (!params.password.equals(params.repassword)) {
-            flash.message = g.message("flash.message.password.mismatch")
+        if (!params.password.equals(params.repassword)) {
+            flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
+            log.warn("New Passowrd and Confirm password not match")
             redirect action: "index"
             return
         } else {
@@ -32,16 +33,16 @@ class RegisterController {
                     u = BootStrap.userService.save(u)
                     BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_ADMIN'))
                     log.info('You have Successfully registered')
-                    flash.successmessage = g.message("flash.message.register.success")
+                    flash.successmessage = g.message(code: "flash.message.register.success")
                     redirect controller: "login", action: "auth"
                 } else {
                     log.warn('please provide a valid Captcha')
-                    flash.warnmessage = g.message("flash.message.incorrect.captcha")
+                    flash.warnmessage = g.message(code: "captcha.mismatch")
                     redirect action: 'index'
                 }
             } catch (ValidationException e) {
                 log.error('Error occured.Unable to Register')
-                flash.warnmessage = g.message("flash.message.register.fail")
+                flash.errormessage = g.message(code: "flash.message.register.fail")
                 redirect action: "index"
             }
         }
