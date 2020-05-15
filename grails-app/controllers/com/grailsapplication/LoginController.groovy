@@ -55,7 +55,7 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
             destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH_TOMCAT))
         } else {
             String path = new File(".").getCanonicalPath();
-            destinationPath = path + config.getString(BaseConstants.DESTINATION_PATH)
+            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH))
         }
         return destinationPath
     }
