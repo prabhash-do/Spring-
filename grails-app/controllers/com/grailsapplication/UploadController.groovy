@@ -24,14 +24,14 @@ class UploadController {
 
         SendMail.mail(fileName)
         log.info("Mail has been sent successfully!")
-        flash.messageemail = g.message(code:"flash.message.email")
+        flash.messageemail = g.message(code: "flash.message.email")
     }
 
     def doSMS(def fileName) {
 
         Sendsms.sendsms(fileName)
         log.info("SMS has been sent successfully!")
-        flash.messagesms = g.message(code:"flash.message.sms")
+        flash.messagesms = g.message(code: "flash.message.sms")
     }
 
     def doDataBaseEntry(fileName) {
@@ -44,31 +44,18 @@ class UploadController {
     }
 
     def doUpload() {
-        ResourceBundle config = ResourceBundle.getBundle("config")
         try {
             def file = request.getFile('file')
             String fileName = file.originalFilename
-            def appHome = System.getProperty("APP_HOME") ?: System.getenv("APP_HOME")
-            def destinationPath
-            if (appHome) {
-                String path = new File(appHome);
-                destinationPath = path + config.getString("destinationPathTomcat")
-            }
-            else {
-                String path = new File(".").getCanonicalPath();
-                destinationPath = path + config.getString(BaseConstants.DESTINATION_PATH)
-            }
+            String destinationPath = LoginController.setPath()
             def extension = fileName.substring(fileName.lastIndexOf("."))
-            if (extension.equalsIgnoreCase(".png")||extension.equalsIgnoreCase(".jpg")||extension.equalsIgnoreCase(".jpeg")) {
+            if (extension.equalsIgnoreCase(".png") || extension.equalsIgnoreCase(".jpg") || extension.equalsIgnoreCase(".jpeg")) {
                 destinationPath = destinationPath.concat(BaseConstants.IMAGES).concat(File.separator)
-            }
-            else if (extension.equalsIgnoreCase(".ppt")||extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".jar")) {
+            } else if (extension.equalsIgnoreCase(".ppt") || extension.equalsIgnoreCase(".pptx") || extension.equalsIgnoreCase(".jar")) {
                 destinationPath = destinationPath.concat(BaseConstants.PPTS).concat(File.separator)
-            }
-            else if (extension.equalsIgnoreCase(".mp4")||extension.equalsIgnoreCase(".mov")||extension.equalsIgnoreCase(".3gp")) {
+            } else if (extension.equalsIgnoreCase(".mp4") || extension.equalsIgnoreCase(".mov") || extension.equalsIgnoreCase(".3gp")) {
                 destinationPath = destinationPath.concat(BaseConstants.VIDEOS).concat(File.separator)
-            }
-            else if (extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".txt")) {
+            } else if (extension.equalsIgnoreCase(".pdf") || extension.equalsIgnoreCase(".txt")) {
                 destinationPath = destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator)
             }
             def files = ListRemoteFiles.list()

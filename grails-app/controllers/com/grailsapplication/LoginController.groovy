@@ -1,5 +1,6 @@
 package com.grailsapplication
 
+import com.util.BaseConstants
 import grails.config.Config
 import grails.converters.JSON
 import grails.core.support.GrailsConfigurationAware
@@ -43,6 +44,20 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
         flash.errormessage = g.message(code:"login.failed")
         log.error(g.message(code:"login.failed"))
         redirect action: "auth"
+    }
+
+    static String setPath() {
+        ResourceBundle config = ResourceBundle.getBundle("config")
+        def appHome = System.getProperty("APP_HOME") ?: System.getenv("APP_HOME")
+        String destinationPath
+        if (appHome) {
+            String path = new File(appHome);
+            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH_TOMCAT))
+        } else {
+            String path = new File(".").getCanonicalPath();
+            destinationPath = path + config.getString(BaseConstants.DESTINATION_PATH)
+        }
+        return destinationPath
     }
 
     @Override
