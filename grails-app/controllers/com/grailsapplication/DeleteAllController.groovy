@@ -16,11 +16,11 @@ class DeleteAllController {
         render view: '../index'
     }
 
-    def doAllDelete = {
+    def doAllDelete() {
 
         ResourceBundle config = ResourceBundle.getBundle("config")
         String path = new File(".").getCanonicalPath();
-        def destinationPath = path + config.getString(BaseConstants.DESTINATION_PATH)
+        String destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH))
         File folder = new File(destinationPath);
         File[] files = folder.listFiles();
 

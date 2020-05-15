@@ -19,11 +19,11 @@ class ListRemoteFiles {
         String destinationPath
         if (appHome) {
             String path = new File(appHome);
-            destinationPath = path + config.getString("destinationPathTomcat")
+            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH_TOMCAT))
         }
         else {
             String path = new File(".").getCanonicalPath();
-            destinationPath = path + config.getString(BaseConstants.DESTINATION_PATH)
+            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH))
         }
         File folder = new File(destinationPath);
 
