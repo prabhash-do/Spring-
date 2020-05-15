@@ -80,9 +80,9 @@
         </ul>
     </fieldset>
 
-    <div class="footer row" role="contentinfo">
+    %{--<div class="footer row" role="contentinfo">
         <p><g:message code="default.client.user.role"></g:message></p>
-    </div>
+    </div>--}%
     <asset:javascript src="validator.js"/>
 
 </body>
