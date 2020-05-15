@@ -7,10 +7,22 @@
 
 <body onload="setup()">
 
+<g:render template="/templates/grailstemplates"/>
 <g:form controller="register">
     <button id="submit" class="butn butn-lg butn-primary butn-blk text-uppercase" type="submit"><g:message
             code="default.button.createuser"></g:message></button>
 </g:form>
+<g:each in="${currentuser}" var="CUser">
+    <ul>
+        <fieldset class="message">
+            <table>
+                <tr>
+                    <td>${CUser.firstname}  ${CUser.lastname}</td>
+                </tr>
+            </table>
+        </fieldset>
+    </ul>
+</g:each>
     <g:each in="${listuser}" var="User">
         <ul>
             <fieldset class="message">

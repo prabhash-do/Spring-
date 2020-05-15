@@ -22,7 +22,6 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
 
         if (springSecurityService.isLoggedIn()) {
             redirect uri: conf.successHandler.defaultTargetUrl
-            System.out.println("User is logged in")
             return
         }
 
@@ -41,7 +40,7 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
 
     def authfail(){
 
-        flash.message = message.getString("login.failed")
+        flash.warnmessage = message.getString("login.failed")
         log.error(message.getString("login.failed"))
         redirect action: "auth"
     }
