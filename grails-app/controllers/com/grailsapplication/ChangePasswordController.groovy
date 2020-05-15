@@ -18,30 +18,30 @@ class ChangePasswordController {
  * @return true
  */
     def changepassword() {
-//        ResourceBundle message = ResourceBundle.getBundle("messages")
+
         User user = springSecurityService.currentUser
 
         if (user != null) {
             if (user.password.isEmpty()) {
                 flash.warnmessage = g.message(code: "flash.message.user.warn")
-                log.info("No User Details Found")
+                log.warn("No User Details Found")
             } else {
-                def passwordCurrent = params.currentpassword
-                def passwordNew = params.newpassword
-                def passwordConfirm = params.confirmpassword
+                String passwordCurrent = params.currentpassword
+                String passwordNew = params.newpassword
+                String passwordConfirm = params.confirmpassword
                 try {
                     if (!passwordEncoder.isPasswordValid(user.password,
                             passwordCurrent, null /*salt*/)) {
-                        log.info("Current password is incorrect")
+                        log.warn("Current password is incorrect")
                         flash.warnmessage = g.message(code:'flash.message.incorrect.current.password')
                         render view: '/changePassword/change', model: [currentpassword: passwordCurrent]
                     } else if (!passwordNew.equals(passwordConfirm)) {
-                        log.info("New Pasword and Confirm password did not match")
+                        log.warn("New Pasword and Confirm password did not match")
                         flash.warnmessage = g.message(code:"flash.message.new.password.mismatch")
                         render view: '/changePassword/change', model: [currentpassword: passwordCurrent]
                     } else if (passwordEncoder.isPasswordValid(user.password, passwordNew,
                             null /*salt*/)) {
-                        log.info("Please choose a different password from current one")
+                        log.warn("Please choose a different password from current one")
                         flash.warnmessage = g.message(code:'flash.message.choose.different.password')
                         render view: '/changePassword/change', model: [currentpassword: passwordCurrent]
                     } else {
@@ -55,7 +55,7 @@ class ChangePasswordController {
                     }
                 } catch (ValidationException e) {
                     log.error("Exception occured while Changing password:\n", e)
-                    flash.warnmessage = g.message(code:"springsecurity.change.password.fail")
+                    flash.errormessage = g.message(code:"springsecurity.change.password.fail")
                     redirect action: "index"
                 }
             }

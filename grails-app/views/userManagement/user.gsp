@@ -8,7 +8,7 @@
 <body onload="setup()">
 
 <g:render template="/templates/grailstemplates"/>
-<g:form controller="register">
+<g:form controller="createUser">
     <button id="submit" class="butn butn-lg butn-primary butn-blk text-uppercase" type="submit"><g:message
             code="default.button.createuser"></g:message></button>
 </g:form>

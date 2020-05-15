@@ -3,9 +3,8 @@
  */
 package com.grailsapplication
 
-import com.company.Checkconnetivity
-import com.company.Deletefile
-import grails.plugin.springsecurity.SpringSecurityService
+import com.company.CheckConnectivity
+import com.company.DeleteFile
 import grails.plugin.springsecurity.annotation.Secured
 
 @Secured('permitAll')
@@ -16,11 +15,11 @@ class DeleteController {
     def index() {
     }
 
-    def doDelete = {
+    def doDelete(){
 
         def filename = params.filename
-        if (Checkconnetivity.internetConnection()) {
-            if (Deletefile.deleteFileUsingJcifs(filename)) {
+        if (CheckConnectivity.internetConnection()) {
+            if (DeleteFile.deleteFileUsingJcifs(filename)) {
                 log.info("File has been deleted successfully from Remote Location!")
                 flash.message = g.message(code: "flash.message.file.delete")
                 redirect controller: "listing", action: "doListing"
@@ -31,7 +30,7 @@ class DeleteController {
         }
     }
 
-    def userdelete = {
+    def userdelete(){
 
         User user = User.findById(params.userid)
         BootStrap.userRoleService.delete(user)
