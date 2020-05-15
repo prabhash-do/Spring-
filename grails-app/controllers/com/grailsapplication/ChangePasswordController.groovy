@@ -18,7 +18,7 @@ class ChangePasswordController {
  * @return true
  */
     def changepassword() {
-//        ResourceBundle message = ResourceBundle.getBundle("messages")
+
         User user = springSecurityService.currentUser
 
         if (user != null) {
@@ -33,16 +33,16 @@ class ChangePasswordController {
                     if (!passwordEncoder.isPasswordValid(user.password,
                             passwordCurrent, null /*salt*/)) {
                         log.warn("Current password is incorrect")
-                        flash.errormessage = g.message(code:'flash.message.incorrect.current.password')
+                        flash.warnmessage = g.message(code:'flash.message.incorrect.current.password')
                         render view: '/changePassword/change', model: [currentpassword: passwordCurrent]
                     } else if (!passwordNew.equals(passwordConfirm)) {
                         log.warn("New Pasword and Confirm password did not match")
-                        flash.errormessage = g.message(code:"flash.message.new.password.mismatch")
+                        flash.warnmessage = g.message(code:"flash.message.new.password.mismatch")
                         render view: '/changePassword/change', model: [currentpassword: passwordCurrent]
                     } else if (passwordEncoder.isPasswordValid(user.password, passwordNew,
                             null /*salt*/)) {
                         log.warn("Please choose a different password from current one")
-                        flash.errormessage = g.message(code:'flash.message.choose.different.password')
+                        flash.warnmessage = g.message(code:'flash.message.choose.different.password')
                         render view: '/changePassword/change', model: [currentpassword: passwordCurrent]
                     } else {
                         passwordCurrent = passwordNew

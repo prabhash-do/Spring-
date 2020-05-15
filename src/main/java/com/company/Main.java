@@ -38,7 +38,7 @@ public class Main {
                     if (tempFile.exists()) {
                         CheckCopyFile.copyFile(userName, password, destinationPath, sourcePath, filename);
                         SendMail.mail(filename);
-                        //SendSms.sendsms(filename);
+                        //Sendsms.sendsms(filename);
                     } else {
                         log.info(message.getString("invalid.message"));
                     }

@@ -18,7 +18,7 @@ class CreateUserController {
     def createUser () {
         if (!params.password.equals(params.repassword)) {
             log.warn("New Pasword and Confirm password did not match")
-            flash.errormessage = g.message(code:"flash.message.new.password.mismatch")
+            flash.warnmessage = g.message(code:"flash.message.new.password.mismatch")
             redirect action: "index"
         } else {
             try {

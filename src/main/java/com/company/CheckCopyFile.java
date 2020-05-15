@@ -31,7 +31,6 @@ public class CheckCopyFile {
         boolean flag = false;
         if (!sourcePath.toLowerCase().endsWith(".pdf") && !sourcePath.toLowerCase().endsWith(".xml") && !sourcePath.toLowerCase().endsWith(".xlsx") && !sourcePath.toLowerCase().endsWith(".csv") && !sourcePath.toLowerCase().endsWith(".txt")) {
             log.info(message.getString("invalid.message"));
-
             return flag;
         } else {
             if (filesize < size) {

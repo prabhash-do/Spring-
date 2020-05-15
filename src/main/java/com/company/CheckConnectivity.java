@@ -7,11 +7,11 @@ import java.net.URLConnection;
 
 import static com.company.AccessFile.config;
 
-public class CheckConnetivity {
+public class CheckConnectivity {
 
-    private static Logger log = Logger.getLogger(CheckConnetivity.class);
+    private static Logger log = Logger.getLogger(CheckConnectivity.class);
 
-    private CheckConnetivity() {
+    private CheckConnectivity() {
     }
 
     /**

@@ -23,7 +23,7 @@ class ResetPasswordController {
         String passwordNew = params.newpassword
         if (!params.newpassword.equals(params.confirmpassword)) {
             log.warn("New password and Confirm password not match")
-            flash.errormessage = g.message(code: "flash.message.new.password.mismatch")
+            flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
             redirect action: "index"
 
         } else {

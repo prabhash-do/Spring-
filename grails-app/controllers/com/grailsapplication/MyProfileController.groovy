@@ -21,7 +21,7 @@ class MyProfileController {
         if (firstName != null || email != null || userName != null) {
             log.info("User Details are shown")
         } else {
-            flash.errormessage = g.message(code: "flash.message.user.warn")
+            flash.warnmessage = g.message(code: "flash.message.user.warn")
             log.warn("No User Details Found")
         }
         render view: "myprofile", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName]
@@ -41,7 +41,7 @@ class MyProfileController {
         if (user != null) {
 
             if (firstname.isEmpty() || email.isEmpty()) {
-                flash.errormessage = g.message(code: "flash.message.edituser.warn")
+                flash.warnmessage = g.message(code: "flash.message.edituser.warn")
                 log.warn("Unable to save user details.Some mandatory fields are left blank")
             } else {
                 user.firstname = firstname

@@ -18,7 +18,7 @@ class RegisterController {
 
     def register() {
         if (!params.password.equals(params.repassword)) {
-            flash.errormessage = g.message(code: "flash.message.new.password.mismatch")
+            flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
             log.warn("New Passowrd and Confirm password not match")
             redirect action: "index"
             return
@@ -37,7 +37,7 @@ class RegisterController {
                     redirect controller: "login", action: "auth"
                 } else {
                     log.warn('please provide a valid Captcha')
-                    flash.errormessage = g.message(code: "captcha.mismatch")
+                    flash.warnmessage = g.message(code: "captcha.mismatch")
                     redirect action: 'index'
                 }
             } catch (ValidationException e) {

@@ -6,9 +6,9 @@
  */
 package com.grailsapplication
 
-import com.company.CheckConnetivity
+import com.company.CheckConnectivity
 import com.company.SendMail
-import com.company.SendSms
+
 import com.util.BaseConstants
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -29,7 +29,7 @@ class UploadController {
 
     def doSMS(def fileName) {
 
-        SendSms.sendsms(fileName)
+        Sendsms.sendsms(fileName)
         log.info("SMS has been sent successfully!")
         flash.messagesms = g.message(code:"flash.message.sms")
     }
@@ -43,7 +43,7 @@ class UploadController {
         log.info("File " + fileName + " has been inserted into DataBase successfully!")
     }
 
-    def doUpload = {
+    def doUpload() {
         ResourceBundle config = ResourceBundle.getBundle("config")
         try {
             def file = request.getFile('file')
@@ -87,7 +87,7 @@ class UploadController {
             }
             fileDest.setWritable(true);*/
 
-            if (CheckConnetivity.internetConnection()) {
+            if (CheckConnectivity.internetConnection()) {
                 if (!files.contains(fileName)) {
                     log.info("File " + fileName + " has been uploaded successfully!")
                     flash.message = g.message(code: "flash.message.file.upload")
