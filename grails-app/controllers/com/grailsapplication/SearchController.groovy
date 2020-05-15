@@ -30,7 +30,7 @@ class SearchController {
                log.info(searchedList)
                render view: "/listing/list", model: [remotelist: searchedList]
 */
-
+                filelist.sort()
                 List<String> result = filelist
                         .stream()
                         .filter({ x -> x.contains(searchName)})
@@ -43,7 +43,6 @@ class SearchController {
                 render view: "/listing/list", model: [remotelist: filelist]
                 log.error("file not found")
             }
-
         }
     }
 }
