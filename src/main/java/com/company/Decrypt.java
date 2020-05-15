@@ -19,7 +19,7 @@ public class Decrypt {
     private static SecretKeySpec secretKey;
     private static byte[] key;
     static String decryptedPassword;
-    static String secret = Secretkey.getSecretKey();
+    static String secret = SecretKey.getSecretKey();
 
     /**
      * This method takes the encrypted password from config.properties and returns actual password

@@ -9,14 +9,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import static com.company.Accessfile.*;
+import static com.company.AccessFile.*;
 
-public class Copyfile {
+public class CopyFile {
 
-    private Copyfile() {
+    private CopyFile() {
     }
 
-    static Logger log = Logger.getLogger(Copyfile.class);
+    static Logger log = Logger.getLogger(CopyFile.class);
 
     /**
      * This method copy a file to shared folder

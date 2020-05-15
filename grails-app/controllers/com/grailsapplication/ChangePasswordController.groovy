@@ -18,12 +18,12 @@ class ChangePasswordController {
  * @return true
  */
     def changepassword() {
-
+//        ResourceBundle message = ResourceBundle.getBundle("messages")
         User user = springSecurityService.currentUser
 
         if (user != null) {
             if (user.password.isEmpty()) {
-                flash.errormessage = g.message(code: "flash.message.user.warn")
+                flash.warnmessage = g.message(code: "flash.message.user.warn")
                 log.warn("No User Details Found")
             } else {
                 String passwordCurrent = params.currentpassword

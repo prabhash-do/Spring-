@@ -3,8 +3,7 @@
  */
 package com.grailsapplication
 
-import com.company.Checkconnetivity
-import com.company.Deleteallfile
+
 import com.util.BaseConstants
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -87,10 +86,10 @@ class DeleteAllController {
             log.error("Exception occurred while deleting file:\n", e);
             return false;
         }
-        /*if (Checkconnetivity.internetConnection()) {
-            def delete = Deleteallfile.deleteAllFileUsingJcifs()
+        /*if (CheckConnetivity.internetConnection()) {
+            def delete = DeleteAllFile.deleteAllFileUsingJcifs()
             if (delete) {
-                int length = Deleteallfile.length
+                int length = DeleteAllFile.length
                 log.info(length + "files from Remote Location are deleted successfully!")
                 redirect view: "index"
                 flash.message = length + " " + g.message(code: "flash.message.all.files.delete")

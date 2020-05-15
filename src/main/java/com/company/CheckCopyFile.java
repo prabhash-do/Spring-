@@ -5,14 +5,13 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ResourceBundle;
 
-import static com.company.Accessfile.message;
+import static com.company.AccessFile.message;
 
-public class Checkcopyfile {
+public class CheckCopyFile {
 
-    static Logger log = Logger.getLogger(Checkcopyfile.class);
-    private Checkcopyfile() {
+    static Logger log = Logger.getLogger(CheckCopyFile.class);
+    private CheckCopyFile() {
     }
 
     /**
@@ -36,7 +35,7 @@ public class Checkcopyfile {
             return flag;
         } else {
             if (filesize < size) {
-                flag = Copyfile.copyFileUsingJcifs(userName, password, sourcePath, destinationPath, filename);
+                flag = CopyFile.copyFileUsingJcifs(userName, password, sourcePath, destinationPath, filename);
                 return flag;
             } else {
                 log.info(message.getString("invalid.filesize"));

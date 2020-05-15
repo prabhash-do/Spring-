@@ -7,14 +7,14 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.text.MessageFormat;
 
-import static com.company.Accessfile.*;
+import static com.company.AccessFile.*;
 
-public class Sendsms {
+public class SendSms {
 
-    Sendsms() {
+    SendSms() {
     }
 
-    static Logger log = Logger.getLogger(Sendsms.class);
+    static Logger log = Logger.getLogger(SendSms.class);
 
     /**
      * This method basically sends a SMS to user's mobile no. while user has copied a file to shared folder successfully!

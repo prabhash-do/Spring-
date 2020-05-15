@@ -5,13 +5,13 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 
-import static com.company.Accessfile.*;
+import static com.company.AccessFile.*;
 
-public class Deletefile {
-    private Deletefile() {
+public class DeleteFile {
+    private DeleteFile() {
     }
 
-    static Logger log = Logger.getLogger(Deletefile.class);
+    static Logger log = Logger.getLogger(DeleteFile.class);
 
     /**
      * This method takes the filename and delete that file from shared folder

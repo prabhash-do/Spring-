@@ -8,14 +8,14 @@ import javax.mail.search.FlagTerm;
 import java.io.IOException;
 import java.util.Properties;
 
-import static com.company.Accessfile.*;
+import static com.company.AccessFile.*;
 
-public class Readmail {
+public class ReadMail {
 
-    private Readmail() {
+    private ReadMail() {
     }
 
-    static Logger log = Logger.getLogger(Readmail.class);
+    static Logger log = Logger.getLogger(ReadMail.class);
 
     /**
      * This method displays the subject of all unread mails from a specific Gmail folder
@@ -33,7 +33,7 @@ public class Readmail {
         String mailhostname = config.getString("imap.host.name");
         String username = config.getString("email.sender.username");
         String password = Decrypt.getDecryptedPassword(config.getString("email.sender.password"));
-        String imapfolder = config.getString("imap.Labels") + Camelcase.convertString(foldername);
+        String imapfolder = config.getString("imap.Labels") + CamelCase.convertString(foldername);
 
         Properties properties = new Properties();
         properties.put(protocol, protocolname);

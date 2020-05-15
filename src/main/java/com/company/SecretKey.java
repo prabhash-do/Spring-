@@ -1,7 +1,7 @@
 package com.company;
 
-public class Secretkey {
-    private Secretkey() {
+public class SecretKey {
+    private SecretKey() {
     }
 
     /**

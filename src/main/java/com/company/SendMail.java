@@ -9,14 +9,14 @@ import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.Properties;
 
-import static com.company.Accessfile.*;
+import static com.company.AccessFile.*;
 
-public class Sendmail {
+public class SendMail {
 
-    private Sendmail() {
+    private SendMail() {
     }
 
-    static Logger log = Logger.getLogger(Sendmail.class);
+    static Logger log = Logger.getLogger(SendMail.class);
 
     /**
      * This method basically sends an email to user's account while user has copied a file to shared folder successfully!
@@ -58,13 +58,13 @@ public class Sendmail {
             message.setRecipients(RecipientType.TO, InternetAddress.parse(receiver_to));
             message.setRecipients(RecipientType.CC, InternetAddress.parse(receiver_cc));
             //  message.setSubject(bundle.getString("subject.of.mail"));
-            message.setSubject(Accessfile.message.getString("subject.of.mail"));
-            String mail = Accessfile.message.getString("mail.body");
+            message.setSubject(AccessFile.message.getString("subject.of.mail"));
+            String mail = AccessFile.message.getString("mail.body");
             mail = mail.replace("#", filename);
 
             message.setText(mail);
             Transport.send(message);
-            log.info(Accessfile.message.getString("success.message.mail"));
+            log.info(AccessFile.message.getString("success.message.mail"));
         } catch (Exception e) {
             log.error("Exception occured while sending mail:\n", e);
         }

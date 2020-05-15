@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 
-import static com.company.Accessfile.*;
+import static com.company.AccessFile.*;
 
 public class Main {
 
@@ -36,23 +36,23 @@ public class Main {
                     filename = sourcePath.substring(sourcePath.lastIndexOf('/') + 1);
                     File tempFile = new File(sourcePath);
                     if (tempFile.exists()) {
-                        Checkcopyfile.copyFile(userName, password, destinationPath, sourcePath, filename);
-                        Sendmail.mail(filename);
-                        //Sendsms.sendsms(filename);
+                        CheckCopyFile.copyFile(userName, password, destinationPath, sourcePath, filename);
+                        SendMail.mail(filename);
+                        //SendSms.sendsms(filename);
                     } else {
                         log.info(message.getString("invalid.message"));
                     }
                     break;
                 case "-l":
-                    Checklistfile.listFile(userName, password, destinationPath);
+                    CheckListFile.listFile(userName, password, destinationPath);
                     break;
                 case "-d":
                     filename = args[1];
-                    Checkdeletefile.deleteFile(filename);
+                    CheckDeleteFile.deleteFile(filename);
                     break;
                 case "-r":
                     foldername = args[1];
-                    Checkmail.readMail(foldername);
+                    CheckMail.readMail(foldername);
                     break;
                 default:
                     log.warn((message.getString("command.execute.case")));

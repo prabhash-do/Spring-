@@ -5,16 +5,16 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 
-import static com.company.Accessfile.*;
+import static com.company.AccessFile.*;
 
-public class Deleteallfile {
+public class DeleteAllFile {
 
     public static int length;
 
-    private Deleteallfile() {
+    private DeleteAllFile() {
     }
 
-    static Logger log = Logger.getLogger(Deleteallfile.class);
+    static Logger log = Logger.getLogger(DeleteAllFile.class);
 
     /**
      * This method deletes all files,if available, from shared folder

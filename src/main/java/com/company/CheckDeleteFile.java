@@ -2,13 +2,13 @@ package com.company;
 
 import org.apache.log4j.Logger;
 import java.io.IOException;
-import static com.company.Accessfile.*;
+import static com.company.AccessFile.*;
 
-public class Checkdeletefile {
+public class CheckDeleteFile {
 
-    static Logger log = Logger.getLogger(Checkdeletefile.class);
+    static Logger log = Logger.getLogger(CheckDeleteFile.class);
 
-    private Checkdeletefile() {
+    private CheckDeleteFile() {
     }
 
     /**
@@ -25,10 +25,10 @@ public class Checkdeletefile {
             if (!filename.toLowerCase().endsWith(".pdf") && !filename.toLowerCase().endsWith(".xml") && !filename.toLowerCase().endsWith(".xlsx") && !filename.toLowerCase().endsWith(".csv") && !filename.toLowerCase().endsWith(".txt")) {
                 log.info(message.getString("invalid.message"));
             } else {
-                Deletefile.deleteFileUsingJcifs(filename);
+                DeleteFile.deleteFileUsingJcifs(filename);
             }
         } else {
-            Deleteallfile.deleteAllFileUsingJcifs();
+            DeleteAllFile.deleteAllFileUsingJcifs();
         }
 
     }

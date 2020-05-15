@@ -2,9 +2,9 @@ package com.company;
 
 import java.io.IOException;
 
-public class Checklistfile {
+public class CheckListFile {
 
-    private Checklistfile() {
+    private CheckListFile() {
     }
 
     /**
@@ -18,6 +18,6 @@ public class Checklistfile {
      */
     public static void listFile(String userName, String password, String destinationPath) throws IOException {
 
-        Listfile.listFileUsingJcifs(userName, password, destinationPath);
+        ListFile.listFileUsingJcifs(userName, password, destinationPath);
     }
 }

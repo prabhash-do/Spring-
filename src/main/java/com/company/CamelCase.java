@@ -1,8 +1,8 @@
 package com.company;
 
-public class Camelcase {
+public class CamelCase {
 
-    private Camelcase() {
+    private CamelCase() {
     }
 
     public static String convertString(String foldername) {

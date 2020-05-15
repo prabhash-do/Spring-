@@ -7,14 +7,14 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.company.Accessfile.*;
+import static com.company.AccessFile.*;
 
 
-public class Listfile {
-    private Listfile() {
+public class ListFile {
+    private ListFile() {
     }
 
-    static Logger log = Logger.getLogger(Listfile.class);
+    static Logger log = Logger.getLogger(ListFile.class);
 
     /**
      * This method lists all files along with their file size

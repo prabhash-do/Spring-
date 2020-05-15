@@ -5,13 +5,13 @@ import org.apache.log4j.Logger;
 import java.net.URL;
 import java.net.URLConnection;
 
-import static com.company.Accessfile.config;
+import static com.company.AccessFile.config;
 
-public class Checkconnetivity {
+public class CheckConnetivity {
 
-    private static Logger log = Logger.getLogger(Checkconnetivity.class);
+    private static Logger log = Logger.getLogger(CheckConnetivity.class);
 
-    private Checkconnetivity() {
+    private CheckConnetivity() {
     }
 
     /**

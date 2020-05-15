@@ -3,8 +3,8 @@ package com.company;
 import javax.mail.MessagingException;
 import java.io.IOException;
 
-public class Checkmail {
-    private Checkmail() {
+public class CheckMail {
+    private CheckMail() {
     }
 
     /**
@@ -16,6 +16,6 @@ public class Checkmail {
      * @Command java -jar <jarname.jar> -r <foldername>
      */
     public static void readMail(String foldername) throws IOException, MessagingException {
-        Readmail.readSubjectOfMailFolder(foldername);
+        ReadMail.readSubjectOfMailFolder(foldername);
     }
 }
