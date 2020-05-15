@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <label for="confirmpassword"><g:message
                                 code="springSecurity.confirm.password.label"></g:message></label>
-                        <input type="password" placeholder="Confirm new password" class="form-control"
+                        <input type="password" placeholder="Confirm password" class="form-control"
                                name="confirmpassword"
                                id="confirmpassword" required/>
                     </div>

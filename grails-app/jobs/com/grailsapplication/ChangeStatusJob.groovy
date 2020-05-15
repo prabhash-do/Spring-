@@ -1,6 +1,6 @@
 package com.grailsapplication
 
-import com.company.Checkconnetivity
+import com.company.CheckConnectivity
 
 class ChangeStatusJob {
     static triggers = {
