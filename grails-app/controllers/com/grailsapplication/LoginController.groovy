@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 class LoginController extends grails.plugin.springsecurity.LoginController implements GrailsConfigurationAware {
 
     List<String> coordinatePositions
-    ResourceBundle message = ResourceBundle.getBundle("messages");
+//    ResourceBundle message = ResourceBundle.getBundle("messages");
     def auth() {
 
         ConfigObject conf = getConf()

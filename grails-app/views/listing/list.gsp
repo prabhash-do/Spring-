@@ -3,6 +3,10 @@
 <html>
 <head>
     <style type="text/css">
+    .delete_test {
+        float: right;
+        margin-right: 3em;
+    }
     .file-preview {
         background: #ff9892;
         border:5px solid #fffff7;
@@ -62,7 +66,7 @@
                     <div class="column" id="thumbnail">
                         ${it}
 
-                        <g:if test="${it.contains(".mp4")||it.contains(".mov")||it.contains(".3gp")}">
+                        <g:if test="${it.contains(".mp4")||it.contains(".mov")||it.contains(".3gp")||it.contains(".avi")||it.contains(".mpg")||it.contains(".ogg")||it.contains(".webm")}">
                             <div class="file-preview">
                                 <a href="${resource(dir: 'upload/videos', file: it)}"/>
                                 <video style="height: 50px ; width: 50px" src="${resource(dir: 'upload/videos', file: it)}" alt="Video" loop preload="auto"/>
@@ -86,13 +90,25 @@
                                 <img style="height:50px ;width:50px" src="${resource(dir: 'images', file: 'txt.png')}"  alt="Image"/>
                             </div>
                         </g:if>
+                        <g:if test="${it.contains(".docx")}">
+                            <div class="file-preview">
+                                <a href="${resource(dir: 'upload', file: it)}" download/>
+                                <img style="height:50px ;width:50px" src="${resource(dir: 'images', file: 'docx.png')}"  alt="Image"/>
+                            </div>
+                        </g:if>
+                        <g:if test="${it.contains(".xlsx")||it.contains(".xls")||it.contains(".csv")}">
+                            <div class="file-preview">
+                                <a href="${resource(dir: 'upload', file: it)}" download/>
+                                <img style="height:50px ;width:50px" src="${resource(dir: 'images', file: 'xls.jpg')}"  alt="Image"/>
+                            </div>
+                        </g:if>
                         <g:if test="${it.contains(".pptx")||it.contains(".ppt")}">
                             <div class="file-preview">
                                 <a href='<g:createLink controller="preview" action="preview" params="[filename: it]" />'/>
                                 <img style="height:50px ;width:50px" src="${resource(dir: 'images', file: 'pptx.png')}"  alt="Image"/>
                             </div>
                         </g:if>
-                        <div>
+                        <div class="delete_test">
                         <g:link controller="delete" action="doDelete" params="[filename: it]"
                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><g:message
                                 code="default.delete.label"/></g:link>

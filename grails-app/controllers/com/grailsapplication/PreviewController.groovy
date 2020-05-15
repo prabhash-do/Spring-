@@ -19,6 +19,8 @@ class PreviewController {
             render view: "/pptReader/pptReader", model: [filename: filename]/*render to ppt  player.*/
             log.info ("Controller is Rendered to the ppt previewer.")
         } else if (ex.equalsIgnoreCase(".mp4")) {
+
+        } else if (ex.equalsIgnoreCase(".mp4") || ex.equalsIgnoreCase(".mov") || ex.equalsIgnoreCase(".avi") || ex.equalsIgnoreCase(".mpg") || ex.equalsIgnoreCase(".ogg") || ex.equalsIgnoreCase(".webm") || ex.equalsIgnoreCase(".3gp")) {
             def videoflag = "true"   /*render to video player.*/
             render template: "/templates/play", model: [filename: filename, videoflag: videoflag]
             log.info ("Controller is Rendered to the video player.")
@@ -28,4 +30,5 @@ class PreviewController {
             flash.error = errorMessage
         }
     }
+
 }
