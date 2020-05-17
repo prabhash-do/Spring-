@@ -9,34 +9,24 @@ import com.util.BaseConstants
 class ListRemoteFiles {
 
     static List<String> list() {
-        ResourceBundle config = ResourceBundle.getBundle("config")
         List<String> listFiles = new ArrayList<String>();
-        def appHome = System.getProperty("APP_HOME") ?: System.getenv("APP_HOME")
-        String destinationPath
-        if (appHome) {
-            String path = new File(appHome);
-            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH_TOMCAT))
-        }
-        else {
-            String path = new File(".").getCanonicalPath();
-            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH))
-        }
+        String destinationPath = LoginController.setPath()
         File folder = new File(destinationPath);
 
         File folderImage = new File(destinationPath.concat(BaseConstants.IMAGES).concat(File.separator));
-        if (!folderImage.exists()){
+        if (!folderImage.exists()) {
             folderImage.mkdir();
         }
         File folderPpt = new File(destinationPath.concat(BaseConstants.PPTS).concat(File.separator));
-        if (!folderPpt.exists()){
+        if (!folderPpt.exists()) {
             folderPpt.mkdir();
         }
         File folderVideo = new File(destinationPath.concat(BaseConstants.VIDEOS).concat(File.separator));
-        if (!folderVideo.exists()){
+        if (!folderVideo.exists()) {
             folderVideo.mkdir();
         }
         File folderDocs = new File(destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator));
-        if (!folderDocs.exists()){
+        if (!folderDocs.exists()) {
             folderDocs.mkdir();
         }
 
@@ -47,8 +37,7 @@ class ListRemoteFiles {
                 if (!listFiles.contains(file.getName())) {
                     listFiles.add(file.getName())
                 }
-            }
-            else if (file.isDirectory()) {
+            } else if (file.isDirectory()) {
                 //image
                 File[] filesImage = folderImage.listFiles();
                 for (File fileImage : filesImage) {
@@ -79,7 +68,7 @@ class ListRemoteFiles {
                 //Documents
                 File[] filesDocs = folderDocs.listFiles();
                 for (File fileDoc : filesDocs) {
-                    if (fileDoc.isFile()){
+                    if (fileDoc.isFile()) {
                         if (!listFiles.contains(fileDoc.getName())) {
                             listFiles.add(fileDoc.getName())
                         }
