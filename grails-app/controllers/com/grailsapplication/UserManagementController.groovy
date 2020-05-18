@@ -1,17 +1,158 @@
 package com.grailsapplication
 
 import grails.plugin.springsecurity.annotation.Secured
+import grails.validation.ValidationException
 
-@Secured(['permitAll'])
 class UserManagementController {
 
     def springSecurityService
-    def index (){
+    def passwordEncoder
+
+    @Secured('permitAll')
+    def index() {
 
         def listuser = User.list()
         User user = springSecurityService.currentUser
         def currentuser = [user]
         listuser.remove(user)
-        render view: '/userManagement/user',model:[listuser : listuser,currentuser: currentuser]
+        render view: '/userManagement/listUser', model: [listuser: listuser, currentuser: currentuser]
+    }
+
+    @Secured('permitAll')
+    def change() {
+        render view: '/userManagement/changePassword'
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def reset() {
+        String username = params.username
+        render view: '/userManagement/resetPassword', model: [username: username]
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def create() {
+        render view: '/userManagement/createUser'
+    }
+    /**
+     * This method allows a user to change password
+     * @return true
+     */
+    @Secured('permitAll')
+    def changepassword() {
+
+        User user = springSecurityService.currentUser
+
+        if (user != null) {
+            if (user.password.isEmpty()) {
+                flash.warnmessage = g.message(code: "flash.message.user.warn")
+                log.warn("No User Details Found")
+            } else {
+                String passwordCurrent = params.currentpassword
+                String passwordNew = params.newpassword
+                String passwordConfirm = params.confirmpassword
+                try {
+                    if (!passwordEncoder.isPasswordValid(user.password,
+                            passwordCurrent, null /*salt*/)) {
+                        log.warn("Current password is incorrect")
+                        flash.warnmessage = g.message(code: 'flash.message.incorrect.current.password')
+                        render view: '/userManagement/changePassword', model: [currentpassword: passwordCurrent]
+                    } else if (!passwordNew.equals(passwordConfirm)) {
+                        log.warn("New Pasword and Confirm password did not match")
+                        flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
+                        render view: '/userManagement/changePassword', model: [currentpassword: passwordCurrent]
+                    } else if (passwordEncoder.isPasswordValid(user.password, passwordNew,
+                            null /*salt*/)) {
+                        log.warn("Please choose a different password from current one")
+                        flash.warnmessage = g.message(code: 'flash.message.choose.different.password')
+                        render view: '/userManagement/changePassword', model: [currentpassword: passwordCurrent]
+                    } else {
+                        passwordCurrent = passwordNew
+                        user.password = passwordCurrent
+                        BootStrap.userService.save(user)
+
+                        log.info("Pasword changed Successfully")
+                        flash.successmessage = g.message(code: "springsecurity.change.password.success")
+                        redirect action: "change"
+                    }
+                } catch (ValidationException e) {
+                    log.error("Exception occured while Changing password:\n", e)
+                    flash.errormessage = g.message(code: "springsecurity.change.password.fail")
+                    redirect action: "change"
+                }
+            }
+        }
+    }
+    /**
+     * This method allows a ROLE_ADMIN llow user to reset password of other users
+     * @return true
+     */
+    @Secured(['ROLE_ADMIN'])
+    def resetpassword() {
+
+        String username = params.username
+        String passwordNew = params.newpassword
+        String passwordConfirm = params.confirmpassword
+        User user = User.findByUsername(username)
+        if (!passwordNew.equals(passwordConfirm)) {
+            log.warn("New Pasword and Confirm password did not match")
+            flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
+            redirect action: "reset"
+        } else {
+            try {
+                user.password = passwordNew
+                BootStrap.userService.save(user)
+                log.info("Password reset Successfully")
+                flash.successmessage = g.message(code: "springsecurity.reset.password.success")
+                redirect action: "reset"
+            } catch (ValidationException e) {
+                log.error("Exception occured while Changing password:\n", e)
+                flash.errormessage = g.message(code: "springsecurity.reset.password.fail")
+                redirect action: "reset"
+            }
+        }
+    }
+    /**
+     * This method allows a ROLE_ADMIN user to create a new User
+     */
+    @Secured(['ROLE_ADMIN'])
+    def createUser() {
+        if (!params.password.equals(params.repassword)) {
+            log.warn("New Pasword and Confirm password did not match")
+            flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
+            redirect action: "create"
+        } else {
+            try {
+                User u = new User(firstname: params.firstname, lastname: params.lastname, email: params.email, mobilenumber: params.mobilenumber, username: params.username, password: params.password)
+                BootStrap.BANKCARD.each { k, v ->
+                    u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
+                }
+                u = BootStrap.userService.save(u)
+                BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
+                log.info("New user has been created Successfully")
+                flash.successmessage = g.message(code: "flash.message.create.user.sucess")
+                redirect controller: "userManagement", action: "index"
+
+            } catch (javax.xml.bind.ValidationException e) {
+                log.error("Fail to create new user")
+                flash.errormessage = g.message(code: "flash.message.create.user.fail")
+                redirect action: "create"
+            }
+        }
+    }
+/**
+ * This method allows a ROLE_ADMIN user to delete any user except the user who has logged in
+ * @return
+ */
+    @Secured(['ROLE_ADMIN'])
+    def userdelete() {
+
+        User user = User.findById(params.userid)
+        BootStrap.userRoleService.delete(user)
+        user.delete(flush: true)
+        flash.successmessage = user.username + " " + g.message(code: "flash.message.user.delete")
+        redirect controller: "userManagement", action: "index"
+
     }
 }
+
+

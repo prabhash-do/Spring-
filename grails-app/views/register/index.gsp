@@ -17,7 +17,7 @@
                     <div class="form-group">
                         <label for="firstname">*<g:message
                                 code="springSecurity.register.firstname.label"></g:message></label>
-                        <input type="text" placeholder="Your firstname" class="form-control" name="firstname"
+                        <input type="text" placeholder="First Name" class="form-control" name="firstname"
                                id="firstname"
                                autocapitalize="none" required/>
                     </div>
@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <label for="lastname"><g:message
                                 code="springSecurity.register.lastname.label"></g:message></label>
-                        <input type="text" placeholder="Your lastname" class="form-control" name="lastname"
+                        <input type="text" placeholder="Last Name" class="form-control" name="lastname"
                                id="lastname"
                                autocapitalize="none"/>
                     </div>
@@ -33,7 +33,7 @@
                     <div class="form-group">
                         <label for="email">*<g:message
                                 code="springSecurity.register.email.label"></g:message></label>
-                        <input type="text" placeholder="Your email address" class="form-control" name="email"
+                        <input type="text" placeholder="Email Address" class="form-control" name="email"
                                id="email"
                                autocapitalize="none" required/>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <label for="mobilenumber"><g:message
                                 code="springSecurity.register.mobilenumber.label"></g:message></label>
-                        <input type="text" placeholder="Your mobile number" class="form-control"
+                        <input type="text" placeholder="Mobile Number" class="form-control"
                                name="mobilenumber"
                                id="mobilenumber"
                                autocapitalize="none"/>
@@ -51,7 +51,7 @@
                     <div class="form-group">
                         <label for="username">*<g:message
                                 code="springSecurity.login.username.label"></g:message></label>
-                        <input type="text" placeholder="Your username" class="form-control" name="username"
+                        <input type="text" placeholder="Username" class="form-control" name="username"
                                id="username"
                                autocapitalize="none" required/>
                     </div>
@@ -59,14 +59,14 @@
                     <div class="form-group">
                         <label for="password">*<g:message
                                 code="springSecurity.login.password.label"></g:message></label>
-                        <input type="password" placeholder="Your password" class="form-control" name="password"
+                        <input type="password" class="form-control" name="password"
                                id="password" required/>
                     </div>
 
                     <div class="form-group">
                         <label for="password">*<g:message
                                 code="springSecurity.confirm.password.label"></g:message></label>
-                        <input type="password" placeholder="confirm password" class="form-control"
+                        <input type="password" class="form-control"
                                name="repassword"
                                id="repassword" required/>
                     </div>
@@ -77,7 +77,7 @@
                              name='captcha'/>
                         <asset:image src="Reload.png" class="glyphicon glyphicon-refresh" alt="Click to reload image"
                                      title="Click to reload image" onclick="reloadCaptcha()"/>
-                        <g:textField name="captcha" placeholder="Enter captcha" class="form-control1" required="true"/>
+                        <g:textField name="captcha" placeholder="Enter Captcha" class="form-control1" required="true"/>
                     </div>
                     <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase"
                             type="submit"><g:message code="springSecurity.register.button"></g:message></button>
