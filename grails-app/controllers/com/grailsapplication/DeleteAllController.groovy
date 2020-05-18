@@ -17,9 +17,7 @@ class DeleteAllController {
 
     def doAllDelete() {
 
-        ResourceBundle config = ResourceBundle.getBundle("config")
-        String path = new File(".").getCanonicalPath();
-        def destinationPath = path + config.getString(BaseConstants.DESTINATION_PATH)
+        String destinationPath = LoginController.setPath()
         File folder = new File(destinationPath);
         File[] files = folder.listFiles();
 
@@ -28,11 +26,10 @@ class DeleteAllController {
                 for (File file : files) {
                     if (file.isFile()) {
                         file.delete();
-                    }
-                    else if (file.isDirectory()) {
+                    } else if (file.isDirectory()) {
                         //image
                         File folderImage = new File(destinationPath.concat(BaseConstants.IMAGES).concat(File.separator));
-                        if (folderImage.exists()){
+                        if (folderImage.exists()) {
                             File[] filesImage = folderImage.listFiles();
                             for (File fileImage : filesImage) {
                                 if (fileImage.isFile()) {
@@ -42,7 +39,7 @@ class DeleteAllController {
                         }
                         //ppt
                         File folderPpt = new File(destinationPath.concat(BaseConstants.PPTS).concat(File.separator));
-                        if (folderPpt.exists()){
+                        if (folderPpt.exists()) {
                             File[] filesPpt = folderPpt.listFiles();
                             for (File filePpt : filesPpt) {
                                 if (filePpt.isFile()) {
@@ -52,7 +49,7 @@ class DeleteAllController {
                         }
                         //video
                         File folderVideo = new File(destinationPath.concat(BaseConstants.VIDEOS).concat(File.separator));
-                        if (folderVideo.exists()){
+                        if (folderVideo.exists()) {
                             File[] filesVideo = folderVideo.listFiles();
                             for (File fileVideo : filesVideo) {
                                 if (fileVideo.isFile()) {
@@ -62,7 +59,7 @@ class DeleteAllController {
                         }
                         //Documents
                         File folderDoc = new File(destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator));
-                        if (folderDoc.exists()){
+                        if (folderDoc.exists()) {
                             File[] filesDoc = folderDoc.listFiles();
                             for (File fileDoc : filesDoc) {
                                 if (fileDoc.isFile()) {
@@ -75,8 +72,7 @@ class DeleteAllController {
                 redirect view: "index"
                 log.info("All files are deleted successfully!")
                 flash.message = g.message(code: "flash.message.all.files.delete")
-            }
-            else {
+            } else {
                 redirect view: "index"
                 log.info("No files found")
                 flash.warn = g.message(code: "flash.message.no.files.found")
