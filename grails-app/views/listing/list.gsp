@@ -52,9 +52,6 @@
                     code="default.home.page"></g:message></span>
         </g:link>
     </content>
-    <section class="row colset-2-its">
-        <h1>${message(code: 'check.remote.files')}</h1>
-    </section>
 </div>
 
 <div id="design" role="main" >
@@ -121,30 +118,12 @@
 </div>
 
 <div id="content" role="main">
-    <section class="row colset-2-its">
-        <h1>${message(code: 'check.database.files')}</h1>
-    </section>
+
 </div>
 
 <div id="design" role="main">
 
-    <g:if test="${dblist}">
-        <g:each in="${dblist}" var="Uploadfile">
-            <ul>
-                <li>
-                    <div class="row">
-                        <div class="column">
-                            ${Uploadfile.fileName}
-                        </div>
 
-                        <div>
-                            ${Uploadfile.status}
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </g:each>
-    </g:if>
 </div>
 </body>
 </html>
