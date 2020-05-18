@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label for="username"><g:message code="springSecurity.login.username.label"></g:message></label>
                         <input type="text" class="form-control" name="${usernameParameter ?: 'username'}" id="username"
-                               placeholder="Type Your Username" autocapitalize="none" required/>
+                               placeholder="Username" autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <input type="password" class="form-control" name="${passwordParameter ?: 'password'}"
-                                   id="password" placeholder="Type Your Password" required/>
+                                   id="password" required/>
                         </div>
                     </div>
 
