@@ -12,8 +12,8 @@
         <h1><b>${message(code: 'default.myprofile.header')}</b>
         </h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <g:form controller="changePassword">
-            <button id="submit" class="butn butn-lg butn-primary butn-blk text-uppercase" type="submit"><g:message
+        <g:form controller="userManagement" action="change">
+            <button id="submit" class="btn btn-primary margin text-uppercase " type="submit"><g:message
                     code="default.button.change"></g:message></button>
         </g:form>
     </section>
@@ -87,13 +87,16 @@
         <b>${message(code: 'default.myprofile.mobilenumber')}</b> ${mobileNumber}<br>
         <b>${message(code: 'default.myprofile.username')}</b> ${userName}
     </div>
-    <button type="button" class="btn btn-primary text-uppercase " data-toggle="modal"
-            data-target=".bd-example-modal-lg"><g:message
-            code="default.button.edit.label"></g:message></button>
-    <g:form controller="secured">
-        <button id="submit" class="btn btn-secondary text-uppercase" type="submit"><g:message
-                code="default.button.cancel"></g:message></button>
-    </g:form>
+
+    <div>
+        <button type="button" class="btn btn-primary text-uppercase " data-toggle="modal"
+                data-target=".bd-example-modal-lg"><g:message
+                code="default.button.edit.label"></g:message></button>
+        <g:form controller="secured">
+            <button id="submit" class="btn btn-secondary text-uppercase" type="submit"><g:message
+                    code="default.button.cancel"></g:message></button>
+        </g:form>
+    </div>
 </div>
 <asset:javascript src="validator.js"/>
 </body>
