@@ -59,7 +59,7 @@
                     <hr class="my-4">
 
                     <p><g:message code="springSecuirity.register.account">
-                    </g:message><g:link controller="register" action="index">
+                    </g:message><g:link controller="register">
                         ${message(code: 'springSecurity.register.button')}</g:link></p>
                 </form>
             </div>
