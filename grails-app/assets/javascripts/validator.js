@@ -9,30 +9,9 @@ function validateEmailByRegex() {
     }
 }
 
-function viewPassword() {
-    var passwordInput = document.getElementById('password');
-    var passStatus = document.getElementById('pass-status');
-
-    if (passwordInput.type == 'password') {
-        passwordInput.type = 'text';
-        passStatus.className = 'fa fa-eye-slash';
-
-    } else {
-        passwordInput.type = 'password';
-        passStatus.className = 'fa fa-eye';
-    }
-}
-
 function reloadCaptcha() {
     document.getElementById('captcha').src = document.getElementById('captcha').src + '?' + new Date();
 }
-
-/*
- this is to mark an input field as disabled
- */
-document.getElementById("disabled").disabled = true;
-
-
 /*
 This method validates the password toggle eye-icon
  */
