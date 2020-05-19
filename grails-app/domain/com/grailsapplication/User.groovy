@@ -54,6 +54,7 @@ class User implements Serializable {
     }
 
     static mapping = {
+        id generator:'sequence', params:[sequence_name:'seq_user']
         password column: '`password`'
         table '`user`'
 

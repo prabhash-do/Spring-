@@ -88,7 +88,7 @@ endpoints:
 ---
                 server:
                         port: 8050
-                        contextPath: '/solutionsd/secured'
+                        contextPath: '/solutionsd/'
 ---
 security:
     coordinate:
