@@ -41,8 +41,8 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
 
     def authfail() {
 
-        flash.errormessage = g.message(code:"login.failed")
-        log.error(g.message(code:"login.failed"))
+        flash.errormessage = g.message(code: "login.failed")
+        log.error(g.message(code: "login.failed"))
         redirect action: "auth"
     }
 
@@ -56,6 +56,21 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
         } else {
             String path = new File(".").getCanonicalPath();
             destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH))
+        }
+        return destinationPath
+    }
+
+    static String setPathForFile(String fileName) {
+        String destinationPath = setPath()
+        String extension = fileName.substring(fileName.lastIndexOf("."))
+        if (extension.equalsIgnoreCase(".png") || extension.equalsIgnoreCase(".jpg") || extension.equalsIgnoreCase(".jpeg")) {
+            destinationPath = destinationPath.concat(BaseConstants.IMAGES).concat(File.separator)
+        } else if (extension.equalsIgnoreCase(".ppt") || extension.equalsIgnoreCase(".pptx") || extension.equalsIgnoreCase(".jar")) {
+            destinationPath = destinationPath.concat(BaseConstants.PPTS).concat(File.separator)
+        } else if (extension.equalsIgnoreCase(".mp4") || extension.equalsIgnoreCase(".mov") || extension.equalsIgnoreCase(".3gp")) {
+            destinationPath = destinationPath.concat(BaseConstants.VIDEOS).concat(File.separator)
+        } else if (extension.equalsIgnoreCase(".pdf") || extension.equalsIgnoreCase(".txt") || extension.equalsIgnoreCase(".docx") || extension.equalsIgnoreCase(".xls") || extension.equalsIgnoreCase(".xlsx") || extension.equalsIgnoreCase(".csv")) {
+            destinationPath = destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator)
         }
         return destinationPath
     }
