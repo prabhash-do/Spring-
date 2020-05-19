@@ -157,7 +157,7 @@ class UserManagementController {
         BootStrap.userRoleService.delete(user)
         user.delete(flush: true)
         flash.successmessage = user.username + " " + g.message(code: "flash.message.user.delete")
-        redirect controller: "userManagement", action: "index"
+        redirect action: "index"
 
     }
 }

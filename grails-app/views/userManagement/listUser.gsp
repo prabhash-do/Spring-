@@ -38,8 +38,8 @@
                         <button id="submit" class="btn btn-primary text-uppercase "
                                 type="submit">${message(code: 'default.button.reset')}</button>
                     </g:form></td>
-                <td><g:form controller="userManagement" action="userdelete" params="[userid: User.id]">
-                    <button id="submit" class="btn btn-primary text-uppercase "
+                <td><g:form controller="userManagement" action="deleteUser"  params="[userid: User.id]">
+                    <button id="submit" class="btn btn-primary text-uppercase " onclick="ondelete()"
                             type="submit">${message(code: 'default.button.deleteuser')}</button></td>
                 </g:form>
                 </tr>
@@ -47,5 +47,14 @@
         </fieldset>
     </ul>
 </g:each>
+    <g:javascript>
+
+        function ondelete(){
+            jAlertI18n("ABCD");
+        }
+
+    </g:javascript>
+
+
 </body>
 </html>
