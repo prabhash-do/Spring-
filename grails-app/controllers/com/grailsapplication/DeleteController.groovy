@@ -15,29 +15,8 @@ class DeleteController {
 
     def doDelete() {
 
-        String destinationPath = LoginController.setPath()
         String fileName = params.filename
-        String extension = fileName.substring(fileName.lastIndexOf("."))
-        if (extension.equalsIgnoreCase(".png") || extension.equalsIgnoreCase(".jpg") || extension.equalsIgnoreCase(".jpeg")) {
-            destinationPath = destinationPath.concat(BaseConstants.IMAGES).concat(File.separator)
-        } else if (extension.equalsIgnoreCase(".ppt") || extension.equalsIgnoreCase(".pptx") || extension.equalsIgnoreCase(".jar")) {
-            destinationPath = destinationPath.concat(BaseConstants.PPTS).concat(File.separator)
-        } else if (extension.equalsIgnoreCase(".mp4") || extension.equalsIgnoreCase(".mov") || extension.equalsIgnoreCase(".3gp")) {
-            destinationPath = destinationPath.concat(BaseConstants.VIDEOS).concat(File.separator)
-        } else if (extension.equalsIgnoreCase(".pdf") || extension.equalsIgnoreCase(".txt") || extension.equalsIgnoreCase(".docx") || extension.equalsIgnoreCase(".xls") || extension.equalsIgnoreCase(".xlsx") || extension.equalsIgnoreCase(".csv")) {
-            destinationPath = destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator)
-        }
-
-        if (CheckConnectivity.internetConnection()) {
-            if (DeleteFile.deleteFileUsingJcifs(fileName)) {
-                log.info("File has been deleted successfully from Remote Location!")
-                flash.message = g.message(code: "flash.message.file.delete")
-                redirect controller: "listing", action: "doListing"
-            }
-        } else {
-            flash.error = g.message(code: "flash.message.check.connectivity")
-            redirect controller: "listing", action: "doListing"
-        }
+        String destinationPath = LoginController.setPathForFile(fileName)
         File file = new File(destinationPath.concat(fileName));
 
         try {
@@ -48,9 +27,9 @@ class DeleteController {
                 return false;
             } else {
                 if (file.delete()) {
+                    DeleteAllController deleteAllController = new DeleteAllController();
+                    deleteAllController.deleteFileFromDB(fileName)
                     redirect controller: "listing", action: "doListing"
-                    log.info("File " + fileName + " has been deleted successfully!")
-                    flash.message = g.message(code: "success.delete.message")
                 }
                 return true;
             }
