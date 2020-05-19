@@ -13,8 +13,7 @@
         </h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <g:form controller="userManagement" action="create">
-            <button id="submit" class="btn btn-primary margin text-uppercase " type="submit"><g:message
-                    code="default.button.createuser"></g:message></button>
+            <button id="submit" class="btn btn-primary margin text-uppercase " type="submit">${message(code: 'default.button.createuser')}</button>
         </g:form>
     </section>
 </div>
@@ -37,13 +36,11 @@
                     <td>${User.firstname}  ${User.lastname}</td>
                     <td><g:form controller="userManagement" action="reset" params="[username: User.username]">
                         <button id="submit" class="btn btn-primary text-uppercase "
-                                type="submit"><g:message
-                                code="default.button.reset"></g:message></button>
+                                type="submit">${message(code: 'default.button.reset')}</button>
                     </g:form></td>
                 <td><g:form controller="userManagement" action="userdelete" params="[userid: User.id]">
                     <button id="submit" class="btn btn-primary text-uppercase "
-                            type="submit"><g:message
-                            code="default.button.deleteuser"></g:message></button></td>
+                            type="submit">${message(code: 'default.button.deleteuser')}</button></td>
                 </g:form>
                 </tr>
             </table>
