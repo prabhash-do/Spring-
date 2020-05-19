@@ -38,9 +38,9 @@
                     <div class="card cards-shadown cards-hover">
                         <div class="card-header"><span class="space"><i class="fab fa-angular service-icon" id="service-icon-1"></i></span>
                             <div class="cardheader-text">
-                                <p id="cardheader-subtext-1" class="cardheader-subtext">Choose Files</p>
+                                <p id="cardheader-subtext-1" class="cardheader-subtext"><g:message code="default.choose.file"/></p>
 
-                                    <input type="file" name="file" id="file0" accept="image/*,application/*,audio/*,video/*,.pptx,.jar">
+                                    <input type="file" name="file" id="file0" multiple>
                                     <div id="progressStatus0">
                         <div id="progressBar0"></div>
                     </div>
@@ -59,19 +59,11 @@
         <g:javascript>
         function savefname0() {
             var filename = $('#file0').val();
-            if (filename != null && filename != '') {
+            if (filename != null && filename !== '') {
                 updateProgressBar0();
-                 var fileNameLength = document.getElementById("file0").files[0].name;
-            if(fileNameLength.length>50)
-            {
-                alert('${((g.message(code: 'alert.filename.size.exceeds')))}')
-                return false;
-            }else {
                 return true;
-            }
-
             } else {
-                alert("${message(code: 'alert.while.uploading')}")
+                alert("${message(code: 'default.choose.file')}");
                 return false;
             }
         }
@@ -90,6 +82,7 @@
                     progressBar.hidden = true;
                     progressStatus.hidden = true;
                 } else {
+                    $('#submit0').prop('disabled', true);
                     width++;
                     progressBar.style.width = width + '%';
                     progressBar.innerHTML = width  + '%';
