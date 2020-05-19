@@ -34,10 +34,14 @@ class UploadController {
         flash.messagesms = g.message(code: "flash.message.sms")
     }
 
-    def doDataBaseEntry(fileName) {
+    def doDataBaseEntry(fileName, fileSize) {
+
+        String date = new Date().format("dd/MM/yyyy hh:mm:ss a")
 
         Uploadfile uploadfile = new Uploadfile()
         uploadfile.fileName = fileName
+        uploadfile.fileSize = fileSize
+        uploadfile.creationDate = date
         uploadfile.status = true
         uploadfile.insert(flush: true)
         log.info("File " + fileName + " has been inserted into DataBase successfully!")
@@ -62,7 +66,7 @@ class UploadController {
                     flash.message = g.message(code: "flash.message.replace.file")
                 }
 
-                doDataBaseEntry(fileName)
+                doDataBaseEntry(fileName, file.size)
 
                 /*boolean isemailchecked = params.email
                 if (isemailchecked) {
