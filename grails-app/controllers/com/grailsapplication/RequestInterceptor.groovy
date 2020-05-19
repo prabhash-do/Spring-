@@ -4,7 +4,8 @@ package com.grailsapplication
 class RequestInterceptor {
 
     public RequestInterceptor(){
-        matchAll().excludes(controller: 'login')
+        matchAll().excludes(controller: ~/(register|login|simpleCaptcha|logout)/)
+
     }
 
     boolean before() {
