@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta name="layout" content="${gspLayout ?: 'main'}"/>
-    <title><g:message code="springSecurity.register.title"></g:message></title>
+    <title>${message(code: 'springSecurity.register.title')}</title>
 </head>
 
 <body>
@@ -9,39 +9,35 @@
     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
             <div class="card-body">
-                <h5 class="card-title text-center"><g:message code="springSecurity.register.header"></g:message></h5>
+                <h5 class="card-title text-center">${message(code: 'springSecurity.register.header')}</h5>
                 <g:render template="/templates/grailstemplates"/>
                 <form class="form-signin" onsubmit="return (validateEmailByRegex('email'))" action="register"
                       method="POST" id="registerForm" autocomplete="off">
 
                     <div class="form-group">
-                        <label for="firstname">*<g:message
-                                code="springSecurity.register.firstname.label"></g:message></label>
-                        <input type="text" placeholder="First Name" class="form-control" name="firstname"
+                        <label for="firstname">*${message(code: 'springSecurity.register.firstname.label')}</label>
+                        <input type="text" placeholder="${message(code: 'springSecurity.register.firstname.label')}" class="form-control" name="firstname"
                                id="firstname"
                                autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="lastname"><g:message
-                                code="springSecurity.register.lastname.label"></g:message></label>
-                        <input type="text" placeholder="Last Name" class="form-control" name="lastname"
+                        <label for="lastname">${message(code: 'springSecurity.register.lastname.label')}</label>
+                        <input type="text" placeholder="${message(code: 'springSecurity.register.lastname.label')}" class="form-control" name="lastname"
                                id="lastname"
                                autocapitalize="none"/>
                     </div>
 
                     <div class="form-group">
-                        <label for="email">*<g:message
-                                code="springSecurity.register.email.label"></g:message></label>
-                        <input type="text" placeholder="Email Address" class="form-control" name="email"
+                        <label for="email">*${message(code: 'springSecurity.register.email.label')}</label>
+                        <input type="text" placeholder="${message(code: 'springSecurity.register.email.label')}" class="form-control" name="email"
                                id="email"
                                autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="mobilenumber"><g:message
-                                code="springSecurity.register.mobilenumber.label"></g:message></label>
-                        <input type="text" placeholder="Mobile Number" class="form-control"
+                        <label for="mobilenumber">${message(code: 'springSecurity.register.mobilenumber.label')}</label>
+                        <input type="text" placeholder="${message(code: 'springSecurity.register.mobilenumber.label')}" class="form-control"
                                name="mobilenumber"
                                id="mobilenumber"
                                autocapitalize="none"/>
@@ -49,23 +45,20 @@
 
 
                     <div class="form-group">
-                        <label for="username">*<g:message
-                                code="springSecurity.login.username.label"></g:message></label>
-                        <input type="text" placeholder="Username" class="form-control" name="username"
+                        <label for="username">*${message(code: 'springSecurity.login.username.label')}</label>
+                        <input type="text" placeholder="${message(code: 'springSecurity.login.username.label')}" class="form-control" name="username"
                                id="username"
                                autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="password">*<g:message
-                                code="springSecurity.login.password.label"></g:message></label>
+                        <label for="password">*${message(code: 'springSecurity.login.password.label')}</label>
                         <input type="password" class="form-control" name="password"
                                id="password" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="password">*<g:message
-                                code="springSecurity.confirm.password.label"></g:message></label>
+                        <label for="password">*${message(code: 'springSecurity.confirm.password.label')}</label>
                         <input type="password" class="form-control"
                                name="repassword"
                                id="repassword" required/>
@@ -80,12 +73,11 @@
                         <g:textField name="captcha" placeholder="Enter Captcha" class="form-control1" required="true"/>
                     </div>
                     <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase"
-                            type="submit"><g:message code="springSecurity.register.button"></g:message></button>
+                            type="submit">${message(code: 'springSecurity.register.button')}</button>
                 </form>
 
-                <p><g:message code="springSecuirity.have.account"></g:message>
-                    <g:link controller="login" action="auth"><g:message
-                            code="springSecurity.login.button"></g:message></g:link></p>
+                <p>${message(code: 'springSecuirity.have.account')}
+                    <g:link controller="login" action="auth">${message(code: 'springSecurity.login.button')}</g:link></p>
             </div>
         </div>
     </div>

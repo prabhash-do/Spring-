@@ -34,37 +34,43 @@ class UploadController {
         flash.messagesms = g.message(code: "flash.message.sms")
     }
 
-    def doDataBaseEntry(fileName) {
+    def doDataBaseEntry(fileName, fileSize) {
+
+        String date = new Date().format("dd/MM/yyyy hh:mm:ss a")
 
         Uploadfile uploadfile = new Uploadfile()
         uploadfile.fileName = fileName
+        uploadfile.fileSize = fileSize
+        uploadfile.creationDate = date
         uploadfile.status = true
         uploadfile.insert(flush: true)
         log.info("File " + fileName + " has been inserted into DataBase successfully!")
     }
 
     def doUpload() {
-        ResourceBundle config = ResourceBundle.getBundle("config")
         try {
             def file = request.getFile('file')
             String fileName = file.originalFilename
-            String destinationPath = LoginController.setPath()
-            def extension = fileName.substring(fileName.lastIndexOf("."))
-            if (extension.equalsIgnoreCase(".png") || extension.equalsIgnoreCase(".jpg") || extension.equalsIgnoreCase(".jpeg")) {
-                destinationPath = destinationPath.concat(BaseConstants.IMAGES).concat(File.separator)
-            } else if (extension.equalsIgnoreCase(".ppt") || extension.equalsIgnoreCase(".pptx") || extension.equalsIgnoreCase(".jar")) {
-                destinationPath = destinationPath.concat(BaseConstants.PPTS).concat(File.separator)
-            } else if (extension.equalsIgnoreCase(".mp4") || extension.equalsIgnoreCase(".mov") || extension.equalsIgnoreCase(".3gp")) {
-                destinationPath = destinationPath.concat(BaseConstants.VIDEOS).concat(File.separator)
-            } else if (extension.equalsIgnoreCase(".pdf") || extension.equalsIgnoreCase(".txt")) {
-                destinationPath = destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator)
-            }
-            def files = BaseHelper.list()
+            String destinationPath = LoginController.setPathForFile(fileName)
+
+            def files = ListRemoteFiles.list()
             File fileDest = new File(destinationPath.concat(fileName))
             file.transferTo(fileDest)
 
             if (CheckConnectivity.internetConnection()) {
                 if (!files.contains(fileName)) {
+//                    def remotelist = ListRemoteFiles.list()
+//                    if (remotelist != null) {
+//                        if (remotelist.isEmpty()) {
+//                            flash._warn = g.message(code: "flash.message.no.files.found")
+//                            log.info("No files found in Remote location")
+//                        } else {
+//                            log.info("Files in Remote location are listed")
+//                        }
+//                        render view: "/index", model: [remotelist: remotelist]
+//                    } else {
+//                        flash.error = g.message(code: "flash.message.check.connectivity")
+//                    }
                     log.info("File " + fileName + " has been uploaded successfully!")
                     flash.message = g.message(code: "flash.message.file.upload")
                 } else {
@@ -72,7 +78,7 @@ class UploadController {
                     flash.message = g.message(code: "flash.message.replace.file")
                 }
 
-                doDataBaseEntry(fileName)
+                doDataBaseEntry(fileName, file.size)
 
                 /*boolean isemailchecked = params.email
                 if (isemailchecked) {
@@ -89,7 +95,7 @@ class UploadController {
         } catch (Exception e) {
             log.error("Exception occured while Uploading file:\n", e)
         }
-        redirect view: "index"
+        new ListingController().doListing();
     }
 
 }

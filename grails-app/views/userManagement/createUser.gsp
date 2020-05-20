@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta name="layout" content="${gspLayout ?: 'main'}"/>
-    <title><g:message code="springSecurity.createuser.title"></g:message></title>
+    <title>${message(code: 'springSecurity.createuser.title')}</title>
 </head>
 
 <body>
@@ -9,70 +9,67 @@
     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
             <div class="card-body">
-                <h5 class="card-title text-center"><g:message code="springSecurity.createuser.header"></g:message></h5>
+                <h5 class="card-title text-center">${message(code: 'springSecurity.createuser.header')}</h5>
                 <g:render template="/templates/grailstemplates"/>
                 <form class="form-signin" action="createUser" method="POST" id="createUserForm" autocomplete="off">
                     <div class="form-group">
-                        <label for="role"><g:message code="springSecurity.register.role"></g:message></label>
+                        <label for="role">${message(code: 'springSecurity.register.role')}</label>
                         <g:select class="form-control" name="roleid"
                                   from="${com.grailsapplication.Role.list()}"
                                   optionKey="id"/>
                     </div>
 
                     <div class="form-group">
-                        <label for="firstname">*<g:message
-                                code="springSecurity.register.firstname.label"></g:message></label>
-                        <input type="text" placeholder="First Name" class="form-control" name="firstname"
-                               id="firstname"
+                        <label for="firstname">*${message(code: 'springSecurity.register.firstname.label')}</label>
+                        <input type="text" placeholder="${message(code: 'springSecurity.register.firstname.label')}" class="form-control" name="firstname"
+                               id="firstname" value="${firstName}"
                                autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="lastname"><g:message
-                                code="springSecurity.register.lastname.label"></g:message></label>
-                        <input type="text" placeholder="Last Name" class="form-control" name="lastname"
-                               id="lastname"
+                        <label for="lastname">${message(code: 'springSecurity.register.lastname.label')}</label>
+                        <input type="text" placeholder="${message(code: 'springSecurity.register.lastname.label')}" class="form-control" name="lastname"
+                               id="lastname" value="${lastName}"
                                autocapitalize="none"/>
                     </div>
 
                     <div class="form-group">
-                        <label for="email">*<g:message code="springSecurity.register.email.label"></g:message></label>
-                        <input type="text" placeholder="Email Address" class="form-control" name="email" id="email"
+                        <label for="email">*${message(code: 'springSecurity.register.email.label')}</label>
+                        <input type="text" placeholder="${message(code: 'springSecurity.register.email.label')}" class="form-control" name="email" id="email"value="${email}"
                                autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="mobilenumber"><g:message
-                                code="springSecurity.register.mobilenumber.label"></g:message></label>
-                        <input type="text" placeholder="Mobile Number" class="form-control" name="mobilenumber"
-                               id="mobilenumber"
+                        <label for="mobilenumber">${message(code: 'springSecurity.register.mobilenumber.label')}</label>
+                        <input type="text" placeholder="${message(code: 'springSecurity.register.mobilenumber.label')}" class="form-control" name="mobilenumber"
+                               id="mobilenumber" value="${mobileNumber}"
                                autocapitalize="none"/>
                     </div>
 
 
                     <div class="form-group">
-                        <label for="username">*<g:message
-                                code="springSecurity.login.username.label"></g:message></label>
-                        <input type="text" placeholder="Username" class="form-control" name="username"
-                               id="username"
+                        <label for="username">*${message(code: 'springSecurity.login.username.label')}</label>
+                        <input type="text" placeholder="${message(code: 'springSecurity.login.username.label')}" class="form-control" name="username"
+                               id="username" value="${userName}"
                                autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="password">*<g:message
-                                code="springSecurity.login.password.label"></g:message></label>
+                        <label for="password">*${message(code: 'springSecurity.login.password.label')}</label>
 
-                        <p><g:message
-                                code="springSecurity.autogenerated.password.label"></g:message>
+                        <p>${message(code: 'springSecurity.autogenerated.password.label')}
                             <tr>
                                 <td>
-                                    <input type="radio" name="autopassword" onclick="showPassword()"
-                                          id="radio1" value="true"/><span class="bold-txt"><g:message
+                                    <input type="radio" name="autopassword"
+                                           onclick="document.getElementById('password').value = generatepassword()"
+                                           id="radio1" value="true"/><span class="bold-txt"><g:message
                                         code="auto.generate.password.yes"/></span>
                                 </td>
                                 <td>
-                                    <input type="radio" name="autopassword" onclick="typePassword()" value="false"
-                                          id="radio2" checked="checked"/><span class="bold-txt"><g:message
+                                    <input type="radio" name="autopassword"
+                                           onclick="document.getElementById('password').value = typePassword()"
+                                           value="false"
+                                           id="radio2" checked="checked"/><span class="bold-txt"><g:message
                                         code="auto.generate.password.no"/></span>
                                 </td>
                             </tr>
@@ -86,25 +83,24 @@
                                        onClick="viewPassword()"></i>
                                 </div>
                             </div>
-                            <input type="password" class="form-control" name="password" value=""
+                            <input type="password" class="form-control" name="password"
                                    id="password" required/>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="password">*<g:message
-                                code="springSecurity.confirm.password.label"></g:message></label>
-                        <input type="password" placeholder="confirm password" class="form-control" name="repassword"
-                               id="repassword"/>
+                    <div class="form-group" id="reenterpassword">
+                        <label for="password">*${message(code: 'springSecurity.confirm.password.label')}</label>
+                        <input type="password" class="form-control" name="confirmpassword" value=""
+                               id="confirmpassword" required/>
                     </div>
 
-                    <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"><g:message
-                            code="default.add.user.button"></g:message></button>
+                    <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">
+                        ${message(code: 'default.add.user.button')}</button>
                     <hr class="my-4">
                 </form>
                 <g:form controller="userManagement">
                     <button id="cancel" class="btn btn-lg btn-secondary btn-block text-uppercase"
-                            type="submit"><g:message code="default.button.cancel"></g:message></button>
+                            type="submit"> ${message(code: 'default.button.cancel')}</button>
                 </g:form>
             </div>
         </div>
@@ -116,19 +112,17 @@
         document.forms['createUserForm'].elements['firstname'].focus();
     });
     function generatepassword() {
-        var randomstring = Math.random().toString(36).slice(-8);
-        return randomstring
-    }
-    function showPassword() {
-        var pass = generatepassword()
-        document.getElementById("password").setAttribute('value', pass);
+        var randomstring = Math.random().toString(36).slice(-8  );
+        document.getElementById("confirmpassword").setAttribute('value', randomstring);
         $('#reenterpassword').hide()
         $('#password').show()
+        return randomstring
     }
     function typePassword() {
-        document.getElementById("password").setAttribute('value', '');
+        document.getElementById("confirmpassword").setAttribute('value', '');
         $('#password').show()
         $('#reenterpassword').show()
+        return null
     }
 </g:javascript>
 </body>

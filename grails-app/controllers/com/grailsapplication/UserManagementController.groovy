@@ -44,7 +44,7 @@ class UserManagementController {
      * @return true
      */
     @Secured('permitAll')
-    def changepassword() {
+    def changePassword() {
 
         User user = springSecurityService.currentUser
 
@@ -93,7 +93,7 @@ class UserManagementController {
      * @return true
      */
     @Secured(['ROLE_ADMIN'])
-    def resetpassword() {
+    def resetPassword() {
 
         String username = params.username
         String passwordNew = params.newpassword
@@ -122,13 +122,20 @@ class UserManagementController {
      */
     @Secured(['ROLE_ADMIN'])
     def createUser() {
-        if (!params.password.equals(params.repassword)) {
+        String firstName = params.firstname
+        String lastName = params.lastname
+        String email = params.email
+        String mobileNumber = params.mobilenumber
+        String userName = params.username
+        String password = params.password
+        String passwordConfirm = params.confirmpassword
+        if (!password.equals(passwordConfirm)) {
             log.warn("New Pasword and Confirm password did not match")
             flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
-            redirect action: "create"
+            render view: '/userManagement/createUser', model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName]
         } else {
             try {
-                User u = new User(firstname: params.firstname, lastname: params.lastname, email: params.email, mobilenumber: params.mobilenumber, username: params.username, password: params.password)
+                User u = new User(firstname: firstName, lastname: lastName, email: email, mobilenumber: mobileNumber, username: userName, password: params.password)
                 BootStrap.BANKCARD.each { k, v ->
                     u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
                 }
@@ -150,13 +157,13 @@ class UserManagementController {
  * @return
  */
     @Secured(['ROLE_ADMIN'])
-    def userdelete() {
+    def deleteUser() {
 
         User user = User.findById(params.userid)
         BootStrap.userRoleService.delete(user)
         user.delete(flush: true)
         flash.successmessage = user.username + " " + g.message(code: "flash.message.user.delete")
-        redirect controller: "userManagement", action: "index"
+        redirect action: "index"
 
     }
 }

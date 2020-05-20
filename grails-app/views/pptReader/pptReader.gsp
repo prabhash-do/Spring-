@@ -39,7 +39,7 @@
                 loop: false,
                 background: "black",
                 transition: "slid",
-                transitionTime: 1,
+                transitionTime: 1
             }
         });
 
@@ -48,7 +48,7 @@
 </head>
 
 <body>
-<div id="content" role="main">
+%{--<div id="content" role="main">
     <content tag="nav">
         <g:link controller="secured">
             <span class="bold-txt" title="${message(code: 'title.home.tooltip')}"><g:message
@@ -57,7 +57,7 @@
         </g:link>
     </content>
 
-</div>
+</div>--}%
 
 <div id="design" role="main">
 
