@@ -30,7 +30,7 @@ class TwoFactorAuthenticationProvider extends DaoAuthenticationProvider {
         def twoFactorAuthenticationDetails = details as TwoFactorAuthenticationDetails
 
 
-        if ( !coordinateValidator.isValidValueForPositionAndUserName(twoFactorAuthenticationDetails.coordinateValue, twoFactorAuthenticationDetails.coordinatePosition, authentication.name) ) {
+        if ( !coordinateValidator.isValidValueForPositionAndUserName(twoFactorAuthenticationDetails.coordinateValue, twoFactorAuthenticationDetails.coordinatePosition, userDetails.username) ) {
             logger.debug("Authentication failed: coordiante note valid");
             throw new BadCredentialsException(messages.getMessage(
                     "AbstractUserDetailsAuthenticationProvider.badCredentials",

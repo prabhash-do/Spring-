@@ -42,7 +42,7 @@
                     <div class="form-group">
                         <label for="coordinateValue">${position}</label>
                         <input type="hidden" name="coordinatePosition" id="coordinatePosition" value="${position}"/>
-                        <input type="text" class="form-control" name="coordinateValue" id="coordinateValue"
+                        <input type="text" class="form-control" name="coordinateValue" id="coordinateValue" maxlength="2"
                                placeholder="${message(code: 'springSecurity.login.coordinate.value')}" required/>
                     </div>
 
