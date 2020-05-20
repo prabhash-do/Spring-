@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="${gspLayout ?: 'main'}"/>
-    <title><g:message code='springSecurity.login.title'/></title>
+    <title>${message(code: 'springSecurity.login.title')}</title>
 </head>
 
 <body>
@@ -17,13 +17,13 @@
                 <form class="form-signin" action="${postUrl ?: '/login/authenticate'}" method="POST" id="loginForm"
                       autocomplete="off">
                     <div class="form-group">
-                        <label for="username"><g:message code="springSecurity.login.username.label"></g:message></label>
+                        <label for="username">${message(code: 'springSecurity.login.username.label')}</label>
                         <input type="text" class="form-control" name="${usernameParameter ?: 'username'}" id="username"
-                               placeholder="Username" autocapitalize="none" required/>
+                               placeholder="${message(code: 'springSecurity.login.username.label')}" autocapitalize="none" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="password"><g:message code="springSecurity.login.password.label"></g:message></label>
+                        <label for="password">${message(code: 'springSecurity.login.password.label')}</label>
                         <link rel="stylesheet"
                               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -42,25 +42,25 @@
                     <div class="form-group">
                         <label for="coordinateValue">${position}</label>
                         <input type="hidden" name="coordinatePosition" id="coordinatePosition" value="${position}"/>
-                        <input type="text" class="form-control" name="coordinateValue" id="coordinateValue"
-                               placeholder="Enter Coordinate value" required/>
+                        <input type="text" class="form-control" name="coordinateValue" id="coordinateValue" maxlength="2"
+                               placeholder="${message(code: 'springSecurity.login.coordinate.value')}" required/>
                     </div>
 
                     <div class="form-group form-check">
                         <label class="form-check-label">
                             <input type="checkbox" class="form-check-input"
                                    name="${rememberMeParameter ?: 'remember-me'}" id="remember_me"
-                                   <g:if test='${hasCookie}'>checked="checked"</g:if>/><g:message
-                                code="springSecurity.login.remember.me.label"></g:message>
+                                   <g:if test='${hasCookie}'>checked="checked"</g:if>/>
+                            ${message(code: 'springSecurity.login.remember.me.label')}
                         </label>
                     </div>
-                    <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"><g:message
-                            code="springSecurity.login.button"></g:message></button>
+                    <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">
+                        ${message(code: 'springSecurity.login.button')}</button>
                     <hr class="my-4">
 
                     <p><g:message code="springSecuirity.register.account">
-                    </g:message><g:link controller="register"><g:message
-                            code="springSecurity.register.button"></g:message></g:link></p>
+                    </g:message><g:link controller="register">
+                        ${message(code: 'springSecurity.register.button')}</g:link></p>
                 </form>
             </div>
         </div>

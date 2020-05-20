@@ -123,6 +123,8 @@
         </div>
     </div>
 </div>
-<asset:javascript src="validator.js"/>
+<g:javascript>
+    document.getElementById("disabled").disabled = true;
+</g:javascript>
 </body>
 </html>

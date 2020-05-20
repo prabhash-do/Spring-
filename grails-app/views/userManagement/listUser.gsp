@@ -34,8 +34,7 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </section>
         <g:form controller="userManagement" action="create">
-            <button id="submit" class="btn btn-primary margin text-uppercase " type="submit"><g:message
-                    code="default.button.createuser"></g:message></button>
+            <button id="submit" class="btn btn-primary margin text-uppercase " type="submit">${message(code: 'default.button.createuser')}</button>
         </g:form>
 <g:each in="${currentuser}" var="CUser">
     <ul>
@@ -56,13 +55,11 @@
                     <td>${User.firstname}  ${User.lastname}</td>
                     <td><g:form controller="userManagement" action="reset" params="[username: User.username]">
                         <button id="submit" class="btn btn-primary text-uppercase "
-                                type="submit"><g:message
-                                code="default.button.reset"></g:message></button>
+                                type="submit">${message(code: 'default.button.reset')}</button>
                     </g:form></td>
-                <td><g:form controller="userManagement" action="userdelete" params="[userid: User.id]">
-                    <button id="submit" class="btn btn-primary text-uppercase "
-                            type="submit"><g:message
-                            code="default.button.deleteuser"></g:message></button></td>
+                <td><g:form controller="userManagement" action="deleteUser"  params="[userid: User.id]">
+                    <button id="submit" class="btn btn-primary text-uppercase " onclick="ondelete()"
+                            type="submit">${message(code: 'default.button.deleteuser')}</button></td>
                 </g:form>
                 </tr>
             </table>

@@ -7,6 +7,8 @@ import grails.util.Holders
 
 // Place your Spring DSL code here
 beans = {
+
+    userDetailsService(com.grailsapplication.UserDetail)
     dataSource(ComboPooledDataSource) { bean ->
         bean.destroyMethod = 'close'
 

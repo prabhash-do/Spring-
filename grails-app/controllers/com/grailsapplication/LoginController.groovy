@@ -41,8 +41,8 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
 
     def authfail() {
 
-        flash.errormessage = g.message(code:"login.failed")
-        log.error(g.message(code:"login.failed"))
+        flash.errormessage = g.message(code: "login.failed")
+        log.error(g.message(code: "login.failed"))
         redirect action: "auth"
     }
 

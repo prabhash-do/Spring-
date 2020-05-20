@@ -25,7 +25,8 @@ class DeleteAllController {
             if (files.length > 0) {
                 for (File file : files) {
                     if (file.isFile()) {
-                        file.delete();
+                        file.delete()
+                        deleteFileFromDB(file.name)
                     } else if (file.isDirectory()) {
                         //image
                         File folderImage = new File(destinationPath.concat(BaseConstants.IMAGES).concat(File.separator));
@@ -33,7 +34,8 @@ class DeleteAllController {
                             File[] filesImage = folderImage.listFiles();
                             for (File fileImage : filesImage) {
                                 if (fileImage.isFile()) {
-                                    fileImage.delete();
+                                    fileImage.delete()
+                                    deleteFileFromDB(fileImage.name)
                                 }
                             }
                         }
@@ -43,7 +45,8 @@ class DeleteAllController {
                             File[] filesPpt = folderPpt.listFiles();
                             for (File filePpt : filesPpt) {
                                 if (filePpt.isFile()) {
-                                    filePpt.delete();
+                                    filePpt.delete()
+                                    deleteFileFromDB(filePpt.name)
                                 }
                             }
                         }
@@ -53,7 +56,8 @@ class DeleteAllController {
                             File[] filesVideo = folderVideo.listFiles();
                             for (File fileVideo : filesVideo) {
                                 if (fileVideo.isFile()) {
-                                    fileVideo.delete();
+                                    fileVideo.delete()
+                                    deleteFileFromDB(fileVideo.name)
                                 }
                             }
                         }
@@ -63,7 +67,8 @@ class DeleteAllController {
                             File[] filesDoc = folderDoc.listFiles();
                             for (File fileDoc : filesDoc) {
                                 if (fileDoc.isFile()) {
-                                    fileDoc.delete();
+                                    fileDoc.delete()
+                                    deleteFileFromDB(fileDoc.name)
                                 }
                             }
                         }
@@ -82,21 +87,14 @@ class DeleteAllController {
             log.error("Exception occurred while deleting file:\n", e);
             return false;
         }
-        /*if (CheckConnetivity.internetConnection()) {
-            def delete = DeleteAllFile.deleteAllFileUsingJcifs()
-            if (delete) {
-                int length = DeleteAllFile.length
-                log.info(length + "files from Remote Location are deleted successfully!")
-                redirect view: "index"
-                flash.message = length + " " + g.message(code: "flash.message.all.files.delete")
-            } else {
-                log.info("No files found in Remote Location")
-                redirect view: "index"
-                flash.warn = g.message(code: "flash.message.no.files.found")
-            }
-        } else {
-            flash.error = g.message(code: "flash.message.check.connectivity")
-            redirect view: "index"
-        }*/
+    }
+
+    def deleteFileFromDB(String fileName) {
+        List<String> fileList = ListRemoteFiles.list()
+        if (!fileList.contains(fileName)) {
+            Uploadfile.executeUpdate("DELETE FROM Uploadfile u WHERE u.fileName = :filename ", [filename: fileName])
+            log.info("File " + fileName + " has been deleted successfully!")
+            flash.message = g.message(code: "success.delete.message")
+        }
     }
 }

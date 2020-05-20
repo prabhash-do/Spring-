@@ -70,9 +70,4 @@
 
 <asset:javascript src="application.js"/>
 </body>
-<g:javascript>
-    function changeClass(id) {
-        document.getElementById(id).className = "w3-bar-item w3-button w3-padding w3-blue"
-    }
-</g:javascript>
 </html>
