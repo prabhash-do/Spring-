@@ -10,7 +10,7 @@ class SearchController {
     def list(params) {
 
         String searchName = params.srch
-        List<String> filelist = ListRemoteFiles.list()
+        List<String> filelist = BaseHelper.list()
         if (searchName.isEmpty()) {
             flash.warn = g.message(code: "flash.message.file.name.empty.warn")
             log.info("the file name to search is not specified")

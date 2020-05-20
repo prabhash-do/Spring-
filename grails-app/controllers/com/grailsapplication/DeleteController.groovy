@@ -10,10 +10,13 @@ import grails.plugin.springsecurity.annotation.Secured
 
 @Secured('permitAll')
 class DeleteController {
+
+    def springSecurityService
+
     def index() {
     }
 
-    def doDelete() {
+    def doDelete () {
 
         String destinationPath = LoginController.setPath()
         String fileName = params.filename

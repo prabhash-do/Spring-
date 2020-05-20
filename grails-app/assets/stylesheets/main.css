@@ -262,7 +262,9 @@ textarea {
     overflow: auto; /* IE always renders vertical scrollbar without this */
     vertical-align: top;
 }
-
+header-large{
+    font-size:18px!important
+}
 input[type=checkbox], input[type=radio] {
     background-color: transparent;
     border: 0;
@@ -559,7 +561,7 @@ img.grails-logo {
 
 #animated-cards .card-header {
     height: 200px;
-    background-color: #156971;
+    background-color: #2196f3;
 }
 
 #animated-cards .service-icon {

@@ -44,6 +44,7 @@ class UploadController {
     }
 
     def doUpload() {
+        ResourceBundle config = ResourceBundle.getBundle("config")
         try {
             def file = request.getFile('file')
             String fileName = file.originalFilename
@@ -58,7 +59,7 @@ class UploadController {
             } else if (extension.equalsIgnoreCase(".pdf") || extension.equalsIgnoreCase(".txt")) {
                 destinationPath = destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator)
             }
-            def files = ListRemoteFiles.list()
+            def files = BaseHelper.list()
             File fileDest = new File(destinationPath.concat(fileName))
             file.transferTo(fileDest)
 

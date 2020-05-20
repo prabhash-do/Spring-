@@ -1,0 +1,204 @@
+/**
+ * This class is used to access java method to list all files present in remote location
+ */
+package com.grailsapplication
+
+
+import com.util.BaseConstants
+
+class BaseHelper {
+
+    static List<String> list() {
+        List<String> listFiles = new ArrayList<String>();
+        String destinationPath = setPath()
+        File folder = new File(destinationPath);
+
+        File folderImage = new File(destinationPath.concat(BaseConstants.IMAGES).concat(File.separator));
+        if (!folderImage.exists()) {
+            folderImage.mkdir();
+        }
+        File folderPpt = new File(destinationPath.concat(BaseConstants.PPTS).concat(File.separator));
+        if (!folderPpt.exists()) {
+            folderPpt.mkdir();
+        }
+        File folderVideo = new File(destinationPath.concat(BaseConstants.VIDEOS).concat(File.separator));
+        if (!folderVideo.exists()) {
+            folderVideo.mkdir();
+        }
+        File folderDocs = new File(destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator));
+        if (!folderDocs.exists()) {
+            folderDocs.mkdir();
+        }
+
+        File[] files = folder.listFiles();
+
+        for (File file : files) {
+            if (file.isFile()) {
+                if (!listFiles.contains(file.getName())) {
+                    listFiles.add(file.getName())
+                }
+            } else if (file.isDirectory()) {
+                //image
+                File[] filesImage = folderImage.listFiles();
+                for (File fileImage : filesImage) {
+                    if (fileImage.isFile()) {
+                        if (!listFiles.contains(fileImage.getName())) {
+                            listFiles.add(fileImage.getName())
+                        }
+                    }
+                }
+                //ppt
+                File[] filesPpt = folderPpt.listFiles();
+                for (File filePpt : filesPpt) {
+                    if (filePpt.isFile()) {
+                        if (!listFiles.contains(filePpt.getName())) {
+                            listFiles.add(filePpt.getName())
+                        }
+                    }
+                }
+                //video
+                File[] filesVideo = folderVideo.listFiles();
+                for (File fileVideo : filesVideo) {
+                    if (fileVideo.isFile()) {
+                        if (!listFiles.contains(fileVideo.getName())) {
+                            listFiles.add(fileVideo.getName())
+                        }
+                    }
+                }
+                //Documents
+                File[] filesDocs = folderDocs.listFiles();
+                for (File fileDoc : filesDocs) {
+                    if (fileDoc.isFile()) {
+                        if (!listFiles.contains(fileDoc.getName())) {
+                            listFiles.add(fileDoc.getName())
+                        }
+                    }
+                }
+            }
+        }
+        return listFiles;
+    }
+
+    static String setPath() {
+        ResourceBundle config = ResourceBundle.getBundle("config")
+        def appHome = System.getProperty("APP_HOME") ?: System.getenv("APP_HOME")
+        String destinationPath
+        if (appHome) {
+            String path = new File(appHome);
+            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH_TOMCAT))
+        } else {
+            String path = new File(".").getCanonicalPath();
+            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH))
+        }
+        return destinationPath
+    }
+
+    static int countFile(String fileType) {
+        String destinationPath = setPath()
+
+        File[] files = new File[String]
+        if (fileType.equals('images')) {
+            File folderImage = new File(destinationPath.concat(BaseConstants.IMAGES).concat(File.separator));
+            files = folderImage.listFiles();
+        } else if (fileType.equals('documents')) {
+            File folderImage = new File(destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator));
+            files = folderImage.listFiles();
+        } else if (fileType.equals('ppts')) {
+            File folderImage = new File(destinationPath.concat(BaseConstants.PPTS).concat(File.separator));
+            files = folderImage.listFiles();
+        } else if (fileType.equals('videos')) {
+            File folderImage = new File(destinationPath.concat(BaseConstants.VIDEOS).concat(File.separator));
+            files = folderImage.listFiles();
+        }
+        int count = 0;
+        for (File file : files) {
+            if (file.isFile()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    static List<String> fileListByFileType(String fileType) {
+        List<String> listFiles = new ArrayList<String>();
+        String destinationPath = setPath()
+        File folder = new File(destinationPath);
+        File folderImage = new File(destinationPath.concat(BaseConstants.IMAGES).concat(File.separator));
+        File folderPpt = new File(destinationPath.concat(BaseConstants.PPTS).concat(File.separator));
+        File folderVideo = new File(destinationPath.concat(BaseConstants.VIDEOS).concat(File.separator));
+        File folderDocs = new File(destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator));
+
+        if (fileType.equals('images')) {
+            if (!folderImage.exists()) {
+                folderImage.mkdir();
+            }
+        } else if (fileType.equals('ppts')) {
+            if (!folderPpt.exists()) {
+                folderPpt.mkdir();
+            }
+        } else if (fileType.equals('videos')) {
+
+            if (!folderVideo.exists()) {
+                folderVideo.mkdir();
+            }
+        } else if (fileType.equals('documents')) {
+            if (!folderDocs.exists()) {
+                folderDocs.mkdir();
+            }
+        }
+
+        File[] files = folder.listFiles();
+
+        for (File file : files) {
+            if (file.isFile()) {
+                if (!listFiles.contains(file.getName())) {
+                    listFiles.add(file.getName())
+                }
+            } else if (file.isDirectory()) {
+                //image
+                if (fileType.equals('images')) {
+                    File[] filesImage = folderImage.listFiles();
+                    for (File fileImage : filesImage) {
+                        if (fileImage.isFile()) {
+                            if (!listFiles.contains(fileImage.getName())) {
+                                listFiles.add(fileImage.getName())
+                            }
+                        }
+                    }
+                }
+                //ppt
+                else if (fileType.equals('ppts')) {
+                    File[] filesPpt = folderPpt.listFiles();
+                    for (File filePpt : filesPpt) {
+                        if (filePpt.isFile()) {
+                            if (!listFiles.contains(filePpt.getName())) {
+                                listFiles.add(filePpt.getName())
+                            }
+                        }
+                    }
+                } else if (fileType.equals('videos')) {
+                    //video
+                    File[] filesVideo = folderVideo.listFiles();
+                    for (File fileVideo : filesVideo) {
+                        if (fileVideo.isFile()) {
+                            if (!listFiles.contains(fileVideo.getName())) {
+                                listFiles.add(fileVideo.getName())
+                            }
+                        }
+                    }
+                } else if (fileType.equals('documents')) {
+                    //Documents
+                    File[] filesDocs = folderDocs.listFiles();
+                    for (File fileDoc : filesDocs) {
+                        if (fileDoc.isFile()) {
+                            if (!listFiles.contains(fileDoc.getName())) {
+                                listFiles.add(fileDoc.getName())
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return listFiles;
+    }
+}

@@ -17,6 +17,12 @@ class UserManagementController {
         listuser.remove(user)
         render view: '/userManagement/listUser', model: [listuser: listuser, currentuser: currentuser]
     }
+    def userList() {
+
+        def listuser = User.list()
+
+        render template: "/templates/recentUsers",model: [listuser: listuser]
+    }
 
     @Secured('permitAll')
     def change() {

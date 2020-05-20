@@ -6,10 +6,10 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured('permitAll')
 class LogoutController {
 
-    static allowedMethods = [logout: 'POST']
+
 
     def logout() {
-        redirect uri: SpringSecurityUtils.securityConfig.logout.filterProcessesUrl // '/logoff'
+        redirect uri: SpringSecurityUtils.securityConfig.logout.filterProcessesUrl /* '/logoff'*/
     }
 }
 

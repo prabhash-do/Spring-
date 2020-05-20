@@ -10,7 +10,7 @@
 <head>
     <meta name="layout" content="main"/>
     <asset:javascript src='jquery-3.3.1.min.js'/>
-    <title>Upload Page</title>
+    <title><g:message code="upload.title.message"/></title>
     <style type="text/css">
     #progressStatus0 {
         width: 0%;
@@ -20,7 +20,7 @@
     #progressBar0 {
         width: 0%;
         height: 35px;
-        background-color: #4CAF50;
+        background-color: #2196f3;
         text-align: center;
         line-height: 32px;
         color: white;
@@ -38,7 +38,7 @@
                     <div class="card cards-shadown cards-hover">
                         <div class="card-header"><span class="space"><i class="fab fa-angular service-icon" id="service-icon-1"></i></span>
                             <div class="cardheader-text">
-                                <p id="cardheader-subtext-1" class="cardheader-subtext">Choose Files</p>
+                                <p id="cardheader-subtext-1" class="cardheader-subtext"><g:message code="upload.choose.file.message"/></p>
 
                                     <input type="file" name="file" id="file0" accept="image/*,application/*,audio/*,video/*,.pptx,.jar">
                                     <div id="progressStatus0">
