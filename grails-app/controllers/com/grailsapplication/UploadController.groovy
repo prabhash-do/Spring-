@@ -47,7 +47,7 @@ class UploadController {
         try {
             def file = request.getFile('file')
             String fileName = file.originalFilename
-            String destinationPath = LoginController.setPath()
+            String destinationPath = BaseHelper.setPath()
             def extension = fileName.substring(fileName.lastIndexOf("."))
             if (extension.equalsIgnoreCase(".png") || extension.equalsIgnoreCase(".jpg") || extension.equalsIgnoreCase(".jpeg")) {
                 destinationPath = destinationPath.concat(BaseConstants.IMAGES).concat(File.separator)
@@ -58,7 +58,7 @@ class UploadController {
             } else if (extension.equalsIgnoreCase(".pdf") || extension.equalsIgnoreCase(".txt")) {
                 destinationPath = destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator)
             }
-            def files = ListRemoteFiles.list()
+            def files = BaseHelper.list()
             File fileDest = new File(destinationPath.concat(fileName))
             file.transferTo(fileDest)
 

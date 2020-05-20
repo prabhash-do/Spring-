@@ -1,7 +1,5 @@
 package com.grailsapplication
 
-import com.company.CheckConnectivity
-
 class ChangeStatusJob {
     static triggers = {
         simple name: 'simpleTrigger1', startDelay: 10000, repeatInterval: 40000, repeatCount: -1
@@ -11,7 +9,7 @@ class ChangeStatusJob {
         try {
             Uploadfile uploadfile = new Uploadfile()
             def dblist = uploadfile.list()
-            def remotelist = ListRemoteFiles.list()
+            def remotelist = BaseHelper.list()
             if (remotelist != null) {
                 for (def i = 0; i < dblist.size(); i++) {
                     def filename = dblist.get(i).fileName

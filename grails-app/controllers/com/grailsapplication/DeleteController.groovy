@@ -15,7 +15,7 @@ class DeleteController {
 
     def doDelete() {
 
-        String destinationPath = LoginController.setPath()
+        String destinationPath = BaseHelper.setPath()
         String fileName = params.filename
         String extension = fileName.substring(fileName.lastIndexOf("."))
         if (extension.equalsIgnoreCase(".png") || extension.equalsIgnoreCase(".jpg") || extension.equalsIgnoreCase(".jpeg")) {

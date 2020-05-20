@@ -46,20 +46,6 @@ class LoginController extends grails.plugin.springsecurity.LoginController imple
         redirect action: "auth"
     }
 
-    static String setPath() {
-        ResourceBundle config = ResourceBundle.getBundle("config")
-        def appHome = System.getProperty("APP_HOME") ?: System.getenv("APP_HOME")
-        String destinationPath
-        if (appHome) {
-            String path = new File(appHome);
-            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH_TOMCAT))
-        } else {
-            String path = new File(".").getCanonicalPath();
-            destinationPath = path.concat(config.getString(BaseConstants.DESTINATION_PATH))
-        }
-        return destinationPath
-    }
-
     @Override
     void setConfiguration(Config co) {
         coordinatePositions = co.getProperty('security.coordinate.positions', List, []) as List<String>

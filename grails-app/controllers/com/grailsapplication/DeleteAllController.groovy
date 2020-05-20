@@ -17,7 +17,7 @@ class DeleteAllController {
 
     def doAllDelete() {
 
-        String destinationPath = LoginController.setPath()
+        String destinationPath = BaseHelper.setPath()
         File folder = new File(destinationPath);
         File[] files = folder.listFiles();
 
