@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
@@ -51,17 +50,17 @@
 
         <div class="w3-bar-block" style="margin-top: 5px;">
             <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
-               class="w3-bar-item w3-button w3-padding" onclick="changeClass('overview')"><i
+               class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-users fa-fw"></i>  Overview
             </a>
             <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
-               class="w3-bar-item w3-button w3-padding" onclick="changeClass('upload')"><i
+               class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-eye fa-fw"></i>  Upload</a>
-            <a id="users" name="users" href="<g:createLink controller='userManagement'/>" onclick="changeClass('users')"
+            <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
                class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-diamond fa-fw"></i>  List Users</a>
             <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
-               class="w3-bar-item w3-button w3-padding" onclick="changeClass('delete')"><i
+               class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-bullseye fa-fw"></i>  Delete All Files</a>
         </div>
     </nav>

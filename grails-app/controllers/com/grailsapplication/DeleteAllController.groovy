@@ -90,7 +90,7 @@ class DeleteAllController {
     }
 
     def deleteFileFromDB(String fileName) {
-        List<String> fileList = ListRemoteFiles.list()
+        List<String> fileList = BaseHelper.list()
         if (!fileList.contains(fileName)) {
             Uploadfile.executeUpdate("DELETE FROM Uploadfile u WHERE u.fileName = :filename ", [filename: fileName])
             log.info("File " + fileName + " has been deleted successfully!")

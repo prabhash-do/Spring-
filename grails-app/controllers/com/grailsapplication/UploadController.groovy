@@ -51,17 +51,8 @@ class UploadController {
         try {
             def file = request.getFile('file')
             String fileName = file.originalFilename
-            String destinationPath = BaseHelper.setPath()
-            def extension = fileName.substring(fileName.lastIndexOf("."))
-            if (extension.equalsIgnoreCase(".png") || extension.equalsIgnoreCase(".jpg") || extension.equalsIgnoreCase(".jpeg")) {
-                destinationPath = destinationPath.concat(BaseConstants.IMAGES).concat(File.separator)
-            } else if (extension.equalsIgnoreCase(".ppt") || extension.equalsIgnoreCase(".pptx") || extension.equalsIgnoreCase(".jar")) {
-                destinationPath = destinationPath.concat(BaseConstants.PPTS).concat(File.separator)
-            } else if (extension.equalsIgnoreCase(".mp4") || extension.equalsIgnoreCase(".mov") || extension.equalsIgnoreCase(".3gp")) {
-                destinationPath = destinationPath.concat(BaseConstants.VIDEOS).concat(File.separator)
-            } else if (extension.equalsIgnoreCase(".pdf") || extension.equalsIgnoreCase(".txt")) {
-                destinationPath = destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator)
-            }
+            String destinationPath = BaseHelper.setPathForFile(fileName)
+
             def files = BaseHelper.list()
             File fileDest = new File(destinationPath.concat(fileName))
             file.transferTo(fileDest)
@@ -92,7 +83,7 @@ class UploadController {
         } catch (Exception e) {
             log.error("Exception occured while Uploading file:\n", e)
         }
-        new ListingController().doListing();
+        redirect view: "index"
     }
 
 }

@@ -51,7 +51,6 @@ html, body, h1, h2, h3, h4, h5 {
 
 <body class="w3-light-grey">
 <!-- Sidebar/menu -->
-<sec:ifLoggedIn>
     <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
         <hr>
 
@@ -72,7 +71,6 @@ html, body, h1, h2, h3, h4, h5 {
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Delete All Files</a>
         </div>
     </nav>
-</sec:ifLoggedIn>
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top: 100px;">
 
@@ -142,83 +140,14 @@ html, body, h1, h2, h3, h4, h5 {
         <div class="w3-quarter" onclick="submitVideos()">
             <div class="w3-container w3-orange w3-text-white w3-padding-16">
                 <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-        <div class="w3-bar-block" style="margin-top: 5px;">
-            <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
-               class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>  Overview
-            </a>
-            <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
-               class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Upload</a>
-            <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
-               class="w3-bar-item w3-button w3-padding"><i
-                    class="fa fa-diamond fa-fw"></i>  List Users</a>
-            <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
-               class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Delete All Files</a>
-        </div>
-    </nav>
-</sec:ifLoggedIn>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px;margin-top: 100px;">
-
-    <!-- Header -->
-    <header class="w3-container" style="padding-top:22px">
-        <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
-    </header>
-
-    <div class="w3-row-padding w3-margin-bottom">
-        <div class="w3-quarter">
-            <div class="w3-container w3-red w3-padding-16">
-                <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
-
-                <div class="w3-right">
-                    <h3>0</h3>
-                </div>
-
-                <div class="w3-clear"></div>
-                <h4>Documents</h4>
-            </div>
-        </div>
-
-        <div class="w3-quarter">
-            <div class="w3-container w3-blue w3-padding-16">
-                <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
-
-                <div class="w3-right">
-                    <h3>0</h3>
-                </div>
-
-                <div class="w3-clear"></div>
-                <h4>Images</h4>
-            </div>
-        </div>
-
-        <div class="w3-quarter">
-            <div class="w3-container w3-teal w3-padding-16">
-                <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
-
-                <div class="w3-right">
-                    <h3>0</h3>
-                </div>
-
-                <div class="w3-clear"></div>
-                <h4>PPTs</h4>
-            </div>
-        </div>
-
-        <div class="w3-quarter">
-            <div class="w3-container w3-orange w3-text-white w3-padding-16">
-                <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-
-                <div class="w3-right">
-                    <h3>0</h3>
+                <div class="w3-right" id="videos">
                 </div>
 
                 <div class="w3-clear"></div>
                 <h4>Videos</h4>
             </div>
         </div>
-    </div>
-
+    </g:form>
     <div class="w3-panel">
 
         <g:form controller="search" action="list" method="post">
@@ -307,16 +236,6 @@ html, body, h1, h2, h3, h4, h5 {
             </tbody>
         </table>
     </div>
-
-                <div class="w3-right" id="videos">
-                </div>
-
-                <div class="w3-clear"></div>
-                <h4>Videos</h4>
-            </div>
-        </div>
-        </div>
-    </g:form>
     <div class="w3-panel">
         %{--        Do Listing of all files here--}%
 
@@ -328,7 +247,7 @@ html, body, h1, h2, h3, h4, h5 {
     <br>
 </div>
     <!-- Footer -->
-    <footer class="w3-container w3-padding-16 w3-light-grey" style="margin-left:300px;margin-bottom: 0px;">
+    <footer class="w3-container w3-padding-16 w3-light-grey">
         <div class="footer row" role="contentinfo">
             <p><g:message code="default.client.user.role"></g:message></p>
         </div>
