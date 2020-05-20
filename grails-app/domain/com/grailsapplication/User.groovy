@@ -12,12 +12,15 @@ class User implements Serializable {
 
     transient springSecurityService
 
-    String firstname
-    String lastname
+    String firstName
+    String lastName
     String email
-    String mobilenumber
+    String mobileNumber
     String username
     String password
+    String sex
+    String dateOfBirth
+
     boolean enabled = true
     boolean accountExpired
     boolean accountLocked
@@ -45,12 +48,14 @@ class User implements Serializable {
     static transients = ['springSecurityService']
 
     static constraints = {
-        firstname nullable: false, blank:true
-        lastname nullable: true,blank:true
+        firstName nullable: false, blank:true
+        lastName nullable: true,blank:true
         email nullable: false,blank: false
-        mobilenumber nullable: true,blank: true
+        mobileNumber nullable: true,blank: true
         username nullable: false, blank: false, unique: true
         password nullable: false, blank: false, password: true
+        sex nullable: false,blank:true
+        dateOfBirth nullable: true,blank:true
     }
 
     static mapping = {

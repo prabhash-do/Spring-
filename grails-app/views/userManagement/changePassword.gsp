@@ -18,7 +18,7 @@
 
                     <div class="form-group">
                         <label for="currentpassword">${message(code: 'springSecurity.current.password.label')}</label>
-                        <input type="password" placeholder="Current password" value="${currentpassword}"
+                        <input type="password" placeholder="${message(code: 'springSecurity.current.password.label')}" value="${currentpassword}"
                                class="form-control"
                                name="currentpassword"
                                id="currentpassword" required/>
@@ -26,13 +26,13 @@
 
                     <div class="form-group">
                         <label for="newpassword">${message(code: 'springSecurity.new.password.label')}</label>
-                        <input type="password" placeholder="New password" class="form-control" name="newpassword"
+                        <input type="password" placeholder="${message(code: 'springSecurity.new.password.label')}" class="form-control" name="newpassword"
                                id="newpassword" required/>
                     </div>
 
                     <div class="form-group">
                         <label for="confirmpassword">${message(code: 'springSecurity.confirm.password.label')}</label>
-                        <input type="password" placeholder="Confirm password" class="form-control"
+                        <input type="password" placeholder="${message(code: 'springSecurity.confirm.password.label')}" class="form-control"
                                name="confirmpassword"
                                id="confirmpassword" required/>
                     </div>

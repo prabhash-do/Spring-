@@ -13,7 +13,8 @@
         </h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <g:form controller="userManagement" action="create">
-            <button id="submit" class="btn btn-primary margin text-uppercase " type="submit">${message(code: 'default.button.createuser')}</button>
+            <button id="submit" class="btn btn-primary margin text-uppercase "
+                    type="submit">${message(code: 'default.button.createuser')}</button>
         </g:form>
     </section>
 </div>
@@ -22,7 +23,7 @@
         <fieldset class="message">
             <table>
                 <tr>
-                    <td>${CUser.firstname}  ${CUser.lastname}</td>
+                    <td>${CUser.username}</td>
                 </tr>
             </table>
         </fieldset>
@@ -33,12 +34,12 @@
         <fieldset class="message">
             <table>
                 <tr>
-                    <td>${User.firstname}  ${User.lastname}</td>
+                    <td>${User.username}</td>
                     <td><g:form controller="userManagement" action="reset" params="[username: User.username]">
                         <button id="submit" class="btn btn-primary text-uppercase "
                                 type="submit">${message(code: 'default.button.reset')}</button>
                     </g:form></td>
-                <td><g:form controller="userManagement" action="deleteUser"  params="[userid: User.id]">
+                <td><g:form controller="userManagement" action="deleteUser" params="[userid: User.id]">
                     <button id="submit" class="btn btn-primary text-uppercase " onclick="ondelete()"
                             type="submit">${message(code: 'default.button.deleteuser')}</button></td>
                 </g:form>
@@ -47,14 +48,13 @@
         </fieldset>
     </ul>
 </g:each>
-    <g:javascript>
+<g:javascript>
 
-        function ondelete(){
-            jAlertI18n("ABCD");
-        }
+    function ondelete() {
+        jAlertI18n("ABCD");
+    }
 
-    </g:javascript>
-
+</g:javascript>
 
 </body>
 </html>
