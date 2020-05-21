@@ -78,19 +78,19 @@
                             <span class="slider round"></span>
                         </label>
                         <td align="left"><span id="isP"></span>
-                        <link rel="stylesheet"
-                              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                            <link rel="stylesheet"
+                                  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-                        <div class="input-group mb-2 mr-sm-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i id="pass-status" class="fa fa-eye" aria-hidden="true"
-                                       onClick="viewPassword()"></i>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i id="pass-status" class="fa fa-eye" aria-hidden="true"
+                                           onClick="viewPassword()"></i>
+                                    </div>
                                 </div>
+                                <input type="password" class="form-control" name="password"
+                                       id="password" data-toggle="tooltip" data-placement="right" title=" Minimum 8 and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character" required/>
                             </div>
-                            <input type="password" class="form-control" name="password"
-                                   id="password" data-toggle="tooltip" data-placement="right" title=" Minimum 8 and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character" required/>
-                        </div>
                     </div>
 
                     <div class="form-group" id="reenterpassword">
@@ -105,7 +105,7 @@
                              name='captcha'/>
                         <asset:image src="Reload.png" class="glyphicon glyphicon-refresh" alt="Click to reload image"
                                      title="Click to reload image" onclick="reloadCaptcha()"/>
-                        <g:textField name="captcha" placeholder="${message(code: 'springSecurity.login.captcha.label')}" class="form-control1" required="true"/>
+                        <g:textField name="captcha" placeholder="Enter Captcha" class="form-control1" required="true"/>
                     </div>
                     <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase"
                             type="submit">${message(code: 'springSecurity.register.button')}</button>

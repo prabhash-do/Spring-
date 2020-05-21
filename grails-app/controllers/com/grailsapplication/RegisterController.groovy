@@ -29,13 +29,14 @@ class RegisterController {
         String password = params.password
         String passwordConfirm = params.confirmpassword
         String captcha = params.captcha
+
         if (!password.equals(passwordConfirm)) {
             log.warn("New Password and Confirm password did not match")
             flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
             render view: '/userManagement/createUser', model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth]
         } else {
             try {
-                User u = new User(firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth)
+                User u =new User(firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, username: userName, password: password,sex: sex,dateOfBirth: dateOfBirth)
                 BootStrap.BANKCARD.each { k, v ->
                     u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
                 }
