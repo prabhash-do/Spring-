@@ -4,8 +4,8 @@ import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 
 
-@EqualsAndHashCode(includes='username')
-@ToString(includes='username', includeNames=true, includePackage=false)
+@EqualsAndHashCode(includes = 'username')
+@ToString(includes = 'username', includeNames = true, includePackage = false)
 class User implements Serializable {
 
     private static final long serialVersionUID = 1
@@ -48,18 +48,18 @@ class User implements Serializable {
     static transients = ['springSecurityService']
 
     static constraints = {
-        firstName nullable: false, blank:true
-        lastName nullable: true,blank:true
-        email nullable: false,blank: false
-        mobileNumber nullable: true,blank: true
+        firstName nullable: false, blank: true
+        lastName nullable: true, blank: true
+        email nullable: false, blank: false
+        mobileNumber nullable: true, blank: true
         username nullable: false, blank: false, unique: true
         password nullable: false, blank: false, password: true
-        sex nullable: false,blank:true
-        dateOfBirth nullable: true,blank:true
+        sex nullable: false, blank: true
+        dateOfBirth nullable: true, blank: true
     }
 
     static mapping = {
-        id generator:'sequence', params:[sequence_name:'seq_user']
+        id generator: 'sequence', params: [sequence_name: 'seq_user']
         password column: '`password`'
         table '`user`'
 

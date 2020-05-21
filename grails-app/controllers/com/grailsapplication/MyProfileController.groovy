@@ -54,6 +54,7 @@ class MyProfileController {
                 user.mobileNumber = mobilenumber
                 user.sex = sex
                 user.dateOfBirth = dateofbirth
+
                 BootStrap.userService.save(user)
                 log.info("User Details are updated")
                 flash.successmessage = g.message(code: "myprofile.update.user.success")

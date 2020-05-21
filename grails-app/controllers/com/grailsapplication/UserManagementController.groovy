@@ -131,7 +131,7 @@ class UserManagementController {
             render view: '/userManagement/createUser', model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex,dateOfBirth: dateOfBirth]
         } else {
             try {
-                User u = new User(firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, username: userName, password: password,sex: sex,dateOfBirth: dateOfBirth)
+                User u = new User(firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, username: userName,password: password, sex: sex,dateOfBirth: dateOfBirth)
                 BootStrap.BANKCARD.each { k, v ->
                     u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
                 }
