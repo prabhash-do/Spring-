@@ -19,7 +19,8 @@ class DeleteController {
     def doDelete () {
 
         String fileName = params.filename
-        String destinationPath = LoginController.setPathForFile(fileName)
+        String destinationPath = BaseHelper.setPathForFile(fileName)
+
         File file = new File(destinationPath.concat(fileName));
 
         try {
@@ -42,7 +43,7 @@ class DeleteController {
     }
 
     def deleteFileFromDB(String fileName) {
-        List<String> fileList = ListRemoteFiles.list()
+        List<String> fileList = BaseHelper.list()
         if (!fileList.contains(fileName)) {
             Uploadfile.executeUpdate("DELETE FROM Uploadfile u WHERE u.fileName = :filename ", [filename: fileName])
             redirect controller: "listing", action: "doListing"

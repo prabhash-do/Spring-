@@ -6,13 +6,13 @@
 </head>
 
 <body>
-<a class="navbar-brand" href="/#"><asset:image src="bankcard.jpg" alt="Bankcard Logo"/></a>
 
-<div class="row">
-    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+<div class="row" style="margin-top: 120px;">
+    <a class="navbar-brand" href="/#"><asset:image src="bankcard.jpg" alt="Bankcard Logo"/></a>
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto ">
         <div class="card card-signin my-5">
-            <div class="card-body ">
-                <h5 class="card-title text-center">${message(code: 'springSecurity.login.header')}</h5>
+            <div class="card-body">
+                <h5 class="card-title text-center" align="center"><g:message code="springSecurity.login.header"></g:message></h5>
                 <g:render template="/templates/grailstemplates"/>
                 <form class="form-signin" action="${postUrl ?: '/login/authenticate'}" method="POST" id="loginForm"
                       autocomplete="off">
@@ -66,6 +66,11 @@
         </div>
     </div>
 </div>
+<footer class="w3-container w3-padding-16 w3-light-grey" style="margin-bottom: 0px; margin-left: 0px;margin-right: 0px">
+    <div class="footer row" role="contentinfo">
+        <p><g:message code="default.client.user.role"></g:message></p>
+    </div>
+</footer>
 <asset:javascript src="validator.js"/>
 <g:javascript>
     document.addEventListener("DOMContentLoaded", function (event) {
