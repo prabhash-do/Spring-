@@ -1168,7 +1168,6 @@ ul li:hover {
     width: 0;
     height: 0;
 }
-
 /* The slider */
 .slider {
     position: absolute;
@@ -1193,7 +1192,6 @@ ul li:hover {
     -webkit-transition: .4s;
     transition: .4s;
 }
-
 input:checked + .slider {
     background-color: #2196F3;
 }

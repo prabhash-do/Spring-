@@ -48,7 +48,7 @@
     </div>
 </div>
 <g:javascript>
-    document.addEventListener("DOMContentLoaded", function (event) {
+    document.addEventListener("DOMContentLoaded", function () {
         document.forms['changepasswordForm'].elements['currentpassword'].focus();
     });
 </g:javascript>
