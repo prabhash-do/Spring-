@@ -10,12 +10,12 @@ class SearchController {
     def list(params) {
 
         String searchName = params.srch
-        List<String> filelist = ListRemoteFiles.list()
-        if (searchName.isEmpty()) {
+        List<String> filelist = BaseHelper.list()
+        if (searchName==null) {
             flash.warn = g.message(code: "flash.message.file.name.empty.warn")
             log.info("the file name to search is not specified")
             render view: "/listing/list", model: [remotelist: filelist]
-        } else if (!searchName.isEmpty()) {
+        } else {
             if (filelist.containsAll(searchName)) {
                 /*{ it ->
                 def fileExt = it.substring(it.lastIndexOf("."));

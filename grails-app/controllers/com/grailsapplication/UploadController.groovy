@@ -51,9 +51,9 @@ class UploadController {
         try {
             def file = request.getFile('file')
             String fileName = file.originalFilename
-            String destinationPath = LoginController.setPathForFile(fileName)
+            String destinationPath = BaseHelper.setPathForFile(fileName)
 
-            def files = ListRemoteFiles.list()
+            def files = BaseHelper.list()
             File fileDest = new File(destinationPath.concat(fileName))
             file.transferTo(fileDest)
 
