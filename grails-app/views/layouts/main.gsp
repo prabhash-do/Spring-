@@ -41,6 +41,12 @@
                 </div>
                 </li>
             </sec:ifLoggedIn>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><g:message code="default.change.language"/> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <navBar:localeDropdownListItems uri="${request.forwardURI}"/>
+                </ul>
+            </li>
         </ul>
     </div>
 
