@@ -51,26 +51,14 @@ class UploadController {
         try {
             def file = request.getFile('file')
             String fileName = file.originalFilename
-            String destinationPath = LoginController.setPathForFile(fileName)
+            String destinationPath = BaseHelper.setPathForFile(fileName)
 
-            def files = ListRemoteFiles.list()
+            def files = BaseHelper.list()
             File fileDest = new File(destinationPath.concat(fileName))
             file.transferTo(fileDest)
 
             if (CheckConnectivity.internetConnection()) {
                 if (!files.contains(fileName)) {
-//                    def remotelist = ListRemoteFiles.list()
-//                    if (remotelist != null) {
-//                        if (remotelist.isEmpty()) {
-//                            flash._warn = g.message(code: "flash.message.no.files.found")
-//                            log.info("No files found in Remote location")
-//                        } else {
-//                            log.info("Files in Remote location are listed")
-//                        }
-//                        render view: "/index", model: [remotelist: remotelist]
-//                    } else {
-//                        flash.error = g.message(code: "flash.message.check.connectivity")
-//                    }
                     log.info("File " + fileName + " has been uploaded successfully!")
                     flash.message = g.message(code: "flash.message.file.upload")
                 } else {
@@ -95,7 +83,7 @@ class UploadController {
         } catch (Exception e) {
             log.error("Exception occured while Uploading file:\n", e)
         }
-        new ListingController().doListing();
+        redirect view: "index"
     }
 
 }
