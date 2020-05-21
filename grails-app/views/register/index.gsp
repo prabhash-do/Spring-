@@ -70,7 +70,7 @@
                              name='captcha'/>
                         <asset:image src="Reload.png" class="glyphicon glyphicon-refresh" alt="Click to reload image"
                                      title="Click to reload image" onclick="reloadCaptcha()"/>
-                        <g:textField name="captcha" placeholder="Enter Captcha" class="form-control1" required="true"/>
+                        <g:textField name="captcha" placeholder="${message(code: 'springSecurity.login.captcha.label')}" class="form-control1" required="true"/>
                     </div>
                     <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase"
                             type="submit">${message(code: 'springSecurity.register.button')}</button>

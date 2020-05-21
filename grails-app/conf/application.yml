@@ -133,3 +133,10 @@ security:
             - D8
             - D9
             - D10
+
+---
+guide:
+  languages:
+    - en
+    - bn
+---
