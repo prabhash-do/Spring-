@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
     <title>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -30,15 +31,17 @@
                 <sec:username/>
             </sec:ifLoggedIn></strong></span><br>
             <sec:ifLoggedIn>
-                <div class="w3-col s8 w3-bar">
+                <div class="w3-col s10 w3-bar">
                     <a href="${g.createLink(controller: "myProfile", action: "showProfileDetails")}"
                        class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
                     <a href="${g.createLink(controller: "logout", action: "logout")}"
                        class="w3-bar-item w3-button"><asset:image src="logout.png" alt="Image"/></a>
                 </div>
             </sec:ifLoggedIn>
+        </div>
+        <div style="margin-top: 70px">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><g:message code="default.change.language"/> <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" style="color:white" data-toggle="dropdown" role="button"><g:message code="default.change.language"/> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <navBar:localeDropdownListItems uri="${request.forwardURI}"/>
                 </ul>
