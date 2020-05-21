@@ -52,7 +52,7 @@
         <fieldset class="message">
             <table>
                 <tr>
-                    <td>${User.firstname}  ${User.lastname}</td>
+                    <td>${User.username}</td>
                     <td><g:form controller="userManagement" action="reset" params="[username: User.username]">
                         <button id="submit" class="btn btn-primary text-uppercase "
                                 type="submit">${message(code: 'default.button.reset')}</button>

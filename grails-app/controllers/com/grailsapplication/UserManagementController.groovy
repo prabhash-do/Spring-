@@ -35,7 +35,7 @@ class UserManagementController {
     }
     /**
      * This method allows a user to change password
-     * @return true
+     * @return boolean
      */
     @Secured('permitAll')
     def changePassword() {
@@ -84,7 +84,7 @@ class UserManagementController {
     }
     /**
      * This method allows a ROLE_ADMIN llow user to reset password of other users
-     * @return true
+     * @return boolean
      */
     @Secured(['ROLE_ADMIN'])
     def resetPassword() {
@@ -120,16 +120,18 @@ class UserManagementController {
         String lastName = params.lastname
         String email = params.email
         String mobileNumber = params.mobilenumber
+        String sex = params.sex
+        String dateOfBirth = params.dateofbirth
         String userName = params.username
         String password = params.password
         String passwordConfirm = params.confirmpassword
         if (!password.equals(passwordConfirm)) {
-            log.warn("New Pasword and Confirm password did not match")
+            log.warn("New Password and Confirm password did not match")
             flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
-            render view: '/userManagement/createUser', model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName]
+            render view: '/userManagement/createUser', model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex,dateOfBirth: dateOfBirth]
         } else {
             try {
-                User u = new User(firstname: firstName, lastname: lastName, email: email, mobilenumber: mobileNumber, username: userName, password: params.password)
+                User u = new User(firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, username: userName, password: password,sex: sex,dateOfBirth: dateOfBirth)
                 BootStrap.BANKCARD.each { k, v ->
                     u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
                 }

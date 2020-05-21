@@ -1154,85 +1154,65 @@ ul li:hover {
     font-size: 20px;
     display: block;
 }
-
-#main-heading {
-    color: #32272F;
-    letter-spacing: 0.64px;
-    /*font-family: "Neue Haas Grotesk Display Std", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;*/
-    font-weight: 500;
-    font-size: x-large;
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
 }
 
-#myDIV {
-    width: 1000px;
-    height: 400px;
-    border: 1px ridge #000000;
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
     position: absolute;
-    left: 82px;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
-.shadowbox {
-    width: 4em;
-    /*border: 1px solid #333;*/
-    /*box-shadow: 2px 2px 2px #444;*/
-    /*padding: 8px 12px;*/
-    /*background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);*/
-    background-color: #fefefe;
-
-    border: 1px solid;
-    padding: 10px;
-    box-shadow: 5px 10px #888888;
-
-}
-
-.center {
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.hideform {
-    display: none;
-}
-
-#main-heading {
-    color: #32272F;
-    letter-spacing: 0.64px;
-    /*font-family: "Neue Haas Grotesk Display Std", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;*/
-    font-weight: 500;
-    font-size: x-large;
-}
-
-#myDIV {
-    width: 1000px;
-    height: 400px;
-    border: 1px ridge #000000;
+.slider:before {
     position: absolute;
-    left: 82px;
+    content: "";
+    height: 10px;
+    width: 10px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
-.shadowbox {
-    width: 4em;
-    /*border: 1px solid #333;*/
-    /*box-shadow: 2px 2px 2px #444;*/
-    /*padding: 8px 12px;*/
-    /*background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);*/
-    background-color: #fefefe;
-
-    border: 1px solid;
-    padding: 10px;
-    box-shadow: 5px 10px #888888;
-
+input:checked + .slider {
+    background-color: #2196F3;
 }
 
-.center {
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
 }
 
-.hideform {
-    display: none;
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(15px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }

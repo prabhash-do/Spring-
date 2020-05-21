@@ -14,21 +14,33 @@ class RegisterController {
 
     static allowedMethods = [register: "POST"]
 
-    def index() {}
+    def index() {
+        render view: "/register/index"
+    }
 
     def register() {
-        if (!params.password.equals(params.repassword)) {
+        String firstName = params.firstname
+        String lastName = params.lastname
+        String email = params.email
+        String mobileNumber = params.mobilenumber
+        String sex = params.sex
+        String dateOfBirth = params.dateofbirth
+        String userName = params.username
+        String password = params.password
+        String passwordConfirm = params.confirmpassword
+        String captcha = params.captcha
+
+        if (!password.equals(passwordConfirm)) {
+            log.warn("New Password and Confirm password did not match")
             flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
-            log.warn("New Passowrd and Confirm password not match")
-            redirect action: "index"
-            return
+            render view: '/userManagement/createUser', model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth]
         } else {
             try {
-                User u = new User(firstname: params.firstname, lastname: params.lastname, email: params.email, mobilenumber: params.mobilenumber, username: params.username, password: params.password)
+                User u =new User(firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, username: userName, password: password,sex: sex,dateOfBirth: dateOfBirth)
                 BootStrap.BANKCARD.each { k, v ->
                     u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
                 }
-                boolean b = simpleCaptchaService.validateCaptcha(params.captcha)
+                boolean b = simpleCaptchaService.validateCaptcha(captcha)
                 if (b) {
                     u = BootStrap.userService.save(u)
                     BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_ADMIN'))
