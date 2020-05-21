@@ -4,6 +4,7 @@ import com.grailsapplication.TwoFactorAuthenticationProvider
 import com.grailsapplication.TwoFactorAuthenticationDetailsSource
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import grails.util.Holders
+import org.springframework.web.servlet.i18n.SessionLocaleResolver
 
 // Place your Spring DSL code here
 beans = {
@@ -68,4 +69,8 @@ beans = {
         hideUserNotFoundExceptions = true
     }
     authenticationDetailsSource(TwoFactorAuthenticationDetailsSource)
+
+    localeResolver(SessionLocaleResolver) {
+        defaultLocale= new Locale('en');
+    }
 }
