@@ -59,6 +59,18 @@ class UploadController {
 
             if (CheckConnectivity.internetConnection()) {
                 if (!files.contains(fileName)) {
+                    def remotelist = ListRemoteFiles.list()
+                    if (remotelist != null) {
+                        if (remotelist.isEmpty()) {
+                            flash._warn = g.message(code: "flash.message.no.files.found")
+                            log.info("No files found in Remote location")
+                        } else {
+                            log.info("Files in Remote location are listed")
+                        }
+                        render view: "/index", model: [remotelist: remotelist]
+                    } else {
+                        flash.error = g.message(code: "flash.message.check.connectivity")
+                    }
                     log.info("File " + fileName + " has been uploaded successfully!")
                     flash.message = g.message(code: "flash.message.file.upload")
                 } else {
@@ -83,7 +95,7 @@ class UploadController {
         } catch (Exception e) {
             log.error("Exception occured while Uploading file:\n", e)
         }
-        redirect view: "index"
+        new ListingController().doListing()
     }
 
 }

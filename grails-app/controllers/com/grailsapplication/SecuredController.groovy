@@ -7,7 +7,7 @@ class SecuredController {
     @Secured(['ROLE_CLIENT', 'ROLE_ADMIN'])
     def index() {
         if (isLoggedIn()) {
-            render view: "../index"
+            new ListingController().doListing()
         } else {
             redirect controller: "login", action: "auth"
         }
