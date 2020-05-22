@@ -41,7 +41,7 @@
         <fieldset class="message">
             <table>
                 <tr>
-                    <td>${CUser.firstname}  ${CUser.lastname}</td>
+                    <td>${CUser.username}</td>
                 </tr>
             </table>
         </fieldset>
