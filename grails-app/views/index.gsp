@@ -245,13 +245,8 @@ html, body, h1, h2, h3, h4, h5 {
         <div class="w3-panel">
             %{--        Do Listing of all files here--}%
 
-        </div>
-        <hr>
-        <hr>
-        <hr>
-        <hr>
-        <br>
     </div>
+</div>
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
         <div class="footer row" role="contentinfo">

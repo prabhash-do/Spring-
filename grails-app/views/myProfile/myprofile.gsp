@@ -86,6 +86,20 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="sex"
+                                       class="col-form-label">${message(code: 'default.myprofile.sex')}</label>
+                                <input type="text" class="form-control" id="sex" name="sex"
+                                       value="${sex}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dateofbirth"
+                                       class="col-form-label">${message(code: 'default.myprofile.dateofbirth')}</label>
+                                <input type="text" class="form-control" id="dateofbirth" name="dateofbirth"
+                                       value="${dateOfBirth}">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="disabled"
                                        class="col-form-label">${message(code: 'default.myprofile.username')}</label>
                                 <input type="text" class="form-control" id="disabled" name="username"
@@ -111,7 +125,9 @@
             <b>${message(code: 'default.myprofile.lastname')}</b> ${lastName}<br>
             <b>${message(code: 'default.myprofile.email')}</b> ${email}<br>
             <b>${message(code: 'default.myprofile.mobilenumber')}</b> ${mobileNumber}<br>
-            <b>${message(code: 'default.myprofile.username')}</b> ${userName}
+            <b>${message(code: 'default.myprofile.username')}</b> ${userName}<br>
+            <b>${message(code: 'default.myprofile.sex')}</b> ${sex}<br>
+            <b>${message(code: 'default.myprofile.dateofbirth')}</b> ${dateOfBirth}
         </div>
         <br>
         <br>

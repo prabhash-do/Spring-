@@ -32,7 +32,7 @@ class BootStrap {
         }
         if ( !userService.findByUsername('username') ) {
 
-            User u = new User(firstname: 'test',lastname: 'user',email: 'test@user.com',mobilenumber: '0987654321',username: 'admin', password: '123qwe')
+            User u = new User(firstName: 'test',lastName: 'user',email: 'test@user.com',mobilenumber: '0987654321',username: 'admin', password: '123qwe',sex:'F',dateOfBirth: '2020-05-20')
 
             BANKCARD.each { k, v ->
                 u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
