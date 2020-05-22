@@ -69,9 +69,6 @@ html, body, h1, h2, h3, h4, h5 {
                     class="fa fa-diamond fa-fw"></i>  List Users</a>
             <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Delete All Files</a>
-            <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
-               class="w3-bar-item w3-button w3-padding"><i
-                    class="fa fa-cogs fa-fw"></i>  Settings</a>
         </div>
     </nav>
 <!-- !PAGE CONTENT! -->
