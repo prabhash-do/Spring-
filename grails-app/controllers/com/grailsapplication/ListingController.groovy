@@ -21,10 +21,10 @@ class ListingController {
             } else {
                 log.info("Files in Remote location are listed")
             }
-            render view: "list", model: [remotelist: remotelist, dblist: dblist]
+            render view: "/index", model: [remotelist: remotelist, dblist: dblist]
         } else {
             flash.error = g.message(code: "flash.message.check.connectivity")
-            render view: "list", model: [dblist: dblist]
+            render view: "/index", model: [dblist: dblist]
         }
     }
 
@@ -41,10 +41,10 @@ class ListingController {
             } else {
                 log.info("Files in Remote location are listed")
             }
-            render view: "list", model: [remotelist: remotelist, dblist: dblist]
+            render view: "/index", model: [remotelist: remotelist, dblist: dblist]
         } else {
             flash.error = g.message(code: "flash.message.check.connectivity")
-            render view: "list", model: [dblist: dblist]
+            render view: "/index", model: [dblist: dblist]
         }
     }
 }

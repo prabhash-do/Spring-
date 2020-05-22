@@ -69,6 +69,9 @@ html, body, h1, h2, h3, h4, h5 {
                     class="fa fa-diamond fa-fw"></i>  List Users</a>
             <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Delete All Files</a>
+            <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
+               class="w3-bar-item w3-button w3-padding"><i
+                    class="fa fa-cogs fa-fw"></i>  Settings</a>
         </div>
     </nav>
 <!-- !PAGE CONTENT! -->
@@ -156,6 +159,7 @@ html, body, h1, h2, h3, h4, h5 {
             <button id="submit-values" class="buttons" type="submit">
                 <i class="icon-ok"></i>
                 <i class="fa fa-search" aria-hidden="true"></i>
+%{--                ${message(code: 'default.button.search')}--}%
             </button>
         </g:form>
 
@@ -228,7 +232,7 @@ html, body, h1, h2, h3, h4, h5 {
                     <td><div class="delete_test">
                         <g:link controller="delete" action="doDelete" params="[filename: it]"
                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i
-                                class="fa fa-trash fa-4x" aria-hidden="true" title="<g:message
+                                class="fa fa-trash fa-3x" aria-hidden="true" title="<g:message
                                         code="default.delete.label"/>"></i></g:link>
                     </div></td>
                 </tr>
@@ -240,11 +244,6 @@ html, body, h1, h2, h3, h4, h5 {
         %{--        Do Listing of all files here--}%
 
     </div>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <br>
 </div>
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
@@ -254,7 +253,6 @@ html, body, h1, h2, h3, h4, h5 {
     </footer>
 
     <!-- End page content -->
-
 
 <script>
 
