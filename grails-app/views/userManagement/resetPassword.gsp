@@ -5,9 +5,9 @@
 </head>
 
 <body>
+<div class="row" style="margin-top:80px;">
 <div class="row">
-    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
+         <div class="card card-signin my-5">
             <div class="card-body">
                 <h5 class="card-title text-center">${message(code: 'springSecurity.reset.password.header')}</h5>
                 <g:render template="/templates/grailstemplates"/>
@@ -39,9 +39,9 @@
                     <button id="cancel" class="btn btn-lg btn-secondary btn-block text-uppercase"
                             type="submit">${message(code: 'default.button.cancel')}</button>
                 </g:form>
-            </div>
         </div>
     </div>
+</div>
 </div>
 <g:javascript>
     document.addEventListener("DOMContentLoaded", function (event) {

@@ -11,18 +11,23 @@
         <hr>
 
         <div class="w3-container" style="margin-top: 100px;">
-            <h5>Dashboard</h5>
+            <h5><g:message code="side.bar.index.head.title"/></h5>
         </div>
 
         <div class="w3-bar-block" style="margin-top: 5px;">
-            <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>" class="w3-bar-item w3-button w3-padding" ><i class="fa fa-users fa-fw"></i>  Overview
+            <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i><g:message
+                    code="side.bar.index.overview.title"/>
             </a>
-            <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert' />"
-               class="w3-bar-item w3-button w3-padding" ><i class="fa fa-eye fa-fw"></i>  Upload</a>
-            <a id="users" name="users" href="<g:createLink controller='userManagement'/>" class="w3-bar-item w3-button w3-padding"><i
-                    class="fa fa-diamond fa-fw"></i>  List Users</a>
+            <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-upload fa-fw"></i><g:message
+                    code="side.bar.index.upload.title"/></a>
+            <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
+               class="w3-bar-item w3-button w3-padding"><i
+                    class="fa fa-users fa-fw"></i><g:message code="side.bar.index.list.user.title"/></a>
             <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
-               class="w3-bar-item w3-button w3-padding" ><i class="fa fa-bullseye fa-fw"></i>  Delete All Files</a>
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
+                    code="side.bar.index.delete.all.files.title"/></a>
         </div>
     </nav>
 </sec:ifLoggedIn>
@@ -110,6 +115,7 @@
         </div>
         <br>
         <br>
+
         <div>
             <button type="button" class="btn btn-primary text-uppercase " data-toggle="modal"
                     data-target=".bd-example-modal-lg"><g:message

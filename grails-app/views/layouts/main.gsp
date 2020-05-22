@@ -26,23 +26,24 @@
     <span class="w3-bar-item w3-right">
         <div class="w3-right" aria-expanded="false" style="height: 0.8px; alignment: right" id="navbarContent">
             <sec:ifLoggedIn>
-                <span>Welcome, <strong>
+                <span><g:message code="main.page.user.welcome"/><strong>
                 <sec:username/>
             </sec:ifLoggedIn></strong></span><br>
             <sec:ifLoggedIn>
-                <div class="w3-col s8 w3-bar">
+                <div class="w3-col s10 w3-bar">
                     <a href="${g.createLink(controller: "myProfile", action: "showProfileDetails")}"
                        class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
                     <a href="${g.createLink(controller: "logout", action: "logout")}"
                        class="w3-bar-item w3-button"><asset:image src="logout.png" alt="Image"/></a>
                 </div>
             </sec:ifLoggedIn>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><g:message code="default.change.language"/> <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <navBar:localeDropdownListItems uri="${request.forwardURI}"/>
-                </ul>
-            </li>
+
+        %{--<li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><g:message code="default.change.language"/> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <navBar:localeDropdownListItems uri="${request.forwardURI}"/>
+            </ul>
+        </li>--}%
         </div>
     </span>
 </div>
@@ -51,23 +52,24 @@
         <hr>
 
         <div class="w3-container" style="margin-top: 100px;">
-            <h5>Dashboard</h5>
+            <h5><g:message code="side.bar.index.head.title"/></h5>
         </div>
 
         <div class="w3-bar-block" style="margin-top: 5px;">
             <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
                class="w3-bar-item w3-button w3-padding"><i
-                    class="fa fa-users fa-fw"></i>  Overview
+                    class="fa fa-eye fa-fw"></i><g:message code="side.bar.index.overview.title"/>
             </a>
             <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
                class="w3-bar-item w3-button w3-padding"><i
-                    class="fa fa-eye fa-fw"></i>  Upload</a>
+                    class="fa fa-upload fa-fw"></i><g:message code="side.bar.index.upload.title"/></a>
             <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
                class="w3-bar-item w3-button w3-padding"><i
-                    class="fa fa-diamond fa-fw"></i>  List Users</a>
+                    class="fa fa-users fa-fw"></i><g:message code="side.bar.index.list.user.title"/></a>
             <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
                class="w3-bar-item w3-button w3-padding"><i
-                    class="fa fa-bullseye fa-fw"></i>  Delete All Files</a>
+                    class="fa fa-trash fa-fw"></i><g:message code="side.bar.index.delete.all.files.title"/></a>
+
         </div>
     </nav>
 </sec:ifLoggedIn>
