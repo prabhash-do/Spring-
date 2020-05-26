@@ -12,19 +12,17 @@ class ListingController {
     def doListing() {
 
         Uploadfile uploadfile = new Uploadfile()
-        def dblist = uploadfile.list()
-        def remotelist = BaseHelper.list()
-        if (remotelist != null) {
-            if (remotelist.isEmpty()) {
-                flash._warn = g.message(code: "flash.message.no.files.found")
-                log.info("No files found in Remote location")
+        List<Uploadfile> dbList = uploadfile.list()
+        List<String> remoteList = BaseHelper.list()
+        if (remoteList != null) {
+            if (remoteList.isEmpty()) {
+                log.info("No files found")
             } else {
-                log.info("Files in Remote location are listed")
+                log.info("Files are listed")
             }
-            render view: "/index", model: [remotelist: remotelist, dblist: dblist]
+            render view: "/index", model: [remotelist: remoteList, dblist: dbList]
         } else {
-            flash.error = g.message(code: "flash.message.check.connectivity")
-            render view: "/index", model: [dblist: dblist]
+            render view: "/index", model: [dblist: dbList]
         }
     }
 
@@ -32,19 +30,27 @@ class ListingController {
 
         Uploadfile uploadfile = new Uploadfile()
         String fileType = params.fileType
-        def dblist = uploadfile.list()
-        def remotelist = BaseHelper.fileListByFileType(fileType)
-        if (remotelist != null) {
-            if (remotelist.isEmpty()) {
-                flash._warn = g.message(code: "flash.message.no.files.found")
-                log.info("No files found in Remote location")
-            } else {
-                log.info("Files in Remote location are listed")
+
+        List<Uploadfile> dbListAll = uploadfile.list()
+        List<Uploadfile> dbList = new ArrayList<Uploadfile>()
+        List<String> remoteList = BaseHelper.fileListByFileType(fileType)
+        for (String remoteFile: remoteList) {
+            for (Uploadfile dbFile: dbListAll) {
+                if (remoteFile == dbFile.fileName) {
+                    dbList.add(dbFile)
+                }
             }
-            render view: "/index", model: [remotelist: remotelist, dblist: dblist]
+        }
+
+        if (remoteList != null) {
+            if (remoteList.isEmpty()) {
+                log.info("No files found")
+            } else {
+                log.info("Files are listed")
+            }
+            render view: "/index", model: [remotelist: remoteList, dblist: dbList]
         } else {
-            flash.error = g.message(code: "flash.message.check.connectivity")
-            render view: "/index", model: [dblist: dblist]
+            render view: "/index", model: [dblist: dbList]
         }
     }
 }

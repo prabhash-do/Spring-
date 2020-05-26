@@ -4,7 +4,7 @@ class Uploadfile {
 
     String fileName
     String creationDate
-    Long fileSize
+    String fileSize
     boolean status
     int id
 
