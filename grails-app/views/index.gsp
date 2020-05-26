@@ -10,7 +10,6 @@
 
     .file-preview {
         background: #fdf8ff;
-        border: 5px solid #1b9ef4;
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
         -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
         -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
@@ -168,18 +167,20 @@ html, body, h1, h2, h3, h4, h5 {
             <thead>
             <tr>
                 <th><b><g:message code="main.file.list.file.name.head"/></b></th>
-                <th><b><g:message code="main.file.list.thumbnail.head"/></b></th>
+                <th><b><g:message code="main.file.list.file.size.head"/></b></th>
+                <th><b><g:message code="main.file.list.creation.date.head"/></b></th>
+                <th><b><g:message code="main.file.list.preview.head"/></b></th>
                 <th><b><g:message code="main.file.list.action.icon.head"/></b></th>
             </tr>
             </thead>
             <tbody>
             <g:each in="${dblist}">
                 <tr>
-                    <td><h5>${it.fileName}<br/><br/>
-                        <span style="font-size: small; font-weight: normal">${it.fileSize}</span><br/>
-                        <span style="font-size: small; font-weight: normal">${it.creationDate}</span></h5></td>
+                    <td><h5>${it.fileName}</h5></td>
+                    <td>${it.fileSize}</td>
+                    <td>${it.creationDate}</td>
                     <td><g:if
-                            test="${it.fileName.contains(".mp4") || it.fileName.contains(".mov") || it.fileName.contains(".3gp") || it.fileName.contains(".avi") || it.fileName.contains(".mpg") || it.fileName.contains(".ogg") || it.fileName.contains(".webm")}">
+                            test="${it.fileName.toLowerCase().contains(".mp4") || it.fileName.toLowerCase().contains(".mov") || it.fileName.toLowerCase().contains(".3gp") || it.fileName.toLowerCase().contains(".avi") || it.fileName.toLowerCase().contains(".mpg") || it.fileName.toLowerCase().contains(".ogg") || it.fileName.toLowerCase().contains(".webm")}">
                         <div class="file-preview">
                             <a href="${resource(dir: 'upload/videos', file: it.fileName)}"/>
                             <video style="height: 50px ; width: 50px"
@@ -187,14 +188,14 @@ html, body, h1, h2, h3, h4, h5 {
                                    preload="auto"/>
                         </div>
                     </g:if>
-                        <g:if test="${it.fileName.contains(".png") || it.fileName.contains(".jpg") || it.fileName.contains(".jpeg")}">
+                        <g:if test="${it.fileName.toLowerCase().contains(".png") || it.fileName.toLowerCase().contains(".jpg") || it.fileName.toLowerCase().contains(".jpeg")}">
                             <div class="file-preview">
                                 <a href="${resource(dir: 'upload/images', file: it.fileName)}"/>
                                 <img style="height:50px ;width:50px"
                                      src="${resource(dir: 'upload/images', file: it.fileName)}" alt="Image"/>
                             </div>
                         </g:if>
-                        <g:if test="${it.fileName.contains(".pdf")}">
+                        <g:if test="${it.fileName.toLowerCase().contains(".pdf")}">
                             <div class="file-preview">
                                 <a href='<g:createLink controller="preview" action="preview"
                                                        params="[filename: it.fileName]"/>'/>
@@ -202,7 +203,7 @@ html, body, h1, h2, h3, h4, h5 {
                                      src="${resource(dir: 'images', file: 'pdf.png')}" alt="Image"/>
                             </div>
                         </g:if>
-                        <g:if test="${it.fileName.contains(".txt")}">
+                        <g:if test="${it.fileName.toLowerCase().contains(".txt")}">
                             <div class="file-preview">
                                 <a href='<g:createLink controller="preview" action="preview"
                                                        params="[filename: it.fileName]"/>'/>
@@ -210,21 +211,21 @@ html, body, h1, h2, h3, h4, h5 {
                                      src="${resource(dir: 'images', file: 'txt.png')}" alt="Image"/>
                             </div>
                         </g:if>
-                        <g:if test="${it.fileName.contains(".docx")}">
+                        <g:if test="${it.fileName.toLowerCase().contains(".docx")}">
                             <div class="file-preview">
                                 <a href="${resource(dir: 'upload', file: it.fileName)}" download/>
                                 <img style="height:50px ;width:50px"
                                      src="${resource(dir: 'images', file: 'docx.png')}" alt="Image"/>
                             </div>
                         </g:if>
-                        <g:if test="${it.fileName.contains(".xlsx") || it.fileName.contains(".xls") || it.fileName.contains(".csv")}">
+                        <g:if test="${it.fileName.toLowerCase().contains(".xlsx") || it.fileName.toLowerCase().contains(".xls") || it.fileName.toLowerCase().contains(".csv")}">
                             <div class="file-preview">
                                 <a href="${resource(dir: 'upload', file: it.fileName)}" download/>
                                 <img style="height:50px ;width:50px"
                                      src="${resource(dir: 'images', file: 'xls.jpg')}" alt="Image"/>
                             </div>
                         </g:if>
-                        <g:if test="${it.fileName.contains(".pptx") || it.fileName.contains(".ppt")}">
+                        <g:if test="${it.fileName.toLowerCase().contains(".pptx") || it.fileName.toLowerCase().contains(".ppt")}">
                             <div class="file-preview">
                                 <a href='<g:createLink controller="preview" action="preview"
                                                        params="[filename: it.fileName]"/>'/>

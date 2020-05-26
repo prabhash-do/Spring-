@@ -91,7 +91,7 @@
                 updateProgressBar0();
                 return true;
             } else {
-                alert("${message(code: 'default.choose.file')}");
+                alert("${message(code: 'upload.choose.file.message')}");
                 return false;
             }
         }
