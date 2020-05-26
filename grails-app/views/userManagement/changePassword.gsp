@@ -5,9 +5,8 @@
 </head>
 
 <body>
-<div class="row" style="margin-top: 100px;">
+<div class="row" style=" margin-left:380px;margin-top: 80px;">
 
-    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
             <div class="card-body">
                 <h5 class="card-title text-center">${message(code: 'springSecurity.change.password.header')}</h5>
@@ -44,7 +43,7 @@
                             type="submit">${message(code: 'default.button.cancel')}</button>
                 </g:form>
             </div>
-        </div>
+
     </div>
 </div>
 <g:javascript>

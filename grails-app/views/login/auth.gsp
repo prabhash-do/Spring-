@@ -68,7 +68,7 @@
 </div>
 <footer class="w3-container w3-padding-16 w3-light-grey" style="margin-bottom: 0px; margin-left: 0px;margin-right: 0px">
     <div class="footer row" role="contentinfo">
-        <p><g:message code="default.client.user.role"></g:message></p>
+        <p><g:message code="default.index.footer.message"></g:message></p>
     </div>
 </footer>
 <asset:javascript src="validator.js"/>

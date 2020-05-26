@@ -51,6 +51,10 @@ pre {
     background-color: #117a8b;
     border: 0px;
 }
+.navbar-dark-left, .navbar-static-left {
+    background-color: #2196F3;
+    border: 0px;
+}
 
 a.navbar-brand {
     color: white !important;

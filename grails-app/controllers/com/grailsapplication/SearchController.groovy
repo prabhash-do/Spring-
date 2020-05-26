@@ -11,7 +11,7 @@ class SearchController {
 
         String searchName = params.srch
         List<String> filelist = BaseHelper.list()
-        if (searchName==null) {
+        if (searchName.isEmpty()) {
             flash.warn = g.message(code: "flash.message.file.name.empty.warn")
             log.info("the file name to search is not specified")
             render view: "/listing/list", model: [remotelist: filelist]
