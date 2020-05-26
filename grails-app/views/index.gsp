@@ -169,67 +169,69 @@ html, body, h1, h2, h3, h4, h5 {
             </tr>
             </thead>
             <tbody>
-            <g:each in="${remotelist}">
+            <g:each in="${dblist}">
                 <tr>
-                    <td><h5>${it}</h5></td>
+                    <td><h5>${it.fileName}<br/><br/>
+                        <span style="font-size: small; font-weight: normal">${it.fileSize}</span><br/>
+                        <span style="font-size: small; font-weight: normal">${it.creationDate}</span></h5></td>
                     <td><g:if
-                            test="${it.contains(".mp4") || it.contains(".mov") || it.contains(".3gp") || it.contains(".avi") || it.contains(".mpg") || it.contains(".ogg") || it.contains(".webm")}">
+                            test="${it.fileName.contains(".mp4") || it.fileName.contains(".mov") || it.fileName.contains(".3gp") || it.fileName.contains(".avi") || it.fileName.contains(".mpg") || it.fileName.contains(".ogg") || it.fileName.contains(".webm")}">
                         <div class="file-preview">
-                            <a href="${resource(dir: 'upload/videos', file: it)}"/>
+                            <a href="${resource(dir: 'upload/videos', file: it.fileName)}"/>
                             <video style="height: 50px ; width: 50px"
-                                   src="${resource(dir: 'upload/videos', file: it)}" alt="Video" loop
+                                   src="${resource(dir: 'upload/videos', file: it.fileName)}" alt="Video" loop
                                    preload="auto"/>
                         </div>
                     </g:if>
-                        <g:if test="${it.contains(".png") || it.contains(".jpg") || it.contains(".jpeg")}">
+                        <g:if test="${it.fileName.contains(".png") || it.fileName.contains(".jpg") || it.fileName.contains(".jpeg")}">
                             <div class="file-preview">
-                                <a href="${resource(dir: 'upload/images', file: it)}"/>
+                                <a href="${resource(dir: 'upload/images', file: it.fileName)}"/>
                                 <img style="height:50px ;width:50px"
-                                     src="${resource(dir: 'upload/images', file: it)}" alt="Image"/>
+                                     src="${resource(dir: 'upload/images', file: it.fileName)}" alt="Image"/>
                             </div>
                         </g:if>
-                        <g:if test="${it.contains(".pdf")}">
+                        <g:if test="${it.fileName.contains(".pdf")}">
                             <div class="file-preview">
                                 <a href='<g:createLink controller="preview" action="preview"
-                                                       params="[filename: it]"/>'/>
+                                                       params="[filename: it.fileName]"/>'/>
                                 <img style="height:50px ;width:50px"
                                      src="${resource(dir: 'images', file: 'pdf.png')}" alt="Image"/>
                             </div>
                         </g:if>
-                        <g:if test="${it.contains(".txt")}">
+                        <g:if test="${it.fileName.contains(".txt")}">
                             <div class="file-preview">
                                 <a href='<g:createLink controller="preview" action="preview"
-                                                       params="[filename: it]"/>'/>
+                                                       params="[filename: it.fileName]"/>'/>
                                 <img style="height:50px ;width:50px"
                                      src="${resource(dir: 'images', file: 'txt.png')}" alt="Image"/>
                             </div>
                         </g:if>
-                        <g:if test="${it.contains(".docx")}">
+                        <g:if test="${it.fileName.contains(".docx")}">
                             <div class="file-preview">
-                                <a href="${resource(dir: 'upload', file: it)}" download/>
+                                <a href="${resource(dir: 'upload', file: it.fileName)}" download/>
                                 <img style="height:50px ;width:50px"
                                      src="${resource(dir: 'images', file: 'docx.png')}" alt="Image"/>
                             </div>
                         </g:if>
-                        <g:if test="${it.contains(".xlsx") || it.contains(".xls") || it.contains(".csv")}">
+                        <g:if test="${it.fileName.contains(".xlsx") || it.fileName.contains(".xls") || it.fileName.contains(".csv")}">
                             <div class="file-preview">
-                                <a href="${resource(dir: 'upload', file: it)}" download/>
+                                <a href="${resource(dir: 'upload', file: it.fileName)}" download/>
                                 <img style="height:50px ;width:50px"
                                      src="${resource(dir: 'images', file: 'xls.jpg')}" alt="Image"/>
                             </div>
                         </g:if>
-                        <g:if test="${it.contains(".pptx") || it.contains(".ppt")}">
+                        <g:if test="${it.fileName.contains(".pptx") || it.fileName.contains(".ppt")}">
                             <div class="file-preview">
                                 <a href='<g:createLink controller="preview" action="preview"
-                                                       params="[filename: it]"/>'/>
+                                                       params="[filename: it.fileName]"/>'/>
                                 <img style="height:50px ;width:50px"
                                      src="${resource(dir: 'images', file: 'pptx.png')}" alt="Image"/>
                             </div>
                         </g:if></td>
                     <td><div class="delete_test">
-                        <g:link controller="delete" action="doDelete" params="[filename: it]"
+                        <g:link controller="delete" action="doDelete" params="[filename: it.fileName]"
                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i
-                                class="fa fa-trash fa-3x" aria-hidden="true" title="<g:message
+                                class="fa fa-trash fa-2x" aria-hidden="true" title="<g:message
                                         code="default.delete.label"/>"></i></g:link>
                     </div></td>
                 </tr>
