@@ -59,13 +59,13 @@ class UploadController {
 
             if (CheckConnectivity.internetConnection()) {
                 if (!files.contains(fileName)) {
-                    def remotelist = ListRemoteFiles.list()
+                    def remotelist = BaseHelper.list()
                     if (remotelist != null) {
                         if (remotelist.isEmpty()) {
                             flash._warn = g.message(code: "flash.message.no.files.found")
-                            log.info("No files found in Remote location")
+                            log.info("No files found")
                         } else {
-                            log.info("Files in Remote location are listed")
+                            log.info("Files are listed")
                         }
                         render view: "/index", model: [remotelist: remotelist]
                     } else {
@@ -74,11 +74,12 @@ class UploadController {
                     log.info("File " + fileName + " has been uploaded successfully!")
                     flash.message = g.message(code: "flash.message.file.upload")
                 } else {
-                    log.warn("File is already there in remote location ")
+                    log.warn("File is already there")
                     flash.message = g.message(code: "flash.message.replace.file")
                 }
 
-                doDataBaseEntry(fileName, file.size)
+                String fileSize = getFileSize((Long)file.size)
+                doDataBaseEntry(fileName, fileSize)
 
                 /*boolean isemailchecked = params.email
                 if (isemailchecked) {
@@ -98,4 +99,15 @@ class UploadController {
         new ListingController().doListing()
     }
 
+    private static String getFileSize(Long fileSize) {
+        if (fileSize < 1024) {
+            return ((double) fileSize).round(2) + " Bytes";
+        } else if (fileSize < 1024 * 1024) {
+            return ((double) fileSize / 1024).round(2) + " KB";
+        } else if (fileSize < 1024 * 1024 * 1024) {
+            return ((double) fileSize / (1024 * 1024)).round(2) + " MB";
+        } else {
+            return ((double) fileSize / (1024 * 1024 * 1024)).round(2) + " GB";
+        }
+    }
 }
