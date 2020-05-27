@@ -20,7 +20,7 @@ class MyProfileController {
         String dateOfBirth = user.dateOfBirth
 
 
-        if (firstName != null || email != null || userName != null) {
+        if (firstName != null || email != null || sex != null) {
             log.info("User Details are shown")
         } else {
             flash.warnmessage = g.message(code: "flash.message.user.warn")
