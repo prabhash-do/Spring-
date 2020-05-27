@@ -40,11 +40,11 @@
 
         <div class="w3-bar-block" style="margin-top: 5px;">
             <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
-               class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i><g:message
+               class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-eye fa-fw"></i><g:message
                     code="side.bar.index.overview.title"/>
             </a>
             <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
-               class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-upload fa-fw"></i><g:message
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-upload fa-fw"></i><g:message
                     code="side.bar.index.upload.title"/></a>
             <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
                class="w3-bar-item w3-button w3-padding"><i
@@ -52,11 +52,15 @@
             <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
                     code="side.bar.index.delete.all.files.title"/></a>
+            <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
+               class="w3-bar-item w3-button w3-padding"><i
+                    class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
         </div>
     </nav>
 </sec:ifLoggedIn>
 <section id="services">
     <div class="container" style="margin-left:300px;margin-top: 140px;">
+        <g:render template="/templates/grailstemplates"/>
         <g:form controller="Upload" action="doUpload" method="POST" enctype="multipart/form-data">
             <div class="row space-rows" id="animated-cards">
                 <div class="col">
@@ -65,6 +69,8 @@
                             <div class="cardheader-text">
                                 <p id="cardheader-subtext-1" class="cardheader-subtext"><g:message
                 code="upload.choose.file.message"/></p>
+
+            <g:hiddenField name="maxFileSize" id="maxFileSize" value="${fileSize1}"/>
 
             <input type="file" name="file" id="file0" multiple>
 
@@ -87,9 +93,25 @@
         <g:javascript>
         function savefname0() {
             var filename = $('#file0').val();
+            var maxfilesize = $('#maxFileSize').val();
             if (filename != null && filename !== '') {
-                updateProgressBar0();
-                return true;
+                 var fi = document.getElementById('file0');
+                // Check if any file is selected.
+                 if (fi.files.length > 0) {
+                     for (var i = 0; i <= fi.files.length - 1; i++) {
+                        var fsize = fi.files.item(i).size;
+                        var file = fsize / 1024/1024;
+                        // The size of the file.
+                        if (file >= maxfilesize) {
+                            alert(
+                                "File is large, please select a file less than "+maxfilesize+"mb");
+                        }
+                        else {
+                            updateProgressBar0();
+                            return true;
+                        }
+                     }
+                 }
             } else {
                 alert("${message(code: 'upload.choose.file.message')}");
                 return false;

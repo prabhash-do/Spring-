@@ -56,6 +56,9 @@
                 class="fa fa-users fa-fw"></i><g:message code="side.bar.index.list.user.title"/></a>
         <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
            class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message code="default.all.delete.label"/></a>
+        <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
+           class="w3-bar-item w3-button w3-padding"><i
+                class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
     </div>
 </nav>
 <!-- !PAGE CONTENT! -->

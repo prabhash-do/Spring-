@@ -16,14 +16,14 @@
 
         <div class="w3-bar-block" style="margin-top: 5px;">
             <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
-               class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i><g:message
+               class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-eye fa-fw"></i><g:message
                     code="side.bar.index.overview.title"/>
             </a>
             <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-upload fa-fw"></i><g:message
                     code="side.bar.index.upload.title"/></a>
             <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
-               class="w3-bar-item w3-button w3-padding w3-blue"><i
+               class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-users fa-fw"></i><g:message code="side.bar.index.list.user.title"/></a>
             <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
@@ -31,6 +31,9 @@
             <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
                     code="default.button.createuser"/></a>
+            <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
+               class="w3-bar-item w3-button w3-padding"><i
+                    class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
         </div>
     </nav>
 </sec:ifLoggedIn>
