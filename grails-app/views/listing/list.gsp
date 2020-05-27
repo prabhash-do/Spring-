@@ -59,7 +59,7 @@
     </div>
 </nav>
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px;margin-top: 40px;">
+<div class="w3-main" style="margin-right:20px;margin-top: 40px;">
     <g:form controller="search" action="list" method="post">
         <g:textField id="searchtext" class="input-xxlarge" name="srch" style="margin-top: 100px; margin-left: 100px"
                      placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>

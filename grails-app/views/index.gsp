@@ -36,9 +36,8 @@
     <meta name="layout" content="main"/>
     <title><g:message code="main.index.my.dashboard.title"/></title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
+    <asset:stylesheet src="bootstrap.min.css"/>
+    <asset:stylesheet src="font-awesome.min.css"/>
 </head>
 <title><g:message code="main.title"/></title>
 <meta charset="UTF-8">
@@ -153,15 +152,17 @@ html, body, h1, h2, h3, h4, h5 {
             </div>
         </g:form>
         <div class="w3-panel">
+            <div class="w3-panel" style="margin-left: 422px;">
+                <g:form controller="search" action="list" method="post">
+                    <g:textField id="searchtext" class="input-xxlarge" name="srch"
+                                 placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
+                    <button id="submit-values" class="buttons" type="submit">
+                        <i class="icon-ok"></i>
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </g:form>
+            </div>
 
-            <g:form controller="search" action="list" method="post">
-                <g:textField id="searchtext" class="input-xxlarge" name="srch"
-                             placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
-                <button id="submit-values" class="buttons" type="submit">
-                    <i class="icon-ok"></i>
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-            </g:form>
 
         <table class="table table-bordered">
             <thead>
@@ -247,15 +248,14 @@ html, body, h1, h2, h3, h4, h5 {
     <div class="w3-panel">
         %{--        Do Listing of all files here--}%
 
+        </div>
     </div>
-</div>
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
         <div class="footer row" role="contentinfo">
             <p><g:message code="default.index.footer.message"></g:message></p>
         </div>
     </footer>
-
     <!-- End page content -->
 
 
@@ -263,7 +263,6 @@ html, body, h1, h2, h3, h4, h5 {
 
         function submitAll() {
             document.forms['all'].submit()
-
         }
 
         function submitDoc() {
