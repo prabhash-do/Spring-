@@ -106,10 +106,9 @@
 
                         <div class="form-group" id="reenterpassword">
                             <label for="password">*${message(code: 'springSecurity.confirm.password.label')}</label>
-                            <input type="password" class="form-control" name="confirmpassword" value=""
-                                   id="confirmpassword" required/>
+                            <input type="password" class="form-control" name="confirmPassword" value=""
+                                   id="confirmPassword"/>
                         </div>
-
                         <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">
                             ${message(code: 'default.add.user.button')}</button>
                         <hr class="my-4">
@@ -146,28 +145,31 @@
 
             document.forms['registerForm'].elements['firstname'].focus();
             var checkbox = document.querySelector('input[type="checkbox"]');
+            var password = document.getElementById("password");
+            var confirmPassword = document.getElementById("confirmPassword");
             if (checkbox.checked) {
-                var pass = document.getElementById('password').value = generatePassword()
-                document.getElementById("confirmpassword").setAttribute('value', pass);
+                password.value = generatePassword()
+                confirmPassword.removeAttribute('required');
                 $('#reenterpassword').hide();
             }
             checkbox.addEventListener('change', function () {
                 if (checkbox.checked) {
-                    var pass = document.getElementById('password').value = generatePassword()
-                    document.getElementById("confirmpassword").setAttribute('value', pass);
+                   password.value = generatePassword()
+                    confirmPassword.removeAttribute('required');
                     $('#reenterpassword').hide();
                 } else {
-                    document.getElementById("confirmpassword").value = typePassword()
-                    document.getElementById("password").value = typePassword()
+                    confirmPassword.value = typePassword()
+                    password.value = typePassword()
+                    confirmPassword.setAttribute('required', 'required');
                 }
             });
         });
         function generatePassword() {
-            var randomstring = Math.random().toString(36).slice(-8).concat('@T2t');
-            return randomstring;
+            var randomString = Math.random().toString(36).slice(-8).concat('@T2t');
+            return randomString;
         }
         function typePassword() {
-            document.getElementById("confirmpassword").setAttribute('value', '');
+            document.getElementById("confirmPassword").setAttribute('value', '');
             $('#password').show()
             $('#reenterpassword').show()
             return null
