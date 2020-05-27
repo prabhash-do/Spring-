@@ -21,7 +21,7 @@ var validateEmailByRegex = function () {
 }
 
 /**
- * Minimum 8 and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character
+ * Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character
  * @returns {boolean}
  */
 function validatePasswordByRegex() {
@@ -43,27 +43,28 @@ function validatePasswordByRegex() {
 }
 
 /**
- * Minimum 8 and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character
+ * Checks password and confirm password are matched or not
  * @returns {boolean}
  */
-function validatePasswordByRegex() {
-    var isPassOk = false;
-    var pass = document.getElementById('password');
-    var reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/;
-
-    if (!reg.test(pass.value)) {
-        document.getElementById("isP").style.color = "red";
-        document.getElementById("isP").innerHTML = "Invalid password format!";
-        document.forms['registerForm'].elements['password'].focus();
-        isPassOk = false;
+function checkPassword() {
+    var check = false;
+    if (document.getElementById('password').value == document.getElementById('confirmpassword').value) {
+        document.getElementById('isP').style.color = 'green';
+        document.getElementById('isP').innerHTML = 'Passwords Matched';
+        if (validatePasswordByRegex()) {
+            check = true;
+        }
     } else {
-        document.getElementById("isP").style.color = "green";
-        document.getElementById("isP").innerHTML = "Validated";
-        isPassOk = true;
+        document.getElementById('isP').style.color = 'red';
+        document.getElementById('isP').innerHTML = 'Passwords not match';
+        check = false;
     }
-    return isPassOk;
+    return check;
 }
 
+/**
+ * this method reloads the captcha on reset button click
+ */
 function reloadCaptcha() {
     document.getElementById('captcha').src = document.getElementById('captcha').src + '?' + new Date();
 }

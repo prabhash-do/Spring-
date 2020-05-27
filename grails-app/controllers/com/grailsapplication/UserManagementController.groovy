@@ -17,11 +17,12 @@ class UserManagementController {
         listuser.remove(user)
         render view: '/userManagement/listUser', model: [listuser: listuser, currentuser: currentuser]
     }
+
     def userList() {
 
         def listuser = User.list()
 
-        render template: "/templates/recentUsers",model: [listuser: listuser]
+        render template: "/templates/recentUsers", model: [listuser: listuser]
     }
 
     @Secured('permitAll')
@@ -39,6 +40,7 @@ class UserManagementController {
     def create() {
         render view: '/userManagement/createUser'
     }
+
     /**
      * This method allows a user to change password
      * @return boolean
@@ -130,30 +132,25 @@ class UserManagementController {
         String dateOfBirth = params.dateofbirth
         String userName = params.username
         String password = params.password
-        String passwordConfirm = params.confirmpassword
-        if (!password.equals(passwordConfirm)) {
-            log.warn("New Password and Confirm password did not match")
-            flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
-            render view: '/userManagement/createUser', model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex,dateOfBirth: dateOfBirth]
-        } else {
-            try {
-                User u = new User(firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, username: userName,password: password, sex: sex,dateOfBirth: dateOfBirth)
-                BootStrap.BANKCARD.each { k, v ->
-                    u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
-                }
-                u = BootStrap.userService.save(u)
-                BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
-                log.info("New user has been created Successfully")
-                flash.successmessage = g.message(code: "flash.message.create.user.sucess")
-                redirect controller: "userManagement", action: "index"
 
-            } catch (javax.xml.bind.ValidationException e) {
-                log.error("Fail to create new user")
-                flash.errormessage = g.message(code: "flash.message.create.user.fail")
-                redirect action: "create"
+        try {
+            User u = new User(firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, username: userName, password: password, sex: sex, dateOfBirth: dateOfBirth)
+            BootStrap.BANKCARD.each { k, v ->
+                u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
             }
+            u = BootStrap.userService.save(u)
+            BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
+            log.info("New user has been created Successfully")
+            flash.successmessage = g.message(code: "flash.message.create.user.sucess")
+            redirect controller: "userManagement", action: "index"
+
+        } catch (javax.xml.bind.ValidationException e) {
+            log.error("Fail to create new user")
+            flash.errormessage = g.message(code: "flash.message.create.user.fail")
+            redirect action: "create"
         }
     }
+
 /**
  * This method allows a ROLE_ADMIN user to delete any user except the user who has logged in
  * @return
