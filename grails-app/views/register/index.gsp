@@ -58,6 +58,7 @@
                                 <option value="${message(code: 'register.sex.male')}"
                                         selected>${message(code: 'register.sex.male')}</option>
                                 <option value="${message(code: 'register.sex.female')}">${message(code: 'register.sex.female')}</option>
+                                <option value="${message(code: 'register.sex.others')}">${message(code: 'register.sex.others')}</option>
                             </select>
                         </div>
 
