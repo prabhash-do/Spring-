@@ -35,7 +35,7 @@
                     <a href="${g.createLink(controller: "myProfile", action: "showProfileDetails")}"
                        class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
                     <a href="${g.createLink(controller: "logout", action: "logout")}"
-                       class="w3-bar-item w3-button"><asset:image src="logout.png" alt="Image"/></a>
+                       class="w3-bar-item w3-button"><i class="fa fa-power-off"></i></a>
                 </div>
             </sec:ifLoggedIn>
         </div>
