@@ -31,7 +31,6 @@
         text-align: center;
         width: 100%;
         height: 35px;
-        background-color: yellow;
         text-align: center;
         line-height: 32px;
         color: black;
