@@ -119,8 +119,8 @@ html, body, h1, h2, h3, h4, h5 {
                         <div class="w3-right">
                         </div>
 
-                        <div class="w3-clear"></div>
-                        <h4><g:message code="main.index.box.all.files.title"/></h4>
+                        <div class="w3-clear" align="left"></div>
+                        <h5><g:message code="main.index.box.all.files.title"/></h5>
                     </div>
                 </div>
             </g:form>
@@ -136,8 +136,8 @@ html, body, h1, h2, h3, h4, h5 {
                         <div class="w3-right">
                         </div>
 
-                        <div class="w3-clear"></div>
-                        <h4><g:message code="main.index.box.document.title"/></h4>
+                        <div class="w3-clear" align="left"></div>
+                        <h5><g:message code="main.index.box.document.title"/></h5>
                     </div>
                 </div>
             </g:form>
@@ -153,8 +153,8 @@ html, body, h1, h2, h3, h4, h5 {
                         <div class="w3-right" id="images">
                         </div>
 
-                        <div class="w3-clear"></div>
-                        <h4><g:message code="main.index.box.images.title"/></h4>
+                        <div class="w3-clear" align="left"></div>
+                        <h5><g:message code="main.index.box.images.title"/></h5>
                     </div>
                 </div>
             </g:form>
@@ -170,8 +170,8 @@ html, body, h1, h2, h3, h4, h5 {
                         <div class="w3-right" id="ppts">
                         </div>
 
-                        <div class="w3-clear"></div>
-                        <h4><g:message code="main.index.box.ppt.title"/></h4>
+                        <div class="w3-clear" align="left"></div>
+                        <h5><g:message code="main.index.box.ppt.title"/></h5>
                     </div>
                 </div>
             </g:form>
@@ -187,8 +187,8 @@ html, body, h1, h2, h3, h4, h5 {
                         <div class="w3-right" id="videos">
                         </div>
 
-                        <div class="w3-clear"></div>
-                        <h4><g:message code="main.index.box.video.title"/></h4>
+                        <div class="w3-clear" align="left"></div>
+                        <h5><g:message code="main.index.box.video.title"/></h5>
                     </div>
                 </div>
             </g:form>
