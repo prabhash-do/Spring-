@@ -16,14 +16,14 @@
     <g:layoutHead/>
 </head>
 
-<body class="w3-light-grey">
+<body class="w3-light-gray">
 
-<div class="w3-bar w3-top w3-blue w3-large" style="z-index:4">
+<div class="w3-bar w3-top w3-indigo w3-large" style="z-index:4">
 
-    <span class="w3-bar-item w3-left"><a class="navbar-brand"
-                                         href="${g.createLink(controller: "secured")}"><asset:image src="file.jpg"
-                                                                                                    alt="Files Logo"/></a>
-    </span>
+%{--    <span class="w3-bar-item w3-left"><a class="navbar-brand"--}%
+%{--                                         href="${g.createLink(controller: "secured")}"><asset:image src="file.jpg"--}%
+%{--                                                                                                    alt="Files Logo"/></a>--}%
+%{--    </span>--}%
     <span class="w3-bar-item w3-right">
         <div class="w3-right" aria-expanded="false" style="height: 0.8px; alignment: right" id="navbarContent">
             <sec:ifLoggedIn>
@@ -39,10 +39,13 @@
                 </div>
             </sec:ifLoggedIn>
         </div>
+
         <div class="dropdown" style="margin-top: 70px">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown">
                 <g:message code="default.change.language"/>
             </button>
+
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <navBar:localeDropdownListItems uri="${request.forwardURI}"/>
             </div>
@@ -71,6 +74,9 @@
             <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
                class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-trash fa-fw"></i><g:message code="side.bar.index.delete.all.files.title"/></a>
+            <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
+                    code="default.button.createuser"/></a>
 
         </div>
     </nav>
