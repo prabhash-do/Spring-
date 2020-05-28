@@ -5,6 +5,34 @@
 </head>
 
 <body>
+<sec:ifLoggedIn>
+    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+        <hr>
+
+        <div class="w3-container" style="margin-top: 100px;">
+            <h5><g:message code="side.bar.index.head.title"/></h5>
+        </div>
+
+        <div class="w3-bar-block" style="margin-top: 5px;">
+            <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i><g:message
+                    code="side.bar.index.overview.title"/>
+            </a>
+            <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-upload fa-fw"></i><g:message
+                    code="side.bar.index.upload.title"/></a>
+            <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
+               class="w3-bar-item w3-button w3-padding"><i
+                    class="fa fa-users fa-fw"></i><g:message code="side.bar.index.list.user.title"/></a>
+            <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
+                    code="side.bar.index.delete.all.files.title"/></a>
+            <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
+               class="w3-bar-item w3-button w3-padding w3-indigo"><i class="fa fa-user fa-fw"></i><g:message
+                    code="default.button.createuser"/></a>
+        </div>
+    </nav>
+</sec:ifLoggedIn>
 <div class="w3-main" style="margin-left:100px;margin-top: 80px;">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -65,14 +93,15 @@
                                    autocapitalize="none" required/>
                         </div>
 
-                        <div class="form-group">
-                            <label>*${message(code: 'springSecurity.register.sex.label')}</label>
-                            <select class="custom-select" name="sex" id="sex" required="required">
-                                <option value="${message(code: 'register.sex.male')}"
-                                        selected>${message(code: 'register.sex.male')}</option>
-                                <option value="${message(code: 'register.sex.female')}">${message(code: 'register.sex.female')}</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label>*${message(code: 'springSecurity.register.sex.label')}</label>
+                        <select class="custom-select" name="sex" id="sex" required="required">
+                            <option value="${message(code: 'register.sex.male')}"
+                                    selected>${message(code: 'register.sex.male')}</option>
+                            <option value="${message(code: 'register.sex.female')}">${message(code: 'register.sex.female')}</option>
+                            <option value="${message(code: 'register.sex.others')}">${message(code: 'register.sex.others')}</option>
+                        </select>
+                    </div>
 
                         <div class="form-group">
                             <label for="dateofbirth">${message(code: 'springSecurity.register.date.label')}</label>
