@@ -48,11 +48,11 @@ class UploadController {
     }
 
     def doUpload() {
+        String message;
         try {
             def file = request.getFile('file')
             String fileName = file.originalFilename
             String destinationPath = BaseHelper.setPathForFile(fileName)
-
             def files = BaseHelper.list()
             File fileDest = new File(destinationPath.concat(fileName))
             file.transferTo(fileDest)
@@ -62,20 +62,20 @@ class UploadController {
                     def remotelist = BaseHelper.list()
                     if (remotelist != null) {
                         if (remotelist.isEmpty()) {
-                            flash._warn = g.message(code: "flash.message.no.files.found")
+                            message = g.message(code: "flash.message.no.files.found")
                             log.info("No files found")
                         } else {
                             log.info("Files are listed")
                         }
-                        render view: "/index", model: [remotelist: remotelist]
+                        message= g.message(code: "flash.message.file.upload")
                     } else {
-                        flash.error = g.message(code: "flash.message.check.connectivity")
+                        message = g.message(code: "flash.message.check.connectivity")
                     }
                     log.info("File " + fileName + " has been uploaded successfully!")
-                    flash.message = g.message(code: "flash.message.file.upload")
+                    message = g.message(code: "flash.message.file.upload")
                 } else {
                     log.warn("File is already there")
-                    flash.message = g.message(code: "flash.message.replace.file")
+                    message = g.message(code: "flash.message.replace.file")
                 }
 
                 String fileSize = getFileSize((Long)file.size)
@@ -91,12 +91,12 @@ class UploadController {
                 }*/
 
             } else {
-                flash.error = g.message(code: "flash.message.check.connectivity")
+                message = g.message(code: "flash.message.check.connectivity")
             }
         } catch (Exception e) {
             log.error("Exception occured while Uploading file:\n", e)
         }
-        new ListingController().doListing()
+        render view: "/insert/upload", model: [message: message]
     }
 
     private static String getFileSize(Long fileSize) {
