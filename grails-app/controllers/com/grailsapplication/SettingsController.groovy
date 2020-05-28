@@ -7,8 +7,13 @@ class SettingsController {
 
     def index() { }
     def doSettings() {
-        boolean setting_flag=true
-        render view: "settings", model: []
+        Settings settings=Settings.findByPropertyName("File size")
+        if(settings!=null) {
+            Double fileSize1 = settings.propertyValue.toDouble()
+            render view: "settings", model: [fileSize1: fileSize1]
+        }else{
+            render view: "settings"
+        }
     }
     def doSubmitSettings() {
         Settings settings = Settings.findByPropertyName("File size")

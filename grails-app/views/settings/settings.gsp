@@ -48,8 +48,8 @@
                 autocomplete="off">
             <div class="form-group">
                 <label for="propertyValue"><h1>Enter maximum size of file (in MB)</h1></label>
-                <input type="text" placeholder="Filesize in MB" class="form-control" name="propertyValue"
-                       id="propertyValue"
+                <input type="text" value="${fileSize1}" placeholder="Filesize in MB" class="form-control" name="propertyValue"
+                       id="propertyValue" onkeypress="return isNumberKey(event)" maxlength="4"
                        autocapitalize="none" required/>
             </div>
             <br>
@@ -57,6 +57,13 @@
         </g:form>
     </div>
 </section>
-
+<script>
+    function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode != 46 &&(charCode < 48 || charCode > 57)))
+            return false;
+        return true;
+    }
+</script>
 </body>
 </html>
