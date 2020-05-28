@@ -9,7 +9,6 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <asset:javascript src='jquery-3.3.1.min.js'/>
     <title><g:message code="main.upload.title"/></title>
     <style type="text/css">
     #progressStatus0 {
@@ -38,10 +37,22 @@
         color: black;
     }
     </style>
-
+    <asset:javascript src='jquery-3.3.1.min.js'/>
+    <asset:javascript src='jquery.alerts.js'/>
+    <asset:stylesheet src="jquery.alerts.css" />
 </head>
 
 <body class="w3-light-grey">
+<g:if test="${message}">
+    <tr align="center">
+        <td>
+            <script type="text/javascript"> jAlert('${message}')</script>
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+</g:if>
 <sec:ifLoggedIn>
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
@@ -53,7 +64,7 @@
 
         <div class="w3-bar-block" style="margin-top: 15px;">
             <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
-               class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-eye fa-fw"></i><g:message
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i><g:message
                     code="side.bar.index.overview.title"/>
             </a>
             <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
@@ -62,12 +73,12 @@
             <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
                class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-users fa-fw"></i><g:message code="side.bar.index.list.user.title"/></a>
-            <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
-               class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
-                    code="side.bar.index.delete.all.files.title"/></a>
             <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
                     code="default.button.createuser"/></a>
+            <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
+                    code="side.bar.index.delete.all.files.title"/></a>
             <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
                class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
@@ -124,7 +135,6 @@
         function savefname0() {
             var filename = $('#file0').val();
             var maxfilesize = $('#maxFileSize').val();
-            console.log("hhhhhhhh",maxfilesize)
             if (filename != null && filename !== '') {
                  var fi = document.getElementById('file0');
                 // Check if any file is selected.

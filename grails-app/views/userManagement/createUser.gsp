@@ -3,8 +3,20 @@
     <meta name="layout" content="${gspLayout ?: 'main'}"/>
     <title>${message(code: 'springSecurity.createuser.title')}</title>
 </head>
-
+<asset:javascript src='jquery-3.3.1.min.js'/>
+<asset:javascript src='jquery.alerts.js'/>
+<asset:stylesheet src="jquery.alerts.css" />
 <body>
+<g:if test="${message}">
+    <tr align="center">
+        <td>
+            <script type="text/javascript"> jAlert('${message}')</script>
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+</g:if>
 <sec:ifLoggedIn>
     <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
         <hr>
@@ -24,12 +36,12 @@
             <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
                class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-users fa-fw"></i><g:message code="side.bar.index.list.user.title"/></a>
+            <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
+                    code="default.button.createuser"/></a>
             <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
                     code="side.bar.index.delete.all.files.title"/></a>
-            <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
-               class="w3-bar-item w3-button w3-padding w3-indigo"><i class="fa fa-user fa-fw"></i><g:message
-                    code="default.button.createuser"/></a>
         </div>
     </nav>
 </sec:ifLoggedIn>
