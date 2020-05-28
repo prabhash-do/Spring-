@@ -193,19 +193,18 @@ html, body, h1, h2, h3, h4, h5 {
         </g:form>
     </div>
 </div>
-
-<div class="w3-panel">
-    <div class="w3-panel" style="margin-left: 422px;">
-<g:form controller="search" action="list" method="post">
-    <g:textField id="searchtext" class="input-xxlarge" name="srch"
-                 placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
-    <button id="submit-values" class="buttons" type="submit">
-        <i class="icon-ok"></i>
-        <i class="fa fa-search" aria-hidden="true"></i>
-    </button>
-</g:form>
-</div>
 <g:if test="${dblist}">
+    <div class="w3-panel">
+    <div class="w3-panel" style="margin-left: 422px;">
+    <g:form controller="search" action="list" method="post">
+        <g:textField id="searchtext" class="input-xxlarge" name="srch"
+                     placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
+        <button id="submit-values" class="buttons" type="submit">
+            <i class="icon-ok"></i>
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+    </g:form>
+    </div>
     <table class="table table-bordered">
         <thead>
         <tr>
