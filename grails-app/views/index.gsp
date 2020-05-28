@@ -98,7 +98,11 @@ html, body, h1, h2, h3, h4, h5 {
     <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
        class="w3-bar-item w3-button w3-padding"><i
             class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
-    </div>
+    <a id="changePassword" name="changePassword" href="<g:createLink controller='userManagement' action='change'/>"
+       class="w3-bar-item w3-button w3-padding"><i
+            class="fa fa-edit"></i><g:message code="default.button.change"/></a>
+
+</div>
 </nav>
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top: 100px;">
@@ -116,6 +120,7 @@ html, body, h1, h2, h3, h4, h5 {
                     <div class="w3-left"><i class="fa fa-list w3-xxxlarge"></i></div>
 
                     <div class="w3-right">
+                        <h5>${numberOfAllFiles}</h5>
                     </div>
 
                     <div class="w3-clear" align="left"></div>

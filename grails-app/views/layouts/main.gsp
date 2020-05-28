@@ -48,7 +48,7 @@
     </span>
 </div>
 <sec:ifLoggedIn>
-    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+    <nav class="w3-sidebar w3-collapse w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
         <hr>
 
         <div class="w3-container" style="margin-top: 100px;">
@@ -72,11 +72,12 @@
             <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
                     code="default.button.createuser"/></a>
-
-                    class="fa fa-bullseye fa-fw"></i>  Delete All Files</a>
             <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
                class="w3-bar-item w3-button w3-padding"><i
-                    class="fa fa-cogs fa-fw"></i>  Settings</a>
+                    class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
+            <a id="changePassword" name="changePassword" href="<g:createLink controller='userManagement' action='change'/>"
+               class="w3-bar-item w3-button w3-padding w3-indigo"><i
+                    class="fa fa-edit"></i><g:message code="default.button.change"/></a>
         </div>
     </nav>
 </sec:ifLoggedIn>

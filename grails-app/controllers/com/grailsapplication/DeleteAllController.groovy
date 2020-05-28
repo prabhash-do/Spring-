@@ -12,7 +12,7 @@ class DeleteAllController {
 
 
     def index() {
-        render view: '../index'
+        new ListingController().doListing()
     }
 
     def doAllDelete() {
