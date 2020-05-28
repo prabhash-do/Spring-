@@ -8,8 +8,7 @@ package com.grailsapplication
 
 import com.company.CheckConnectivity
 import com.company.SendMail
-
-import com.util.BaseConstants
+import com.company.SendSms
 import grails.plugin.springsecurity.annotation.Secured
 
 @Secured(['permitAll'])
@@ -29,7 +28,7 @@ class UploadController {
 
     def doSMS(def fileName) {
 
-        Sendsms.sendsms(fileName)
+        SendSms.sendsms(fileName)
         log.info("SMS has been sent successfully!")
         flash.messagesms = g.message(code: "flash.message.sms")
     }
@@ -51,48 +50,48 @@ class UploadController {
         try {
             def file = request.getFile('file')
             String fileName = file.originalFilename
-            String destinationPath = BaseHelper.setPathForFile(fileName)
+            Uploadfile uploadfile = new Uploadfile()
+            List<Uploadfile> dbList = uploadfile.list()
+            List<String> localList = BaseHelper.list()
 
-            def files = BaseHelper.list()
-            File fileDest = new File(destinationPath.concat(fileName))
-            file.transferTo(fileDest)
+            /*Check and upload to local*/
+            if (!localList.contains(fileName)) {
+                String destinationPath = BaseHelper.setPathForFile(fileName)
+                File fileDest = new File(destinationPath.concat(fileName))
+                file.transferTo(fileDest)
+            }
 
-            if (CheckConnectivity.internetConnection()) {
-                if (!files.contains(fileName)) {
-                    def remotelist = BaseHelper.list()
-                    if (remotelist != null) {
-                        if (remotelist.isEmpty()) {
-                            flash._warn = g.message(code: "flash.message.no.files.found")
-                            log.info("No files found")
-                        } else {
-                            log.info("Files are listed")
-                        }
-                        render view: "/index", model: [remotelist: remotelist]
-                    } else {
-                        flash.error = g.message(code: "flash.message.check.connectivity")
-                    }
-                    log.info("File " + fileName + " has been uploaded successfully!")
-                    flash.message = g.message(code: "flash.message.file.upload")
-                } else {
-                    log.warn("File is already there")
-                    flash.message = g.message(code: "flash.message.replace.file")
+            /*Check and upload to database*/
+            boolean isPresent = false
+            for (Uploadfile uploadfile1: dbList) {
+                if (uploadfile1.fileName == fileName) {
+                    isPresent = true
+                    break
                 }
-
+            }
+            if (!isPresent) {
                 String fileSize = getFileSize((Long)file.size)
                 doDataBaseEntry(fileName, fileSize)
+                log.info("File " + fileName + " has been uploaded successfully!")
+                flash.message = g.message(code: "flash.message.file.upload")
+            } else {
+                log.warn("File is already there")
+                flash.message = g.message(code: "flash.message.replace.file")
+            }
 
-                /*boolean isemailchecked = params.email
+            /*DON'T DELETE*/
+            /*if (CheckConnectivity.internetConnection()) {
+                boolean isemailchecked = params.email
                 if (isemailchecked) {
                     doMail(fileName)
                 }
                 boolean issmschecked = params.sms
                 if (issmschecked) {
                     doSMS(fileName)
-                }*/
-
+                }
             } else {
                 flash.error = g.message(code: "flash.message.check.connectivity")
-            }
+            }*/
         } catch (Exception e) {
             log.error("Exception occured while Uploading file:\n", e)
         }
