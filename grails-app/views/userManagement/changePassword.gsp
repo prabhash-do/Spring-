@@ -43,7 +43,6 @@
                             type="submit">${message(code: 'default.button.cancel')}</button>
                 </g:form>
             </div>
-
     </div>
 </div>
 <g:javascript>

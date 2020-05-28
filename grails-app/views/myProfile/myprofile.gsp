@@ -32,16 +32,13 @@
     </nav>
 </sec:ifLoggedIn>
 <g:render template="/templates/grailstemplates"/>
-<div id="main-heading" role="main" style="margin-left:300px;margin-top: 100px;">
+<div id="main-heading" role="main" style="margin-left:300px;margin-top: 120px;">
     <section class="row">
-        <h1><b>${message(code: 'default.myprofile.header')}</b>
-        </h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <g:form controller="userManagement" action="change">
-            <button id="submit" class="btn btn-primary margin text-uppercase " type="submit"><g:message
-                    code="default.button.change"></g:message></button>
-        </g:form>
+        <h1><b>${message(code: 'default.myprofile.header')}</b></h1>
+
+
     </section>
+
 
     <div class="row">
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -105,6 +102,7 @@
                                 <input type="text" class="form-control" id="disabled" name="username"
                                        value="${userName}">
                             </div>
+
                         </div>
 
                         <div class="modal-footer">
@@ -129,10 +127,14 @@
             <b>${message(code: 'default.myprofile.sex')}</b> ${sex}<br>
             <b>${message(code: 'default.myprofile.dateofbirth')}</b> ${dateOfBirth}
         </div>
-        <br>
-        <br>
 
         <div>
+            <div class="container">
+                <g:form controller="userManagement" action="change">
+                    <button id="submit" class="btn btn-primary margin text-uppercase " type="submit"><g:message
+                            code="default.button.change"></g:message></button>
+                </g:form>
+            </div>
             <button type="button" class="btn btn-primary text-uppercase " data-toggle="modal"
                     data-target=".bd-example-modal-lg"><g:message
                     code="default.button.edit.label"></g:message></button>

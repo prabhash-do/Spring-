@@ -32,7 +32,7 @@
     </nav>
 </sec:ifLoggedIn>
 <g:render template="/templates/grailstemplates"/>
-<div id="main-heading" role="main" style="margin-left:300px;margin-top: 100px;">
+<div id="main-heading" role="main" style="margin-left:300px;margin-top: 120px;">
     <section class="row" style="margin-left:-30px;margin-top: 100px;">
         <h1><b>${message(code: 'default.user.header')}</b>
         </h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -31,6 +31,10 @@
         -webkit-transform: scale(2.5); /* Safari 3-8 */
         transform: scale(2.5);
     }
+
+    .w3-quarter {
+        width: 20%;
+    }
     </style>
 
     <meta name="layout" content="main"/>
@@ -38,6 +42,7 @@
 
     <asset:stylesheet src="bootstrap.min.css"/>
     <asset:stylesheet src="font-awesome.min.css"/>
+
 </head>
 <title><g:message code="main.title"/></title>
 <meta charset="UTF-8">
@@ -85,7 +90,7 @@ html, body, h1, h2, h3, h4, h5 {
         <g:form id="all" name="all" controller="listing" action="doListing">
             <div class="w3-quarter" onclick="submitAll()">
                 <div class="w3-container w3-cyan w3-padding-16">
-                    <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                    <div class="w3-left"><i class="fa fa-list w3-xxxlarge"></i></div>
 
                     <div class="w3-right" id="all">
                     </div>
@@ -99,7 +104,7 @@ html, body, h1, h2, h3, h4, h5 {
             <g:hiddenField name="fileType" id="fileType" value="documents"/>
             <div class="w3-quarter" onclick="submitDoc()">
                 <div class="w3-container w3-red w3-padding-16">
-                    <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                    <div class="w3-left"><i class="fa fa-file-pdf-o w3-xxxlarge"></i></div>
 
                     <div class="w3-right" id="documents">
                     </div>
@@ -113,7 +118,7 @@ html, body, h1, h2, h3, h4, h5 {
             <g:hiddenField name="fileType" id="fileType" value="images"/>
             <div class="w3-quarter" onclick="submitImages()">
                 <div class="w3-container w3-blue w3-padding-16">
-                    <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
+                    <div class="w3-left"><i class="fa fa-file-image-o w3-xxxlarge"></i></div>
 
                     <div class="w3-right" id="images">
                     </div>
@@ -127,7 +132,7 @@ html, body, h1, h2, h3, h4, h5 {
             <g:hiddenField name="fileType" id="fileType" value="ppts"/>
             <div class="w3-quarter" onclick="submitPpts()">
                 <div class="w3-container w3-teal w3-padding-16">
-                    <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
+                    <div class="w3-left"><i class="fa fa-file-powerpoint-o w3-xxxlarge"></i></div>
 
                     <div class="w3-right" id="ppts">
                     </div>
@@ -141,7 +146,7 @@ html, body, h1, h2, h3, h4, h5 {
             <g:hiddenField name="fileType" id="fileType" value="videos"/>
             <div class="w3-quarter" onclick="submitVideos()">
                 <div class="w3-container w3-orange w3-text-white w3-padding-16">
-                    <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+                    <div class="w3-left"><i class="fa fa-file-video-o w3-xxxlarge"></i></div>
 
                     <div class="w3-right" id="videos">
                     </div>
