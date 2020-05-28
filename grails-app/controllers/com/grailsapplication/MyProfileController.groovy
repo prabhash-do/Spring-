@@ -20,7 +20,7 @@ class MyProfileController {
         String dateOfBirth = user.dateOfBirth
 
 
-        if (firstName != null || email != null || sex != null) {
+        if (firstName != null || email != null || sex != null || username!=null) {
             log.info("User Details are shown")
         } else {
             flash.warnmessage = g.message(code: "flash.message.user.warn")
@@ -44,7 +44,7 @@ class MyProfileController {
 
         if (user != null) {
 
-            if (firstname.isEmpty() || email.isEmpty()) {
+            if (firstname.isEmpty() || email.isEmpty() || sex.isEmpty()) {
                 flash.warnmessage = g.message(code: "flash.message.edituser.warn")
                 log.warn("Unable to save user details.Some mandatory fields are left blank")
             } else {
