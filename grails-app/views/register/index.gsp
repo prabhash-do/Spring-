@@ -35,11 +35,15 @@
                         <div class="form-group">
                             <label for="email">*${message(code: 'springSecurity.register.email.label')}</label>
                             <td align="left"><span id="isE"></span>
-                                <input type="text" placeholder="${message(code: 'springSecurity.register.email.label')}"
-                                       class="form-control" name="email"
-                                       id="email" data-toggle="tooltip" data-placement="right"
-                                       title="${message(code: 'default.email.format')}"
-                                       autocapitalize="none" required/>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <input type="text" placeholder="${message(code: 'springSecurity.register.email.label')}"
+                                           class="form-control" name="email"
+                                           id="email"
+                                           autocapitalize="none" required/>
+                                    <div class="tooltips">
+                                        <asset:image src="tooltip.png" alt="Image"/><span class="tooltiptext">${message(code: 'default.email.format')}</span>
+                                    </div>
+                                </div>
                         </div>
 
                         <div class="form-group">
@@ -64,7 +68,7 @@
 
                         <div class="form-group">
                             <label for="dateofbirth">${message(code: 'springSecurity.register.date.label')}</label>
-                            <input type="date" value="2020-05-20" name="dateofbirth" id="dateofbirth" min="2012-01-01"
+                            <input type="date" value="2020-05-20" name="dateofbirth" id="dateofbirth" min="1950-01-01"
                                    max="2050-12-31">
                         </div>
 
@@ -95,9 +99,11 @@
                                         </div>
                                     </div>
                                     <input type="password" class="form-control" name="password"
-                                           id="password" data-toggle="tooltip" data-placement="right"
-                                           title="${message(code: 'default.password.format')}"
+                                           id="password"
                                            required/>
+                                    <div class="tooltips">
+                                        <asset:image src="tooltip.png" alt="Image"/><span class="tooltiptext">${message(code: 'default.password.format')}</span>
+                                    </div>
                                 </div>
                         </div>
 

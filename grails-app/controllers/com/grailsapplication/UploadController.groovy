@@ -8,8 +8,7 @@ package com.grailsapplication
 
 import com.company.CheckConnectivity
 import com.company.SendMail
-
-import com.util.BaseConstants
+import com.company.SendSms
 import grails.plugin.springsecurity.annotation.Secured
 
 @Secured(['permitAll'])
@@ -29,7 +28,7 @@ class UploadController {
 
     def doSMS(def fileName) {
 
-        Sendsms.sendsms(fileName)
+        SendSms.sendsms(fileName)
         log.info("SMS has been sent successfully!")
         flash.messagesms = g.message(code: "flash.message.sms")
     }
