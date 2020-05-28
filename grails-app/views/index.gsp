@@ -292,7 +292,7 @@ html, body, h1, h2, h3, h4, h5 {
     <div class="w3-panel" style="margin-left: 240px">
         <div class="w3-panel">
             <img style="height:300px ;width:600px"
-                 src="${resource(dir: 'images', file: 'folderEmptyState.png')}" alt="Image"/>
+                 src="${resource(dir: 'images', file: 'emptyFolderState.png')}" alt="Image"/>
         </div>
     </div>
 </g:else>
