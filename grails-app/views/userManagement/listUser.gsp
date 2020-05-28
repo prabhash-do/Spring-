@@ -28,19 +28,19 @@
             <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
                     code="side.bar.index.delete.all.files.title"/></a>
+            <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
+                    code="default.button.createuser"/></a>
         </div>
     </nav>
 </sec:ifLoggedIn>
 <g:render template="/templates/grailstemplates"/>
-<div id="main-heading" role="main" style="margin-left:300px;margin-top: 120px;">
-    <section class="row" style="margin-left:-30px;margin-top: 100px;">
-        <h1><b>${message(code: 'default.user.header')}</b>
-        </h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </section>
-        <g:form controller="userManagement" action="create">
-            <button id="submit" class="btn btn-primary margin text-uppercase " type="submit">${message(code: 'default.button.createuser')}</button>
-        </g:form>
+<div id="main-heading" role="main" style="margin-left:300px;margin-top: 140px;">
+%{--    <section class="row" style="margin-left:-30px;margin-top: 100px;">--}%
+%{--        <h1><b>${message(code: 'default.user.header')}</b>--}%
+%{--        </h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--}%
+%{--    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--}%
+%{--    </section>--}%
 <g:each in="${currentuser}" var="CUser">
     <ul>
         <fieldset class="message">
@@ -63,7 +63,7 @@
                                 type="submit">${message(code: 'default.button.reset')}</button>
                     </g:form></td>
                 <td><g:form controller="userManagement" action="deleteUser"  params="[userid: User.id]">
-                    <button id="submit" class="btn btn-primary text-uppercase " onclick="ondelete()"
+                    <button id="submit1" class="btn btn-primary text-uppercase "
                             type="submit">${message(code: 'default.button.deleteuser')}</button></td>
                 </g:form>
                 </tr>

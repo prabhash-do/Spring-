@@ -28,6 +28,9 @@
             <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
                     code="side.bar.index.delete.all.files.title"/></a>
+            <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
+                    code="default.button.createuser"/></a>
         </div>
     </nav>
 </sec:ifLoggedIn>

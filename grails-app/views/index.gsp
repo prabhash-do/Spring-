@@ -34,6 +34,23 @@
 
     .w3-quarter {
         width: 20%;
+        float: left;
+    }
+
+    .shadown {
+        box-shadow: 2px 2px 30px #aaaaaa;
+    }
+
+    .zoom {
+        background-color: transparent;
+        transition: transform .2s;
+
+    }
+
+    .zoom:hover {
+        /*-ms-transform: scale(1.3); !* IE 9 *!*/
+        /*-webkit-transform: scale(1.3); !* Safari 3-8 *!*/
+        transform: scale(1.1);
     }
     </style>
 
@@ -63,7 +80,7 @@ html, body, h1, h2, h3, h4, h5 {
 
     <div class="w3-bar-block" style="margin-top: 15px;">
         <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
-           class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-eye fa-fw"></i><g:message
+           class="w3-bar-item w3-button w3-padding w3-indigo"><i class="fa fa-eye fa-fw"></i><g:message
                 code="side.bar.index.overview.title"/>
         </a>
         <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
@@ -75,6 +92,9 @@ html, body, h1, h2, h3, h4, h5 {
         <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
            class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
                 code="side.bar.index.delete.all.files.title"/></a>
+        <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
+           class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
+                code="default.button.createuser"/></a>
 
     </div>
 </nav>
@@ -87,86 +107,102 @@ html, body, h1, h2, h3, h4, h5 {
     </header>
 
     <div class="w3-row-padding w3-margin-bottom">
-        <g:form id="all" name="all" controller="listing" action="doListing">
-            <div class="w3-quarter" onclick="submitAll()">
-                <div class="w3-container w3-cyan w3-padding-16">
-                    <div class="w3-left"><i class="fa fa-list w3-xxxlarge"></i></div>
+        <div class="w3-quarter">
+            <g:form id="all" name="all" controller="listing" action="doListing">
+                <div class="shadown zoom" onclick="submitAll()">
+                    <div class="w3-container w3-cyan w3-padding-16">
+                        <div class="w3-left"><i class="fa fa-list w3-xxxlarge"></i></div>
 
-                    <div class="w3-right" id="all">
+                        <div class="w3-right">
+                        </div>
+
+                        <div class="w3-clear"></div>
+                        <h4><g:message code="main.index.box.all.files.title"/></h4>
                     </div>
-
-                    <div class="w3-clear"></div>
-                    <h4><g:message code="main.index.box.all.files.title"/></h4>
                 </div>
-            </div>
-        </g:form>
-        <g:form id="documents" name="documents" controller="listing" action="doListingByFileType">
-            <g:hiddenField name="fileType" id="fileType" value="documents"/>
-            <div class="w3-quarter" onclick="submitDoc()">
-                <div class="w3-container w3-red w3-padding-16">
-                    <div class="w3-left"><i class="fa fa-file-pdf-o w3-xxxlarge"></i></div>
+            </g:form>
+        </div>
 
-                    <div class="w3-right" id="documents">
+        <div class="w3-quarter">
+            <g:form id="documents" name="documents" controller="listing" action="doListingByFileType">
+                <g:hiddenField name="fileType" id="fileType" value="documents"/>
+                <div class="shadown zoom" onclick="submitDoc()">
+                    <div class="w3-container w3-red w3-padding-16">
+                        <div class="w3-left"><i class="fa fa-file-pdf-o w3-xxxlarge"></i></div>
+
+                        <div class="w3-right">
+                        </div>
+
+                        <div class="w3-clear"></div>
+                        <h4><g:message code="main.index.box.document.title"/></h4>
                     </div>
-
-                    <div class="w3-clear"></div>
-                    <h4><g:message code="main.index.box.document.title"/></h4>
                 </div>
-            </div>
-        </g:form>
-        <g:form id="images" name="images" controller="listing" action="doListingByFileType">
-            <g:hiddenField name="fileType" id="fileType" value="images"/>
-            <div class="w3-quarter" onclick="submitImages()">
-                <div class="w3-container w3-blue w3-padding-16">
-                    <div class="w3-left"><i class="fa fa-file-image-o w3-xxxlarge"></i></div>
+            </g:form>
+        </div>
 
-                    <div class="w3-right" id="images">
+        <div class="w3-quarter">
+            <g:form id="images" name="images" controller="listing" action="doListingByFileType">
+                <g:hiddenField name="fileType" id="fileType" value="images"/>
+                <div class="shadown zoom" onclick="submitImages()">
+                    <div class="w3-container w3-indigo w3-padding-16">
+                        <div class="w3-left"><i class="fa fa-file-image-o w3-xxxlarge"></i></div>
+
+                        <div class="w3-right" id="images">
+                        </div>
+
+                        <div class="w3-clear"></div>
+                        <h4><g:message code="main.index.box.images.title"/></h4>
                     </div>
-
-                    <div class="w3-clear"></div>
-                    <h4><g:message code="main.index.box.images.title"/></h4>
                 </div>
-            </div>
-        </g:form>
-        <g:form id="ppts" name="ppts" controller="listing" action="doListingByFileType">
-            <g:hiddenField name="fileType" id="fileType" value="ppts"/>
-            <div class="w3-quarter" onclick="submitPpts()">
-                <div class="w3-container w3-teal w3-padding-16">
-                    <div class="w3-left"><i class="fa fa-file-powerpoint-o w3-xxxlarge"></i></div>
+            </g:form>
+        </div>
 
-                    <div class="w3-right" id="ppts">
+        <div class="w3-quarter">
+            <g:form id="ppts" name="ppts" controller="listing" action="doListingByFileType">
+                <g:hiddenField name="fileType" id="fileType" value="ppts"/>
+                <div class="shadown zoom" onclick="submitPpts()">
+                    <div class="w3-container w3-teal w3-padding-16">
+                        <div class="w3-left"><i class="fa fa-file-powerpoint-o w3-xxxlarge"></i></div>
+
+                        <div class="w3-right" id="ppts">
+                        </div>
+
+                        <div class="w3-clear"></div>
+                        <h4><g:message code="main.index.box.ppt.title"/></h4>
                     </div>
-
-                    <div class="w3-clear"></div>
-                    <h4><g:message code="main.index.box.ppt.title"/></h4>
                 </div>
-            </div>
-        </g:form>
-        <g:form id="videos" name="videos" controller="listing" action="doListingByFileType">
-            <g:hiddenField name="fileType" id="fileType" value="videos"/>
-            <div class="w3-quarter" onclick="submitVideos()">
-                <div class="w3-container w3-orange w3-text-white w3-padding-16">
-                    <div class="w3-left"><i class="fa fa-file-video-o w3-xxxlarge"></i></div>
+            </g:form>
+        </div>
 
-                    <div class="w3-right" id="videos">
+        <div class="w3-quarter">
+            <g:form id="videos" name="videos" controller="listing" action="doListingByFileType">
+                <g:hiddenField name="fileType" id="fileType" value="videos"/>
+                <div class="shadown zoom" onclick="submitVideos()">
+                    <div class="w3-container w3-orange w3-text-white w3-padding-16">
+                        <div class="w3-left"><i class="fa fa-file-video-o w3-xxxlarge"></i></div>
+
+                        <div class="w3-right" id="videos">
+                        </div>
+
+                        <div class="w3-clear"></div>
+                        <h4><g:message code="main.index.box.video.title"/></h4>
                     </div>
-
-                    <div class="w3-clear"></div>
-                    <h4><g:message code="main.index.box.video.title"/></h4>
                 </div>
-            </div>
-        </g:form>
-        <div class="w3-panel">
-            <div class="w3-panel" style="margin-left: 422px;">
-                <g:form controller="search" action="list" method="post">
-                    <g:textField id="searchtext" class="input-xxlarge" name="srch"
-                                 placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
-                    <button id="submit-values" class="buttons" type="submit">
-                        <i class="icon-ok"></i>
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
-                </g:form>
-            </div>
+            </g:form>
+        </div>
+    </div>
+
+    <div class="w3-panel">
+        <div class="w3-panel" style="margin-left: 422px;">
+            <g:form controller="search" action="list" method="post">
+                <g:textField id="searchtext" class="input-xxlarge" name="srch"
+                             placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
+                <button id="submit-values" class="buttons" type="submit">
+                    <i class="icon-ok"></i>
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </g:form>
+        </div>
 
 
         <table class="table table-bordered">
@@ -249,48 +285,50 @@ html, body, h1, h2, h3, h4, h5 {
             </g:each>
             </tbody>
         </table>
-    </div>
-    <div class="w3-panel">
-        %{--        Do Listing of all files here--}%
+
+
+        <div class="w3-panel">
+            %{--        Do Listing of all files here--}%
 
         </div>
+
+        <!-- Footer -->
+        %{--    <footer class="w3-container w3-padding-16 w3-light-grey">--}%
+        %{--        <div class="footer row" role="contentinfo">--}%
+        %{--            <p><g:message code="default.index.footer.message"></g:message></p>--}%
+        %{--        </div>--}%
+        %{--    </footer>--}%
+        <!-- End page content -->
+
+
+        <script>
+
+            function submitAll() {
+                document.forms['all'].submit()
+            }
+
+            function submitDoc() {
+                document.forms['documents'].submit()
+
+            }
+
+            function submitImages() {
+                document.forms['images'].submit()
+
+            }
+
+            function submitVideos() {
+                document.forms['videos'].submit()
+
+            }
+
+            function submitPpts() {
+                document.forms['ppts'].submit()
+
+            }
+
+        </script>
     </div>
-    <!-- Footer -->
-    <footer class="w3-container w3-padding-16 w3-light-grey">
-        <div class="footer row" role="contentinfo">
-            <p><g:message code="default.index.footer.message"></g:message></p>
-        </div>
-    </footer>
-    <!-- End page content -->
-
-
-    <script>
-
-        function submitAll() {
-            document.forms['all'].submit()
-        }
-
-        function submitDoc() {
-            document.forms['documents'].submit()
-
-        }
-
-        function submitImages() {
-            document.forms['images'].submit()
-
-        }
-
-        function submitVideos() {
-            document.forms['videos'].submit()
-
-        }
-
-        function submitPpts() {
-            document.forms['ppts'].submit()
-
-        }
-
-    </script>
 </div>
 </body>
 </html>

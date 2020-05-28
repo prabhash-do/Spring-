@@ -5,6 +5,34 @@
 </head>
 
 <body>
+<sec:ifLoggedIn>
+    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+        <hr>
+
+        <div class="w3-container" style="margin-top: 100px;">
+            <h5><g:message code="side.bar.index.head.title"/></h5>
+        </div>
+
+        <div class="w3-bar-block" style="margin-top: 5px;">
+            <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i><g:message
+                    code="side.bar.index.overview.title"/>
+            </a>
+            <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-upload fa-fw"></i><g:message
+                    code="side.bar.index.upload.title"/></a>
+            <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
+               class="w3-bar-item w3-button w3-padding"><i
+                    class="fa fa-users fa-fw"></i><g:message code="side.bar.index.list.user.title"/></a>
+            <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
+                    code="side.bar.index.delete.all.files.title"/></a>
+            <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
+               class="w3-bar-item w3-button w3-padding w3-indigo"><i class="fa fa-user fa-fw"></i><g:message
+                    code="default.button.createuser"/></a>
+        </div>
+    </nav>
+</sec:ifLoggedIn>
 <div class="w3-main" style="margin-left:100px;margin-top: 80px;">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -65,14 +93,15 @@
                                    autocapitalize="none" required/>
                         </div>
 
-                        <div class="form-group">
-                            <label>*${message(code: 'springSecurity.register.sex.label')}</label>
-                            <select class="custom-select" name="sex" id="sex" required="required">
-                                <option value="${message(code: 'register.sex.male')}"
-                                        selected>${message(code: 'register.sex.male')}</option>
-                                <option value="${message(code: 'register.sex.female')}">${message(code: 'register.sex.female')}</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label>*${message(code: 'springSecurity.register.sex.label')}</label>
+                        <select class="custom-select" name="sex" id="sex" required="required">
+                            <option value="${message(code: 'register.sex.male')}"
+                                    selected>${message(code: 'register.sex.male')}</option>
+                            <option value="${message(code: 'register.sex.female')}">${message(code: 'register.sex.female')}</option>
+                            <option value="${message(code: 'register.sex.others')}">${message(code: 'register.sex.others')}</option>
+                        </select>
+                    </div>
 
                         <div class="form-group">
                             <label for="dateofbirth">${message(code: 'springSecurity.register.date.label')}</label>
@@ -106,10 +135,9 @@
 
                         <div class="form-group" id="reenterpassword">
                             <label for="password">*${message(code: 'springSecurity.confirm.password.label')}</label>
-                            <input type="password" class="form-control" name="confirmpassword" value=""
-                                   id="confirmpassword" required/>
+                            <input type="password" class="form-control" name="confirmPassword" value=""
+                                   id="confirmPassword"/>
                         </div>
-
                         <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">
                             ${message(code: 'default.add.user.button')}</button>
                         <hr class="my-4">
@@ -146,28 +174,31 @@
 
             document.forms['registerForm'].elements['firstname'].focus();
             var checkbox = document.querySelector('input[type="checkbox"]');
+            var password = document.getElementById("password");
+            var confirmPassword = document.getElementById("confirmPassword");
             if (checkbox.checked) {
-                var pass = document.getElementById('password').value = generatePassword()
-                document.getElementById("confirmpassword").setAttribute('value', pass);
+                password.value = generatePassword()
+                confirmPassword.removeAttribute('required');
                 $('#reenterpassword').hide();
             }
             checkbox.addEventListener('change', function () {
                 if (checkbox.checked) {
-                    var pass = document.getElementById('password').value = generatePassword()
-                    document.getElementById("confirmpassword").setAttribute('value', pass);
+                   password.value = generatePassword()
+                    confirmPassword.removeAttribute('required');
                     $('#reenterpassword').hide();
                 } else {
-                    document.getElementById("confirmpassword").value = typePassword()
-                    document.getElementById("password").value = typePassword()
+                    confirmPassword.value = typePassword()
+                    password.value = typePassword()
+                    confirmPassword.setAttribute('required', 'required');
                 }
             });
         });
         function generatePassword() {
-            var randomstring = Math.random().toString(36).slice(-8).concat('@T2t');
-            return randomstring;
+            var randomString = Math.random().toString(36).slice(-8).concat('@T2t');
+            return randomString;
         }
         function typePassword() {
-            document.getElementById("confirmpassword").setAttribute('value', '');
+            document.getElementById("confirmPassword").setAttribute('value', '');
             $('#password').show()
             $('#reenterpassword').show()
             return null
