@@ -25,6 +25,18 @@
         line-height: 32px;
         color: white;
     }
+    .hide{
+        display: none;
+    }
+    #warning_message{
+        text-align: center;
+        width: 100%;
+        height: 35px;
+        background-color: yellow;
+        text-align: center;
+        line-height: 32px;
+        color: black;
+    }
     </style>
 
 </head>
@@ -65,6 +77,8 @@
 </sec:ifLoggedIn>
 <section id="services">
     <div class="container" style="margin-left:300px;margin-top: 140px;">
+        <h5 id="warning_message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            Please set maximum file size from settings menu, after that you can upload a file.</h5>
         <g:render template="/templates/grailstemplates"/>
         <g:form controller="Upload" action="doUpload" method="POST" enctype="multipart/form-data">
             <div class="row space-rows" id="animated-cards">
@@ -96,9 +110,21 @@
     </div>
 
         <g:javascript>
+
+            $(document).ready(function() {
+             var maxfilesize = $('#maxFileSize').val();
+             if(maxfilesize == ""){
+                 document.getElementById("file0").disabled = true;
+             }else {
+                 $("#warning_message").addClass("hide")
+             }
+            });
+
+
         function savefname0() {
             var filename = $('#file0').val();
             var maxfilesize = $('#maxFileSize').val();
+            console.log("hhhhhhhh",maxfilesize)
             if (filename != null && filename !== '') {
                  var fi = document.getElementById('file0');
                 // Check if any file is selected.
@@ -109,7 +135,7 @@
                         // The size of the file.
                         if (file >= maxfilesize) {
                             alert(
-                                "File is large, please select a file less than "+maxfilesize+"mb");
+                                "File is large, please select a file less than "+maxfilesize+"MB");
                         }
                         else {
                             updateProgressBar0();

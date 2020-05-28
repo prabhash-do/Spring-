@@ -11,7 +11,7 @@ class InsertController {
             Double fileSize1 = settings.propertyValue.toDouble()
             render view: "upload", model: [fileSize1: fileSize1]
         }else{
-            render view: "upload", model: [fileSize1: "null"]
+            render view: "upload"
         }
     }
 }

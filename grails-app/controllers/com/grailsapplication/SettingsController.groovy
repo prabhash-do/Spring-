@@ -23,8 +23,5 @@ class SettingsController {
             settings.insert(flush:true)
         }
         new ListingController().doListing()
-
-
-
     }
 }
