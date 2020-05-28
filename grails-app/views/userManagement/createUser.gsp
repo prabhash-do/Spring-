@@ -3,8 +3,20 @@
     <meta name="layout" content="${gspLayout ?: 'main'}"/>
     <title>${message(code: 'springSecurity.createuser.title')}</title>
 </head>
-
+<asset:javascript src='jquery-3.3.1.min.js'/>
+<asset:javascript src='jquery.alerts.js'/>
+<asset:stylesheet src="jquery.alerts.css" />
 <body>
+<g:if test="${message}">
+    <tr align="center">
+        <td>
+            <script type="text/javascript"> jAlert('${message}')</script>
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+</g:if>
 <sec:ifLoggedIn>
     <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
         <hr>
@@ -24,12 +36,12 @@
             <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
                class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-users fa-fw"></i><g:message code="side.bar.index.list.user.title"/></a>
+            <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
+                    code="default.button.createuser"/></a>
             <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
                     code="side.bar.index.delete.all.files.title"/></a>
-            <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
-               class="w3-bar-item w3-button w3-padding w3-indigo"><i class="fa fa-user fa-fw"></i><g:message
-                    code="default.button.createuser"/></a>
         </div>
     </nav>
 </sec:ifLoggedIn>
@@ -68,11 +80,15 @@
                         <div class="form-group">
                             <label for="email">*${message(code: 'springSecurity.register.email.label')}</label>
                             <td align="left"><span id="isE"></span>
-                                <input type="text" placeholder="${message(code: 'springSecurity.register.email.label')}"
-                                       class="form-control" name="email"
-                                       id="email" data-toggle="tooltip" data-placement="right"
-                                       title="${message(code: 'default.email.format')}"
-                                       autocapitalize="none" required/>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <input type="text" placeholder="${message(code: 'springSecurity.register.email.label')}"
+                                           class="form-control" name="email"
+                                           id="email"
+                                           autocapitalize="none" required/>
+                                    <div class="tooltips">
+                                        <asset:image src="tooltip.png" alt="Image"/><span class="tooltiptext">${message(code: 'default.email.format')}</span>
+                                    </div>
+                                </div>
                         </div>
 
                         <div class="form-group">
@@ -128,8 +144,11 @@
                                         </div>
                                     </div>
                                     <input type="password" class="form-control" name="password"
-                                           id="password" data-toggle="tooltip" data-placement="right"
-                                           title="${message(code: 'default.password.format')}"/>
+                                           id="password"
+                                           required/>
+                                    <div class="tooltips">
+                                        <asset:image src="tooltip.png" alt="Image"/><span class="tooltiptext">${message(code: 'default.password.format')}</span>
+                                    </div>
                                 </div>
                         </div>
 

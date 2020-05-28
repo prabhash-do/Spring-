@@ -23,9 +23,6 @@
 
                     <div class="form-group">
                         <label for="password">${message(code: 'springSecurity.login.password.label')}</label>
-                        <link rel="stylesheet"
-                              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
                         <div class="input-group mb-2 mr-sm-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -69,11 +66,11 @@
         </div>
     </div>
 </div>
-<footer class="w3-container w3-padding-16 w3-light-grey" style="margin-bottom: 0px; margin-left: 0px;margin-right: 0px">
+%{--<footer class="w3-container w3-padding-0 w3-light-grey" style="margin-bottom: 0px; margin-left: 0px;margin-right: 0px">
     <div class="footer row" role="contentinfo">
         <p><g:message code="default.index.footer.message"></g:message></p>
     </div>
-</footer>
+</footer>--}%
 <asset:javascript src="validator.js"/>
 <g:javascript>
     document.addEventListener("DOMContentLoaded", function (event) {

@@ -9,7 +9,6 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <asset:javascript src='jquery-3.3.1.min.js'/>
     <title><g:message code="main.upload.title"/></title>
     <style type="text/css">
     #progressStatus0 {
@@ -25,11 +24,35 @@
         line-height: 32px;
         color: white;
     }
+    .hide{
+        display: none;
+    }
+    #warning_message{
+        text-align: center;
+        width: 100%;
+        height: 35px;
+        background-color: yellow;
+        text-align: center;
+        line-height: 32px;
+        color: black;
+    }
     </style>
-
+    <asset:javascript src='jquery-3.3.1.min.js'/>
+    <asset:javascript src='jquery.alerts.js'/>
+    <asset:stylesheet src="jquery.alerts.css" />
 </head>
 
 <body class="w3-light-grey">
+<g:if test="${message}">
+    <tr align="center">
+        <td>
+            <script type="text/javascript"> jAlert('${message}')</script>
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+</g:if>
 <sec:ifLoggedIn>
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
@@ -50,18 +73,24 @@
             <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
                class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-users fa-fw"></i><g:message code="side.bar.index.list.user.title"/></a>
-            <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
-               class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
-                    code="side.bar.index.delete.all.files.title"/></a>
             <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
                     code="default.button.createuser"/></a>
+            <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
+               class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
+                    code="side.bar.index.delete.all.files.title"/></a>
+            <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
+               class="w3-bar-item w3-button w3-padding"><i
+                    class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
 
         </div>
     </nav>
 </sec:ifLoggedIn>
 <section id="services">
     <div class="container" style="margin-left:300px;margin-top: 140px;">
+        <h5 id="warning_message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            Please set maximum file size from settings menu, after that you can upload a file.</h5>
+        <g:render template="/templates/grailstemplates"/>
         <g:form controller="Upload" action="doUpload" method="POST" enctype="multipart/form-data">
             <div class="row space-rows" id="animated-cards">
                 <div class="col">
@@ -70,6 +99,8 @@
                             <div class="cardheader-text">
                                 <p id="cardheader-subtext-1" class="cardheader-subtext"><g:message
                 code="upload.choose.file.message"/></p>
+
+            <g:hiddenField name="maxFileSize" id="maxFileSize" value="${fileSize1}"/>
 
             <input type="file" name="file" id="file0" multiple>
 
@@ -90,11 +121,38 @@
     </div>
 
         <g:javascript>
+
+            $(document).ready(function() {
+             var maxfilesize = $('#maxFileSize').val();
+             if(maxfilesize == ""){
+                 document.getElementById("file0").disabled = true;
+             }else {
+                 $("#warning_message").addClass("hide")
+             }
+            });
+
+
         function savefname0() {
             var filename = $('#file0').val();
+            var maxfilesize = $('#maxFileSize').val();
             if (filename != null && filename !== '') {
-                updateProgressBar0();
-                return true;
+                 var fi = document.getElementById('file0');
+                // Check if any file is selected.
+                 if (fi.files.length > 0) {
+                     for (var i = 0; i <= fi.files.length - 1; i++) {
+                        var fsize = fi.files.item(i).size;
+                        var file = fsize / 1024/1024;
+                        // The size of the file.
+                        if (file >= maxfilesize) {
+                            alert(
+                                "File is large, please select a file less than "+maxfilesize+"MB");
+                        }
+                        else {
+                            updateProgressBar0();
+                            return true;
+                        }
+                     }
+                 }
             } else {
                 alert("${message(code: 'upload.choose.file.message')}");
                 return false;

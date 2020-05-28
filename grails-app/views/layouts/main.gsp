@@ -2,12 +2,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <asset:stylesheet src="w3.css" />
+    <asset:stylesheet src="raleway.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
-    <title>
-    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
 
@@ -20,10 +17,9 @@
 
 <div class="w3-bar w3-top w3-indigo w3-large" style="z-index:4">
 
-%{--    <span class="w3-bar-item w3-left"><a class="navbar-brand"--}%
-%{--                                         href="${g.createLink(controller: "secured")}"><asset:image src="file.jpg"--}%
-%{--                                                                                                    alt="Files Logo"/></a>--}%
-%{--    </span>--}%
+    <span class="w3-container w3-margin-top w3-left"><a class="navbar-brand"
+                                         href="${g.createLink(controller: "secured")}"><asset:image src="Sfile.png" alt="Files Logo"/></a>
+    </span>
     <span class="w3-bar-item w3-right">
         <div class="w3-right" aria-expanded="false" style="height: 0.8px; alignment: right" id="navbarContent">
             <sec:ifLoggedIn>
@@ -40,16 +36,14 @@
             </sec:ifLoggedIn>
         </div>
 
-        <div class="dropdown" style="margin-top: 70px">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown">
-                <g:message code="default.change.language"/>
-            </button>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <navBar:localeDropdownListItems uri="${request.forwardURI}"/>
-            </div>
+    <div class="dropdown" style="margin-top: 60px">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" style="color:#2196F3; background-color: white" data-toggle="dropdown">
+            <g:message code="default.change.language"/>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <navBar:localeDropdownListItems uri="${request.forwardURI}"/>
         </div>
+    </div>
     </span>
 </div>
 <sec:ifLoggedIn>
@@ -78,6 +72,10 @@
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
                     code="default.button.createuser"/></a>
 
+                    class="fa fa-bullseye fa-fw"></i>  Delete All Files</a>
+            <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
+               class="w3-bar-item w3-button w3-padding"><i
+                    class="fa fa-cogs fa-fw"></i>  Settings</a>
         </div>
     </nav>
 </sec:ifLoggedIn>

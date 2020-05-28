@@ -557,7 +557,7 @@ img.grails-logo {
 
 #animated-cards .card-header {
     height: 200px;
-    background-color: #2196f3;
+    background-color: #3f51b5;
 }
 
 #animated-cards .service-icon {
@@ -622,7 +622,7 @@ img.grails-logo {
 }
 
 #animated-cards .card:hover .card-header:first-child {
-    background-color: #19c4df;
+    background-color: #1962df;
 }
 
 #animated-cards .card:hover .service-icon {
@@ -654,4 +654,36 @@ img.grails-logo {
     -webkit-transform: scale(32.5); /* Safari 3-8 */
     transform: scale(32.5);
 
+}
+
+.tooltips {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltips .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltips:hover .tooltiptext {
+    visibility: visible;
+}
+
+.tooltips .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 25%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
 }

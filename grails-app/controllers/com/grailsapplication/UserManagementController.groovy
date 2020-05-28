@@ -15,7 +15,8 @@ class UserManagementController {
         User user = springSecurityService.currentUser
         def currentuser = [user]
         listuser.remove(user)
-        render view: '/userManagement/listUser', model: [listuser: listuser, currentuser: currentuser]
+        String message= params.message
+        render view: '/userManagement/listUser', model: [listuser: listuser, currentuser: currentuser, message: message]
     }
 
     def userList() {
@@ -38,7 +39,8 @@ class UserManagementController {
 
     @Secured(['ROLE_ADMIN'])
     def create() {
-        render view: '/userManagement/createUser'
+        String message= params.message
+        render view: '/userManagement/createUser', model: [message: message]
     }
 
     /**
@@ -141,13 +143,13 @@ class UserManagementController {
             u = BootStrap.userService.save(u)
             BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
             log.info("New user has been created Successfully")
-            flash.successmessage = g.message(code: "flash.message.create.user.sucess")
-            redirect controller: "userManagement", action: "index"
+            String message = g.message(code: "flash.message.create.user.sucess")
+            forward(controller: "userManagement", action: "index", params: [message: message])
 
         } catch (javax.xml.bind.ValidationException e) {
             log.error("Fail to create new user")
-            flash.errormessage = g.message(code: "flash.message.create.user.fail")
-            redirect action: "create"
+            String message = g.message(code: "flash.message.create.user.fail")
+            forward(action: "create", params: [message: message])
         }
     }
 

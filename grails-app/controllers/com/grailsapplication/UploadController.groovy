@@ -8,8 +8,7 @@ package com.grailsapplication
 
 import com.company.CheckConnectivity
 import com.company.SendMail
-
-import com.util.BaseConstants
+import com.company.SendSms
 import grails.plugin.springsecurity.annotation.Secured
 
 @Secured(['permitAll'])
@@ -29,7 +28,7 @@ class UploadController {
 
     def doSMS(def fileName) {
 
-        Sendsms.sendsms(fileName)
+        SendSms.sendsms(fileName)
         log.info("SMS has been sent successfully!")
         flash.messagesms = g.message(code: "flash.message.sms")
     }
@@ -48,40 +47,44 @@ class UploadController {
     }
 
     def doUpload() {
+        String message;
         try {
+            Settings settings = Settings.findByPropertyName("File size")
             def file = request.getFile('file')
             String fileName = file.originalFilename
             String destinationPath = BaseHelper.setPathForFile(fileName)
-
             def files = BaseHelper.list()
             File fileDest = new File(destinationPath.concat(fileName))
-            file.transferTo(fileDest)
-
-            if (CheckConnectivity.internetConnection()) {
-                if (!files.contains(fileName)) {
-                    def remotelist = BaseHelper.list()
-                    if (remotelist != null) {
-                        if (remotelist.isEmpty()) {
-                            flash._warn = g.message(code: "flash.message.no.files.found")
-                            log.info("No files found")
+            Double fileSize1 = file.size / (1024 * 1024)
+            if (fileSize1 >= settings.propertyValue.toDouble()) {
+                log.warn("File Size is more than the accepted value")
+                redirect controller: 'insert', action: 'insert'
+            } else {
+                file.transferTo(fileDest)
+                if (CheckConnectivity.internetConnection()) {
+                    if (!files.contains(fileName)) {
+                        def remotelist = BaseHelper.list()
+                        if (remotelist != null) {
+                            if (remotelist.isEmpty()) {
+                                message = g.message(code: "flash.message.no.files.found")
+                                log.info("No files found")
+                            } else {
+                                log.info("Files are listed")
+                            }
+                            message = g.message(code: "flash.message.file.upload")
                         } else {
-                            log.info("Files are listed")
+                            message = g.message(code: "flash.message.check.connectivity")
                         }
-                        render view: "/index", model: [remotelist: remotelist]
+                        log.info("File " + fileName + " has been uploaded successfully!")
+                        message = g.message(code: "flash.message.file.upload")
                     } else {
-                        flash.error = g.message(code: "flash.message.check.connectivity")
+                        log.warn("File is already there")
+                        message = g.message(code: "flash.message.replace.file")
                     }
-                    log.info("File " + fileName + " has been uploaded successfully!")
-                    flash.message = g.message(code: "flash.message.file.upload")
-                } else {
-                    log.warn("File is already there")
-                    flash.message = g.message(code: "flash.message.replace.file")
-                }
 
-                String fileSize = getFileSize((Long)file.size)
-                doDataBaseEntry(fileName, fileSize)
-
-                /*boolean isemailchecked = params.email
+                    String fileSize = getFileSize((Long) file.size)
+                    doDataBaseEntry(fileName, fileSize)
+                    /*boolean isemailchecked = params.email
                 if (isemailchecked) {
                     doMail(fileName)
                 }
@@ -90,13 +93,14 @@ class UploadController {
                     doSMS(fileName)
                 }*/
 
-            } else {
-                flash.error = g.message(code: "flash.message.check.connectivity")
+                } else {
+                    message = g.message(code: "flash.message.check.connectivity")
+                }
             }
-        } catch (Exception e) {
+        } catch (Exception e ) {
             log.error("Exception occured while Uploading file:\n", e)
         }
-        new ListingController().doListing()
+        render view: "/insert/upload", model: [message: message]
     }
 
     private static String getFileSize(Long fileSize) {
