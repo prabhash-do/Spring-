@@ -59,6 +59,7 @@
 
     <asset:stylesheet src="bootstrap.min.css"/>
     <asset:stylesheet src="font-awesome.min.css"/>
+
 </head>
 <title><g:message code="main.title"/></title>
 <meta charset="UTF-8">
@@ -94,6 +95,9 @@ html, body, h1, h2, h3, h4, h5 {
         <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
            class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
                 code="default.button.createuser"/></a>
+        <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
+           class="w3-bar-item w3-button w3-padding"><i
+                class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
 
     </div>
 </nav>
@@ -110,13 +114,13 @@ html, body, h1, h2, h3, h4, h5 {
             <g:form id="all" name="all" controller="listing" action="doListing">
                 <div class="shadown zoom" onclick="submitAll()">
                     <div class="w3-container w3-cyan w3-padding-16">
-                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                        <div class="w3-left"><i class="fa fa-list w3-xxxlarge"></i></div>
 
                         <div class="w3-right">
                         </div>
 
-                        <div class="w3-clear"></div>
-                        <h4><g:message code="main.index.box.all.files.title"/></h4>
+                        <div class="w3-clear" align="left"></div>
+                        <h5><g:message code="main.index.box.all.files.title"/></h5>
                     </div>
                 </div>
             </g:form>
@@ -127,13 +131,13 @@ html, body, h1, h2, h3, h4, h5 {
                 <g:hiddenField name="fileType" id="fileType" value="documents"/>
                 <div class="shadown zoom" onclick="submitDoc()">
                     <div class="w3-container w3-red w3-padding-16">
-                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                        <div class="w3-left"><i class="fa fa-file-pdf-o w3-xxxlarge"></i></div>
 
                         <div class="w3-right">
                         </div>
 
-                        <div class="w3-clear"></div>
-                        <h4><g:message code="main.index.box.document.title"/></h4>
+                        <div class="w3-clear" align="left"></div>
+                        <h5><g:message code="main.index.box.document.title"/></h5>
                     </div>
                 </div>
             </g:form>
@@ -144,13 +148,13 @@ html, body, h1, h2, h3, h4, h5 {
                 <g:hiddenField name="fileType" id="fileType" value="images"/>
                 <div class="shadown zoom" onclick="submitImages()">
                     <div class="w3-container w3-indigo w3-padding-16">
-                        <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
+                        <div class="w3-left"><i class="fa fa-file-image-o w3-xxxlarge"></i></div>
 
                         <div class="w3-right" id="images">
                         </div>
 
-                        <div class="w3-clear"></div>
-                        <h4><g:message code="main.index.box.images.title"/></h4>
+                        <div class="w3-clear" align="left"></div>
+                        <h5><g:message code="main.index.box.images.title"/></h5>
                     </div>
                 </div>
             </g:form>
@@ -161,13 +165,13 @@ html, body, h1, h2, h3, h4, h5 {
                 <g:hiddenField name="fileType" id="fileType" value="ppts"/>
                 <div class="shadown zoom" onclick="submitPpts()">
                     <div class="w3-container w3-teal w3-padding-16">
-                        <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
+                        <div class="w3-left"><i class="fa fa-file-powerpoint-o w3-xxxlarge"></i></div>
 
                         <div class="w3-right" id="ppts">
                         </div>
 
-                        <div class="w3-clear"></div>
-                        <h4><g:message code="main.index.box.ppt.title"/></h4>
+                        <div class="w3-clear" align="left"></div>
+                        <h5><g:message code="main.index.box.ppt.title"/></h5>
                     </div>
                 </div>
             </g:form>
@@ -178,13 +182,13 @@ html, body, h1, h2, h3, h4, h5 {
                 <g:hiddenField name="fileType" id="fileType" value="videos"/>
                 <div class="shadown zoom" onclick="submitVideos()">
                     <div class="w3-container w3-orange w3-text-white w3-padding-16">
-                        <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+                        <div class="w3-left"><i class="fa fa-file-video-o w3-xxxlarge"></i></div>
 
                         <div class="w3-right" id="videos">
                         </div>
 
-                        <div class="w3-clear"></div>
-                        <h4><g:message code="main.index.box.video.title"/></h4>
+                        <div class="w3-clear" align="left"></div>
+                        <h5><g:message code="main.index.box.video.title"/></h5>
                     </div>
                 </div>
             </g:form>

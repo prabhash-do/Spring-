@@ -35,7 +35,7 @@
                     <a href="${g.createLink(controller: "myProfile", action: "showProfileDetails")}"
                        class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
                     <a href="${g.createLink(controller: "logout", action: "logout")}"
-                       class="w3-bar-item w3-button"><asset:image src="logout.png" alt="Image"/></a>
+                       class="w3-bar-item w3-button"><i class="fa fa-power-off"></i></a>
                 </div>
             </sec:ifLoggedIn>
         </div>
@@ -76,6 +76,10 @@
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
                     code="default.button.createuser"/></a>
 
+                    class="fa fa-bullseye fa-fw"></i>  Delete All Files</a>
+            <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
+               class="w3-bar-item w3-button w3-padding"><i
+                    class="fa fa-cogs fa-fw"></i>  Settings</a>
         </div>
     </nav>
 </sec:ifLoggedIn>

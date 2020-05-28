@@ -6,6 +6,12 @@ import grails.plugin.springsecurity.annotation.Secured
 class InsertController {
 
     def insert() {
-        render view :"upload"
+        Settings settings=Settings.findByPropertyName("File size")
+        if(settings!=null) {
+            Double fileSize1 = settings.propertyValue.toDouble()
+            render view: "upload", model: [fileSize1: fileSize1]
+        }else{
+            render view: "upload"
+        }
     }
 }
