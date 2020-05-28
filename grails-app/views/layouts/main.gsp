@@ -40,16 +40,14 @@
             </sec:ifLoggedIn>
         </div>
 
-        <div class="dropdown" style="margin-top: 70px">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown">
-                <g:message code="default.change.language"/>
-            </button>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <navBar:localeDropdownListItems uri="${request.forwardURI}"/>
-            </div>
+    <div class="dropdown" style="margin-top: 60px">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" style="color:#2196F3; background-color: white" data-toggle="dropdown">
+            <g:message code="default.change.language"/>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <navBar:localeDropdownListItems uri="${request.forwardURI}"/>
         </div>
+    </div>
     </span>
 </div>
 <sec:ifLoggedIn>
