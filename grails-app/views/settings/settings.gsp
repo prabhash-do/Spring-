@@ -48,7 +48,7 @@
                 autocomplete="off">
             <div class="form-group">
                 <label for="propertyValue"><h1>Enter maximum size of file (in MB)</h1></label>
-                <input type="text" placeholder="Filesize in MB" class="form-control" name="propertyValue"
+                <input type="text" value="${fileSize1}" placeholder="Filesize in MB" class="form-control" name="propertyValue"
                        id="propertyValue"
                        autocapitalize="none" required/>
             </div>
