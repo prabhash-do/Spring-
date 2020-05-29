@@ -90,8 +90,7 @@
 </sec:ifLoggedIn>
 <section id="services">
     <div class="container" style="margin-left:300px;margin-top: 140px;">
-        <h5 id="warning_message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Please set maximum file size from settings menu, after that you can upload a file.</h5>
+        <h5 id="warning_message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><g:message code="warning.setting.file.size"/></h5>
         <g:render template="/templates/grailstemplates"/>
         <g:form controller="Upload" action="doUpload" method="POST" enctype="multipart/form-data">
             <div class="row space-rows" id="animated-cards">
@@ -146,8 +145,7 @@
                         var file = fsize / 1024/1024;
                         // The size of the file.
                         if (file >= maxfilesize) {
-                            alert(
-                                "File is large, please select a file less than "+maxfilesize+"MB");
+                            alert("${message(code: 'alert.file.large')}"+maxfilesize+"MB");
                         }
                         else {
                             updateProgressBar0();

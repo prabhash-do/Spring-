@@ -19,7 +19,7 @@
         <hr>
 
         <div class="w3-container" style="margin-top: 100px;">
-            <h5>Dashboard</h5>
+            <h5><g:message code="side.bar.index.head.title"/></h5>
         </div>
 
         <div class="w3-bar-block" style="margin-top: 5px;">
@@ -50,8 +50,8 @@
         <g:form class="setting-page" controller="settings" action="doSubmitSettings" method="POST" id="setting-page"
                 autocomplete="off">
             <div class="form-group">
-                <label for="propertyValue"><h1>Enter maximum size of file (in MB)</h1></label>
-                <input type="text" value="${fileSize1}" placeholder="Filesize in MB" class="form-control" name="propertyValue"
+                <label for="propertyValue"><h1><g:message code="settings.max.size.file"/></h1></label>
+                <input type="text" value="${fileSize1}" placeholder=<g:message code="placeholder.file.size"/> class="form-control" name="propertyValue"
                        id="propertyValue" onkeypress="return isNumberKey(event)" maxlength="4"
                        autocapitalize="none" required/>
             </div>
