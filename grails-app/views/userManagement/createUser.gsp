@@ -14,20 +14,20 @@
     </style>
 
 </head>
-%{--<asset:javascript src='jquery-3.3.1.min.js'/>--}%
-%{--<asset:javascript src='jquery.alerts.js'/>--}%
-%{--<asset:stylesheet src="jquery.alerts.css" />--}%
+<asset:javascript src='jquery-3.3.1.min.js'/>
+<asset:javascript src='jquery.alerts.js'/>
+<asset:stylesheet src="jquery.alerts.css" />
 <body>
-%{--<g:if test="${message}">--}%
-%{--    <tr align="center">--}%
-%{--        <td>--}%
-%{--            <script type="text/javascript"> jAlert('${message}')</script>--}%
-%{--        </td>--}%
-%{--        <td>--}%
-%{--            &nbsp;--}%
-%{--        </td>--}%
-%{--    </tr>--}%
-%{--</g:if>--}%
+<g:if test="${message}">
+    <tr align="center">
+        <td>
+            <script type="text/javascript"> jAlert('${message}')</script>
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+</g:if>
 <sec:ifLoggedIn>
     <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
         <hr>
