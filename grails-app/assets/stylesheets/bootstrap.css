@@ -4383,7 +4383,7 @@ input[type="button"].btn-block {
   display: flex;
   -ms-flex-direction: column;
   flex-direction: column;
-  min-width: 0;
+  min-width: 0px;
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
@@ -7559,7 +7559,7 @@ i{
 
 .mb-4,
 .my-4 {
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 1.0rem !important;
 }
 
 .ml-4,

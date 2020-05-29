@@ -56,7 +56,12 @@
     </nav>
 </sec:ifLoggedIn>
 <g:render template="/templates/grailstemplates"/>
-<div id="main-heading" role="main" style="margin-left:300px;margin-top: 140px;">
+<div id="main-heading" role="main" style="margin-left:300px;margin-top:100px;">
+
+    <header class="w3-container" style="padding-top:22px">
+        <h1><b><i class="fa fa-user"></i>&nbsp;<g:message code="default.user.header"/></b></h1>
+        <hr class="my-4"/>
+    </header>
 %{--    <section class="row" style="margin-left:-30px;margin-top: 100px;">--}%
 %{--        <h1><b>${message(code: 'default.user.header')}</b>--}%
 %{--        </h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--}%
