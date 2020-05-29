@@ -100,7 +100,11 @@ html, body, h1, h2, h3, h4, h5 {
     <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
        class="w3-bar-item w3-button w3-padding"><i
             class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
-    </div>
+    <a id="changePassword" name="changePassword" href="<g:createLink controller='userManagement' action='change'/>"
+       class="w3-bar-item w3-button w3-padding"><i
+            class="fa fa-edit"></i><g:message code="default.button.change"/></a>
+
+</div>
 </nav>
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top: 100px;">
@@ -197,13 +201,11 @@ html, body, h1, h2, h3, h4, h5 {
 </div>
 <g:if test="${dblist}">
     <div class="w3-panel">
-    <div class="w3-panel" style="margin-left: 422px;">
-    <g:form controller="search" action="list" method="post">
+    <div class="w3-panel" style="margin-left: 450px;">
+    <g:form controller="listing" action="searchList" method="post">
         <g:textField id="searchtext" class="input-xxlarge" name="srch"
                      placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
-        <button id="submit-values" class="buttons" type="submit">
-            <i class="icon-ok"></i>
-            <i class="fa fa-search" aria-hidden="true"></i>
+        <button id="submit-values" class="buttons" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
         </button>
     </g:form>
     </div>
@@ -288,12 +290,14 @@ html, body, h1, h2, h3, h4, h5 {
         </tbody>
     </table>
 </g:if>
-
-
-    <div class="w3-panel">
-        %{--        Do Listing of all files here--}%
-
+<g:else>
+    <div class="w3-panel" style="margin-left: 240px">
+        <div class="w3-panel">
+            <img style="height:300px ;width:600px"
+                 src="${resource(dir: 'images', file: 'emptyFolderState.png')}" alt="Image"/>
+        </div>
     </div>
+</g:else>
 
     <!-- Footer -->
 %{--    <footer class="w3-container w3-padding-16 w3-light-grey">--}%

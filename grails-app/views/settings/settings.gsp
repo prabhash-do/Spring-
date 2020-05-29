@@ -41,6 +41,9 @@
             <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
                class="w3-bar-item w3-button w3-padding w3-indigo"><i
                     class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
+            <a id="changePassword" name="changePassword" href="<g:createLink controller='userManagement' action='change'/>"
+               class="w3-bar-item w3-button w3-padding"><i
+                    class="fa fa-edit"></i><g:message code="side.bar.index.settings.title"/></a>
         </div>
     </nav>
 </sec:ifLoggedIn>
@@ -50,8 +53,8 @@
                 autocomplete="off">
             <div class="form-group">
                 <label for="propertyValue"><h1>Enter maximum size of file (in MB)</h1></label>
-                <input type="text" placeholder="Filesize in MB" class="form-control" name="propertyValue"
-                       id="propertyValue"
+                <input type="text" value="${fileSize1}" placeholder="Filesize in MB" class="form-control" name="propertyValue"
+                       id="propertyValue" onkeypress="return isNumberKey(event)" maxlength="4"
                        autocapitalize="none" required/>
             </div>
             <br>
@@ -61,9 +64,7 @@
 </section>
 
 <script type="text/javascript">
-    $('#file0').change(function () {
-        $('#submit0').removeAttr('disabled')
-    })
+
 
 
     function deleteAllFile() {
@@ -97,5 +98,13 @@
     }
 </script>
 
+<script>
+    function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode != 46 &&(charCode < 48 || charCode > 57)))
+            return false;
+        return true;
+    }
+</script>
 </body>
 </html>

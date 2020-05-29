@@ -31,7 +31,6 @@
         text-align: center;
         width: 100%;
         height: 35px;
-        background-color: yellow;
         text-align: center;
         line-height: 32px;
         color: black;
@@ -83,6 +82,9 @@
             <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
                class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
+            <a id="changePassword" name="changePassword" href="<g:createLink controller='userManagement' action='change'/>"
+               class="w3-bar-item w3-button w3-padding"><i
+                    class="fa fa-edit"></i><g:message code="default.button.change"/></a>
 
         </div>
     </nav>
