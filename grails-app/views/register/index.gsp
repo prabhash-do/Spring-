@@ -52,7 +52,7 @@
                                    placeholder="${message(code: 'springSecurity.register.mobilenumber.label')}"
                                    class="form-control"
                                    name="mobilenumber"
-                                   id="mobilenumber"
+                                   id="mobilenumber" minlength="10" onkeypress="return isNumberKey1(event)"
                                    autocapitalize="none"/>
                         </div>
 
@@ -112,7 +112,6 @@
                             <input type="password" class="form-control" name="confirmPassword" value=""
                                    id="confirmPassword"/>
                         </div>
-
                         <div class="form-group">
                             <label for="captcha"></label>
                             <img src="${createLink(controller: 'simpleCaptcha', action: 'captcha')}" id="captcha"
