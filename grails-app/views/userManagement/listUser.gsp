@@ -7,6 +7,7 @@
         <asset:javascript src='jquery-3.3.1.min.js'/>
         <asset:javascript src='jquery.alerts.js'/>
         <asset:stylesheet src="jquery.alerts.css"/>
+        <asset:javascript src='sweetalert.min.js'/>
 
 </head>
 
@@ -43,7 +44,7 @@
             <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
                     code="default.button.createuser"/></a>
-            <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
+            <a id="delete" name="delete" onclick="deleteAllFile()" href="#"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
                     code="side.bar.index.delete.all.files.title"/></a>
             <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
@@ -80,15 +81,88 @@
                             <button id="submit" class="btn btn-primary text-uppercase "
                                     type="submit">${message(code: 'default.button.reset')}</button>
                         </g:form></td>
-                    <td><g:form controller="userManagement" action="deleteUser" params="[userid: User.id]">
-                        <button id="submit1" class="btn btn-primary text-uppercase "
+                    <td>
+                        <button id="submit1" onclick="deleteUser('${User.id}')" class="btn btn-primary text-uppercase "
                                 type="submit">${message(code: 'default.button.deleteuser')}</button></td>
-                    </g:form>
+                    </tr>
+
                     </tr>
                 </table>
             </fieldset>
         </ul>
     </g:each>
 </div>
+
+<script>
+    function deleteUser(data) {
+        swal({
+// options...
+            title: "Are you sure?",
+            text: "Once deleted, user will not be available!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            closeonConfirm: false
+        }).then(function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    type: 'POST',
+                    data: "userid=" + data,
+                    url: '${createLink(controller: 'userManagement' ,action: 'deleteUser')}',
+                    success: function (data) {
+                        swal({
+                            title: "Deleted!",
+                            text: "User has been deleted",
+                            icon: "success",
+                            close: false
+                        }).then(function (isConfirm) {
+                            if (isConfirm) {
+                                location.reload()
+                            }
+                        })
+                    }
+            });
+    } else {
+                swal('Cancelled',
+                    'User is safe :)',
+                    'error'
+                );
+            }
+
+        });
+    }
+
+    function deleteAllFile() {
+        swal({
+            // options...
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover files!",
+            icon: "warning",
+            buttons:true,
+            dangerMode: true,
+            closeonConfirm: false
+        }).then(function(isConfirm) {
+            if ( isConfirm) {
+                $.ajax({
+                    type: 'POST',
+                    url: '${createLink(controller: 'deleteAll' ,action: 'doAllDelete')}',
+                    success: function () {
+                        swal('Deleted!', 'All File deleted', 'success');
+                        location.reload()
+                    }
+                });
+            }
+            else {
+                swal('Cancelled',
+                    'Your file is safe :)',
+                    'error'
+                );
+            }
+
+        });
+    }
+
+
+</script>
 </body>
 </html>

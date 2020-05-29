@@ -10,6 +10,8 @@
 <head>
     <meta name="layout" content="main"/>
     <title>settings</title>
+    <asset:javascript src='jquery-3.3.1.min.js'/>
+    <asset:javascript src='sweetalert.min.js'/>
 </head>
 
 <body>
@@ -33,7 +35,7 @@
             <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
                class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-users fa-fw"></i><g:message code="side.bar.index.list.user.title"/></a>
-            <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
+            <a id="delete" name="delete" onclick="deleteAllFile()" href="#"
                class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
                     code="side.bar.index.delete.all.files.title"/></a>
             <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
@@ -57,6 +59,43 @@
         </g:form>
     </div>
 </section>
+
+<script type="text/javascript">
+    $('#file0').change(function () {
+        $('#submit0').removeAttr('disabled')
+    })
+
+
+    function deleteAllFile() {
+        swal({
+            // options...
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover files!",
+            icon: "warning",
+            buttons:true,
+            dangerMode: true,
+            closeonConfirm: false
+        }).then(function(isConfirm) {
+            if ( isConfirm) {
+                $.ajax({
+                    type: 'POST',
+                    url: '${createLink(controller: 'deleteAll' ,action: 'doAllDelete')}',
+                    success: function () {
+                        swal('Deleted!', 'All File deleted', 'success');
+                        location.reload()
+                    }
+                });
+            }
+            else {
+                swal('Cancelled',
+                    'Your file is safe :)',
+                    'error'
+                );
+            }
+
+        });
+    }
+</script>
 
 </body>
 </html>
