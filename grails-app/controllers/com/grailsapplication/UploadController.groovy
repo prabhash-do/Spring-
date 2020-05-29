@@ -53,52 +53,54 @@ class UploadController {
         try {
             def file = request.getFile('file')
             String fileName = file.originalFilename
-            String destinationPath = BaseHelper.setPathForFile(fileName)
-            def files = BaseHelper.list()
-            File fileDest = new File(destinationPath.concat(fileName))
-            Double fsize1 = file.size / (1024 * 1024)
-            if (fsize1 >= settings.propertyValue.toDouble()) {
+            Uploadfile uploadfile = new Uploadfile()
+            List<Uploadfile> dbList = uploadfile.list()
+            List<String> localList = BaseHelper.list()
+            Double fSize = file.size / (1024 * 1024)
+            if (fSize >= settings.propertyValue.toDouble()) {
                 log.warn("File Size is more than the accepted value")
+                message = g.message(code: "flash.message.file.size.mismatch")
                 redirect controller: 'insert', action: 'insert'
             } else {
-                file.transferTo(fileDest)
-                if (CheckConnectivity.internetConnection()) {
-                    if (!files.contains(fileName)) {
-                        def remotelist = BaseHelper.list()
-                        if (remotelist != null) {
-                            if (remotelist.isEmpty()) {
-                                message = g.message(code: "flash.message.no.files.found")
-                                log.info("No files found")
-                            } else {
-                                log.info("Files are listed")
-                            }
-                            message = g.message(code: "flash.message.file.upload")
-                        } else {
-                            message = g.message(code: "flash.message.check.connectivity")
-                        }
-                        log.info("File " + fileName + " has been uploaded successfully!")
-                        message = g.message(code: "flash.message.file.upload")
-                    } else {
-                        log.warn("File is already there")
-                        message = g.message(code: "flash.message.replace.file")
-                    }
+                /*Check and upload to local*/
+                if (!localList.contains(fileName)) {
+                    String destinationPath = BaseHelper.setPathForFile(fileName)
+                    File fileDest = new File(destinationPath.concat(fileName))
+                    file.transferTo(fileDest)
+                }
 
-                    String fileSize = getFileSize((Long) file.size)
+                /*Check and upload to database*/
+                boolean isPresent = false
+                for (Uploadfile uploadfile1: dbList) {
+                    if (uploadfile1.fileName == fileName) {
+                        isPresent = true
+                        break
+                    }
+                }
+                if (!isPresent) {
+                    String fileSize = getFileSize((Long)file.size)
                     doDataBaseEntry(fileName, fileSize)
-                    /*boolean isemailchecked = params.email
+                    log.info("File " + fileName + " has been uploaded successfully!")
+                    message = g.message(code: "flash.message.file.upload")
+                } else {
+                    log.warn("File is already there")
+                    message = g.message(code: "flash.message.replace.file")
+                }
+            }
+            /*DON'T DELETE*/
+            /*if (CheckConnectivity.internetConnection()) {
+                boolean isemailchecked = params.email
                 if (isemailchecked) {
                     doMail(fileName)
                 }
                 boolean issmschecked = params.sms
                 if (issmschecked) {
                     doSMS(fileName)
-                }*/
-
-                } else {
-                    message = g.message(code: "flash.message.check.connectivity")
                 }
-            }
-        } catch (Exception e ) {
+            } else {
+                flash.error = g.message(code: "flash.message.check.connectivity")
+            }*/
+        } catch (Exception e) {
             log.error("Exception occured while Uploading file:\n", e)
         }
         render view: "/insert/upload", model: [message: message, fileSize1: fileSize1]

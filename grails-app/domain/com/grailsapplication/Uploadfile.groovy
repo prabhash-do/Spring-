@@ -11,7 +11,7 @@ class Uploadfile {
 
 
     static constraints = {
-        id maxsize: 300*1024*8
+        id maxsize: 99999999
         fileName maxsize: 99999999
         fileName(unique: ['status'])
     }
