@@ -288,12 +288,14 @@ html, body, h1, h2, h3, h4, h5 {
         </tbody>
     </table>
 </g:if>
-
-
-    <div class="w3-panel">
-        %{--        Do Listing of all files here--}%
-
+<g:else>
+    <div class="w3-panel" style="margin-left: 240px">
+        <div class="w3-panel">
+            <img style="height:300px ;width:600px"
+                 src="${resource(dir: 'images', file: 'emptyFolderState.png')}" alt="Image"/>
+        </div>
     </div>
+</g:else>
 
     <!-- Footer -->
 %{--    <footer class="w3-container w3-padding-16 w3-light-grey">--}%
