@@ -143,13 +143,13 @@ class UserManagementController {
             u = BootStrap.userService.save(u)
             BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
             log.info("New user has been created Successfully")
-            String message = g.message(code: "flash.message.create.user.sucess")
+            String message = g.message(code: "flash.message.create.user.sucess" , args:[u.firstName,u.lastName])
             forward(controller: "userManagement", action: "index", params: [message: message])
 
-        } catch (javax.xml.bind.ValidationException e) {
+        } catch (ValidationException e) {
             log.error("Fail to create new user")
             String message = g.message(code: "flash.message.create.user.fail")
-            forward(action: "create", params: [message: message])
+            forward( action: "create", params: [message: message])
         }
     }
 
