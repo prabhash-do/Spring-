@@ -18,16 +18,21 @@ class MyProfileController {
         String userName = user.username
         String sex = user.sex
         String dateOfBirth = user.dateOfBirth
+        if (user != null) {
+            if (user.password.isEmpty()) {
+                flash.warnmessage = g.message(code: "flash.message.user.warn")
+                log.warn("No User Details Found")
+            } else {
+                if (firstName != null || email != null || sex != null || userName != null) {
+                    log.info("User Details are shown")
+                } else {
+                    flash.warnmessage = g.message(code: "flash.message.user.warn")
+                    log.warn("No User Details Found")
+                }
+                render view: "myprofile", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth]
 
-
-        if (firstName != null || email != null || sex != null || username!=null) {
-            log.info("User Details are shown")
-        } else {
-            flash.warnmessage = g.message(code: "flash.message.user.warn")
-            log.warn("No User Details Found")
+            }
         }
-        render view: "myprofile", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth]
-
     }
 /**
  * Allow Current user to update it's details

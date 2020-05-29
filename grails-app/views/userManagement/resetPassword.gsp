@@ -53,22 +53,23 @@
                 <h5 class="card-title text-center">${message(code: 'springSecurity.reset.password.header')}</h5>
                 <g:render template="/templates/grailstemplates"/>
                 <g:form class="form-signin" action="resetPassword" params="[username: username]" method="POST"
-                        id="resetpasswordForm"
+                        id="registerForm" onsubmit="return checkPassword();"
                         autocomplete="off">
 
                     <div class="form-group">
-                        <label for="newpassword">${message(code: 'springSecurity.new.password.label')}</label>
+                        <label for="password">${message(code: 'springSecurity.new.password.label')}</label>
+                        <td align="left"><span id="isP"></span>
                         <input type="password" placeholder="${message(code: 'springSecurity.new.password.label')}"
-                               class="form-control" name="newpassword"
-                               id="newpassword" required/>
+                               class="form-control" name="password"
+                               id="password" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="confirmpassword">${message(code: 'springSecurity.confirm.password.label')}</label>
+                        <label for="confirmPassword">${message(code: 'springSecurity.confirm.password.label')}</label>
                         <input type="password" placeholder="${message(code: 'springSecurity.confirm.password.label')}"
                                class="form-control"
-                               name="confirmpassword"
-                               id="confirmpassword" required/>
+                               name="confirmPassword"
+                               id="confirmPassword" required/>
                     </div>
 
                     <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase"
@@ -84,10 +85,6 @@
     </div>
 </div>
 </div>
-<g:javascript>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.forms['resetpasswordForm'].elements['newpassword'].focus();
-    });
-</g:javascript>
+<asset:javascript src="validator.js"/>
 </body>
 </html>

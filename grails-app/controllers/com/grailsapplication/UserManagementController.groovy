@@ -15,7 +15,7 @@ class UserManagementController {
         User user = springSecurityService.currentUser
         def currentuser = [user]
         listuser.remove(user)
-        String message= params.message
+        String message = params.message
         render view: '/userManagement/listUser', model: [listuser: listuser, currentuser: currentuser, message: message]
     }
 
@@ -39,8 +39,23 @@ class UserManagementController {
 
     @Secured(['ROLE_ADMIN'])
     def create() {
-        String message= params.message
+        String message = params.message
         render view: '/userManagement/createUser', model: [message: message]
+    }
+
+    def upload() {
+        request.getFile('filecsv')
+                .inputStream
+                .splitEachLine(',') { fields ->
+                    def demo = new Demo(demo: fields[0].trim(),
+                            description: fields[1].trim())
+
+                    if (user.hasErrors() || user.save(flush: true) == null) {
+                        log.error("Could not import domainObject  ${user.errors}")
+                    }
+
+                    log.debug("Importing domainObject  ${user.toString()}")
+                }
     }
 
     /**
@@ -58,20 +73,14 @@ class UserManagementController {
                 log.warn("No User Details Found")
             } else {
                 String passwordCurrent = params.currentpassword
-                String passwordNew = params.newpassword
-                String passwordConfirm = params.confirmpassword
+                String passwordNew = params.password
                 try {
                     if (!passwordEncoder.isPasswordValid(user.password,
                             passwordCurrent, null /*salt*/)) {
                         log.warn("Current password is incorrect")
                         flash.warnmessage = g.message(code: 'flash.message.incorrect.current.password')
                         render view: '/userManagement/changePassword', model: [currentpassword: passwordCurrent]
-                    } else if (!passwordNew.equals(passwordConfirm)) {
-                        log.warn("New Pasword and Confirm password did not match")
-                        flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
-                        render view: '/userManagement/changePassword', model: [currentpassword: passwordCurrent]
-                    } else if (passwordEncoder.isPasswordValid(user.password, passwordNew,
-                            null /*salt*/)) {
+                    } else if (passwordEncoder.isPasswordValid(user.password, passwordNew,null /*salt*/)) {
                         log.warn("Please choose a different password from current one")
                         flash.warnmessage = g.message(code: 'flash.message.choose.different.password')
                         render view: '/userManagement/changePassword', model: [currentpassword: passwordCurrent]
@@ -100,25 +109,29 @@ class UserManagementController {
     def resetPassword() {
 
         String username = params.username
-        String passwordNew = params.newpassword
-        String passwordConfirm = params.confirmpassword
+        String passwordNew = params.password
         User user = User.findByUsername(username)
-        if (!passwordNew.equals(passwordConfirm)) {
-            log.warn("New Pasword and Confirm password did not match")
-            flash.warnmessage = g.message(code: "flash.message.new.password.mismatch")
-            redirect action: "reset"
-        } else {
-            try {
-                user.password = passwordNew
-                BootStrap.userService.save(user)
-                log.info("Password reset Successfully")
-                flash.successmessage = g.message(code: "springsecurity.reset.password.success")
-                redirect action: "reset"
-            } catch (ValidationException e) {
-                log.error("Exception occured while Changing password:\n", e)
-                flash.errormessage = g.message(code: "springsecurity.reset.password.fail")
-                redirect action: "reset"
+        if (user != null) {
+            if (user.password.isEmpty()) {
+                flash.warnmessage = g.message(code: "flash.message.user.warn")
+                log.warn("No User Details Found")
             }
+            else {
+                try {
+                    user.password = passwordNew
+                    BootStrap.userService.save(user)
+                    log.info("Password reset Successfully")
+                    flash.successmessage = g.message(code: "springsecurity.reset.password.success")
+                    redirect action: "reset"
+                } catch (ValidationException e) {
+                    log.error("Exception occured while Changing password:\n", e)
+                    flash.errormessage = g.message(code: "springsecurity.reset.password.fail")
+                    redirect action: "reset"
+                }
+            }
+        }else{
+            flash.warnmessage = g.message(code: "flash.message.choose.user.warn")
+            log.warn("No User Found")
         }
     }
     /**

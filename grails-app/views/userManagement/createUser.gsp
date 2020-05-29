@@ -14,20 +14,20 @@
     </style>
 
 </head>
-<asset:javascript src='jquery-3.3.1.min.js'/>
-<asset:javascript src='jquery.alerts.js'/>
-<asset:stylesheet src="jquery.alerts.css" />
+%{--<asset:javascript src='jquery-3.3.1.min.js'/>--}%
+%{--<asset:javascript src='jquery.alerts.js'/>--}%
+%{--<asset:stylesheet src="jquery.alerts.css" />--}%
 <body>
-<g:if test="${message}">
-    <tr align="center">
-        <td>
-            <script type="text/javascript"> jAlert('${message}')</script>
-        </td>
-        <td>
-            &nbsp;
-        </td>
-    </tr>
-</g:if>
+%{--<g:if test="${message}">--}%
+%{--    <tr align="center">--}%
+%{--        <td>--}%
+%{--            <script type="text/javascript"> jAlert('${message}')</script>--}%
+%{--        </td>--}%
+%{--        <td>--}%
+%{--            &nbsp;--}%
+%{--        </td>--}%
+%{--    </tr>--}%
+%{--</g:if>--}%
 <sec:ifLoggedIn>
     <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
         <hr>
@@ -138,8 +138,8 @@
 
                         <div class="form-group">
                             <label for="dateofbirth">${message(code: 'springSecurity.register.date.label')}</label>
-                            <input type="date" value="2020-05-20" name="dateofbirth" id="dateofbirth" min="2012-01-01"
-                                   max="2050-12-31">
+                            <input type="date" value="2020-05-20" name="dateofbirth" id="dateofbirth" min="1990-01-01"
+                                   max="2025-12-31">
                         </div>
 
 
