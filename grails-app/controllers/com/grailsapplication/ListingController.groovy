@@ -14,49 +14,46 @@ class ListingController {
 
     def doListing() {
 
-//        Uploadfile uploadfile = new Uploadfile()
-//        List<Uploadfile> dbList = uploadfile.list()
-//        List<String> remoteList = BaseHelper.list()
-////        int numberOfAllFiles = uploadfile.count()
-//        doListingByFileType()
-//
-//        if (remoteList != null) {
-//            if (remoteList.isEmpty()) {
-//                log.info("No files found")
-//            } else {
-//                log.info("Files are listed")
-//            }
-//            render view: "/index", model: [remotelist: remoteList, dblist: dbList]
-//        } else {
-//            render view: "/index", model: [dblist: dbList]
-//        }
-        doListingByFileType()
+        Uploadfile uploadfile = new Uploadfile()
+        List<Uploadfile> dbList = uploadfile.list()
+        List<String> remoteList = BaseHelper.list()
+        if (remoteList != null) {
+            if (remoteList.isEmpty()) {
+                log.info("No files found")
+            } else {
+                log.info("Files are listed")
+            }
+            render view: "/index", model: [remotelist: remoteList, dblist: dbList]
+        } else {
+            render view: "/index", model: [dblist: dbList]
+        }
     }
 
     def doListingByFileType() {
 
         Uploadfile uploadfile = new Uploadfile()
         String fileType = params.fileType
+
         List<Uploadfile> dbListAll = uploadfile.list()
         List<Uploadfile> dbList = new ArrayList<Uploadfile>()
         List<String> remoteList = BaseHelper.fileListByFileType(fileType)
-        for (String remoteFile : remoteList) {
-            for (Uploadfile dbFile : dbListAll) {
+        for (String remoteFile: remoteList) {
+            for (Uploadfile dbFile: dbListAll) {
                 if (remoteFile == dbFile.fileName) {
                     dbList.add(dbFile)
                 }
             }
         }
-        int numberOfAllFiles = uploadfile.count()
-                if (remoteList != null) {
+
+        if (remoteList != null) {
             if (remoteList.isEmpty()) {
                 log.info("No files found")
             } else {
                 log.info("Files are listed")
             }
-            render view: "/index", model: [remotelist: remoteList, dblist: dbList, numberOfAllFiles: numberOfAllFiles]
+            render view: "/index", model: [remotelist: remoteList, dblist: dbList]
         } else {
-            render view: "/index", model: [dblist: dbList, numberOfAllFiles: numberOfAllFiles]
+            render view: "/index", model: [dblist: dbList]
         }
     }
     def searchList(params) {
