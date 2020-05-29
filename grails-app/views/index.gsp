@@ -59,6 +59,8 @@
 
     <asset:stylesheet src="bootstrap.min.css"/>
     <asset:stylesheet src="font-awesome.min.css"/>
+    <asset:javascript src='jquery-3.3.1.min.js'/>
+    <asset:javascript src='sweetalert.min.js'/>
 
 </head>
 <title><g:message code="main.title"/></title>
@@ -92,7 +94,7 @@ html, body, h1, h2, h3, h4, h5 {
     <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
        class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
             code="default.button.createuser"/></a>
-    <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
+    <a id="delete" name="delete" onclick="deleteAllFile()" href="#"
        class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i><g:message
             code="side.bar.index.delete.all.files.title"/></a>
     <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
@@ -278,10 +280,10 @@ html, body, h1, h2, h3, h4, h5 {
                         </div>
                     </g:if></td>
                 <td><div class="delete_test">
-                    <g:link controller="delete" action="doDelete" params="[filename: it.fileName]"
-                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i
+                    <a id="del_file" href="#"
+                       onclick="deleteFile('${it.fileName}')"><i
                             class="fa fa-trash fa-2x" aria-hidden="true" title="<g:message
-                                    code="default.delete.label"/>"></i></g:link>
+                                    code="default.delete.label"/>"></i></a>
                 </div></td>
             </tr>
         </g:each>
@@ -304,6 +306,81 @@ html, body, h1, h2, h3, h4, h5 {
 %{--        </div>--}%
 %{--    </footer>--}%
     <!-- End page content -->
+
+    <script type="text/javascript" >
+
+        function deleteFile(data) {
+            swal({
+                // options...
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this file!",
+                icon: "warning",
+                buttons:true,
+                dangerMode: true,
+                closeonConfirm: false
+            }).then(function(isConfirm) {
+                if ( isConfirm) {
+                    $.ajax({
+                        type: 'POST',
+                        data: "filename=" +data,
+                        url: '${createLink(controller: 'delete' ,action: 'doDelete')}',
+                        success: function (data) {
+
+                            swal({
+                                title: "Deleted!",
+                                text: "Your file has been deleted",
+                                icon: "success",
+                                buttons: true,
+                                close: false
+                            }).then(function (isConfirm) {
+                                if (isConfirm) {
+                                    location.reload()
+                                }
+                            })
+                        }
+                    });
+                        }
+                else {
+                    swal('Cancelled',
+                        'Your file is safe :)',
+                        'error'
+                    );
+                }
+
+            });
+        }
+
+        function deleteAllFile() {
+            swal({
+                // options...
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover files!",
+                icon: "warning",
+                buttons:true,
+                dangerMode: true,
+                closeonConfirm: false
+            }).then(function(isConfirm) {
+                if ( isConfirm) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '${createLink(controller: 'deleteAll' ,action: 'doAllDelete')}',
+                        success: function () {
+                            swal('Deleted!', 'All file has been deleted.', 'success');
+                            location.reload()
+                        }
+                    });
+                }
+                else {
+                    swal('Cancelled',
+                        'Your file is safe :)',
+                        'error'
+                    );
+                }
+
+            });
+        }
+
+    </script>
 
 
     <script>
