@@ -120,7 +120,6 @@ html, body, h1, h2, h3, h4, h5 {
                     <div class="w3-left"><i class="fa fa-list w3-xxxlarge"></i></div>
 
                     <div class="w3-right">
-                        <h5>${numberOfAllFiles}</h5>
                     </div>
 
                     <div class="w3-clear" align="left"></div>
