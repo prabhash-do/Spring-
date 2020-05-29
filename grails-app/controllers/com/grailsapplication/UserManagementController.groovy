@@ -43,21 +43,6 @@ class UserManagementController {
         render view: '/userManagement/createUser', model: [message: message]
     }
 
-    def upload() {
-        request.getFile('filecsv')
-                .inputStream
-                .splitEachLine(',') { fields ->
-                    def demo = new Demo(demo: fields[0].trim(),
-                            description: fields[1].trim())
-
-                    if (user.hasErrors() || user.save(flush: true) == null) {
-                        log.error("Could not import domainObject  ${user.errors}")
-                    }
-
-                    log.debug("Importing domainObject  ${user.toString()}")
-                }
-    }
-
     /**
      * This method allows a user to change password
      * @return boolean
@@ -80,7 +65,7 @@ class UserManagementController {
                         log.warn("Current password is incorrect")
                         flash.warnmessage = g.message(code: 'flash.message.incorrect.current.password')
                         render view: '/userManagement/changePassword', model: [currentpassword: passwordCurrent]
-                    } else if (passwordEncoder.isPasswordValid(user.password, passwordNew,null /*salt*/)) {
+                    } else if (passwordEncoder.isPasswordValid(user.password, passwordNew, null /*salt*/)) {
                         log.warn("Please choose a different password from current one")
                         flash.warnmessage = g.message(code: 'flash.message.choose.different.password')
                         render view: '/userManagement/changePassword', model: [currentpassword: passwordCurrent]
@@ -115,8 +100,7 @@ class UserManagementController {
             if (user.password.isEmpty()) {
                 flash.warnmessage = g.message(code: "flash.message.user.warn")
                 log.warn("No User Details Found")
-            }
-            else {
+            } else {
                 try {
                     user.password = passwordNew
                     BootStrap.userService.save(user)
@@ -129,7 +113,7 @@ class UserManagementController {
                     redirect action: "reset"
                 }
             }
-        }else{
+        } else {
             flash.warnmessage = g.message(code: "flash.message.choose.user.warn")
             log.warn("No User Found")
         }
@@ -156,13 +140,13 @@ class UserManagementController {
             u = BootStrap.userService.save(u)
             BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
             log.info("New user has been created Successfully")
-            String message = g.message(code: "flash.message.create.user.sucess" , args:[u.firstName,u.lastName])
+            String message = g.message(code: "flash.message.create.user.sucess", args: [u.username])
             forward(controller: "userManagement", action: "index", params: [message: message])
 
         } catch (ValidationException e) {
             log.error("Fail to create new user")
             String message = g.message(code: "flash.message.create.user.fail")
-            forward( action: "create", params: [message: message])
+            forward(action: "create", params: [message: message])
         }
     }
 
