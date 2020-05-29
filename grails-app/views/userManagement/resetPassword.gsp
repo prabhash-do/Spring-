@@ -2,6 +2,14 @@
 <head>
     <meta name="layout" content="${gspLayout ?: 'main'}"/>
     <title>${message(code: 'springSecurity.reset.password.title')}</title>
+    <style>
+        .card{
+            width:200%;
+        }
+    .card-body{
+            width:200%;
+        }
+    </style>
 </head>
 
 <body class="w3-light-grey">
@@ -15,7 +23,7 @@
 
     <div class="w3-bar-block" style="margin-top: 15px;">
         <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
-           class="w3-bar-item w3-button w3-padding w3-indigo"><i class="fa fa-eye fa-fw"></i><g:message
+           class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i><g:message
                 code="side.bar.index.overview.title"/>
         </a>
         <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
@@ -45,22 +53,23 @@
                 <h5 class="card-title text-center">${message(code: 'springSecurity.reset.password.header')}</h5>
                 <g:render template="/templates/grailstemplates"/>
                 <g:form class="form-signin" action="resetPassword" params="[username: username]" method="POST"
-                        id="resetpasswordForm"
+                        id="registerForm" onsubmit="return checkPassword();"
                         autocomplete="off">
 
                     <div class="form-group">
-                        <label for="newpassword">${message(code: 'springSecurity.new.password.label')}</label>
+                        <label for="password">${message(code: 'springSecurity.new.password.label')}</label>
+                        <td align="left"><span id="isP"></span>
                         <input type="password" placeholder="${message(code: 'springSecurity.new.password.label')}"
-                               class="form-control" name="newpassword"
-                               id="newpassword" required/>
+                               class="form-control" name="password"
+                               id="password" required/>
                     </div>
 
                     <div class="form-group">
-                        <label for="confirmpassword">${message(code: 'springSecurity.confirm.password.label')}</label>
+                        <label for="confirmPassword">${message(code: 'springSecurity.confirm.password.label')}</label>
                         <input type="password" placeholder="${message(code: 'springSecurity.confirm.password.label')}"
                                class="form-control"
-                               name="confirmpassword"
-                               id="confirmpassword" required/>
+                               name="confirmPassword"
+                               id="confirmPassword" required/>
                     </div>
 
                     <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase"
@@ -76,10 +85,6 @@
     </div>
 </div>
 </div>
-<g:javascript>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.forms['resetpasswordForm'].elements['newpassword'].focus();
-    });
-</g:javascript>
+<asset:javascript src="validator.js"/>
 </body>
 </html>

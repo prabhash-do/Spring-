@@ -111,7 +111,8 @@ html, body, h1, h2, h3, h4, h5 {
 
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
-        <h5><b><i class="fa fa-dashboard"></i><g:message code="main.index.my.dashboard.title"/></b></h5>
+        <h1><b><i class="fa fa-dashboard"></i>&nbsp;<g:message code="main.index.my.dashboard.title"/></b></h1>
+    <hr class="my-4"/>
     </header>
 
 <div class="w3-row-padding w3-margin-bottom">

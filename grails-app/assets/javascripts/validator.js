@@ -48,7 +48,7 @@ function validatePasswordByRegex() {
  */
 function checkPassword() {
     var check = false;
-    if (document.getElementById('password').value == document.getElementById('confirmpassword').value) {
+    if (document.getElementById('password').value == document.getElementById('confirmPassword').value) {
         document.getElementById('isP').style.color = 'green';
         document.getElementById('isP').innerHTML = 'Passwords Matched';
         if (validatePasswordByRegex()) {
@@ -84,4 +84,13 @@ function viewPassword() {
         passwordInput.type = 'password';
         passStatus.className = 'fa fa-eye';
     }
+}
+
+/* This method validates mobile number to accept only integer values
+*/
+function isNumberKey1(evt){
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
 }

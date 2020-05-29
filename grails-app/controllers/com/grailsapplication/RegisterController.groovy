@@ -24,7 +24,7 @@ class RegisterController {
     def checkUserNameAvailable() {
         String userName = params.id
         def available
-        if (User.findByUsername(userName)) {
+        if (User.findByUsername(userName.toLowerCase())) {
             available = false
         } else {
             available = true
@@ -49,7 +49,7 @@ class RegisterController {
 
 
         try {
-            User u = new User(firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, username: userName, password: password, sex: sex, dateOfBirth: dateOfBirth)
+            User u = new User(firstName: firstName, lastName: lastName, email: email.toLowerCase(), mobileNumber: mobileNumber, username: userName.toLowerCase(), password: password, sex: sex, dateOfBirth: dateOfBirth)
             BootStrap.BANKCARD.each { k, v ->
                 u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
             }
