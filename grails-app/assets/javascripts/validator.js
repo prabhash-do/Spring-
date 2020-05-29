@@ -48,7 +48,7 @@ function validatePasswordByRegex() {
  */
 function checkPassword() {
     var check = false;
-    if (document.getElementById('password').value == document.getElementById('confirmpassword').value) {
+    if (document.getElementById('password').value == document.getElementById('confirmPassword').value) {
         document.getElementById('isP').style.color = 'green';
         document.getElementById('isP').innerHTML = 'Passwords Matched';
         if (validatePasswordByRegex()) {
