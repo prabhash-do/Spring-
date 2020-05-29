@@ -43,22 +43,28 @@
                     class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
             <a id="changePassword" name="changePassword" href="<g:createLink controller='userManagement' action='change'/>"
                class="w3-bar-item w3-button w3-padding"><i
-                    class="fa fa-edit"></i><g:message code="side.bar.index.settings.title"/></a>
+                    class="fa fa-edit"></i><g:message code="default.button.change"/></a>
         </div>
     </nav>
 </sec:ifLoggedIn>
+
 <section id="services">
-    <div class="container" style="margin-left:300px;margin-top: 140px;">
+    <div class="container" style="margin-left:280px;margin-top: 100px;">
+        <header class="w3-container" style="padding-top:22px">
+            <h1><b><i class="fa fa-cogs"></i>&nbsp;<g:message code="main.title.settings"/></b></h1>
+            <hr class="my-4"/>
+        </header>
         <g:form class="setting-page" controller="settings" action="doSubmitSettings" method="POST" id="setting-page"
                 autocomplete="off">
-            <div class="form-group">
+            <div class="form-group" style="margin-left: 20px">
                 <label for="propertyValue"><h1><g:message code="settings.max.size.file"/></h1></label>
-                <input type="text" value="${fileSize1}" placeholder=<g:message code="placeholder.file.size"/> class="form-control" name="propertyValue"
+                <input type="text" value="${fileSize1}" placeholder="Filesize in MB" class="form-control" name="propertyValue"
                        id="propertyValue" onkeypress="return isNumberKey(event)" maxlength="4"
                        autocapitalize="none" required/>
+                <br>
+                <button id="submit" type="submit"><g:message code="settings.submit.button"/></button>
             </div>
-            <br>
-            <button id="submit" type="submit">Submit</button>
+
         </g:form>
     </div>
 </section>

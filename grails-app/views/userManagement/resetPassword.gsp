@@ -2,6 +2,14 @@
 <head>
     <meta name="layout" content="${gspLayout ?: 'main'}"/>
     <title>${message(code: 'springSecurity.reset.password.title')}</title>
+    <style>
+        .card{
+            width:200%;
+        }
+    .card-body{
+            width:200%;
+        }
+    </style>
 </head>
 
 <body class="w3-light-grey">
@@ -15,7 +23,7 @@
 
     <div class="w3-bar-block" style="margin-top: 15px;">
         <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
-           class="w3-bar-item w3-button w3-padding w3-indigo"><i class="fa fa-eye fa-fw"></i><g:message
+           class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i><g:message
                 code="side.bar.index.overview.title"/>
         </a>
         <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"

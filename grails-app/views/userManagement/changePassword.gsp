@@ -2,6 +2,12 @@
 <head>
     <meta name="layout" content="${gspLayout ?: 'main'}"/>
     <title>${message(code: 'springSecurity.change.password.title')}</title>
+    <style>
+
+    .card{
+        width :90%;
+    }
+    </style>
 </head>
 
 <body class="w3-light-grey">
@@ -15,7 +21,7 @@
 
     <div class="w3-bar-block" style="margin-top: 15px;">
         <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
-           class="w3-bar-item w3-button w3-padding w3-indigo"><i class="fa fa-eye fa-fw"></i><g:message
+           class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i><g:message
                 code="side.bar.index.overview.title"/>
         </a>
         <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
@@ -38,7 +44,7 @@
                 class="fa fa-edit"></i><g:message code="default.button.change"/></a>
     </div>
 </nav>
-<div class="row" style=" margin-left:380px;margin-top: 80px;">
+<div class="row" style=" margin-left:400px;margin-top:80px;">
 
         <div class="card card-signin my-5">
             <div class="card-body">
@@ -69,7 +75,7 @@
                     </div>
                     <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase"
                             type="submit">${message(code: 'springSecurity.submit.button')}</button>
-                    <hr class="my-4">
+                <hr><hr><hr><hr>
                 </form>
                 <g:form controller="myProfile" action="showProfileDetails">
                     <button id="cancel" class="btn btn-lg btn-secondary btn-block text-uppercase"

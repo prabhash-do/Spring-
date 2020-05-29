@@ -90,8 +90,13 @@
     </nav>
 </sec:ifLoggedIn>
 <section id="services">
-    <div class="container" style="margin-left:300px;margin-top: 140px;">
-        <h5 id="warning_message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><g:message code="warning.setting.file.size"/></h5>
+    <div class="container" style="margin-left:300px;margin-top: 100px;">
+        <header class="w3-container" style="padding-top:22px">
+            <h1><b><i class="fa fa-upload"></i>&nbsp;<g:message code="upload.title.message"/></b></h1>
+            <hr class="my-4"/>
+        </header>
+        <h5 id="warning_message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <g:message code="warning.setting.file.size"/></h5>
         <g:render template="/templates/grailstemplates"/>
         <g:form controller="Upload" action="doUpload" method="POST" enctype="multipart/form-data">
             <div class="row space-rows" id="animated-cards">

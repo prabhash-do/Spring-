@@ -5,8 +5,19 @@
     <asset:javascript src='jquery-3.3.1.min.js'/>
     <asset:javascript src='jquery.alerts.js'/>
     <asset:stylesheet src="jquery.alerts.css"/>
+
+    <style>
+    .card{
+        width:120%;
+
+    }
+    </style>
+
 </head>
-<body >
+<asset:javascript src='jquery-3.3.1.min.js'/>
+<asset:javascript src='jquery.alerts.js'/>
+<asset:stylesheet src="jquery.alerts.css" />
+<body>
 <g:if test="${message}">
     <tr align="center">
         <td>
@@ -51,7 +62,7 @@
         </div>
     </nav>
 </sec:ifLoggedIn>
-<div class="w3-main" style="margin-left:100px;margin-top: 80px;">
+<div class="w3-main" style="margin-left:180px;margin-top: 80px;">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin my-5">
