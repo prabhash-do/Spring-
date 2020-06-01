@@ -114,8 +114,9 @@ class UserManagementController {
                 }
             }
         } else {
-            flash.warnmessage = g.message(code: "flash.message.choose.user.warn")
             log.warn("No User Found")
+            String message = g.message(code: "flash.message.choose.user.warn")
+            forward(action: "index", params: [message: message])
         }
     }
     /**
