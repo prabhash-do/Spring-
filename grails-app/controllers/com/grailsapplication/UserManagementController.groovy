@@ -108,7 +108,7 @@ class UserManagementController {
                     flash.successmessage = g.message(code: "springsecurity.reset.password.success")
                     redirect action: "reset"
                 } catch (ValidationException e) {
-                    log.error("Exception occured while Changing password:\n", e)
+                    log.error("Exception occured while reseting password:\n", e)
                     flash.errormessage = g.message(code: "springsecurity.reset.password.fail")
                     redirect action: "reset"
                 }
@@ -144,7 +144,7 @@ class UserManagementController {
             forward(controller: "userManagement", action: "index", params: [message: message])
 
         } catch (ValidationException e) {
-            log.error("Fail to create new user")
+            log.error("Fail to create new user\n", e)
             String message = g.message(code: "flash.message.create.user.fail")
             forward(action: "create", params: [message: message])
         }

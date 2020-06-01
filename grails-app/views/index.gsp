@@ -122,6 +122,7 @@ html, body, h1, h2, h3, h4, h5 {
                     <div class="w3-left"><i class="fa fa-list w3-xxxlarge"></i></div>
 
                     <div class="w3-right">
+                        <h5>${numberOfAllFiles}</h5>
                     </div>
 
                     <div class="w3-clear" align="left"></div>
@@ -138,7 +139,8 @@ html, body, h1, h2, h3, h4, h5 {
                 <div class="w3-container w3-red w3-padding-16">
                     <div class="w3-left"><i class="fa fa-file-pdf-o w3-xxxlarge"></i></div>
 
-                    <div class="w3-right">
+                    <div class="w3-right" id="documents">
+                        <h5>${numberOfDocFiles}</h5>
                     </div>
 
                     <div class="w3-clear" align="left"></div>
@@ -156,6 +158,7 @@ html, body, h1, h2, h3, h4, h5 {
                     <div class="w3-left"><i class="fa fa-file-image-o w3-xxxlarge"></i></div>
 
                     <div class="w3-right" id="images">
+                        <h5>${numberOfImageFiles}</h5>
                     </div>
 
                     <div class="w3-clear" align="left"></div>
@@ -173,6 +176,7 @@ html, body, h1, h2, h3, h4, h5 {
                     <div class="w3-left"><i class="fa fa-file-powerpoint-o w3-xxxlarge"></i></div>
 
                     <div class="w3-right" id="ppts">
+                        <h5>${numberOfPptFiles}</h5>
                     </div>
 
                     <div class="w3-clear" align="left"></div>
@@ -190,6 +194,7 @@ html, body, h1, h2, h3, h4, h5 {
                     <div class="w3-left"><i class="fa fa-file-video-o w3-xxxlarge"></i></div>
 
                     <div class="w3-right" id="videos">
+                        <h5>${numberOfVideoFiles}</h5>
                     </div>
 
                     <div class="w3-clear" align="left"></div>

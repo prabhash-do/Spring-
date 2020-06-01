@@ -7,16 +7,15 @@
     <asset:stylesheet src="jquery.alerts.css"/>
 
     <style>
-    .card{
-        width:120%;
-
+    .card {
+        width: 120%;
     }
     </style>
 
 </head>
 <asset:javascript src='jquery-3.3.1.min.js'/>
 <asset:javascript src='jquery.alerts.js'/>
-<asset:stylesheet src="jquery.alerts.css" />
+<asset:stylesheet src="jquery.alerts.css"/>
 <body>
 <g:if test="${message}">
     <tr align="center">
@@ -56,7 +55,8 @@
             <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
                class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
-            <a id="changePassword" name="changePassword" href="<g:createLink controller='userManagement' action='change'/>"
+            <a id="changePassword" name="changePassword"
+               href="<g:createLink controller='userManagement' action='change'/>"
                class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-edit"></i><g:message code="default.button.change"/></a>
         </div>
@@ -69,7 +69,7 @@
                 <div class="card-body">
                     <h5 class="card-title text-center">${message(code: 'springSecurity.createuser.header')}</h5>
                     <g:render template="/templates/grailstemplates"/>
-                    <form class="form-signin" onsubmit="return !!(validateEmailByRegex() & checkPassword());"
+                    <form class="form-signin" onsubmit="return !!(validateEmailByRegex() & isAutoPasswordChecked());"
                           action="createUser" method="POST" id="registerForm" autocomplete="off">
                         <div class="form-group">
                             <label for="role">${message(code: 'springSecurity.register.role')}</label>
@@ -97,13 +97,17 @@
                         <div class="form-group">
                             <label for="email">*${message(code: 'springSecurity.register.email.label')}</label>
                             <td align="left"><span id="isE"></span>
+
                                 <div class="input-group mb-2 mr-sm-2">
-                                    <input type="text" placeholder="${message(code: 'springSecurity.register.email.label')}"
+                                    <input type="text"
+                                           placeholder="${message(code: 'springSecurity.register.email.label')}"
                                            class="form-control" name="email"
                                            id="email"
                                            autocapitalize="none" required/>
+
                                     <div class="tooltips">
-                                        <asset:image src="tooltip.png" alt="Image"/><span class="tooltiptext">${message(code: 'default.email.format')}</span>
+                                        <asset:image src="tooltip.png" alt="Image"/><span
+                                            class="tooltiptext">${message(code: 'default.email.format')}</span>
                                     </div>
                                 </div>
                         </div>
@@ -126,15 +130,15 @@
                                    autocapitalize="none" required/>
                         </div>
 
-                    <div class="form-group">
-                        <label>*${message(code: 'springSecurity.register.sex.label')}</label>
-                        <select class="custom-select" name="sex" id="sex" required="required">
-                            <option value="${message(code: 'register.sex.male')}"
-                                    selected>${message(code: 'register.sex.male')}</option>
-                            <option value="${message(code: 'register.sex.female')}">${message(code: 'register.sex.female')}</option>
-                            <option value="${message(code: 'register.sex.others')}">${message(code: 'register.sex.others')}</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label>*${message(code: 'springSecurity.register.sex.label')}</label>
+                            <select class="custom-select" name="sex" id="sex" required="required">
+                                <option value="${message(code: 'register.sex.male')}"
+                                        selected>${message(code: 'register.sex.male')}</option>
+                                <option value="${message(code: 'register.sex.female')}">${message(code: 'register.sex.female')}</option>
+                                <option value="${message(code: 'register.sex.others')}">${message(code: 'register.sex.others')}</option>
+                            </select>
+                        </div>
 
                         <div class="form-group">
                             <label for="dateofbirth">${message(code: 'springSecurity.register.date.label')}</label>
@@ -142,14 +146,13 @@
                                    max="2025-12-31">
                         </div>
 
-
                         <div class="form-group">
                             <label for="password">*${message(code: 'springSecurity.autogenerated.password.label')}</label>
                             <td align="left"><span id="isP"></span>
-                            <label class="switch">
-                                <input type="checkbox" id="checkbox" checked>
-                                <span class="slider round"></span>
-                            </label>
+                                <label class="switch">
+                                    <input type="checkbox" id="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
 
                                 <link rel="stylesheet"
                                       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -164,8 +167,10 @@
                                     <input type="password" class="form-control" name="password"
                                            id="password"
                                            required/>
+
                                     <div class="tooltips">
-                                        <asset:image src="tooltip.png" alt="Image"/><span class="tooltiptext">${message(code: 'default.password.format')}</span>
+                                        <asset:image src="tooltip.png" alt="Image"/><span
+                                            class="tooltiptext">${message(code: 'default.password.format')}</span>
                                     </div>
                                 </div>
                         </div>
@@ -208,7 +213,6 @@
                     });
                 }
             });
-
             document.forms['registerForm'].elements['firstname'].focus();
             var checkbox = document.querySelector('input[type="checkbox"]');
             var password = document.getElementById("password");
@@ -231,7 +235,7 @@
             });
         });
         function generatePassword() {
-            var randomString = Math.random().toString(36).slice(-8).concat('@T2t');
+            var randomString = Math.random().toString(36).slice(-8);
             return randomString;
         }
         function typePassword() {
@@ -240,7 +244,6 @@
             $('#reenterpassword').show()
             return null
         }
-
 </g:javascript>
 </body>
 </html>

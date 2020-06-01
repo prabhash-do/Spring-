@@ -2,8 +2,6 @@
  * This class is used to access java method to list all files present in remote location
  */
 package com.grailsapplication
-
-
 import com.util.BaseConstants
 
 class BaseHelper {
@@ -106,32 +104,6 @@ class BaseHelper {
         }
         return destinationPath
     }
-    // To count the no of files of each type in index page
-    /*static int countFile(String fileType) {
-        String destinationPath = setPath()
-
-        File[] files = new File[String]
-        if (fileType.equals('images')) {
-            File folderImage = new File(destinationPath.concat(BaseConstants.IMAGES).concat(File.separator));
-            files = folderImage.listFiles();
-        } else if (fileType.equals('documents')) {
-            File folderImage = new File(destinationPath.concat(BaseConstants.DOCUMENTS).concat(File.separator));
-            files = folderImage.listFiles();
-        } else if (fileType.equals('ppts')) {
-            File folderImage = new File(destinationPath.concat(BaseConstants.PPTS).concat(File.separator));
-            files = folderImage.listFiles();
-        } else if (fileType.equals('videos')) {
-            File folderImage = new File(destinationPath.concat(BaseConstants.VIDEOS).concat(File.separator));
-            files = folderImage.listFiles();
-        }
-        int count = 0;
-        for (File file : files) {
-            if (file.isFile()) {
-                count++;
-            }
-        }
-        return count;
-    }*/
 
     static List<String> fileListByFileType(String fileType) {
         List<String> listFiles = new ArrayList<String>();
