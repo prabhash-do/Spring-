@@ -53,7 +53,6 @@
         </td>
     </tr>
 </g:if>
-<sec:ifLoggedIn>
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
         <hr>
@@ -82,13 +81,8 @@
             <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
                class="w3-bar-item w3-button w3-padding"><i
                     class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
-            <a id="changePassword" name="changePassword" href="<g:createLink controller='userManagement' action='change'/>"
-               class="w3-bar-item w3-button w3-padding"><i
-                    class="fa fa-edit"></i><g:message code="default.button.change"/></a>
-
         </div>
     </nav>
-</sec:ifLoggedIn>
 <section id="services">
     <div class="container" style="margin-left:300px;margin-top: 80px;">
         <header class="w3-container" style="padding-top:22px">

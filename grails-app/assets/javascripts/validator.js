@@ -28,12 +28,12 @@ var validateEmailByRegex = function () {
 function validatePasswordByRegex() {
     var isPassOk = false;
     var pass = document.getElementById('password');
-    var reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+    var reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,20}$/;
 
     if (!reg.test(pass.value)) {
         $("#password").css("border", "1px solid red");
         document.getElementById("isP").style.color = "red";
-        document.getElementById("isP").innerHTML = "Invalid password format!";
+        document.getElementById("isP").innerHTML = "Password does not match with the password complexity";
         isPassOk = false;
     } else {
         $("#password").css("border", "1px solid green");
