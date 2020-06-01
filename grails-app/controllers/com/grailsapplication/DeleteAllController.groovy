@@ -3,13 +3,11 @@
  */
 package com.grailsapplication
 
-
 import com.util.BaseConstants
 import grails.plugin.springsecurity.annotation.Secured
 
 @Secured('permitAll')
 class DeleteAllController {
-
 
     def index() {
         new ListingController().doListing()
@@ -26,7 +24,6 @@ class DeleteAllController {
                 for (File file : files) {
                     if (file.isFile()) {
                         file.delete()
-                        deleteFileFromDB(file.name)
                     } else if (file.isDirectory()) {
                         //image
                         File folderImage = new File(destinationPath.concat(BaseConstants.IMAGES).concat(File.separator));
@@ -35,7 +32,6 @@ class DeleteAllController {
                             for (File fileImage : filesImage) {
                                 if (fileImage.isFile()) {
                                     fileImage.delete()
-                                    deleteFileFromDB(fileImage.name)
                                 }
                             }
                         }
@@ -46,7 +42,6 @@ class DeleteAllController {
                             for (File filePpt : filesPpt) {
                                 if (filePpt.isFile()) {
                                     filePpt.delete()
-                                    deleteFileFromDB(filePpt.name)
                                 }
                             }
                         }
@@ -57,7 +52,6 @@ class DeleteAllController {
                             for (File fileVideo : filesVideo) {
                                 if (fileVideo.isFile()) {
                                     fileVideo.delete()
-                                    deleteFileFromDB(fileVideo.name)
                                 }
                             }
                         }
@@ -68,33 +62,22 @@ class DeleteAllController {
                             for (File fileDoc : filesDoc) {
                                 if (fileDoc.isFile()) {
                                     fileDoc.delete()
-                                    deleteFileFromDB(fileDoc.name)
                                 }
                             }
                         }
                     }
                 }
+                Uploadfile.executeUpdate("DELETE FROM Uploadfile")
                 redirect view: "index"
-                log.info("All files are deleted successfully!")
-                flash.message = g.message(code: "flash.message.all.files.delete")
+                log.info("All files have been deleted Successfully!")
             } else {
                 redirect view: "index"
                 log.info("No files found")
-                flash.warn = g.message(code: "flash.message.no.files.found")
             }
         } catch (Exception e) {
             redirect view: "index"
             log.error("Exception occurred while deleting file:\n", e);
             return false;
-        }
-    }
-
-    def deleteFileFromDB(String fileName) {
-        List<String> fileList = BaseHelper.list()
-        if (!fileList.contains(fileName)) {
-            Uploadfile.executeUpdate("DELETE FROM Uploadfile u WHERE u.fileName = :filename ", [filename: fileName])
-            log.info("File " + fileName + " has been deleted successfully!")
-            flash.message = g.message(code: "success.delete.message")
         }
     }
 }
