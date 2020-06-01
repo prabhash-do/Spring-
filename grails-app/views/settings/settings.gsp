@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>settings</title>
+    <title><g:message code="main.settings.title"/></title>
     <asset:javascript src='jquery-3.3.1.min.js'/>
     <asset:javascript src='sweetalert.min.js'/>
 </head>
@@ -61,7 +61,7 @@
                 autocomplete="off">
             <div class="form-group" style="margin-left: 20px">
                 <label for="propertyValue"><h1><g:message code="settings.max.size.file"/></h1></label>
-                <input type="text" value="${fileSize1}" placeholder="Filesize in MB" class="form-control" name="propertyValue"
+                <input type="text" value="${fileSize1}" placeholder="<g:message code="placeholder.file.size"/>" class="form-control" name="propertyValue"
                        id="propertyValue" onkeypress="return isNumberKey(event)" maxlength="4"
                        autocapitalize="none" required/>
                 <br>

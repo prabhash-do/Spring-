@@ -57,7 +57,7 @@
 
                     <div class="form-group">
                         <label for="password">${message(code: 'springSecurity.new.password.label')}</label>
-                        <td align="left">
+                        <td align="left"><span id="isP"></span>
                         <input type="password" placeholder="${message(code: 'springSecurity.new.password.label')}"
                                class="form-control" name="password"
                                id="password" required/>
