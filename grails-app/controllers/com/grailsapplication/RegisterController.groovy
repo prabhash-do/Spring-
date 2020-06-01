@@ -66,7 +66,7 @@ class RegisterController {
                 redirect action: 'index'
             }
         } catch (ValidationException e) {
-            log.error('Error occured.Unable to Register')
+            log.error('Error occured.Unable to Register\n',e)
             flash.errormessage = g.message(code: "flash.message.register.fail")
             redirect action: "index"
         }
