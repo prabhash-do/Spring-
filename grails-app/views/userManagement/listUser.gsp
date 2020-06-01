@@ -30,11 +30,6 @@
         <h1><b><i class="fa fa-user"></i>&nbsp;<g:message code="default.user.header"/></b></h1>
         <hr class="my-4"/>
     </header>
-%{--    <section class="row" style="margin-left:-30px;margin-top: 100px;">--}%
-%{--        <h1><b>${message(code: 'default.user.header')}</b>--}%
-%{--        </h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--}%
-%{--    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--}%
-%{--    </section>--}%
     <g:each in="${currentuser}" var="CUser">
         <ul>
             <fieldset class="message">
@@ -57,12 +52,13 @@
                             <button id="submit" class="btn btn-primary text-uppercase "
                                     type="submit">${message(code: 'default.button.reset')}</button>
                         </g:form></td>
-                    <td>
-                        <button id="submit1" onclick="deleteUser('${User.id}')" class="btn btn-primary text-uppercase "
-                                type="submit">${message(code: 'default.button.deleteuser')}</button></td>
+                        <td>
+                            <button id="submit1" onclick="deleteUser('${User.id}')"
+                                    class="btn btn-primary text-uppercase "
+                                    type="submit">${message(code: 'default.button.deleteuser')}</button></td>
                     </tr>
 
-                    </tr>
+                </tr>
                 </table>
             </fieldset>
         </ul>
@@ -97,8 +93,8 @@
                             }
                         })
                     }
-            });
-    } else {
+                });
+            } else {
                 swal('Cancelled',
                     'User is safe :)',
                     'error'
@@ -114,11 +110,11 @@
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover files!",
             icon: "warning",
-            buttons:true,
+            buttons: true,
             dangerMode: true,
             closeonConfirm: false
-        }).then(function(isConfirm) {
-            if ( isConfirm) {
+        }).then(function (isConfirm) {
+            if (isConfirm) {
                 $.ajax({
                     type: 'POST',
                     url: '${createLink(controller: 'deleteAll' ,action: 'doAllDelete')}',
@@ -127,8 +123,7 @@
                         location.reload()
                     }
                 });
-            }
-            else {
+            } else {
                 swal('Cancelled',
                     'Your file is safe :)',
                     'error'

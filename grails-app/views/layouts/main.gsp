@@ -38,6 +38,12 @@
                         </li>
                         <li>
                             <a style="color: #000000;"
+                               href="${g.createLink(controller: "userManagement", action: "change")}"
+                               class="w3-bar-item"><i class="fa fa-edit"></i>
+                                ${message(code: 'default.button.change')}</a>
+                        </li>
+                        <li>
+                            <a style="color: #000000;"
                                href="${g.createLink(controller: "logout", action: "logout")}"
                                class="w3-bar-item"><i class="fa fa-power-off"></i>
                                 ${message(code: 'default.button.logout')}</a>

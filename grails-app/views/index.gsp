@@ -3,8 +3,6 @@
 <head>
     <style type="text/css">
     .delete_test {
-        float: right;
-        margin-right: 3em;
         text-align: center;
     }
 
@@ -14,8 +12,6 @@
         -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
         -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
         display: inline-block;
-        float: right;
-        margin-right: 3em;
         width: 60px;
         height: 60px;
         text-align: center;
@@ -229,14 +225,14 @@ html, body, h1, h2, h3, h4, h5 {
                     </g:if>
                     <g:if test="${it.fileName.toLowerCase().contains(".docx")}">
                         <div class="file-preview">
-                            <a href="${resource(dir: 'upload', file: it.fileName)}" download/>
+                            <a href="${resource(dir: 'upload/documents', file: it.fileName)}" download/>
                             <img style="height:50px ;width:50px"
                                  src="${resource(dir: 'images', file: 'docx.png')}" alt="Image"/>
                         </div>
                     </g:if>
                     <g:if test="${it.fileName.toLowerCase().contains(".xlsx") || it.fileName.toLowerCase().contains(".xls") || it.fileName.toLowerCase().contains(".csv")}">
                         <div class="file-preview">
-                            <a href="${resource(dir: 'upload', file: it.fileName)}" download/>
+                            <a href="${resource(dir: 'upload/documents', file: it.fileName)}" download/>
                             <img style="height:50px ;width:50px"
                                  src="${resource(dir: 'images', file: 'xls.jpg')}" alt="Image"/>
                         </div>
