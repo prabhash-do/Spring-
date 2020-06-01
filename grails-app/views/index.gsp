@@ -206,7 +206,7 @@ html, body, h1, h2, h3, h4, h5 {
 </div>
 <g:if test="${dblist}">
     <div class="w3-panel">
-    <div class="w3-panel" style="margin-left: 450px;">
+    <div class="w3-panel" style="margin-left:-10px;">
     <g:form controller="listing" action="searchList" method="post">
         <g:textField id="searchtext" class="input-xxlarge" name="srch"
                      placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
@@ -296,7 +296,7 @@ html, body, h1, h2, h3, h4, h5 {
     </table>
 </g:if>
 <g:else>
-    <div class="w3-panel" style="margin-left: 240px">
+    <div class="w3-panel" style="margin-left: 180px">
         <div class="w3-panel">
             <img style="height:300px ;width:600px"
                  src="${resource(dir: 'images', file: 'emptyFolderState.png')}" alt="Image"/>
