@@ -90,7 +90,7 @@
     </nav>
 </sec:ifLoggedIn>
 <section id="services">
-    <div class="container" style="margin-left:300px;margin-top: 100px;">
+    <div class="container" style="margin-left:300px;margin-top: 80px;">
         <header class="w3-container" style="padding-top:22px">
             <h1><b><i class="fa fa-upload"></i>&nbsp;<g:message code="upload.title.message"/></b></h1>
             <hr class="my-4"/>

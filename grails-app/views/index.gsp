@@ -58,7 +58,6 @@
     <title><g:message code="main.index.my.dashboard.title"/></title>
 
     <asset:stylesheet src="bootstrap.min.css"/>
-    <asset:stylesheet src="font-awesome.min.css"/>
     <asset:javascript src='jquery-3.3.1.min.js'/>
     <asset:javascript src='sweetalert.min.js'/>
 
@@ -111,7 +110,7 @@ html, body, h1, h2, h3, h4, h5 {
 
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
-        <h1><b><i class="fa fa-dashboard"></i>&nbsp;<g:message code="main.index.my.dashboard.title"/></b></h1>
+        <h5><b><i class="fa fa-dashboard"></i><g:message code="main.index.my.dashboard.title"/></b></h5>
     <hr class="my-4"/>
     </header>
 

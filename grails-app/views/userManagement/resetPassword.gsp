@@ -4,10 +4,10 @@
     <title>${message(code: 'springSecurity.reset.password.title')}</title>
     <style>
         .card{
-            width:200%;
+            width:80%;
         }
     .card-body{
-            width:200%;
+            width:100%;
         }
     </style>
 </head>
@@ -46,8 +46,7 @@
                 class="fa fa-edit"></i><g:message code="default.button.change"/></a>
     </div>
 </nav>
-<div class="row" style="margin-top:80px;">
-<div class="row">
+<div class="row" style=" margin-left:400px;margin-top: 80px;">
          <div class="card card-signin my-5">
             <div class="card-body">
                 <h5 class="card-title text-center">${message(code: 'springSecurity.reset.password.header')}</h5>
@@ -58,7 +57,7 @@
 
                     <div class="form-group">
                         <label for="password">${message(code: 'springSecurity.new.password.label')}</label>
-                        <td align="left"><span id="isP"></span>
+                        <td align="left">
                         <input type="password" placeholder="${message(code: 'springSecurity.new.password.label')}"
                                class="form-control" name="password"
                                id="password" required/>
@@ -83,7 +82,6 @@
                 </g:form>
         </div>
     </div>
-</div>
 </div>
 <asset:javascript src="validator.js"/>
 </body>
