@@ -21,13 +21,13 @@ var validateEmailByRegex = function () {
 }
 
 /**
- * Minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character
+ * Minimum 8 and maximum 20 characters, at least one uppercase letter, one lowercase letter, one number and one special character
  * @returns {boolean}
  */
 function validatePasswordByRegex() {
     var isPassOk = false;
     var pass = document.getElementById('password');
-    var reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/;
+    var reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
 
     if (!reg.test(pass.value)) {
         document.getElementById("isP").style.color = "red";
@@ -48,7 +48,7 @@ function validatePasswordByRegex() {
  */
 function checkPassword() {
     var check = false;
-    if (document.getElementById('password').value == document.getElementById('confirmPassword').value) {
+    if (document.getElementById('password').value === document.getElementById('confirmPassword').value) {
         document.getElementById('isP').style.color = 'green';
         document.getElementById('isP').innerHTML = 'Passwords Matched';
         if (validatePasswordByRegex()) {
@@ -63,14 +63,32 @@ function checkPassword() {
 }
 
 /**
- * this method reloads the captcha on reset button click
+ * This function calls checkPassword() function to validate password if manually typed
+ * for AUTO-GENERATED password no validation works
+ * @returns {boolean}
+ */
+function isAutoPasswordChecked() {
+    var check = false;
+    var checkbox = document.querySelector('input[type="checkbox"]');
+    if ($(checkbox).is(":checked")) {
+        check = true;
+    } else {
+        if (checkPassword()) {
+            check = true;
+        }
+    }
+    return check;
+}
+
+/**
+ * this function reloads the captcha on reset button click
  */
 function reloadCaptcha() {
     document.getElementById('captcha').src = document.getElementById('captcha').src + '?' + new Date();
 }
 
 /*
-This method validates the password toggle eye-icon
+This function validates the password toggle eye-icon
  */
 function viewPassword() {
     var passwordInput = document.getElementById('password');
@@ -86,9 +104,9 @@ function viewPassword() {
     }
 }
 
-/* This method validates mobile number to accept only integer values
+/* This function validates mobile number to accept only integer values
 */
-function isNumberKey1(evt){
+function isNumberKey1(evt) {
     var charCode = (evt.which) ? evt.which : evt.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
