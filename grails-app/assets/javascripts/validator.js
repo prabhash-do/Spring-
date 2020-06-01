@@ -8,11 +8,12 @@ var validateEmailByRegex = function () {
     var reg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
     if (!reg.test(email.value)) {
+        $("#email").css("border", "1px solid red");
         document.getElementById("isE").style.color = "red";
         document.getElementById("isE").innerHTML = "Invalid email address!";
-        document.forms['registerForm'].elements['email'].focus();
         isMailOk = false;
     } else {
+        $("#email").css("border", "1px solid green");
         document.getElementById("isE").style.color = "green";
         document.getElementById("isE").innerHTML = "Valid";
         isMailOk = true;
@@ -30,11 +31,12 @@ function validatePasswordByRegex() {
     var reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
 
     if (!reg.test(pass.value)) {
+        $("#password").css("border", "1px solid red");
         document.getElementById("isP").style.color = "red";
         document.getElementById("isP").innerHTML = "Invalid password format!";
-        document.forms['registerForm'].elements['password'].focus();
         isPassOk = false;
     } else {
+        $("#password").css("border", "1px solid green");
         document.getElementById("isP").style.color = "green";
         document.getElementById("isP").innerHTML = "Validated";
         isPassOk = true;
@@ -55,6 +57,7 @@ function checkPassword() {
             check = true;
         }
     } else {
+        $("#password").css("border", "1px solid red");
         document.getElementById('isP').style.color = 'red';
         document.getElementById('isP').innerHTML = 'Passwords not match';
         check = false;
