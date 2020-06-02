@@ -124,15 +124,15 @@
                                       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
                                 <div class="input-group mb-2 mr-sm-2">
+                                    <input type="password" class="form-control" name="password"
+                                           id="password"
+                                           required/>
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
                                             <i id="pass-status" class="fa fa-eye" aria-hidden="true"
                                                onClick="viewPassword()"></i>
                                         </div>
                                     </div>
-                                    <input type="password" class="form-control" name="password"
-                                           id="password"
-                                           required/>
 
                                     <div class="tooltips">
                                         <asset:image src="tooltip.png" style="margin-top: 7px" alt="Image"/><span
@@ -143,8 +143,16 @@
 
                         <div class="form-group" id="reenterpassword">
                             <label for="password">*${message(code: 'springSecurity.confirm.password.label')}</label>
-                            <input type="password" class="form-control" name="confirmPassword" value=""
+                            <div class="input-group mb-2 mr-sm-2">
+                                <input type="password" class="form-control" name="confirmPassword" value=""
                                    id="confirmPassword"/>
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i id="cpass-status" class="fa fa-eye" aria-hidden="true"
+                                       onClick="viewConfirmPassword()"></i>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                         <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">
                             ${message(code: 'default.add.user.button')}</button>
