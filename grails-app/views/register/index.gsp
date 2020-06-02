@@ -44,7 +44,7 @@
                                            autocapitalize="none" required/>
 
                                     <div class="tooltips">
-                                        <asset:image src="tooltip.png" alt="Image"/><span
+                                        <asset:image src="tooltip.png" style="margin-top: 7px" alt="Image"/><span
                                             class="tooltiptext">${message(code: 'default.email.format')}</span>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                                     </div>
 
                                     <div class="tooltips">
-                                        <asset:image src="tooltip.png" alt="Image"/><span
+                                        <asset:image src="tooltip.png" style="margin-top: 7px" alt="Image"/><span
                                             class="tooltiptext">${message(code: 'default.password.format')}</span>
                                     </div>
                                 </div>

@@ -53,13 +53,12 @@
                                        onClick="viewPassword()"></i>
                                 </div>
                             </div>
-                            <div class="tooltips">
-                                <asset:image src="tooltip.png" alt="Image"/><span
+                            <div class="tooltips" >
+                                <asset:image src="tooltip.png" style="margin-top: 7px" alt="Image"/><span
                                     class="tooltiptext">${message(code: 'default.password.format')}</span>
                             </div>
                         </div>
                 </div>
-
                 <div class="form-group">
                     <label for="confirmPassword">${message(code: 'springSecurity.confirm.password.label')}</label>
                     <div class="input-group mb-2 mr-sm-2">
