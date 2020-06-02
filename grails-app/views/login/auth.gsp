@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label for="coordinateValue">${position}</label>
                         <input type="hidden" name="coordinatePosition" id="coordinatePosition" value="${position}"/>
-                        <div class="file-preview1"style="margin-left: 370px">
+                        <div class="file-preview1"style="margin-left: 300px">
                             <asset:image style="height:15px ;width:15px"
                                          src="bankcard.jpg" alt="Image"/>
                         </div>
