@@ -47,6 +47,11 @@
                 <table>
                     <tr>
                         <td>${User.username}</td>
+                        <td><g:form controller="userManagement" action="editUser" params="[username: User.username]">
+                            <button id="submit" class="btn btn-primary text-uppercase "
+                                    type="submit">${message(code: 'default.button.edit')}</button>
+                        </g:form></td>
+                        <td><g:form controller="userManagement" action="reset" params="[username: User.username]"></g:form>
                         <td><g:form controller="userManagement" action="reset">
                             <g:hiddenField name="username" id="username" value="${User.username}" />
                             <button id="submit" class="btn btn-primary text-uppercase "
