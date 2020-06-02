@@ -93,9 +93,37 @@ function reloadCaptcha() {
 /*
 This function validates the password toggle eye-icon
  */
+function viewOldPassword() {
+    var passwordInput = document.getElementById('currentpassword');
+    var passStatus = document.getElementById('opass-status');
+
+    if (passwordInput.type == 'password') {
+        passwordInput.type = 'text';
+        passStatus.className = 'fa fa-eye-slash';
+
+    } else {
+        passwordInput.type = 'password';
+        passStatus.className = 'fa fa-eye';
+    }
+}
+
 function viewPassword() {
     var passwordInput = document.getElementById('password');
     var passStatus = document.getElementById('pass-status');
+
+    if (passwordInput.type == 'password') {
+        passwordInput.type = 'text';
+        passStatus.className = 'fa fa-eye-slash';
+
+    } else {
+        passwordInput.type = 'password';
+        passStatus.className = 'fa fa-eye';
+    }
+}
+
+function viewConfirmPassword() {
+    var passwordInput = document.getElementById('confirmPassword');
+    var passStatus = document.getElementById('cpass-status');
 
     if (passwordInput.type == 'password') {
         passwordInput.type = 'text';

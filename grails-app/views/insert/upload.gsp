@@ -74,7 +74,7 @@
 
             <g:hiddenField name="maxFileSize" id="maxFileSize" value="${fileSize1}"/>
 
-            <input type="file" name="file" id="file0" multiple>
+            <input type="file" style="background-color: #3f51b5" name="file" id="file0" multiple>
 
             <div id="progressStatus0">
                 <div id="progressBar0"></div>

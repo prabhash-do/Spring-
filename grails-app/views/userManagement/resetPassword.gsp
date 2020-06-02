@@ -26,17 +26,36 @@
                 <div class="form-group">
                     <label for="password">${message(code: 'springSecurity.new.password.label')}</label>
                     <td align="left"><span id="isP"></span>
-                        <input type="password" placeholder="${message(code: 'springSecurity.new.password.label')}"
-                               class="form-control" name="password"
-                               id="password" required/>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <input type="password" placeholder="${message(code: 'springSecurity.new.password.label')}"
+                                   class="form-control" name="password"
+                                   id="password" required/>
+
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i id="pass-status" class="fa fa-eye" aria-hidden="true"
+                                       onClick="viewPassword()"></i>
+                                </div>
+                            </div>
+                        </div>
                 </div>
 
                 <div class="form-group">
                     <label for="confirmPassword">${message(code: 'springSecurity.confirm.password.label')}</label>
-                    <input type="password" placeholder="${message(code: 'springSecurity.confirm.password.label')}"
-                           class="form-control"
-                           name="confirmPassword"
-                           id="confirmPassword" required/>
+
+                    <div class="input-group mb-2 mr-sm-2">
+                        <input type="password" placeholder="${message(code: 'springSecurity.confirm.password.label')}"
+                               class="form-control"
+                               name="confirmPassword"
+                               id="confirmPassword" required/>
+
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i id="cpass-status" class="fa fa-eye" aria-hidden="true"
+                                   onClick="viewConfirmPassword()"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase"
