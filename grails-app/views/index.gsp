@@ -3,8 +3,6 @@
 <head>
     <style type="text/css">
     .delete_test {
-        float: right;
-        margin-right: 3em;
         text-align: center;
     }
 
@@ -14,8 +12,6 @@
         -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
         -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
         display: inline-block;
-        float: right;
-        margin-right: 3em;
         width: 60px;
         height: 60px;
         text-align: center;
@@ -72,12 +68,11 @@
         transform: scale(1.1);
     }
     </style>
-
+    <content tag="menu.item"><g:message code="side.bar.index.overview.title"/></content>
     <meta name="layout" content="main"/>
     <title><g:message code="main.index.my.dashboard.title"/></title>
 
     <asset:stylesheet src="bootstrap.min.css"/>
-    <asset:stylesheet src="font-awesome.min.css"/>
     <asset:javascript src='jquery-3.3.1.min.js'/>
     <asset:javascript src='sweetalert.min.js'/>
 
@@ -91,43 +86,12 @@ html, body, h1, h2, h3, h4, h5 {
 </style>
 
 <body class="w3-light-grey">
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
-    <hr>
-
-    <div class="w3-container" style="margin-top: 100px;">
-        <h5><g:message code="side.bar.index.head.title"/></h5>
-    </div>
-
-<div class="w3-bar-block" style="margin-top: 15px;">
-    <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
-       class="w3-bar-item w3-button w3-padding w3-indigo"><i class="fa fa-eye fa-fw"></i><g:message
-            code="side.bar.index.overview.title"/>
-    </a>
-    <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
-       class="w3-bar-item w3-button w3-padding"><i class="fa fa-upload fa-fw"></i><g:message
-            code="side.bar.index.upload.title"/></a>
-    <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
-       class="w3-bar-item w3-button w3-padding"><i
-            class="fa fa-users fa-fw"></i><g:message code="side.bar.index.list.user.title"/></a>
-    <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
-       class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
-            code="default.button.createuser"/></a>
-    <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
-       class="w3-bar-item w3-button w3-padding"><i
-            class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
-    <a id="changePassword" name="changePassword" href="<g:createLink controller='userManagement' action='change'/>"
-       class="w3-bar-item w3-button w3-padding"><i
-            class="fa fa-edit"></i><g:message code="default.button.change"/></a>
-
-</div>
-</nav>
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top: 100px;">
-
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
         <h5><b><i class="fa fa-dashboard"></i><g:message code="main.index.my.dashboard.title"/></b></h5>
+    <hr class="my-4"/>
     </header>
 
 <div class="w3-row-padding w3-margin-bottom">
@@ -138,6 +102,7 @@ html, body, h1, h2, h3, h4, h5 {
                     <div class="w3-left"><i class="fa fa-list w3-xxxlarge"></i></div>
 
                     <div class="w3-right">
+                        <h5>${numberOfAllFiles}</h5>
                     </div>
 
                     <div class="w3-clear" align="left"></div>
@@ -154,7 +119,8 @@ html, body, h1, h2, h3, h4, h5 {
                 <div class="w3-container w3-red w3-padding-16">
                     <div class="w3-left"><i class="fa fa-file-pdf-o w3-xxxlarge"></i></div>
 
-                    <div class="w3-right">
+                    <div class="w3-right" id="documents">
+                        <h5>${numberOfDocFiles}</h5>
                     </div>
 
                     <div class="w3-clear" align="left"></div>
@@ -172,6 +138,7 @@ html, body, h1, h2, h3, h4, h5 {
                     <div class="w3-left"><i class="fa fa-file-image-o w3-xxxlarge"></i></div>
 
                     <div class="w3-right" id="images">
+                        <h5>${numberOfImageFiles}</h5>
                     </div>
 
                     <div class="w3-clear" align="left"></div>
@@ -189,6 +156,7 @@ html, body, h1, h2, h3, h4, h5 {
                     <div class="w3-left"><i class="fa fa-file-powerpoint-o w3-xxxlarge"></i></div>
 
                     <div class="w3-right" id="ppts">
+                        <h5>${numberOfPptFiles}</h5>
                     </div>
 
                     <div class="w3-clear" align="left"></div>
@@ -206,6 +174,7 @@ html, body, h1, h2, h3, h4, h5 {
                     <div class="w3-left"><i class="fa fa-file-video-o w3-xxxlarge"></i></div>
 
                     <div class="w3-right" id="videos">
+                        <h5>${numberOfVideoFiles}</h5>
                     </div>
 
                     <div class="w3-clear" align="left"></div>
@@ -217,7 +186,7 @@ html, body, h1, h2, h3, h4, h5 {
 </div>
 <g:if test="${dblist}">
     <div class="w3-panel">
-    <div class="w3-panel" style="float: left">
+    <div class="w3-panel" style="margin-left:-16px;">
     <g:form controller="listing" action="searchList" method="post">
         <g:textField id="searchtext" class="input-xxlarge" name="srch"
                      placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
@@ -278,14 +247,14 @@ html, body, h1, h2, h3, h4, h5 {
                     </g:if>
                     <g:if test="${it.fileName.toLowerCase().contains(".docx")}">
                         <div class="file-preview">
-                            <a href="${resource(dir: 'upload', file: it.fileName)}" download/>
+                            <a href="${resource(dir: 'upload/documents', file: it.fileName)}" download/>
                             <img style="height:50px ;width:50px"
                                  src="${resource(dir: 'images', file: 'docx.png')}" alt="Image"/>
                         </div>
                     </g:if>
                     <g:if test="${it.fileName.toLowerCase().contains(".xlsx") || it.fileName.toLowerCase().contains(".xls") || it.fileName.toLowerCase().contains(".csv")}">
                         <div class="file-preview">
-                            <a href="${resource(dir: 'upload', file: it.fileName)}" download/>
+                            <a href="${resource(dir: 'upload/documents', file: it.fileName)}" download/>
                             <img style="height:50px ;width:50px"
                                  src="${resource(dir: 'images', file: 'xls.jpg')}" alt="Image"/>
                         </div>
@@ -310,7 +279,7 @@ html, body, h1, h2, h3, h4, h5 {
     </table>
 </g:if>
 <g:else>
-    <div class="w3-panel" style="margin-left: 240px">
+    <div class="w3-panel" style="margin-left: 180px">
         <div class="w3-panel">
             <img style="height:300px ;width:600px"
                  src="${resource(dir: 'images', file: 'emptyFolderState.png')}" alt="Image"/>

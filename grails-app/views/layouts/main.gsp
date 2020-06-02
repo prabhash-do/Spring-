@@ -2,49 +2,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <asset:stylesheet src="w3.css" />
-    <asset:stylesheet src="raleway.css" />
-    <asset:javascript src="popper.js" />
+    <asset:stylesheet src="w3.css"/>
+    <asset:stylesheet src="raleway.css"/>
+    <asset:javascript src="popper.js"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
-
     <asset:stylesheet src="application.css"/>
-
     <g:layoutHead/>
 </head>
 
 <body class="w3-light-gray">
-
 <div class="w3-bar w3-top w3-indigo w3-large" style="z-index:4">
-
-    <span class="w3-container w3-margin-top w3-left"><a class="navbar-brand"
-                                         href="${g.createLink(controller: "secured")}"><asset:image src="Sfile.png" alt="Files Logo"/></a>
+    <span class="w3-container w3-left"><a class="navbar-brand"
+                                          href="${g.createLink(controller: "secured")}"><asset:image src="Sfile.png"
+                                                                                                     alt="Files Logo"/></a>
     </span>
     <span class="w3-bar-item w3-right">
         <div class="w3-right" aria-expanded="false" style="height: 0.8px; alignment: right" id="navbarContent">
+
             <sec:ifLoggedIn>
-                <span><g:message code="main.page.user.welcome"/><strong>
-                <sec:username/>
-            </sec:ifLoggedIn></strong></span><br>
-            <sec:ifLoggedIn>
-                <div class="w3-col s12 w3-bar">
-                    <a href="${g.createLink(controller: "myProfile", action: "showProfileDetails")}"
-                       class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
-                    <a href="${g.createLink(controller: "logout", action: "logout")}"
-                       class="w3-bar-item w3-button"><i class="fa fa-power-off"></i></a>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                            style="color:black; background-color: white" data-toggle="dropdown">
+                        <span><g:message code="main.page.user.welcome"/><strong>
+                            <sec:username/></strong></span>
+                    </button>
+
+                    <div class="dropdown-menu" style="background-color: #fff">
+                        <li>
+                            <a style="color: #000000;"
+                               href="${g.createLink(controller: "myProfile", action: "showProfileDetails")}"
+                               class="w3-bar-item"><i class="fa fa-user"></i>
+                                ${message(code: 'default.myprofile.header')}</a>
+                        </li>
+                        <li>
+                            <a style="color: #000000;"
+                               href="${g.createLink(controller: "userManagement", action: "change")}"
+                               class="w3-bar-item"><i class="fa fa-edit"></i>
+                                ${message(code: 'default.button.change')}</a>
+                        </li>
+                        <li>
+                            <a style="color: #000000;"
+                               href="${g.createLink(controller: "logout", action: "logout")}"
+                               class="w3-bar-item"><i class="fa fa-power-off"></i>
+                                ${message(code: 'default.button.logout')}</a>
+                        </li>
+                    </div>
                 </div>
             </sec:ifLoggedIn>
-        </div>
+            <div class="dropdown" style="margin-top: 10px">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        style="color: black; background-color: white" data-toggle="dropdown">
+                    <g:message code="default.change.language"/>
+                </button>
 
-    <div class="dropdown" style="margin-top: 60px">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" style="color:#2196F3; background-color: white" data-toggle="dropdown">
-            <g:message code="default.change.language"/>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <navBar:localeDropdownListItems uri="${request.forwardURI}"/>
+                <div class="dropdown-menu" style="background-color: #fff" aria-labelledby="dropdownMenuButton">
+                    <navBar:localeDropdownListItems uri="${request.forwardURI}"/>
+                </div>
+            </div>
         </div>
-    </div>
     </span>
 </div>
 <sec:ifLoggedIn>
@@ -57,32 +74,26 @@
 
         <div class="w3-bar-block" style="margin-top: 5px;">
             <a id="overview" name="overview" href="<g:createLink controller='secured' action='index'/>"
-               class="w3-bar-item w3-button w3-padding"><i
+               class="${pageProperty(name: 'page.menu.item') == "${g.message(code: 'side.bar.index.overview.title')}" ? 'w3-bar-item w3-button w3-padding w3-indigo' : 'w3-bar-item w3-button w3-padding'}"><i
                     class="fa fa-eye fa-fw"></i><g:message code="side.bar.index.overview.title"/>
             </a>
             <a id="upload" name="upload" href="<g:createLink controller='insert' action='insert'/>"
-               class="w3-bar-item w3-button w3-padding"><i
+               class="${pageProperty(name: 'page.menu.item') == "${g.message(code: 'side.bar.index.upload.title')}" ? 'w3-bar-item w3-button w3-padding w3-indigo' : 'w3-bar-item w3-button w3-padding'}"><i
                     class="fa fa-upload fa-fw"></i><g:message code="side.bar.index.upload.title"/></a>
             <a id="users" name="users" href="<g:createLink controller='userManagement'/>"
-               class="w3-bar-item w3-button w3-padding"><i
+               class="${pageProperty(name: 'page.menu.item') == "${g.message(code: 'side.bar.index.list.user.title')}" ? 'w3-bar-item w3-button w3-padding w3-indigo' : 'w3-bar-item w3-button w3-padding'}"><i
                     class="fa fa-users fa-fw"></i><g:message code="side.bar.index.list.user.title"/></a>
-            <a id="delete" name="delete" href="<g:createLink controller='deleteAll' action='doAllDelete'/>"
-               class="w3-bar-item w3-button w3-padding"><i
-                    class="fa fa-trash fa-fw"></i><g:message code="side.bar.index.delete.all.files.title"/></a>
             <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
-               class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i><g:message
+               class="${pageProperty(name: 'page.menu.item') == "${g.message(code: 'default.button.createuser')}" ? 'w3-bar-item w3-button w3-padding w3-indigo' : 'w3-bar-item w3-button w3-padding'}"><i class="fa fa-user fa-fw"></i><g:message
                     code="default.button.createuser"/></a>
             <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
-               class="w3-bar-item w3-button w3-padding"><i
+               class="${pageProperty(name: 'page.menu.item') == "${g.message(code: 'side.bar.index.settings.title')}" ? 'w3-bar-item w3-button w3-padding w3-indigo' : 'w3-bar-item w3-button w3-padding'}"><i
                     class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
-            <a id="changePassword" name="changePassword" href="<g:createLink controller='userManagement' action='change'/>"
-               class="w3-bar-item w3-button w3-padding w3-indigo"><i
-                    class="fa fa-edit"></i><g:message code="default.button.change"/></a>
+
         </div>
     </nav>
 </sec:ifLoggedIn>
 <g:layoutBody/>
-
 <asset:javascript src="application.js"/>
 </body>
 </html>
