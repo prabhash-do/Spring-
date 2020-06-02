@@ -14,11 +14,11 @@
     </style>
 
 </head>
-<asset:javascript src='jquery-3.3.1.min.js'/>
-<asset:javascript src='jquery.alerts.js'/>
-<asset:stylesheet src="jquery.alerts.css"/>
 <body>
 <g:if test="${message}">
+    <asset:javascript src='jquery-3.3.1.min.js'/>
+    <asset:javascript src='jquery.alerts.js'/>
+    <asset:stylesheet src="jquery.alerts.css" />
     <tr align="center">
         <td>
             <script type="text/javascript"> jAlert('${message}')</script>

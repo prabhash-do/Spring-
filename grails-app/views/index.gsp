@@ -110,9 +110,8 @@ html, body, h1, h2, h3, h4, h5 {
             </div>
         </g:form>
     </div>
-
     <div class="w3-quarter">
-        <g:form id="images" name="images" controller="listing" action="doListingByFileType">
+        <g:form id="formimages" name="formimages" controller="listing" action="doListingByFileType">
             <g:hiddenField name="fileType" id="fileType" value="images"/>
             <div class="shadown zoom" onclick="submitImages()">
                 <div class="w3-container w3-indigo w3-padding-16">
@@ -128,7 +127,6 @@ html, body, h1, h2, h3, h4, h5 {
             </div>
         </g:form>
     </div>
-
     <div class="w3-quarter">
         <g:form id="ppts" name="ppts" controller="listing" action="doListingByFileType">
             <g:hiddenField name="fileType" id="fileType" value="ppts"/>
@@ -361,7 +359,7 @@ html, body, h1, h2, h3, h4, h5 {
         }
 
         function submitImages() {
-            document.forms['images'].submit()
+            document.forms['formimages'].submit()
 
         }
 
