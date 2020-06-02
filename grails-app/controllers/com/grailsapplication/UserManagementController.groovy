@@ -12,10 +12,13 @@ class UserManagementController {
     def index() {
 
         def listuser = User.list()
+        String message;
         User user = springSecurityService.currentUser
         def currentuser = [user]
         listuser.remove(user)
-        String message = params.message
+        if(chainModel !=null && chainModel.containsKey('message')) {
+            message = chainModel.get('message')
+        }
         render view: '/userManagement/listUser', model: [listuser: listuser, currentuser: currentuser, message: message]
     }
 
@@ -39,7 +42,10 @@ class UserManagementController {
 
     @Secured(['ROLE_ADMIN'])
     def create() {
-        String message = params.message
+        String message;
+        if(chainModel !=null && chainModel.containsKey('message')) {
+            message = chainModel.get('message')
+        }
         render view: '/userManagement/createUser', model: [message: message]
     }
 
@@ -141,13 +147,13 @@ class UserManagementController {
             u = BootStrap.userService.save(u)
             BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority('ROLE_CLIENT'))
             log.info("New user has been created Successfully")
-            String message = g.message(code: "flash.message.create.user.sucess", args: [u.username])
-            forward(controller: "userManagement", action: "index", params: [message: message])
+            String message = g.message(code: "flash.message.create.user.success", args: [u.username])
+            chain(controller:'userManagement', action: 'index', model:[message: message]);
 
         } catch (ValidationException e) {
             log.error("Fail to create new user\n", e)
             String message = g.message(code: "flash.message.create.user.fail")
-            forward(action: "create", params: [message: message])
+            chain(action: "create", model: [message: message])
         }
     }
 

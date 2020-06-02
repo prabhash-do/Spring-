@@ -27,6 +27,8 @@ class SettingsController {
             settings.propertyValue = params.propertyValue
             settings.insert(flush:true)
         }
-        new ListingController().doListing()
+        Double fileSize1 = settings.propertyValue.toDouble()
+        String message= g.message(code: "file.size.limit.save.alert", args: [fileSize1])
+        render view: "settings", model: [fileSize1: fileSize1, message: message]
     }
 }
