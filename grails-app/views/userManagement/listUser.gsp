@@ -47,20 +47,22 @@
                 <table>
                     <tr>
                         <td>${User.username}</td>
-                        <td><g:form controller="userManagement" action="editUser" params="[username: User.username]">
-                            <button id="submit" class="btn btn-primary text-uppercase "
-                                    type="submit">${message(code: 'default.button.edit')}</button>
-                        </g:form></td>
-                        <td><g:form controller="userManagement" action="reset" params="[username: User.username]"></g:form>
-                        <td><g:form controller="userManagement" action="reset">
-                            <g:hiddenField name="username" id="username" value="${User.username}" />
-                            <button id="submit" class="btn btn-primary text-uppercase "
-                                    type="submit">${message(code: 'default.button.reset')}</button>
-                        </g:form></td>
                         <td>
-                            <button id="submit1" onclick="deleteUser('${User.id}')"
-                                    class="btn btn-primary text-uppercase "
-                                    type="submit">${message(code: 'default.button.deleteuser')}</button></td>
+                            <div class="dropdown">
+                                <button class="dropbtn" style="margin-left: 111px"><i class="fa fa-ellipsis-h"
+                                                                                      style="color: indigo"></i>
+                                </button>
+
+                                <div class="dropdown-content">
+                                    <a href="${g.createLink(controller: "userManagement", action: "reset", params: [username: User.username])}"
+                                       class="w3-bar-item">${message(code: 'default.button.reset')}</a>
+                                    <a href="${g.createLink(controller: "userManagement", action: "editUser", params: [username: User.username])}"
+                                       class="w3-bar-item">${message(code: 'default.button.edituser')}</a>
+                                    <a href="#" onclick="deleteUser('${User.id}')"
+                                       class="w3-bar-item">${message(code: 'default.button.deleteuser')}</a>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
 
                 </tr>
