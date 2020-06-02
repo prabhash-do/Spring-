@@ -26,8 +26,11 @@ class DeleteController {
             } else {
                 if (file.delete()) {
                     deleteFileFromDB(fileName)
+                    return true;
                 }
-                return true;
+                else {
+                    return false;
+                }
             }
         } catch (Exception e) {
             redirect controller: "listing", action: "doListing"

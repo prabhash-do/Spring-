@@ -34,6 +34,12 @@ class UserManagementController {
         render view: '/userManagement/changePassword'
     }
 
+
+    @Secured(['ROLE_ADMIN'])
+    def edit(){
+        render view: '/userManagement/editUser'
+    }
+
     @Secured(['ROLE_ADMIN'])
     def reset() {
         String username = params.username
@@ -92,6 +98,37 @@ class UserManagementController {
             }
         }
     }
+
+    /**
+     * This method allows a ROLE_ADMIN user to edit any User
+     */
+    @Secured(['ROLE_ADMIN'])
+    def editUser(){
+        String username = params.username
+        User user = User.findByUsername(username)
+        String firstName = user.firstName
+        String lastName = user.lastName
+        String email = user.email
+        String mobileNumber = user.mobileNumber
+        String userName = user.username
+        String sex = user.sex
+        String dateOfBirth = user.dateOfBirth
+        if (user != null) {
+            if (user.password.isEmpty()) {
+                flash.warnmessage = g.message(code: "flash.message.user.warn")
+                log.warn("No User Details Found")
+            } else {
+                if (firstName != null || email != null || sex != null || userName != null) {
+                    log.info("User Details are shown")
+                } else {
+                    flash.warnmessage = g.message(code: "flash.message.user.warn")
+                    log.warn("No User Details Found")
+                }
+                render view: "editUser", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth]
+
+            }
+        }
+    }
     /**
      * This method allows a ROLE_ADMIN llow user to reset password of other users
      * @return boolean
@@ -126,6 +163,8 @@ class UserManagementController {
             chain(action: "index", model: [message: message] )
         }
     }
+
+
     /**
      * This method allows a ROLE_ADMIN user to create a new User
      */
@@ -168,7 +207,6 @@ class UserManagementController {
         User user = User.findById(params.userid)
         BootStrap.userRoleService.delete(user)
         user.delete(flush: true)
-        flash.successmessage = user.username + " " + g.message(code: "flash.message.user.delete")
         redirect action: "index"
 
     }

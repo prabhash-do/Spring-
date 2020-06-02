@@ -83,7 +83,7 @@
                             <input type="text"
                                    placeholder="${message(code: 'springSecurity.register.mobilenumber.label')}"
                                    class="form-control" name="mobilenumber"
-                                   id="mobilenumber" minlength="10" onkeypress="return isNumberKey1(event)"
+                                   id="mobilenumber" maxlength="10" onkeypress="return isNumberKey1(event)"
                                    autocapitalize="none"/>
                         </div>
 
