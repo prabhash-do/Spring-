@@ -18,12 +18,17 @@ class DeleteAllController {
         String destinationPath = BaseHelper.setPath()
         File folder = new File(destinationPath);
         File[] files = folder.listFiles();
+        boolean isNotDeleted = false
 
         try {
             if (files.length > 0) {
                 for (File file : files) {
                     if (file.isFile()) {
-                        file.delete()
+                        if(file.delete()) {
+                            deleteFileFromDB(file.name)
+                        } else {
+                            isNotDeleted = true
+                        }
                     } else if (file.isDirectory()) {
                         //image
                         File folderImage = new File(destinationPath.concat(BaseConstants.IMAGES).concat(File.separator));
@@ -31,7 +36,11 @@ class DeleteAllController {
                             File[] filesImage = folderImage.listFiles();
                             for (File fileImage : filesImage) {
                                 if (fileImage.isFile()) {
-                                    fileImage.delete()
+                                    if(fileImage.delete()) {
+                                        deleteFileFromDB(fileImage.name)
+                                    } else {
+                                        isNotDeleted = true
+                                    }
                                 }
                             }
                         }
@@ -41,7 +50,11 @@ class DeleteAllController {
                             File[] filesPpt = folderPpt.listFiles();
                             for (File filePpt : filesPpt) {
                                 if (filePpt.isFile()) {
-                                    filePpt.delete()
+                                    if(filePpt.delete()) {
+                                        deleteFileFromDB(filePpt.name)
+                                    } else {
+                                        isNotDeleted = true
+                                    }
                                 }
                             }
                         }
@@ -51,7 +64,11 @@ class DeleteAllController {
                             File[] filesVideo = folderVideo.listFiles();
                             for (File fileVideo : filesVideo) {
                                 if (fileVideo.isFile()) {
-                                    fileVideo.delete()
+                                    if(fileVideo.delete()) {
+                                        deleteFileFromDB(fileVideo.name)
+                                    } else {
+                                        isNotDeleted = true
+                                    }
                                 }
                             }
                         }
@@ -61,23 +78,37 @@ class DeleteAllController {
                             File[] filesDoc = folderDoc.listFiles();
                             for (File fileDoc : filesDoc) {
                                 if (fileDoc.isFile()) {
-                                    fileDoc.delete()
+                                    if(fileDoc.delete()) {
+                                        deleteFileFromDB(fileDoc.name)
+                                    } else {
+                                        isNotDeleted = true
+                                    }
                                 }
                             }
                         }
                     }
                 }
-                Uploadfile.executeUpdate("DELETE FROM Uploadfile")
-                redirect view: "index"
-                log.info("All files have been deleted Successfully!")
+                if (isNotDeleted) {
+                    log.info("All files could not be deleted.")
+                    return false
+                } else {
+                    log.info("All files have been deleted Successfully!")
+                    return true
+                }
             } else {
-                redirect view: "index"
                 log.info("No files found")
             }
         } catch (Exception e) {
-            redirect view: "index"
             log.error("Exception occurred while deleting file:\n", e);
             return false;
+        }
+    }
+
+    def deleteFileFromDB(String fileName) {
+        List<String> fileList = BaseHelper.list()
+        if (!fileList.contains(fileName)) {
+            Uploadfile.executeUpdate("DELETE FROM Uploadfile u WHERE u.fileName = :filename ", [filename: fileName])
+            log.info("File " + fileName + " has been deleted successfully!")
         }
     }
 }
