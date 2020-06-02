@@ -53,6 +53,10 @@
                                        onClick="viewPassword()"></i>
                                 </div>
                             </div>
+                            <div class="tooltips">
+                                <asset:image src="tooltip.png" alt="Image"/><span
+                                    class="tooltiptext">${message(code: 'default.password.format')}</span>
+                            </div>
                         </div>
                 </div>
 
