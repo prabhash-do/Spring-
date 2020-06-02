@@ -226,7 +226,8 @@ class UserManagementController {
         if (searchUser.isEmpty()) {
             String message = g.message(code: "flash.message.user.search.name.empty.warn")
             log.info("the username to search is not specified")
-            render view: "/userManagement/listUser", model: [listuser: userList, message: message]
+            //render view: "/userManagement/listUser", model: [listuser: userList, message: message]
+            chain(action: "index", model: [message: message])
         } else {
             if (userName.contains(searchUser)) {
 
@@ -238,7 +239,7 @@ class UserManagementController {
             } else {
                 String message = g.message(code: "flash.message.search.not.found.warn")
                 log.error("User not found")
-                chain(action: "index", params: [message: message])
+                chain(action: "index", model: [message: message])
             }
         }
     }
