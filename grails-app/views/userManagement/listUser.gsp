@@ -30,6 +30,14 @@
         <h1><b><i class="fa fa-user"></i>&nbsp;<g:message code="default.user.header"/></b></h1>
         <hr class="my-4"/>
     </header>
+    <div class="w3-panel" style="margin-left:5px;">
+        <g:form controller="userManagement" action="searchUser" method="post">
+            <g:textField id="searchtext" class="input-xxlarge" name="srch"
+                         placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
+            <button id="submit-values" class="buttons" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </g:form>
+    </div>
     <g:each in="${currentuser}" var="CUser">
         <ul>
             <fieldset class="message">
