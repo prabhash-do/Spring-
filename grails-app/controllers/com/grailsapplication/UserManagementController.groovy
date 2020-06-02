@@ -3,6 +3,8 @@ package com.grailsapplication
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 
+import java.util.stream.Collectors
+
 class UserManagementController {
 
     def springSecurityService
@@ -170,6 +172,36 @@ class UserManagementController {
         flash.successmessage = user.username + " " + g.message(code: "flash.message.user.delete")
         redirect action: "index"
 
+    }
+    @Secured('permitAll')
+    def searchUser(params) {
+        String searchUser = params.srch
+        List<String> userList = User.listOrderByUsername()
+        def userName =[]
+
+        for (User listOfUsers :userList){
+                userName.add(listOfUsers.username)
+            }
+
+        println (userName)
+        if (searchUser.isEmpty()) {
+            String message = g.message(code: "flash.message.user.search.name.empty.warn")
+            log.info("the username to search is not specified")
+            render view: "/userManagement/listUser", model: [listuser: userList, message: message]
+        } else {
+            if (userName.contains(searchUser)) {
+
+                //userList.sort()
+                List<User> result = [User.findByUsername(searchUser)]
+
+                log.info("search result is"+ result);
+                render view: "/userManagement/listUser", model: [listuser: result]
+            } else {
+                String message = g.message(code: "flash.message.search.not.found.warn")
+                log.error("User not found")
+                chain(action: "index", params: [message: message])
+            }
+        }
     }
 }
 
