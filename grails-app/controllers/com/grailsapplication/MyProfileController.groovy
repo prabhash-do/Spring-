@@ -11,6 +11,7 @@ class MyProfileController {
  */
     def showProfileDetails() {
         User user = springSecurityService.currentUser
+        UserRole userRole = UserRole.findByUser(user)
         String firstName = user.firstName
         String lastName = user.lastName
         String email = user.email
@@ -18,6 +19,7 @@ class MyProfileController {
         String userName = user.username
         String sex = user.sex
         String dateOfBirth = user.dateOfBirth
+        String role = userRole.role
         if (user != null) {
             if (user.password.isEmpty()) {
                 flash.warnmessage = g.message(code: "flash.message.user.warn")
@@ -29,7 +31,7 @@ class MyProfileController {
                     flash.warnmessage = g.message(code: "flash.message.user.warn")
                     log.warn("No User Details Found")
                 }
-                render view: "myprofile", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth]
+                render view: "myprofile", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth, role: role]
 
             }
         }
