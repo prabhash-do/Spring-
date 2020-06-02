@@ -116,7 +116,8 @@
                         var file = fsize / 1024/1024;
                         // The size of the file.
                         if (file >= maxfilesize) {
-                            alert("${message(code: 'alert.file.large')}"+maxfilesize+"MB");
+                            jAlert("${message(code: 'alert.file.large')}"+maxfilesize+"MB");
+                            return false;
                         }
                         else {
                             updateProgressBar0();

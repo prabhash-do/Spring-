@@ -14,11 +14,11 @@
     </style>
 
 </head>
-<asset:javascript src='jquery-3.3.1.min.js'/>
-<asset:javascript src='jquery.alerts.js'/>
-<asset:stylesheet src="jquery.alerts.css"/>
 <body>
 <g:if test="${message}">
+    <asset:javascript src='jquery-3.3.1.min.js'/>
+    <asset:javascript src='jquery.alerts.js'/>
+    <asset:stylesheet src="jquery.alerts.css" />
     <tr align="center">
         <td>
             <script type="text/javascript"> jAlert('${message}')</script>
@@ -83,7 +83,7 @@
                             <input type="text"
                                    placeholder="${message(code: 'springSecurity.register.mobilenumber.label')}"
                                    class="form-control" name="mobilenumber"
-                                   id="mobilenumber" minlength="10" onkeypress="return isNumberKey1(event)"
+                                   id="mobilenumber" maxlength="10" onkeypress="return isNumberKey1(event)"
                                    autocapitalize="none"/>
                         </div>
 

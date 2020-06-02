@@ -650,9 +650,9 @@ img.grails-logo {
 
 
 .file-preview1:hover {
-    -ms-transform: scale(32.5); /* IE 9 */
-    -webkit-transform: scale(32.5); /* Safari 3-8 */
-    transform: scale(32.5);
+    -ms-transform: scale(27.5); /* IE 9 */
+    -webkit-transform: scale(27.5); /* Safari 3-8 */
+    transform: scale(27.5);
 
 }
 

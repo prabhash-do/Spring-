@@ -36,6 +36,12 @@ class UserManagementController {
         render view: '/userManagement/changePassword'
     }
 
+
+    @Secured(['ROLE_ADMIN'])
+    def edit(){
+        render view: '/userManagement/editUser'
+    }
+
     @Secured(['ROLE_ADMIN'])
     def reset() {
         String username = params.username
@@ -94,6 +100,37 @@ class UserManagementController {
             }
         }
     }
+
+    /**
+     * This method allows a ROLE_ADMIN user to edit any User
+     */
+    @Secured(['ROLE_ADMIN'])
+    def editUser(){
+        String username = params.username
+        User user = User.findByUsername(username)
+        String firstName = user.firstName
+        String lastName = user.lastName
+        String email = user.email
+        String mobileNumber = user.mobileNumber
+        String userName = user.username
+        String sex = user.sex
+        String dateOfBirth = user.dateOfBirth
+        if (user != null) {
+            if (user.password.isEmpty()) {
+                flash.warnmessage = g.message(code: "flash.message.user.warn")
+                log.warn("No User Details Found")
+            } else {
+                if (firstName != null || email != null || sex != null || userName != null) {
+                    log.info("User Details are shown")
+                } else {
+                    flash.warnmessage = g.message(code: "flash.message.user.warn")
+                    log.warn("No User Details Found")
+                }
+                render view: "editUser", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth]
+
+            }
+        }
+    }
     /**
      * This method allows a ROLE_ADMIN llow user to reset password of other users
      * @return boolean
@@ -103,30 +140,33 @@ class UserManagementController {
 
         String username = params.username
         String passwordNew = params.password
+        String message;
         User user = User.findByUsername(username)
         if (user != null) {
             if (user.password.isEmpty()) {
-                flash.warnmessage = g.message(code: "flash.message.user.warn")
+                message = g.message(code: "flash.message.user.warn")
                 log.warn("No User Details Found")
             } else {
                 try {
                     user.password = passwordNew
                     BootStrap.userService.save(user)
                     log.info("Password reset Successfully")
-                    flash.successmessage = g.message(code: "springsecurity.reset.password.success")
-                    redirect action: "reset"
+                    message = g.message(code: "springsecurity.reset.password.success", args: [username])
+                    chain(action: "index", model: [message: message])
                 } catch (ValidationException e) {
                     log.error("Exception occured while reseting password:\n", e)
-                    flash.errormessage = g.message(code: "springsecurity.reset.password.fail")
-                    redirect action: "reset"
+                    message = g.message(code: "springsecurity.reset.password.fail", args: [username])
+                    chain (action: "index", model: [message: message])
                 }
             }
         } else {
             log.warn("No User Found")
-            String message = g.message(code: "flash.message.choose.user.warn")
-            forward(action: "index", params: [message: message])
+            message = g.message(code: "flash.message.choose.user.warn")
+            chain(action: "index", model: [message: message] )
         }
     }
+
+
     /**
      * This method allows a ROLE_ADMIN user to create a new User
      */
@@ -169,7 +209,6 @@ class UserManagementController {
         User user = User.findById(params.userid)
         BootStrap.userRoleService.delete(user)
         user.delete(flush: true)
-        flash.successmessage = user.username + " " + g.message(code: "flash.message.user.delete")
         redirect action: "index"
 
     }

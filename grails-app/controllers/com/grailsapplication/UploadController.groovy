@@ -59,8 +59,6 @@ class UploadController {
             Double fSize = file.size / (1024 * 1024)
             if (fSize >= settings.propertyValue.toDouble()) {
                 log.warn("File Size is more than the accepted value")
-                message = g.message(code: "flash.message.file.size.mismatch")
-                redirect controller: 'insert', action: 'insert'
             } else {
                 /*Check and upload to local*/
                 if (!localList.contains(fileName)) {
@@ -81,7 +79,7 @@ class UploadController {
                     String fileSize = getFileSize((Long)file.size)
                     doDataBaseEntry(fileName, fileSize)
                     log.info("File " + fileName + " has been uploaded successfully!")
-                    message = g.message(code: "flash.message.file.upload")
+                    message = g.message(code: "flash.message.file.upload" ,args:[fileName])
                 } else {
                     log.warn("File is already there")
                     message = g.message(code: "flash.message.replace.file")

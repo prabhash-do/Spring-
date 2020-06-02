@@ -16,6 +16,25 @@
         height: 60px;
         text-align: center;
     }
+    .button {
+        float: right;
+        background-color: #af1b25; /* Green */
+        border: none;
+        color: #fbfbff;
+        padding: 8px 11px;
+        text-align: center;
+        text-decoration: #f9ffeb;
+        display: inline-block;
+        font-size: 15px;
+        margin: 2px 2px;
+        cursor: pointer;
+    }
+
+    .button:hover{
+        -ms-transform: scale(1.5); /* IE 9 */
+        -webkit-transform: scale(1.5); /* Safari 3-8 */
+        transform: scale(1.5);
+    }
 
     .row {
         margin-top: 35px;
@@ -110,9 +129,8 @@ html, body, h1, h2, h3, h4, h5 {
             </div>
         </g:form>
     </div>
-
     <div class="w3-quarter">
-        <g:form id="images" name="images" controller="listing" action="doListingByFileType">
+        <g:form id="formimages" name="formimages" controller="listing" action="doListingByFileType">
             <g:hiddenField name="fileType" id="fileType" value="images"/>
             <div class="shadown zoom" onclick="submitImages()">
                 <div class="w3-container w3-indigo w3-padding-16">
@@ -128,7 +146,6 @@ html, body, h1, h2, h3, h4, h5 {
             </div>
         </g:form>
     </div>
-
     <div class="w3-quarter">
         <g:form id="ppts" name="ppts" controller="listing" action="doListingByFileType">
             <g:hiddenField name="fileType" id="fileType" value="ppts"/>
@@ -174,6 +191,9 @@ html, body, h1, h2, h3, h4, h5 {
         <button id="submit-values" class="buttons" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
         </button>
     </g:form>
+    </div>
+    <div class="w3-panel" >
+        <button class="button" value="Delete All" name="Delete All" onclick="deleteAllFile()">Delete All</button>
     </div>
     <table class="table table-bordered">
         <thead>
@@ -278,9 +298,9 @@ html, body, h1, h2, h3, h4, h5 {
         function deleteFile(data) {
             swal({
                 // options...
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this file!",
-                icon: "warning",
+                title: "${message(code: 'swal.change.alert')}",
+                text: "${message(code: 'swal.change.not.available.file')}",
+                icon: "${message(code: 'swal.change.warning')}",
                 buttons:true,
                 dangerMode: true,
                 closeonConfirm: false
@@ -291,27 +311,29 @@ html, body, h1, h2, h3, h4, h5 {
                         data: "filename=" +data,
                         url: '${createLink(controller: 'delete' ,action: 'doDelete')}',
                         success: function (data) {
+                            if (data) {
+                                swal({
+                                    title: "${message(code: 'swal.change.delete')}",
+                                    text: "${message(code:'swal.change.file.delete')}",
+                                    icon: "${message(code:'swal.change.s')}",
+                                    close: false
+                                }).then(function (isConfirm) {
+                                    if (isConfirm) {
+                                        location.reload()
+                                    }
+                                })
+                            }
+                            else{
+                                swal('${message(code:'swal.change.cancel')}',
+                                    '${message(code:'swal.change.file.s')}',
+                                    '${message(code:'swal.change.error')}'
+                                );
+                            }
 
-                            swal({
-                                title: "Deleted!",
-                                text: "Your file has been deleted",
-                                icon: "success",
-                                buttons: true,
-                                close: false
-                            }).then(function (isConfirm) {
-                                if (isConfirm) {
-                                    location.reload()
-                                }
-                            })
                         }
+
                     });
                         }
-                else {
-                    swal('Cancelled',
-                        'Your file is safe :)',
-                        'error'
-                    );
-                }
 
             });
         }
@@ -319,9 +341,9 @@ html, body, h1, h2, h3, h4, h5 {
         function deleteAllFile() {
             swal({
                 // options...
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover files!",
-                icon: "warning",
+                title: "${message(code: 'swal.change.alert')}",
+                text: "${message(code: 'swal.change.not.available.file')}",
+                icon: "${message(code: 'swal.change.warning')}",
                 buttons:true,
                 dangerMode: true,
                 closeonConfirm: false
@@ -330,18 +352,20 @@ html, body, h1, h2, h3, h4, h5 {
                     $.ajax({
                         type: 'POST',
                         url: '${createLink(controller: 'deleteAll' ,action: 'doAllDelete')}',
-                        success: function () {
-                            swal('Deleted!', 'All file has been deleted.', 'success');
-                            location.reload()
-                        }
-                    });
-                }
-                else {
-                    swal('Cancelled',
-                        'Your file is safe :)',
-                        'error'
-                    );
-                }
+                        success: function (data) {
+                        swal({
+                            title: "${message(code: 'swal.change.delete')}",
+                            text: "${message(code:'swal.change.file.delete.All')}",
+                            icon: "${message(code:'swal.change.s')}",
+                                 close: false
+                             }).then(function (isConfirm) {
+                            if (isConfirm) {
+                                location.reload()
+                            }
+                        })
+                    }
+                });
+        }
 
             });
         }
@@ -361,7 +385,7 @@ html, body, h1, h2, h3, h4, h5 {
         }
 
         function submitImages() {
-            document.forms['images'].submit()
+            document.forms['formimages'].submit()
 
         }
 
