@@ -138,28 +138,29 @@ class UserManagementController {
 
         String username = params.username
         String passwordNew = params.password
+        String message;
         User user = User.findByUsername(username)
         if (user != null) {
             if (user.password.isEmpty()) {
-                flash.warnmessage = g.message(code: "flash.message.user.warn")
+                message = g.message(code: "flash.message.user.warn")
                 log.warn("No User Details Found")
             } else {
                 try {
                     user.password = passwordNew
                     BootStrap.userService.save(user)
                     log.info("Password reset Successfully")
-                    flash.successmessage = g.message(code: "springsecurity.reset.password.success")
-                    redirect action: "reset"
+                    message = g.message(code: "springsecurity.reset.password.success", args: [username])
+                    chain(action: "index", model: [message: message])
                 } catch (ValidationException e) {
                     log.error("Exception occured while reseting password:\n", e)
-                    flash.errormessage = g.message(code: "springsecurity.reset.password.fail")
-                    redirect action: "reset"
+                    message = g.message(code: "springsecurity.reset.password.fail", args: [username])
+                    chain (action: "index", model: [message: message])
                 }
             }
         } else {
             log.warn("No User Found")
-            String message = g.message(code: "flash.message.choose.user.warn")
-            forward(action: "index", params: [message: message])
+            message = g.message(code: "flash.message.choose.user.warn")
+            chain(action: "index", model: [message: message] )
         }
     }
 
