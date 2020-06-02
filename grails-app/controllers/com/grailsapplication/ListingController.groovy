@@ -85,14 +85,13 @@ class ListingController {
         String searchName = params.srch
         List<String> filelist = BaseHelper.list()
         if (searchName.isEmpty()) {
-            flash.warn = g.message(code: "flash.message.file.name.empty.warn")
+            String message = g.message(code: "flash.message.file.search.name.empty.warn")
             log.info("the file name to search is not specified")
-            render view: "/index", model: [dblist: filelist]
+            chain(action: "doListing", model: [message: message])
         } else {
             if (filelist.containsAll(searchName)) {
                 /*{ it ->
                 def fileExt = it.substring(it.lastIndexOf("."));
-
                def fileName = it.replace(fileExt, '')
                def searching=searchName.replace(searchExt, '')
                if(searchExt==null||searchExt==fileExt){
@@ -121,9 +120,11 @@ class ListingController {
                 log.info("search result is"+ result);
                 render view: "/index", model: [dblist: searchDbList]
             } else {
-                flash.error = g.message(code: "flash.message.search.not.found.warn")
-                render view: "/index", model: [dblist: filelist]
+
                 log.error("file not found")
+                String message = g.message(code: "flash.message.search.not.found.warn")
+                chain(action: "doListing", model: [message: message])
+
             }
         }
     }
