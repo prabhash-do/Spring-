@@ -26,9 +26,15 @@
                 <div class="form-group">
                     <label for="password">${message(code: 'springSecurity.new.password.label')}</label>
                     <td align="left"><span id="isP"></span>
-                        <input type="password" placeholder="${message(code: 'springSecurity.new.password.label')}"
-                               class="form-control" name="password"
-                               id="password" required/>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <input type="password" placeholder="${message(code: 'springSecurity.new.password.label')}"
+                                   class="form-control" name="password"
+                                   id="password" required/>
+                            <div class="tooltips">
+                                <asset:image src="tooltip.png" alt="Image"/><span
+                                    class="tooltiptext">${message(code: 'default.password.format')}</span>
+                            </div>
+                        </div>
                 </div>
 
                 <div class="form-group">
