@@ -256,6 +256,7 @@ class UserManagementController {
     }
     @Secured('permitAll')
     def searchUser(params) {
+        User user = springSecurityService.currentUser
         String searchUser = params.srch
         List<String> userList = User.listOrderByUsername()
         def userName =[]
@@ -268,16 +269,19 @@ class UserManagementController {
         if (searchUser.isEmpty()) {
             String message = g.message(code: "flash.message.user.search.name.empty.warn")
             log.info("the username to search is not specified")
-            //render view: "/userManagement/listUser", model: [listuser: userList, message: message]
             chain(action: "index", model: [message: message])
         } else {
             if (userName.contains(searchUser)) {
 
-                //userList.sort()
                 List<User> result = [User.findByUsername(searchUser)]
 
                 log.info("search result is"+ result);
-                render view: "/userManagement/listUser", model: [listuser: result]
+                if (searchUser==user.username){
+                    render view: "/userManagement/listUser", model: [currentuser: result]
+                }else{
+                    render view: "/userManagement/listUser", model: [listuser: result]
+                }
+
             } else {
                 String message = g.message(code: "flash.message.search.not.found.warn")
                 log.error("User not found")
