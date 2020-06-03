@@ -64,15 +64,15 @@
                                 <div class="dropdown-content" >
                                     <g:form controller="userManagement" action="reset">
                                         <g:hiddenField name="username" id="username" value="${User.username}"/>
-                                        <button id="resetSubmit" class="btn"
+                                        <button id="resetSubmit" class="dropbtn"
                                                 type="submit">${message(code: 'default.button.reset')}</button>
                                     </g:form>
                                     <g:form controller="userManagement" action="editUser">
                                         <g:hiddenField name="username" id="username" value="${User.username}"/>
-                                        <button id="editSubmit" class="btn"
+                                        <button id="editSubmit" class="dropbtn"
                                                 type="submit">${message(code: 'default.button.edituser')}</button>
                                     </g:form>
-                                    <button id="deleteSubmit" class="btn" style="margin-left: 24px"
+                                    <button id="deleteSubmit" class="dropbtn"
                                             onclick="deleteUser('${User.id}')"
                                             type="submit">${message(code: 'default.button.deleteuser')}</button>
                                 </div>
