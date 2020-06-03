@@ -349,20 +349,30 @@ html, body, h1, h2, h3, h4, h5 {
                 closeonConfirm: false
             }).then(function(isConfirm) {
                 if ( isConfirm) {
-                    $.ajax({
+                var xhr=$.ajax({
                         type: 'POST',
                         url: '${createLink(controller: 'deleteAll' ,action: 'doAllDelete')}',
                         success: function (data) {
-                        swal({
-                            title: "${message(code: 'swal.change.delete')}",
-                            text: "${message(code:'swal.change.file.delete.All')}",
-                            icon: "${message(code:'swal.change.s')}",
-                                 close: false
-                             }).then(function (isConfirm) {
-                            if (isConfirm) {
-                                location.reload()
+                            var headerVal = xhr.getResponseHeader("filedelete");
+                            if(headerVal==1) {
+                                swal({
+                                    title: "${message(code: 'swal.change.delete')}",
+                                    text: "${message(code:'swal.change.file.delete.All')}",
+                                    icon: "${message(code:'swal.change.s')}",
+                                    close: false
+                                }).then(function (isConfirm) {
+                                    if (isConfirm) {
+                                        location.reload()
+                                    }
+                                })
                             }
-                        })
+                            else if(headerVal==0) {
+                                swal('${message(code:'swal.change.cancel')}','${message(code:'swal.change.file.not.delete.All')}','${message(code:'swal.change.error')}').then(function (isConfrim) {
+                                  if(isConfrim){
+                                      location.reload()
+                                  }
+                                })
+                            }
                     }
                 });
         }

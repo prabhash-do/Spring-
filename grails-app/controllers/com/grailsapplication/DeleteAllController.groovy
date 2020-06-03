@@ -19,7 +19,7 @@ class DeleteAllController {
         File folder = new File(destinationPath);
         File[] files = folder.listFiles();
         boolean isNotDeleted = false
-
+        CommonUtil.clearBrowserCache(response)
         try {
             if (files.length > 0) {
                 for (File file : files) {
@@ -90,13 +90,18 @@ class DeleteAllController {
                 }
                 if (isNotDeleted) {
                     log.info("All files could not be deleted.")
-                    return false
+                    response.setHeader("filedelete", "0")
+                    render "0"
+                    return
                 } else {
                     log.info("All files have been deleted Successfully!")
-                    return true
+                    response.setHeader("filedelete", "1")
+                    render "1"
+                    return
                 }
             } else {
                 log.info("No files found")
+
             }
         } catch (Exception e) {
             log.error("Exception occurred while deleting file:\n", e);
