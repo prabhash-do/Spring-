@@ -72,7 +72,7 @@
 
                         <div class="form-group">
                             <label for="dateofbirth">${message(code: 'springSecurity.register.date.label')}</label>
-                            <input type="date" value="2020-05-20" name="dateofbirth" id="dateofbirth" min="1990-01-01"
+                            <input type="date" value="1990-01-01" name="dateofbirth" id="dateofbirth" min="1950-01-01"
                                    max="2025-12-31">
                         </div>
 
