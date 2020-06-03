@@ -39,7 +39,7 @@
                           action="createUser" method="POST" id="registerForm" autocomplete="off">
                         <div class="form-group">
                             <label for="role">${message(code: 'springSecurity.register.role')}</label>
-                            <g:select class="form-control" name="roleid" id="role"
+                            <g:select class="form-control" name="roleid" id="roleid"
                                       from="${com.grailsapplication.Role.list()}"
                                       optionKey="id"/>
                         </div>
@@ -218,6 +218,17 @@
             $('#reenterpassword').show()
             return null
         }
+
+        window.onload = function() {
+        const myInput = document.getElementById('password');
+        const myInput1 = document.getElementById('confirmPassword');
+        myInput.onpaste = function(e) {
+         e.preventDefault();
+ }
+  myInput1.onpaste = function(e) {
+         e.preventDefault();
+ }
+}
 </g:javascript>
 </body>
 </html>

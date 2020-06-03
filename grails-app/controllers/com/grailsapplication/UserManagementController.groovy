@@ -13,7 +13,7 @@ class UserManagementController {
     @Secured('permitAll')
     def index() {
 
-        def listuser = User.list()
+        List<User> listuser = User.list()
         String message;
         User user = springSecurityService.currentUser
         def currentuser = [user]
@@ -148,19 +148,18 @@ class UserManagementController {
         String dateOfBirth = params.dateofbirth
         String userName = params.username
         String password = params.password
-        String roleId = params.roleid
 
         try {
             User u = new User(firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, username: userName, password: password, sex: sex, dateOfBirth: dateOfBirth)
             BootStrap.BANKCARD.each { k, v ->
                 u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
             }
-            Role role = Role.findById(roleId.toLong())
+            Role role = Role.findById(params.roleid.toLong())
             u = BootStrap.userService.save(u)
             BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority(role.authority))
             log.info("New user has been created Successfully")
             String message = g.message(code: "flash.message.create.user.success", args: [u.username])
-            chain(controller: 'userManagement', action: 'index', model: [message: message]);
+            chain(controller:'userManagement', action: 'index', model:[message: message]);
         } catch (ValidationException e) {
             log.error("Fail to create new user\n", e)
             String message = g.message(code: "flash.message.create.user.fail")
@@ -257,6 +256,7 @@ class UserManagementController {
     }
     @Secured('permitAll')
     def searchUser(params) {
+        User user = springSecurityService.currentUser
         String searchUser = params.srch
         List<String> userList = User.listOrderByUsername()
         def userName =[]
@@ -269,16 +269,19 @@ class UserManagementController {
         if (searchUser.isEmpty()) {
             String message = g.message(code: "flash.message.user.search.name.empty.warn")
             log.info("the username to search is not specified")
-            //render view: "/userManagement/listUser", model: [listuser: userList, message: message]
             chain(action: "index", model: [message: message])
         } else {
             if (userName.contains(searchUser)) {
 
-                //userList.sort()
                 List<User> result = [User.findByUsername(searchUser)]
 
                 log.info("search result is"+ result);
-                render view: "/userManagement/listUser", model: [listuser: result]
+                if (searchUser==user.username){
+                    render view: "/userManagement/listUser", model: [currentuser: result]
+                }else{
+                    render view: "/userManagement/listUser", model: [listuser: result]
+                }
+
             } else {
                 String message = g.message(code: "flash.message.search.not.found.warn")
                 log.error("User not found")
