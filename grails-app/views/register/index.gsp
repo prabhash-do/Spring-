@@ -81,7 +81,7 @@
                                 align="left"><span id="isU"></span>
                             <input type="text" placeholder="${message(code: 'springSecurity.login.username.label')}"
                                    class="form-control" name="username"
-                                   id="username"
+                                   id="username" autocomplete="off"
                                    autocapitalize="none" required/>
                         </div>
 
@@ -96,7 +96,7 @@
                                       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
                                 <div class="input-group mb-2 mr-sm-2">
-                                    <input type="password" class="form-control" name="password"
+                                    <input type="password" class="form-control" name="password" autocomplete="off"
                                            id="password"
                                            required/>
 
@@ -194,7 +194,7 @@
             });
         });
         function generatePassword() {
-            var randomString = Math.random().toString(36).slice(-8);
+            var randomString = Math.random().toString(36).slice(-8).concat('2aS@');
             return randomString;
         }
         function typePassword() {
@@ -205,8 +205,8 @@
         }
 
         window.onload = function() {
-        const myInput = document.getElementById('password');
-        const myInput1 = document.getElementById('confirmPassword');
+        var myInput = document.getElementById('password');
+        var myInput1 = document.getElementById('confirmPassword');
         myInput.onpaste = function(e) {
          e.preventDefault();
         }
