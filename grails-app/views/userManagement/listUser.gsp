@@ -5,10 +5,10 @@
     <meta name="layout" content="main"/>
     <content tag="menu.item"><g:message code="side.bar.index.list.user.title"/></content>
     <title>${message(code: 'default.user.details')}</title>
-        <asset:javascript src='jquery-3.3.1.min.js'/>
-        <asset:javascript src='jquery.alerts.js'/>
-        <asset:stylesheet src="jquery.alerts.css"/>
-        <asset:javascript src='sweetalert.min.js'/>
+    <asset:javascript src='jquery-3.3.1.min.js'/>
+    <asset:javascript src='jquery.alerts.js'/>
+    <asset:stylesheet src="jquery.alerts.css"/>
+    <asset:javascript src='sweetalert.min.js'/>
 
 </head>
 
@@ -61,13 +61,20 @@
                                                                                       style="color: indigo"></i>
                                 </button>
 
-                                <div class="dropdown-content">
-                                    <a href="${g.createLink(controller: "userManagement", action: "reset", params: [username: User.username])}"
-                                       class="w3-bar-item">${message(code: 'default.button.reset')}</a>
-                                    <a href="${g.createLink(controller: "userManagement", action: "editUser", params: [username: User.username])}"
-                                       class="w3-bar-item">${message(code: 'default.button.edituser')}</a>
-                                    <a href="#" onclick="deleteUser('${User.id}')"
-                                       class="w3-bar-item">${message(code: 'default.button.deleteuser')}</a>
+                                <div class="dropdown-content" >
+                                    <g:form controller="userManagement" action="reset">
+                                        <g:hiddenField name="username" id="username" value="${User.username}"/>
+                                        <button id="resetSubmit" class="btn"
+                                                type="submit">${message(code: 'default.button.reset')}</button>
+                                    </g:form>
+                                    <g:form controller="userManagement" action="editUser">
+                                        <g:hiddenField name="username" id="username" value="${User.username}"/>
+                                        <button id="editSubmit" class="btn"
+                                                type="submit">${message(code: 'default.button.edituser')}</button>
+                                    </g:form>
+                                    <button id="deleteSubmit" class="btn" style="margin-left: 24px"
+                                            onclick="deleteUser('${User.id}')"
+                                            type="submit">${message(code: 'default.button.deleteuser')}</button>
                                 </div>
                             </div>
                         </td>
