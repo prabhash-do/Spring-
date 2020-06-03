@@ -204,6 +204,16 @@
             return null
         }
 
+        window.onload = function() {
+        const myInput = document.getElementById('password');
+        const myInput1 = document.getElementById('confirmPassword');
+        myInput.onpaste = function(e) {
+         e.preventDefault();
+        }
+        myInput1.onpaste = function(e) {
+         e.preventDefault();
+ }
+}
 </g:javascript>
 <asset:javascript src="validator.js"/>
 </body>
