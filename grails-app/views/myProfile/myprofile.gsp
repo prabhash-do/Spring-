@@ -6,6 +6,20 @@
 </head>
 
 <body onload="setup()">
+<g:if test="${message}">
+    <asset:javascript src='jquery-3.3.1.min.js'/>
+    <asset:javascript src='jquery.alerts.js'/>
+    <asset:stylesheet src="jquery.alerts.css" />
+    <tr align="center">
+        <td>
+            <script type="text/javascript"> jAlert('${message}')</script>
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+</g:if>
+
 <g:render template="/templates/grailstemplates"/>
 <div class="container" style="margin-left:300px;margin-top: 100px;">
     <header class="w3-container" style="padding-top:22px">
