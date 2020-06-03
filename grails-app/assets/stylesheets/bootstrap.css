@@ -3018,7 +3018,7 @@ input[type="button"].btn-block {
   left: auto;
 }
 
-.dropup .dropdown-menu {
+.dropup .dropdown-menu  {
   top: auto;
   bottom: 100%;
   margin-top: 0;
@@ -3346,7 +3346,7 @@ input[type="button"].btn-block {
   margin-left: -1px;
 }
 
-.input-group > .form-control:focus,
+.input-group >
 .input-group > .custom-select:focus,
 .input-group > .custom-file .custom-file-input:focus ~ .custom-file-label {
   z-index: 3;
@@ -5483,7 +5483,7 @@ button.close {
   -ms-flex-pack: end;
   justify-content: flex-end;
   padding: 1rem;
-  border-top: 1px solid #e9ecef;
+  /*border-top: 1px solid #e9ecef;*/
 }
 
 .modal-footer > :not(:first-child) {

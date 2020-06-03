@@ -82,48 +82,48 @@ class ListingController {
 
     def searchList(params) {
 
-        String searchName = params.srch
-        List<String> filelist = BaseHelper.list()
-        if (searchName.isEmpty()) {
-            flash.warn = g.message(code: "flash.message.file.name.empty.warn")
-            log.info("the file name to search is not specified")
-            render view: "/index", model: [dblist: filelist]
-        } else {
-            if (filelist.containsAll(searchName)) {
-                /*{ it ->
-                def fileExt = it.substring(it.lastIndexOf("."));
+        Uploadfile uploadfile = new Uploadfile()
+        List<Uploadfile> dbList = uploadfile.list()
 
-               def fileName = it.replace(fileExt, '')
-               def searching=searchName.replace(searchExt, '')
-               if(searchExt==null||searchExt==fileExt){
-                   if (fileName.equalsIgnoreCase(searching)) {
-               filelist.findAll().add(searchName)
-               log.info("file found")
-               def searchedList = [filelist.findAll().add(searchName)]
-               log.info(searchedList)
-               render view: "/listing/list", model: [remotelist: searchedList]
-*/
-                filelist.sort()
-                List<String> result = filelist
-                        .stream()
-                        .filter({ x -> x.contains(searchName)})
-                        .collect(Collectors.toList());
-                Uploadfile uploadfile = new Uploadfile()
-                List<Uploadfile> dbList = uploadfile.list()
-                List<Uploadfile> searchDbList = new ArrayList<Uploadfile>()
-                for (String searchResult: result){
-                    for(Uploadfile file : dbList) {
-                        if (file.fileName== searchResult){
-                            searchDbList.add(file)
-                        }
-                    }
+        int allCount = dbList.size()
+        int docCount = 0
+        int imageCount = 0
+        int pptCount = 0
+        int videoCount = 0
+
+        for (Uploadfile uploadfile1 : dbList) {
+            String fileName = uploadfile1.fileName
+            String extension = fileName.substring(fileName.lastIndexOf("."))
+            if (extension.equalsIgnoreCase(".png") || extension.equalsIgnoreCase(".jpg") || extension.equalsIgnoreCase(".jpeg")) {
+                imageCount++
+            } else if (extension.equalsIgnoreCase(".ppt") || extension.equalsIgnoreCase(".pptx") || extension.equalsIgnoreCase(".jar")) {
+                pptCount++
+            } else if (extension.equalsIgnoreCase(".mp4") || extension.equalsIgnoreCase(".mov") || extension.equalsIgnoreCase(".3gp")) {
+                videoCount++
+            } else if (extension.equalsIgnoreCase(".pdf") || extension.equalsIgnoreCase(".txt") || extension.equalsIgnoreCase(".docx") || extension.equalsIgnoreCase(".xls") || extension.equalsIgnoreCase(".xlsx") || extension.equalsIgnoreCase(".csv")) {
+                docCount++
+            }
+        }
+
+        String searchName = params.srch
+        if (searchName.isEmpty()) {
+            String message = g.message(code: "flash.message.file.search.name.empty.warn")
+            log.info("the file name to search is not specified")
+            chain(action: "doListing", model: [message: message])
+        } else {
+            List<Uploadfile> searchDbList = new ArrayList<Uploadfile>()
+            for(Uploadfile file : dbList) {
+                if (file.fileName.contains(searchName)) {
+                    searchDbList.add(file)
                 }
-                log.info("search result is"+ result);
-                render view: "/index", model: [dblist: searchDbList]
+            }
+            if (searchDbList.size()) {
+                log.info("search result is"+ searchDbList);
+                render view: "/index", model: [dblist: searchDbList, numberOfAllFiles: allCount, numberOfDocFiles: docCount, numberOfImageFiles: imageCount, numberOfPptFiles: pptCount, numberOfVideoFiles: videoCount]
             } else {
-                flash.error = g.message(code: "flash.message.search.not.found.warn")
-                render view: "/index", model: [dblist: filelist]
                 log.error("file not found")
+                String message = g.message(code: "flash.message.search.not.found.warn")
+                chain(action: "doListing", model: [message: message])
             }
         }
     }

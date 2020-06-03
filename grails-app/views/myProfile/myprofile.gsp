@@ -6,6 +6,20 @@
 </head>
 
 <body onload="setup()">
+<g:if test="${message}">
+    <asset:javascript src='jquery-3.3.1.min.js'/>
+    <asset:javascript src='jquery.alerts.js'/>
+    <asset:stylesheet src="jquery.alerts.css" />
+    <tr align="center">
+        <td>
+            <script type="text/javascript"> jAlert('${message}')</script>
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+</g:if>
+
 <g:render template="/templates/grailstemplates"/>
 <div class="container" style="margin-left:300px;margin-top: 100px;">
     <header class="w3-container" style="padding-top:22px">
@@ -55,6 +69,12 @@
                 <h4 class="w3-bottombar w3-white w3-border-gray">${message(code: 'default.myprofile.username')}</h4>
 
                 <p>${userName}</p>
+            </div>
+
+            <div class="w3-container w3-third">
+                <h4 class="w3-bottombar w3-white w3-border-gray">${message(code: 'default.myprofile.role')}</h4>
+
+                <p>${role}</p>
             </div>
         </div>
 
@@ -106,17 +126,21 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="mobilenumber"
-                                   class="col-form-label">${message(code: 'default.myprofile.mobilenumber')}</label>
-                            <input type="text" class="form-control" id="mobilenumber" name="mobilenumber"
-                                   value="${mobileNumber}">
+                            <label for="mobilenumber">${message(code: 'springSecurity.register.mobilenumber.label')}</label>
+                            <input type="text"
+                                   placeholder="${message(code: 'springSecurity.register.mobilenumber.label')}"
+                                   class="form-control" name="mobilenumber" value="${mobileNumber}"
+                                   id="mobilenumber" maxlength="10" onkeypress="return isNumberKey1(event)"
+                                   autocapitalize="none"/>
                         </div>
 
                         <div class="form-group">
-                            <label for="sex"
-                                   class="col-form-label">${message(code: 'default.myprofile.sex')}</label>
-                            <input type="text" class="form-control" id="sex" name="sex"
-                                   value="${sex}">
+                            <label>${message(code: 'default.myprofile.sex')}</label>
+                            <select class="custom-select" name="sex" id="sex" required="required" value="${sex}" selected>
+                                <option value="${message(code: 'register.sex.female')}">${message(code: 'register.sex.female')}</option></option>
+                                <option value="${message(code: 'register.sex.male')}">${message(code: 'register.sex.male')}</option>
+                                <option value="${message(code: 'register.sex.others')}">${message(code: 'register.sex.others')}</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -146,6 +170,7 @@
         </div>
     </div>
 </div>
+<asset:javascript src="validator.js"/>
 <g:javascript>
     document.getElementById("disabled").disabled = true;
 </g:javascript>

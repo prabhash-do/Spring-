@@ -5,10 +5,10 @@
     <meta name="layout" content="main"/>
     <content tag="menu.item"><g:message code="side.bar.index.list.user.title"/></content>
     <title>${message(code: 'default.user.details')}</title>
-        <asset:javascript src='jquery-3.3.1.min.js'/>
-        <asset:javascript src='jquery.alerts.js'/>
-        <asset:stylesheet src="jquery.alerts.css"/>
-        <asset:javascript src='sweetalert.min.js'/>
+    <asset:javascript src='jquery-3.3.1.min.js'/>
+    <asset:javascript src='jquery.alerts.js'/>
+    <asset:stylesheet src="jquery.alerts.css"/>
+    <asset:javascript src='sweetalert.min.js'/>
 
 </head>
 
@@ -30,6 +30,14 @@
         <h1><b><i class="fa fa-user"></i>&nbsp;<g:message code="default.user.header"/></b></h1>
         <hr class="my-4"/>
     </header>
+    <div class="w3-panel" style="margin-left:5px;">
+        <g:form controller="userManagement" action="searchUser" method="post">
+            <g:textField id="searchtext" class="input-xxlarge" name="srch"
+                         placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
+            <button id="submit-values" class="buttons" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </g:form>
+    </div>
     <g:each in="${currentuser}" var="CUser">
         <ul>
             <fieldset class="message">
@@ -47,20 +55,29 @@
                 <table>
                     <tr>
                         <td>${User.username}</td>
-                        <td><g:form controller="userManagement" action="editUser" params="[username: User.username]">
-                            <button id="submit" class="btn btn-primary text-uppercase "
-                                    type="submit">${message(code: 'default.button.edit')}</button>
-                        </g:form></td>
-                        <td><g:form controller="userManagement" action="reset" params="[username: User.username]"></g:form>
-                        <td><g:form controller="userManagement" action="reset">
-                            <g:hiddenField name="username" id="username" value="${User.username}" />
-                            <button id="submit" class="btn btn-primary text-uppercase "
-                                    type="submit">${message(code: 'default.button.reset')}</button>
-                        </g:form></td>
                         <td>
-                            <button id="submit1" onclick="deleteUser('${User.id}')"
-                                    class="btn btn-primary text-uppercase "
-                                    type="submit">${message(code: 'default.button.deleteuser')}</button></td>
+                            <div class="dropdown">
+                                <button class="dropbtn" style="margin-left: 111px"><i class="fa fa-ellipsis-h"
+                                                                                      style="color: indigo"></i>
+                                </button>
+
+                                <div class="dropdown-content" >
+                                    <g:form controller="userManagement" action="reset">
+                                        <g:hiddenField name="username" id="username" value="${User.username}"/>
+                                        <button id="resetSubmit" class="btn"
+                                                type="submit">${message(code: 'default.button.reset')}</button>
+                                    </g:form>
+                                    <g:form controller="userManagement" action="editUser">
+                                        <g:hiddenField name="username" id="username" value="${User.username}"/>
+                                        <button id="editSubmit" class="btn"
+                                                type="submit">${message(code: 'default.button.edituser')}</button>
+                                    </g:form>
+                                    <button id="deleteSubmit" class="btn" style="margin-left: 24px"
+                                            onclick="deleteUser('${User.id}')"
+                                            type="submit">${message(code: 'default.button.deleteuser')}</button>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
 
                 </tr>

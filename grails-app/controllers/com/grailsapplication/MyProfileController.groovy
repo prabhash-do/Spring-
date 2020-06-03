@@ -11,6 +11,7 @@ class MyProfileController {
  */
     def showProfileDetails() {
         User user = springSecurityService.currentUser
+        UserRole userRole = UserRole.findByUser(user)
         String firstName = user.firstName
         String lastName = user.lastName
         String email = user.email
@@ -18,18 +19,23 @@ class MyProfileController {
         String userName = user.username
         String sex = user.sex
         String dateOfBirth = user.dateOfBirth
+        String role = userRole.role
+        String message
+        if (chainModel != null && chainModel.containsKey('message')) {
+            message = chainModel.get('message')
+        }
         if (user != null) {
             if (user.password.isEmpty()) {
-                flash.warnmessage = g.message(code: "flash.message.user.warn")
+               message = g.message(code: "flash.message.user.warn")
                 log.warn("No User Details Found")
             } else {
                 if (firstName != null || email != null || sex != null || userName != null) {
                     log.info("User Details are shown")
                 } else {
-                    flash.warnmessage = g.message(code: "flash.message.user.warn")
+                    message = g.message(code: "flash.message.user.warn")
                     log.warn("No User Details Found")
                 }
-                render view: "myprofile", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth]
+                render view: "myprofile", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth, role: role, message: message]
 
             }
         }
@@ -46,11 +52,12 @@ class MyProfileController {
         String mobilenumber = params.mobilenumber
         String sex = params.sex
         String dateofbirth = params.dateofbirth
+        String message
 
         if (user != null) {
 
             if (firstname.isEmpty() || email.isEmpty() || sex.isEmpty()) {
-                flash.warnmessage = g.message(code: "flash.message.edituser.warn")
+                message = g.message(code: "flash.message.edituser.warn")
                 log.warn("Unable to save user details.Some mandatory fields are left blank")
             } else {
                 user.firstName = firstname
@@ -62,9 +69,9 @@ class MyProfileController {
 
                 BootStrap.userService.save(user)
                 log.info("User Details are updated")
-                flash.successmessage = g.message(code: "myprofile.update.user.success")
+                message = g.message(code: "myprofile.update.user.success")
             }
         }
-        redirect controller: "myProfile", action: "showProfileDetails"
+        chain(controller: "myProfile", action: "showProfileDetails", model: [message: message])
     }
 }

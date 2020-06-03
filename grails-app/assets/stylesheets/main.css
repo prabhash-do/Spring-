@@ -557,7 +557,7 @@ img.grails-logo {
 
 #animated-cards .card-header {
     height: 200px;
-    background-color: #3f51b5;
+    background-color: lightgrey;
 }
 
 #animated-cards .service-icon {
@@ -573,7 +573,7 @@ img.grails-logo {
 }
 
 #animated-cards .cardheader-text {
-    color: #fff;
+    color: #000000;
 }
 
 #animated-cards .card-text.sub-text-color {
@@ -622,7 +622,7 @@ img.grails-logo {
 }
 
 #animated-cards .card:hover .card-header:first-child {
-    background-color: #1962df;
+    background-color: lightgrey;
 }
 
 #animated-cards .card:hover .service-icon {
