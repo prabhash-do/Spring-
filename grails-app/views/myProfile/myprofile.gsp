@@ -9,7 +9,7 @@
 <g:if test="${message}">
     <asset:javascript src='jquery-3.3.1.min.js'/>
     <asset:javascript src='jquery.alerts.js'/>
-    <asset:stylesheet src="jquery.alerts.css" />
+    <asset:stylesheet src="jquery.alerts.css"/>
     <tr align="center">
         <td>
             <script type="text/javascript"> jAlert('${message}')</script>
@@ -136,8 +136,8 @@
 
                         <div class="form-group">
                             <label>${message(code: 'default.myprofile.sex')}</label>
-                            <select class="custom-select" name="sex" id="sex" required="required" value="${sex}" selected>
-                                <option value="${message(code: 'register.sex.female')}">${message(code: 'register.sex.female')}</option></option>
+                            <select class="custom-select" name="sex" id="sex" required="required">
+                                <option value="${message(code: 'register.sex.female')}">${message(code: 'register.sex.female')}</option>
                                 <option value="${message(code: 'register.sex.male')}">${message(code: 'register.sex.male')}</option>
                                 <option value="${message(code: 'register.sex.others')}">${message(code: 'register.sex.others')}</option>
                             </select>
@@ -173,6 +173,7 @@
 <asset:javascript src="validator.js"/>
 <g:javascript>
     document.getElementById("disabled").disabled = true;
+    document.getElementById("sex").value = "${sex}";
 </g:javascript>
 </body>
 </html>
