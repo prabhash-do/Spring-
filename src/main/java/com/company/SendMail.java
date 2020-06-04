@@ -1,6 +1,7 @@
 package com.company;
 
 import org.apache.log4j.Logger;
+import org.hibernate.validator.constraints.Email;
 
 import javax.mail.*;
 import javax.mail.Message.RecipientType;
@@ -24,12 +25,12 @@ public class SendMail {
      * @param filename
      * @throws IOException
      */
-    public static void mail(String filename) throws IOException {
+    public static void mail(String filename, String email_id, String action) throws IOException {
 
         final String sender = config.getString("email.sender.username");
         final String password = Decrypt.getDecryptedPassword(config.getString("email.sender.password"));
-        final String receiver_to = config.getString("email.receipient.to");
-        final String receiver_cc = config.getString("email.receipient.cc");
+        final String receiver_to = email_id;
+        final String receiver_cc = email_id;
 
         String smtphost = config.getString("smtp.host");
         String smtphost_name = config.getString("smtp.host.name");
@@ -58,12 +59,44 @@ public class SendMail {
             message.setRecipients(RecipientType.TO, InternetAddress.parse(receiver_to));
             message.setRecipients(RecipientType.CC, InternetAddress.parse(receiver_cc));
             //  message.setSubject(bundle.getString("subject.of.mail"));
-            message.setSubject(AccessFile.message.getString("subject.of.mail"));
-            String mail = AccessFile.message.getString("mail.body");
-            mail = mail.replace("#", filename);
+            if(action=="upload"){
+                message.setSubject(AccessFile.message.getString("subject.of.mail.upload"));
+                String mail = AccessFile.message.getString("mail.body.upload");
+                mail = mail.replace("#", filename);
 
-            message.setText(mail);
-            Transport.send(message);
+                message.setText(mail);
+                Transport.send(message);
+            }
+            else if(action=="delete"){
+                message.setSubject(AccessFile.message.getString("subject.of.mail.delete"));
+                String mail = AccessFile.message.getString("mail.body.delete");
+                mail = mail.replace("#", filename);
+
+                message.setText(mail);
+                Transport.send(message);
+            }
+            else if(action=="user_creation"){
+                message.setSubject(AccessFile.message.getString("subject.of.mail.user.creation"));
+                String mail = AccessFile.message.getString("mail.body.user.creation");
+                mail = mail.replace("#", filename);
+
+                message.setText(mail);
+                Transport.send(message);
+            }
+            else if (action=="reset_password"){
+                message.setSubject(AccessFile.message.getString("subject.of.mail.reset.password"));
+                String mail = AccessFile.message.getString("mail.body.reset.password");
+
+                message.setText(mail);
+                Transport.send(message);
+            }
+            else if (action=="dummy_mail"){
+                message.setSubject(AccessFile.message.getString("subject.of.dummy.mail"));
+                String mail = AccessFile.message.getString("mail.body.dummy");
+
+                message.setText(mail);
+                Transport.send(message);
+            }
             log.info(AccessFile.message.getString("success.message.mail"));
         } catch (Exception e) {
             log.error("Exception occured while sending mail:\n", e);
