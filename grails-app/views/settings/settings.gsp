@@ -50,38 +50,6 @@
     </div>
 </section>
 
-<script type="text/javascript">
-
-    function deleteAllFile() {
-        swal({
-            // options...
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover files!",
-            icon: "warning",
-            buttons:true,
-            dangerMode: true,
-            closeonConfirm: false
-        }).then(function(isConfirm) {
-            if ( isConfirm) {
-                $.ajax({
-                    type: 'POST',
-                    url: '${createLink(controller: 'deleteAll' ,action: 'doAllDelete')}',
-                    success: function () {
-                        swal('Deleted!', 'All File deleted', 'success');
-                        location.reload()
-                    }
-                });
-            }
-            else {
-                swal('Cancelled',
-                    'Your file is safe :)',
-                    'error'
-                );
-            }
-
-        });
-    }
-</script>
 
 <script>
     function isNumberKey(evt){

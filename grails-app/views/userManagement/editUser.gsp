@@ -3,6 +3,7 @@
 <head>
     <meta name="layout" content="main"/>
     <title>${message(code: 'default.user.details')}</title>
+    <content tag="menu.item"><g:message code="side.bar.index.list.user.title"/></content>
 </head>
 
 <body onload="setup()">
@@ -94,7 +95,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="role">${message(code: 'springSecurity.register.role')}</label>
-                            <g:select class="form-control" name="roleid" id="role"
+                            <g:select class="form-control" name="roleid" id="role" value="${role}"
                                       from="${com.grailsapplication.Role.list()}"
                                       optionKey="id"/>
                         </div>
