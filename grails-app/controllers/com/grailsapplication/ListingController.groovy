@@ -15,37 +15,56 @@ class ListingController {
     def doListing() {
 
         Uploadfile uploadfile = new Uploadfile()
-        List<Uploadfile> dbList = uploadfile.list()
+        List<Uploadfile> dbListAll = uploadfile.list()
 
-        int allCount = dbList.size()
-        int docCount = 0
-        int imageCount = 0
-        int pptCount = 0
-        int videoCount = 0
+        Object[] fileCount = getFileCount(dbListAll, null)
 
-        for (Uploadfile uploadfile1 : dbList) {
-            String fileName = uploadfile1.fileName
-            String extension = fileName.substring(fileName.lastIndexOf("."))
-            if (extension.equalsIgnoreCase(".png") || extension.equalsIgnoreCase(".jpg") || extension.equalsIgnoreCase(".jpeg")) {
-                imageCount++
-            } else if (extension.equalsIgnoreCase(".ppt") || extension.equalsIgnoreCase(".pptx") || extension.equalsIgnoreCase(".jar")) {
-                pptCount++
-            } else if (extension.equalsIgnoreCase(".mp4") || extension.equalsIgnoreCase(".mov") || extension.equalsIgnoreCase(".3gp")) {
-                videoCount++
-            } else if (extension.equalsIgnoreCase(".pdf") || extension.equalsIgnoreCase(".txt") || extension.equalsIgnoreCase(".docx") || extension.equalsIgnoreCase(".xls") || extension.equalsIgnoreCase(".xlsx") || extension.equalsIgnoreCase(".csv")) {
-                docCount++
-            }
-        }
-        render view: "/index", model: [dblist: dbList, numberOfAllFiles: allCount, numberOfDocFiles: docCount, numberOfImageFiles: imageCount, numberOfPptFiles: pptCount, numberOfVideoFiles: videoCount]
+        render view: "/index", model: [dblist: dbListAll, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
     }
 
     def doListingByFileType() {
 
         Uploadfile uploadfile = new Uploadfile()
         List<Uploadfile> dbListAll = uploadfile.list()
-        List<Uploadfile> dbList = new ArrayList<Uploadfile>()
         String fileType = params.fileType
 
+        Object[] fileCount = getFileCount(dbListAll, fileType)
+
+        render view: "/index", model: [dblist: fileCount[0], numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
+    }
+
+    def searchList(params) {
+
+        Uploadfile uploadfile = new Uploadfile()
+        List<Uploadfile> dbListAll = uploadfile.list()
+
+        Object[] fileCount = getFileCount(dbListAll, null)
+
+        String searchName = params.srch
+        if (searchName.isEmpty()) {
+            String message = g.message(code: "flash.message.file.search.name.empty.warn")
+            log.info("File name to search is not specified")
+            chain(action: "doListing", model: [message: message])
+        } else {
+            List<Uploadfile> searchDbList = new ArrayList<Uploadfile>()
+            for(Uploadfile file : dbListAll) {
+                if (file.fileName.toLowerCase().contains(searchName.toLowerCase())) {
+                    searchDbList.add(file)
+                }
+            }
+            if (searchDbList.size()) {
+                log.info("Search result is"+ searchDbList);
+                render view: "/index", model: [dblist: searchDbList, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
+            } else {
+                log.error("File not found")
+                String message = g.message(code: "flash.message.search.not.found.warn")
+                render view: "/index", model: [message: message, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
+            }
+        }
+    }
+
+    private static Object[] getFileCount(List<Uploadfile> dbListAll, String fileType) {
+        List<Uploadfile> dbList = new ArrayList<Uploadfile>()
         int allCount = dbListAll.size()
         int docCount = 0
         int imageCount = 0
@@ -77,54 +96,6 @@ class ListingController {
                 }
             }
         }
-        render view: "/index", model: [dblist: dbList, numberOfAllFiles: allCount, numberOfDocFiles: docCount, numberOfImageFiles: imageCount, numberOfPptFiles: pptCount, numberOfVideoFiles: videoCount]
-    }
-
-    def searchList(params) {
-
-        Uploadfile uploadfile = new Uploadfile()
-        List<Uploadfile> dbList = uploadfile.list()
-
-        int allCount = dbList.size()
-        int docCount = 0
-        int imageCount = 0
-        int pptCount = 0
-        int videoCount = 0
-
-        for (Uploadfile uploadfile1 : dbList) {
-            String fileName = uploadfile1.fileName
-            String extension = fileName.substring(fileName.lastIndexOf("."))
-            if (extension.equalsIgnoreCase(".png") || extension.equalsIgnoreCase(".jpg") || extension.equalsIgnoreCase(".jpeg")) {
-                imageCount++
-            } else if (extension.equalsIgnoreCase(".ppt") || extension.equalsIgnoreCase(".pptx") || extension.equalsIgnoreCase(".jar")) {
-                pptCount++
-            } else if (extension.equalsIgnoreCase(".mp4") || extension.equalsIgnoreCase(".mov") || extension.equalsIgnoreCase(".3gp")) {
-                videoCount++
-            } else if (extension.equalsIgnoreCase(".pdf") || extension.equalsIgnoreCase(".txt") || extension.equalsIgnoreCase(".docx") || extension.equalsIgnoreCase(".xls") || extension.equalsIgnoreCase(".xlsx") || extension.equalsIgnoreCase(".csv")) {
-                docCount++
-            }
-        }
-
-        String searchName = params.srch
-        if (searchName.isEmpty()) {
-            String message = g.message(code: "flash.message.file.search.name.empty.warn")
-            log.info("the file name to search is not specified")
-            chain(action: "doListing", model: [message: message])
-        } else {
-            List<Uploadfile> searchDbList = new ArrayList<Uploadfile>()
-            for(Uploadfile file : dbList) {
-                if (file.fileName.contains(searchName)) {
-                    searchDbList.add(file)
-                }
-            }
-            if (searchDbList.size()) {
-                log.info("search result is"+ searchDbList);
-                render view: "/index", model: [dblist: searchDbList, numberOfAllFiles: allCount, numberOfDocFiles: docCount, numberOfImageFiles: imageCount, numberOfPptFiles: pptCount, numberOfVideoFiles: videoCount]
-            } else {
-                log.error("file not found")
-                String message = g.message(code: "flash.message.search.not.found.warn")
-                chain(action: "doListing", model: [message: message])
-            }
-        }
+        return [dbList, allCount, docCount, imageCount, pptCount, videoCount]
     }
 }

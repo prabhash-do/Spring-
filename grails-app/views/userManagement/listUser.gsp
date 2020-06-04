@@ -31,12 +31,17 @@
         <hr class="my-4"/>
     </header>
     <div class="w3-panel" style="margin-left:5px;">
-        <g:form controller="userManagement" action="searchUser" method="post">
-            <g:textField id="searchtext" class="input-xxlarge" name="srch"
-                         placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
-            <button id="submit-values" class="buttons" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
-            </button>
-        </g:form>
+        <div class="input-group mb-2 mr-sm-2">
+            <g:form controller="userManagement" action="searchUser" method="post">
+                <g:textField id="searchtext" class="input-xxlarge" name="srch"
+                             placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
+                <button id="submit-values" class="buttons" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </g:form>
+            <g:form controller="userManagement" action="index" method="post" style="padding-left: 70%">
+                <button id="submit" style="width: 80px;" type="submit"><g:message code="button.list.all.users" /></button>
+            </g:form>
+        </div>
     </div>
     <g:each in="${currentuser}" var="CUser">
         <ul>
@@ -61,26 +66,24 @@
                                                                                       style="color: indigo"></i>
                                 </button>
 
-                                <div class="dropdown-content" >
+                                <div class="dropdown-content">
                                     <g:form controller="userManagement" action="reset">
                                         <g:hiddenField name="username" id="username" value="${User.username}"/>
-                                        <button id="resetSubmit" class="btn"
+                                        <button id="resetSubmit" class="dropbtn"
                                                 type="submit">${message(code: 'default.button.reset')}</button>
                                     </g:form>
                                     <g:form controller="userManagement" action="editUser">
                                         <g:hiddenField name="username" id="username" value="${User.username}"/>
-                                        <button id="editSubmit" class="btn"
+                                        <button id="editSubmit" class="dropbtn"
                                                 type="submit">${message(code: 'default.button.edituser')}</button>
                                     </g:form>
-                                    <button id="deleteSubmit" class="btn" style="margin-left: 24px"
+                                    <button id="deleteSubmit" class="dropbtn"
                                             onclick="deleteUser('${User.id}')"
                                             type="submit">${message(code: 'default.button.deleteuser')}</button>
                                 </div>
                             </div>
                         </td>
                     </tr>
-
-                </tr>
                 </table>
             </fieldset>
         </ul>
@@ -96,6 +99,7 @@
             icon: "warning",
             buttons: true,
             dangerMode: true,
+            closeOnClickOutside:false,
             closeonConfirm: false
         }).then(function (isConfirm) {
             if (isConfirm) {
@@ -108,6 +112,7 @@
                             title: "Deleted!",
                             text: "User has been deleted",
                             icon: "success",
+                            closeOnClickOutside:false,
                             close: false
                         }).then(function (isConfirm) {
                             if (isConfirm) {
@@ -119,35 +124,6 @@
             } else {
                 swal('Cancelled',
                     'User is safe :)',
-                    'error'
-                );
-            }
-
-        });
-    }
-
-    function deleteAllFile() {
-        swal({
-            // options...
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover files!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            closeonConfirm: false
-        }).then(function (isConfirm) {
-            if (isConfirm) {
-                $.ajax({
-                    type: 'POST',
-                    url: '${createLink(controller: 'deleteAll' ,action: 'doAllDelete')}',
-                    success: function () {
-                        swal('Deleted!', 'All File deleted', 'success');
-                        location.reload()
-                    }
-                });
-            } else {
-                swal('Cancelled',
-                    'Your file is safe :)',
                     'error'
                 );
             }

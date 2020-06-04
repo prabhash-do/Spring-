@@ -3,13 +3,29 @@
 <head>
     <meta name="layout" content="main"/>
     <title>${message(code: 'default.user.details')}</title>
+    <content tag="menu.item"><g:message code="side.bar.index.list.user.title"/></content>
 </head>
 
 <body onload="setup()">
+<g:if test="${message}">
+    <asset:javascript src='jquery-3.3.1.min.js'/>
+    <asset:javascript src='jquery.alerts.js'/>
+    <asset:stylesheet src="jquery.alerts.css"/>
+    <tr align="center">
+        <td>
+            <script type="text/javascript"> jAlert('${message}')</script>
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+</g:if>
 <g:render template="/templates/grailstemplates"/>
 <div class="container" style="margin-left:300px;margin-top: 100px;">
     <header class="w3-container" style="padding-top:22px">
-        <h1><b><i class="fa fa-user" style="color: cornflowerblue;"></i><b style="color: cornflowerblue;font: inherit; font-size: 23px;"> ${firstName}</b></b></h1>
+        <h1><b><i class="fa fa-user" style="color: cornflowerblue;"></i><b
+                style="color: cornflowerblue;font: inherit; font-size: 23px;">${firstName}</b></b></h1>
+
         <p><h6 style="font-size: 12px; color: black;">${message(code: 'default.header.user')}: ${userId}</h6></p>
         <hr class="my-4"/>
     </header>
@@ -82,7 +98,8 @@
          aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <g:form controller="userManagement" action="editUserDetails" params="[username: userName]">
+                <g:form controller="userManagement" action="editUserDetails">
+                    <g:hiddenField name="username" id="username" value="${userName}"/>
                     <div class="modal-header">
                         <h5 class="modal-title"
                             id="exampleModalCenterTitle">${message(code: 'default.myprofile.dialog.title')}</h5>
@@ -94,7 +111,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="role">${message(code: 'springSecurity.register.role')}</label>
-                            <g:select class="form-control" name="roleid" id="role"
+                            <g:select class="form-control" name="roleid" id="role" value="${roleId}"
                                       from="${com.grailsapplication.Role.list()}"
                                       optionKey="id"/>
                         </div>
@@ -130,8 +147,8 @@
 
                         <div class="form-group">
                             <label>${message(code: 'default.myprofile.sex')}</label>
-                            <select class="custom-select" name="sex" id="sex" required="required" value="${sex}" selected>
-                                <option value="${message(code: 'register.sex.female')}">${message(code: 'register.sex.female')}</option></option>
+                            <select class="custom-select" name="sex" id="sex" required="required">
+                                <option value="${message(code: 'register.sex.female')}">${message(code: 'register.sex.female')}</option>
                                 <option value="${message(code: 'register.sex.male')}">${message(code: 'register.sex.male')}</option>
                                 <option value="${message(code: 'register.sex.others')}">${message(code: 'register.sex.others')}</option>
                             </select>
@@ -167,6 +184,7 @@
 <asset:javascript src="validator.js"/>
 <g:javascript>
     document.getElementById("disabled").disabled = true;
+    document.getElementById("sex").value = "${sex}";
 </g:javascript>
 </body>
 </html>
