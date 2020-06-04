@@ -256,21 +256,54 @@ class UserManagementController {
     }
     @Secured('permitAll')
     def searchUser(params) {
-        User user = springSecurityService.currentUser
+
         String searchUser = params.srch
-        List<String> userList = User.listOrderByUsername()
-        def userName =[]
 
-        for (User listOfUsers :userList){
-                userName.add(listOfUsers.username)
-            }
-
-        println (userName)
         if (searchUser.isEmpty()) {
             String message = g.message(code: "flash.message.user.search.name.empty.warn")
             log.info("the username to search is not specified")
             chain(action: "index", model: [message: message])
         } else {
+
+            List<String> userList = User.listOrderByUsername()
+
+            def userName =[]
+            User user = springSecurityService.currentUser
+            for (User user1 :userList){
+                userName.add(user1.username)
+            }
+            int size = userName.size()
+            List<User> userList1 = new ArrayList<User>()
+            if (userName.findAll().toString().contains(searchUser)) {
+                User result =null
+                for(User file : userList) {
+                    result = (User) User.findByUsername(userName.get(i))
+                    userList1.add(result)
+                    }
+
+                render view: "/userManagement/listUser", model: [listuser: userList1]
+            } else {
+                String message = g.message(code: "flash.message.search.not.found.warn")
+                log.error("User not found")
+                chain(action: "index", model: [message: message])
+            }
+        }
+    }
+    /*def searchUser(params) {
+
+        String searchUser = params.srch
+
+        if (searchUser.isEmpty()) {
+            String message = g.message(code: "flash.message.user.search.name.empty.warn")
+            log.info("the username to search is not specified")
+            chain(action: "index", model: [message: message])
+        } else {
+            List<String> userList = User.listOrderByUsername()
+            def userName =[]
+            User user = springSecurityService.currentUser
+            for (User listOfUsers :userList){
+                userName.add(listOfUsers.username)
+            }
             if (userName.contains(searchUser)) {
 
                 List<User> result = [User.findByUsername(searchUser)]
@@ -288,6 +321,6 @@ class UserManagementController {
                 chain(action: "index", model: [message: message])
             }
         }
-    }
+    }*/
 }
 
