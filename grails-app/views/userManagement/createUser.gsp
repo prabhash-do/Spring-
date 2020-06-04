@@ -92,7 +92,7 @@
                                 align="left"><span id="isU"></span>
                             <input type="text" placeholder="${message(code: 'springSecurity.login.username.label')}"
                                    class="form-control" name="username"
-                                   id="username"
+                                   id="username" autocomplete="off"
                                    autocapitalize="none" required/>
                         </div>
 
@@ -108,7 +108,7 @@
 
                         <div class="form-group">
                             <label for="dateofbirth">${message(code: 'springSecurity.register.date.label')}</label>
-                            <input type="date" value="2020-05-20" name="dateofbirth" id="dateofbirth" min="1990-01-01"
+                            <input type="date" value="1990-01-01" name="dateofbirth" id="dateofbirth" min="1950-01-01"
                                    max="2025-12-31">
                         </div>
 
@@ -125,7 +125,7 @@
 
                                 <div class="input-group mb-2 mr-sm-2">
                                     <input type="password" class="form-control" name="password"
-                                           id="password"
+                                           id="password" autocomplete="off"
                                            required/>
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -209,7 +209,7 @@
             });
         });
         function generatePassword() {
-            var randomString = Math.random().toString(36).slice(-8);
+            var randomString = Math.random().toString(36).slice(-8).concat('2aS@');
             return randomString;
         }
         function typePassword() {
@@ -220,8 +220,8 @@
         }
 
         window.onload = function() {
-        const myInput = document.getElementById('password');
-        const myInput1 = document.getElementById('confirmPassword');
+        var myInput = document.getElementById('password');
+        var myInput1 = document.getElementById('confirmPassword');
         myInput.onpaste = function(e) {
          e.preventDefault();
  }

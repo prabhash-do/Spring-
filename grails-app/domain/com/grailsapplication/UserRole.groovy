@@ -15,11 +15,15 @@ class UserRole implements Serializable {
 	User user
 	Role role
 
+
 	@Override
 	boolean equals(other) {
+		boolean flag=false
 		if (other instanceof UserRole) {
+			flag=true
 			other.userId == user?.id && other.roleId == role?.id
 		}
+		return flag
 	}
 
     @Override

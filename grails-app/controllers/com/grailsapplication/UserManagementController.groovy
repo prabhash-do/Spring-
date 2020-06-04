@@ -13,7 +13,7 @@ class UserManagementController {
     @Secured('permitAll')
     def index() {
 
-        List<User> listuser = User.list()
+        def listuser = User.list()
         String message;
         User user = springSecurityService.currentUser
         def currentuser = [user]
@@ -50,12 +50,6 @@ class UserManagementController {
         }
         render view: '/userManagement/createUser', model: [message: message]
     }
-
-    @Secured(['ROLE_ADMIN'])
-    def edit() {
-        render view: '/userManagement/editUser'
-    }
-
     /**
      * This method allows a user to change password
      * @return boolean
@@ -148,18 +142,19 @@ class UserManagementController {
         String dateOfBirth = params.dateofbirth
         String userName = params.username
         String password = params.password
+        String roleId = params.roleid
 
         try {
             User u = new User(firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, username: userName, password: password, sex: sex, dateOfBirth: dateOfBirth)
             BootStrap.BANKCARD.each { k, v ->
                 u.addToCoordinates(new SecurityCoordinate(position: k, value: v, user: u))
             }
-            Role role = Role.findById(params.roleid.toLong())
+            Role role = Role.findById(roleId.toLong())
             u = BootStrap.userService.save(u)
             BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority(role.authority))
             log.info("New user has been created Successfully")
             String message = g.message(code: "flash.message.create.user.success", args: [u.username])
-            chain(controller:'userManagement', action: 'index', model:[message: message]);
+            chain(controller: 'userManagement', action: 'index', model: [message: message]);
         } catch (ValidationException e) {
             log.error("Fail to create new user\n", e)
             String message = g.message(code: "flash.message.create.user.fail")
@@ -183,24 +178,22 @@ class UserManagementController {
         String dateOfBirth = user.dateOfBirth
         String userId = user.id
         String role = userRole.role
-        if (user != null) {
-            if (user.password.isEmpty()) {
-                flash.warnmessage = g.message(code: "flash.message.user.warn")
-                log.warn("No User Details Found")
+        String message
+        if (chainModel != null && chainModel.containsKey('message')) {
+            message = chainModel.get('message')
+        }
+        if (user != null || userRole != null) {
+            if (firstName != null || email != null || sex != null || userName != null) {
+                log.info("User Details are shown")
             } else {
-                if (firstName != null || email != null || sex != null || userName != null) {
-                    log.info("User Details are shown")
-                } else {
-                    flash.warnmessage = g.message(code: "flash.message.user.warn")
-                    log.warn("No User Details Found")
-                }
-                render view: "editUser", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth, userId: userId, role: role]
-
+                message = g.message(code: "flash.message.user.warn")
+                log.warn("No User Details Found")
             }
+            render view: "editUser", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth, userId: userId, role: role, message: message]
         } else {
             log.warn("No User Found")
-            String message = g.message(code: "flash.message.no.user.found")
-            forward(action: "index", params: [message: message])
+            message = g.message(code: "flash.message.no.user.found")
+            chain(action: "index", params: [message: message])
         }
     }
     /**
@@ -211,6 +204,7 @@ class UserManagementController {
 
         String username = params.username
         User user = User.findByUsername(username)
+        UserRole userRole = UserRole.findByUser(user)
         String firstName = params.firstname
         String lastName = params.lastname
         String email = params.email
@@ -218,11 +212,12 @@ class UserManagementController {
         String sex = params.sex
         String dateOfBirth = params.dateofbirth
         String roleId = params.roleid
+        String message
 
-        if (user != null) {
+        if (user != null || userRole != null) {
 
             if (firstName.isEmpty() || email.isEmpty() || sex.isEmpty()) {
-                flash.warnmessage = g.message(code: "flash.message.edituser.warn")
+                message = g.message(code: "flash.message.edituser.warn")
                 log.warn("Unable to save user details.Some mandatory fields are left blank")
             } else {
                 user.firstName = firstName
@@ -232,14 +227,19 @@ class UserManagementController {
                 user.sex = sex
                 user.dateOfBirth = dateOfBirth
 
+                BootStrap.userRoleService.delete(user)
                 Role role = Role.findById(roleId.toLong())
                 User u = BootStrap.userService.save(user)
-                BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority(role.authority))
+                BootStrap.userRoleService.save(u, role)
                 log.info("User Details are updated")
-                flash.successmessage = g.message(code: "myprofile.update.user.success")
+                message = g.message(code: "update.user.success", args: [user.username])
+                chain(action: 'editUser', params: [username: username], model: [message: message])
             }
+        } else {
+            log.warn("No User Found")
+            message = g.message(code: "flash.message.no.user.found")
+            chain(action: "index", params: [message: message])
         }
-        redirect(action: 'editUser', params: [username: username])
     }
 /**
  * This method allows a ROLE_ADMIN user to delete any user except the user who has logged in
@@ -254,34 +254,31 @@ class UserManagementController {
         redirect action: "index"
 
     }
+
     @Secured('permitAll')
     def searchUser(params) {
-        User user = springSecurityService.currentUser
         String searchUser = params.srch
         List<String> userList = User.listOrderByUsername()
-        def userName =[]
+        def userName = []
 
-        for (User listOfUsers :userList){
-                userName.add(listOfUsers.username)
-            }
+        for (User listOfUsers : userList) {
+            userName.add(listOfUsers.username)
+        }
 
-        println (userName)
+        println(userName)
         if (searchUser.isEmpty()) {
             String message = g.message(code: "flash.message.user.search.name.empty.warn")
             log.info("the username to search is not specified")
+            //render view: "/userManagement/listUser", model: [listuser: userList, message: message]
             chain(action: "index", model: [message: message])
         } else {
             if (userName.contains(searchUser)) {
 
+                //userList.sort()
                 List<User> result = [User.findByUsername(searchUser)]
 
-                log.info("search result is"+ result);
-                if (searchUser==user.username){
-                    render view: "/userManagement/listUser", model: [currentuser: result]
-                }else{
-                    render view: "/userManagement/listUser", model: [listuser: result]
-                }
-
+                log.info("search result is" + result);
+                render view: "/userManagement/listUser", model: [listuser: result]
             } else {
                 String message = g.message(code: "flash.message.search.not.found.warn")
                 log.error("User not found")
