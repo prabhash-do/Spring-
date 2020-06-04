@@ -303,6 +303,7 @@ html, body, h1, h2, h3, h4, h5 {
                 icon: "${message(code: 'swal.change.warning')}",
                 buttons:true,
                 dangerMode: true,
+                closeOnClickOutside:false,
                 closeonConfirm: false
             }).then(function(isConfirm) {
                 if ( isConfirm) {
@@ -316,6 +317,7 @@ html, body, h1, h2, h3, h4, h5 {
                                     title: "${message(code: 'swal.change.delete')}",
                                     text: "${message(code:'swal.change.file.delete')}",
                                     icon: "${message(code:'swal.change.s')}",
+                                    closeOnClickOutside:false,
                                     close: false
                                 }).then(function (isConfirm) {
                                     if (isConfirm) {
@@ -327,6 +329,7 @@ html, body, h1, h2, h3, h4, h5 {
                                 swal('${message(code:'swal.change.cancel')}',
                                     '${message(code:'swal.change.file.s')}',
                                     '${message(code:'swal.change.error')}'
+
                                 );
                             }
 
@@ -346,6 +349,7 @@ html, body, h1, h2, h3, h4, h5 {
                 icon: "${message(code: 'swal.change.warning')}",
                 buttons:true,
                 dangerMode: true,
+                closeOnClickOutside:false,
                 closeonConfirm: false
             }).then(function(isConfirm) {
                 if ( isConfirm) {
@@ -359,6 +363,7 @@ html, body, h1, h2, h3, h4, h5 {
                                     title: "${message(code: 'swal.change.delete')}",
                                     text: "${message(code:'swal.change.file.delete.All')}",
                                     icon: "${message(code:'swal.change.s')}",
+                                    closeOnClickOutside:false,
                                     close: false
                                 }).then(function (isConfirm) {
                                     if (isConfirm) {

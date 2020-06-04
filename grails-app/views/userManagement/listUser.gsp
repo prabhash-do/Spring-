@@ -96,6 +96,7 @@
             icon: "warning",
             buttons: true,
             dangerMode: true,
+            closeOnClickOutside:false,
             closeonConfirm: false
         }).then(function (isConfirm) {
             if (isConfirm) {
@@ -108,6 +109,7 @@
                             title: "Deleted!",
                             text: "User has been deleted",
                             icon: "success",
+                            closeOnClickOutside:false,
                             close: false
                         }).then(function (isConfirm) {
                             if (isConfirm) {
@@ -119,35 +121,6 @@
             } else {
                 swal('Cancelled',
                     'User is safe :)',
-                    'error'
-                );
-            }
-
-        });
-    }
-
-    function deleteAllFile() {
-        swal({
-            // options...
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover files!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            closeonConfirm: false
-        }).then(function (isConfirm) {
-            if (isConfirm) {
-                $.ajax({
-                    type: 'POST',
-                    url: '${createLink(controller: 'deleteAll' ,action: 'doAllDelete')}',
-                    success: function () {
-                        swal('Deleted!', 'All File deleted', 'success');
-                        location.reload()
-                    }
-                });
-            } else {
-                swal('Cancelled',
-                    'Your file is safe :)',
                     'error'
                 );
             }
