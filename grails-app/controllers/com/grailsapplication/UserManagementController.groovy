@@ -319,24 +319,23 @@ class UserManagementController {
         redirect action: "index"
 
     }
-
     @Secured('permitAll')
     def searchUser() {
         User user = springSecurityService.currentUser
         String searchUser = params.srch
         List<User> userList = User.listOrderByUsername()
-        List<String> userName = []
         String message;
         try {
-            for (User user1 : userList) {
-                userName.add(user1.username)
-            }
-            List<User> result
             if (searchUser.isEmpty()) {
                 message = g.message(code: "flash.message.user.search.name.empty.warn")
                 log.info("the username to search is not specified")
                 chain(action: "index", model: [message: message])
             } else {
+                List<String> userName = []
+                for (User user1 : userList) {
+                    userName.add(user1.username)
+                }
+                List<User> result
                 if (userName.findAll().toString().toLowerCase().contains(searchUser.toLowerCase())) {
                     result = User.findAllByUsernameRlike(searchUser.toLowerCase())
                     result.remove(user)
@@ -359,6 +358,4 @@ class UserManagementController {
             render(view: "listUser", model: [message: message])
         }
     }
-
 }
-
