@@ -48,13 +48,17 @@ class DeleteController {
                     deleteFileFromDB(fileName)
 
                     Settings settings1 = Settings.findByPropertyName("Email_Delete")
-                    if(settings1.propertyValue=="on"){
-                        doMail(fileName)
+                    if (settings1 != null) {
+                        if (settings1.propertyValue == "on") {
+                            doMail(fileName)
+                        }
                     }
 
                     Settings settings2 = Settings.findByPropertyName("Sms_Delete")
-                    if(settings2.propertyValue=="on"){
-                        doSMS(fileName)
+                    if (settings2 != null) {
+                        if(settings2.propertyValue=="on"){
+                            doSMS(fileName)
+                        }
                     }
 
                     return true;

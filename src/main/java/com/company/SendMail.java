@@ -1,16 +1,18 @@
 package com.company;
 
 import org.apache.log4j.Logger;
-import org.hibernate.validator.constraints.Email;
 
-import javax.mail.*;
+import javax.mail.Message;
 import javax.mail.Message.RecipientType;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.Properties;
 
-import static com.company.AccessFile.*;
+import static com.company.AccessFile.config;
 
 public class SendMail {
 
