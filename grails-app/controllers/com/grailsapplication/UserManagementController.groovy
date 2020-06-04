@@ -256,7 +256,7 @@ class UserManagementController {
 
     }
     @Secured('permitAll')
-    def searchUser(params) {
+    def searchUser() {
         User user = springSecurityService.currentUser
         String searchUser = params.srch
         List<User> userList = User.listOrderByUsername()
@@ -285,7 +285,7 @@ class UserManagementController {
                 } else {
                     message = g.message(code: "flash.message.search.not.found.warn")
                     log.error("User not found")
-                    render(view: "listUser", model: [message: message])
+                    chain(action: "index", model: [message: message])
                 }
             }
         }
