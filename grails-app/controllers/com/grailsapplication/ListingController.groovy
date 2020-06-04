@@ -37,34 +37,38 @@ class ListingController {
 
         Uploadfile uploadfile = new Uploadfile()
         List<Uploadfile> dbListAll = uploadfile.list()
+
+        Object[] fileCount = getFileCount(dbListAll, null)
+
         String searchName = params.srch
         String message
-        Object[] fileCount = getFileCount(dbListAll,null)
-        try{
+        try {
             if (searchName.isEmpty()) {
                 message = g.message(code: "flash.message.file.search.name.empty.warn")
                 log.info("File name to search is not specified")
-                chain(action: "doListing", model: [message: message])
+                render view: "/index", model: [message: message, dblist: dbListAll, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
             } else {
                 List<Uploadfile> searchDbList = new ArrayList<Uploadfile>()
-                for(Uploadfile file : dbListAll) {
+                for (Uploadfile file : dbListAll) {
                     if (file.fileName.toLowerCase().contains(searchName.toLowerCase())) {
                         searchDbList.add(file)
                     }
                 }
                 if (searchDbList.size()) {
-                    log.info("Search result is"+ searchDbList);
+                    log.info("Search result is" + searchDbList);
                     render view: "/index", model: [dblist: searchDbList, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
                 } else {
                     log.error("File not found")
                     message = g.message(code: "flash.message.search.not.found.warn")
-                    render view: "/index", model: [message: message, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
+                    render view: "/index", model: [message: message, dblist: dbListAll, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
                 }
             }
-        }catch (Exception) {
+        } catch (Exception) {
             message = g.message(code: "flash.message.unknown.exception")
             render view: "/index", model: [dblist: dbListAll, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
         }
+
+    }
     }
 
     private static Object[] getFileCount(List<Uploadfile> dbListAll, String fileType) {
@@ -102,4 +106,3 @@ class ListingController {
         }
         return [dbList, allCount, docCount, imageCount, pptCount, videoCount]
     }
-}

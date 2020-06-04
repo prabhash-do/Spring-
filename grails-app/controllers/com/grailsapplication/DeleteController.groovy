@@ -3,12 +3,32 @@
  */
 package com.grailsapplication
 
+import com.company.SendMail
+import com.company.SendSms
 import grails.plugin.springsecurity.annotation.Secured
 
 @Secured('permitAll')
 class DeleteController {
 
+    def springSecurityService
+
     def index() {
+    }
+
+    def doMail(def fileName) {
+        User user = springSecurityService.currentUser
+        String action = "delete"
+        SendMail.mail(fileName,user.email,action)
+        log.info("Mail has been sent successfully!")
+        flash.messageemail = g.message(code: "flash.message.email")
+    }
+
+    def doSMS(def fileName) {
+        User user = springSecurityService.currentUser
+        String action = "delete"
+        SendSms.sendsms(fileName,user.mobileNumber,action)
+        log.info("SMS has been sent successfully!")
+        flash.messagesms = g.message(code: "flash.message.sms")
     }
 
     def doDelete() {
@@ -26,6 +46,21 @@ class DeleteController {
             } else {
                 if (file.delete()) {
                     deleteFileFromDB(fileName)
+
+                    Settings settings1 = Settings.findByPropertyName("Email_Delete")
+                    if (settings1 != null) {
+                        if (settings1.propertyValue == "on") {
+                            doMail(fileName)
+                        }
+                    }
+
+                    Settings settings2 = Settings.findByPropertyName("Sms_Delete")
+                    if (settings2 != null) {
+                        if(settings2.propertyValue=="on"){
+                            doSMS(fileName)
+                        }
+                    }
+
                     return true;
                 }
                 else {
