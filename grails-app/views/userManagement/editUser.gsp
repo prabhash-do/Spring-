@@ -23,7 +23,7 @@
 <g:render template="/templates/grailstemplates"/>
 <div class="container" style="margin-left:300px;margin-top: 100px;">
     <header class="w3-container" style="padding-top:22px">
-        <h1><b><i class="fa fa-user" style="color: cornflowerblue;"></i><b
+        <h1><b><i class="fa fa-user" style="color: cornflowerblue; margin-right: 5px"></i><b
                 style="color: cornflowerblue;font: inherit; font-size: 23px;">${firstName}</b></b></h1>
 
         <p><h6 style="font-size: 12px; color: black;">${message(code: 'default.header.user')}: ${userId}</h6></p>
