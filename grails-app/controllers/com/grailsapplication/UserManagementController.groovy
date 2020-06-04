@@ -148,13 +148,17 @@ class UserManagementController {
                     BootStrap.userService.save(user)
 
                     Settings settings1 = Settings.findByPropertyName("Email_Password_Change")
-                    if(settings1.propertyValue=="on"){
-                        doMailResetPassword()
+                    if (settings1 != null) {
+                        if (settings1.propertyValue == "on") {
+                            doMailResetPassword()
+                        }
                     }
 
                     Settings settings2 = Settings.findByPropertyName("Sms_Password_Change")
-                    if(settings2.propertyValue=="on"){
-                        doSMSResetPassword()
+                    if (settings2 != null) {
+                        if(settings2.propertyValue=="on"){
+                            doSMSResetPassword()
+                        }
                     }
 
                     log.info("Password reset Successfully")
@@ -199,13 +203,17 @@ class UserManagementController {
             BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority(role.authority))
 
             Settings settings1 = Settings.findByPropertyName("Email_User_Creation")
-            if(settings1.propertyValue=="on"){
-                doMailUserCreate(userName)
+            if (settings1 != null) {
+                if(settings1.propertyValue=="on") {
+                    doMailUserCreate(userName)
+                }
             }
 
             Settings settings2 = Settings.findByPropertyName("Sms_User_Creation")
-            if(settings2.propertyValue=="on"){
-                doSMSUserCreate(userName)
+            if (settings2 != null) {
+                if (settings2.propertyValue == "on") {
+                    doSMSUserCreate(userName)
+                }
             }
 
             log.info("New user has been created Successfully")

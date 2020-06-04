@@ -90,13 +90,17 @@ class UploadController {
             }
 
             Settings settings1 = Settings.findByPropertyName("Email_Upload")
-            if(settings1.propertyValue=="on"){
-                doMail(fileName)
+            if (settings1 != null) {
+                if(settings1.propertyValue=="on"){
+                    doMail(fileName)
+                }
             }
 
             Settings settings2 = Settings.findByPropertyName("Sms_Upload")
-            if(settings2.propertyValue=="on"){
-                doSMS(fileName)
+            if (settings2 != null) {
+                if(settings2.propertyValue=="on"){
+                    doSMS(fileName)
+                }
             }
 
             /*DON'T DELETE*/
