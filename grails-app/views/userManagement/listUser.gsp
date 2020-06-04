@@ -31,12 +31,17 @@
         <hr class="my-4"/>
     </header>
     <div class="w3-panel" style="margin-left:5px;">
-        <g:form controller="userManagement" action="searchUser" method="post">
-            <g:textField id="searchtext" class="input-xxlarge" name="srch"
-                         placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
-            <button id="submit-values" class="buttons" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
-            </button>
-        </g:form>
+        <div class="input-group mb-2 mr-sm-2">
+            <g:form controller="userManagement" action="searchUser" method="post">
+                <g:textField id="searchtext" class="input-xxlarge" name="srch"
+                             placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
+                <button id="submit-values" class="buttons" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </g:form>
+            <g:form controller="userManagement" action="index" method="post" style="padding-left: 70%">
+                <button id="submit" style="width: 80px;" type="submit"><g:message code="button.list.all.users" /></button>
+            </g:form>
+        </div>
     </div>
     <g:each in="${currentuser}" var="CUser">
         <ul>
@@ -61,7 +66,7 @@
                                                                                       style="color: indigo"></i>
                                 </button>
 
-                                <div class="dropdown-content" >
+                                <div class="dropdown-content">
                                     <g:form controller="userManagement" action="reset">
                                         <g:hiddenField name="username" id="username" value="${User.username}"/>
                                         <button id="resetSubmit" class="btn"
@@ -79,8 +84,6 @@
                             </div>
                         </td>
                     </tr>
-
-                </tr>
                 </table>
             </fieldset>
         </ul>
