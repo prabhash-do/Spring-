@@ -178,6 +178,7 @@ class UserManagementController {
         String dateOfBirth = user.dateOfBirth
         String userId = user.id
         String role = userRole.role
+        String roleId = userRole.role.id
         String message
         if (chainModel != null && chainModel.containsKey('message')) {
             message = chainModel.get('message')
@@ -189,7 +190,7 @@ class UserManagementController {
                 message = g.message(code: "flash.message.user.warn")
                 log.warn("No User Details Found")
             }
-            render view: "editUser", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth, userId: userId, role: role, message: message]
+            render view: "editUser", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth, userId: userId, role: role, roleId: roleId, message: message]
         } else {
             log.warn("No User Found")
             message = g.message(code: "flash.message.no.user.found")
