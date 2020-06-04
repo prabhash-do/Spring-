@@ -50,12 +50,6 @@ class UserManagementController {
         }
         render view: '/userManagement/createUser', model: [message: message]
     }
-
-    @Secured(['ROLE_ADMIN'])
-    def edit() {
-        render view: '/userManagement/editUser'
-    }
-
     /**
      * This method allows a user to change password
      * @return boolean
@@ -184,24 +178,22 @@ class UserManagementController {
         String dateOfBirth = user.dateOfBirth
         String userId = user.id
         String role = userRole.role
-        if (user != null) {
-            if (user.password.isEmpty()) {
-                flash.warnmessage = g.message(code: "flash.message.user.warn")
-                log.warn("No User Details Found")
+        String message
+        if (chainModel != null && chainModel.containsKey('message')) {
+            message = chainModel.get('message')
+        }
+        if (user != null || userRole != null) {
+            if (firstName != null || email != null || sex != null || userName != null) {
+                log.info("User Details are shown")
             } else {
-                if (firstName != null || email != null || sex != null || userName != null) {
-                    log.info("User Details are shown")
-                } else {
-                    flash.warnmessage = g.message(code: "flash.message.user.warn")
-                    log.warn("No User Details Found")
-                }
-                render view: "editUser", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth, userId: userId, role: role]
-
+                message = g.message(code: "flash.message.user.warn")
+                log.warn("No User Details Found")
             }
+            render view: "editUser", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, userName: userName, sex: sex, dateOfBirth: dateOfBirth, userId: userId, role: role, message: message]
         } else {
             log.warn("No User Found")
-            String message = g.message(code: "flash.message.no.user.found")
-            forward(action: "index", params: [message: message])
+            message = g.message(code: "flash.message.no.user.found")
+            chain(action: "index", params: [message: message])
         }
     }
     /**
@@ -212,6 +204,7 @@ class UserManagementController {
 
         String username = params.username
         User user = User.findByUsername(username)
+        UserRole userRole = UserRole.findByUser(user)
         String firstName = params.firstname
         String lastName = params.lastname
         String email = params.email
@@ -219,11 +212,12 @@ class UserManagementController {
         String sex = params.sex
         String dateOfBirth = params.dateofbirth
         String roleId = params.roleid
+        String message
 
-        if (user != null) {
+        if (user != null || userRole != null) {
 
             if (firstName.isEmpty() || email.isEmpty() || sex.isEmpty()) {
-                flash.warnmessage = g.message(code: "flash.message.edituser.warn")
+                message = g.message(code: "flash.message.edituser.warn")
                 log.warn("Unable to save user details.Some mandatory fields are left blank")
             } else {
                 user.firstName = firstName
@@ -233,14 +227,19 @@ class UserManagementController {
                 user.sex = sex
                 user.dateOfBirth = dateOfBirth
 
+                BootStrap.userRoleService.delete(user)
                 Role role = Role.findById(roleId.toLong())
                 User u = BootStrap.userService.save(user)
                 BootStrap.userRoleService.save(u, role)
                 log.info("User Details are updated")
-                flash.successmessage = g.message(code: "myprofile.update.user.success")
+                message = g.message(code: "update.user.success", args: [user.username])
+                chain(action: 'editUser', params: [username: username], model: [message: message])
             }
+        } else {
+            log.warn("No User Found")
+            message = g.message(code: "flash.message.no.user.found")
+            chain(action: "index", params: [message: message])
         }
-        redirect(action: 'editUser', params: [username: username])
     }
 /**
  * This method allows a ROLE_ADMIN user to delete any user except the user who has logged in
