@@ -33,13 +33,10 @@ class ListingController {
         render view: "/index", model: [dblist: fileCount[0], numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
     }
 
-    def searchList(params) {
-
+    def searchList() {
         Uploadfile uploadfile = new Uploadfile()
         List<Uploadfile> dbListAll = uploadfile.list()
-
         Object[] fileCount = getFileCount(dbListAll, null)
-
         String searchName = params.srch
         String message
         try {
@@ -49,13 +46,13 @@ class ListingController {
                 render view: "/index", model: [message: message, dblist: dbListAll, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
             } else {
                 List<Uploadfile> searchDbList = new ArrayList<Uploadfile>()
-                for (Uploadfile file : dbListAll) {
+                for(Uploadfile file : dbListAll) {
                     if (file.fileName.toLowerCase().contains(searchName.toLowerCase())) {
                         searchDbList.add(file)
                     }
                 }
                 if (searchDbList.size()) {
-                    log.info("Search result is" + searchDbList);
+                    log.info("Search result is"+ searchDbList);
                     render view: "/index", model: [dblist: searchDbList, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
                 } else {
                     log.error("File not found")
@@ -63,14 +60,11 @@ class ListingController {
                     render view: "/index", model: [message: message, dblist: dbListAll, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
                 }
             }
-        } catch (Exception) {
+        }catch (Exception ex) {
             message = g.message(code: "flash.message.unknown.exception")
-            render view: "/index", model: [dblist: dbListAll, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
+            render view: "/index", model: [message: message, dblist: dbListAll, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
         }
-
     }
-    }
-
     private static Object[] getFileCount(List<Uploadfile> dbListAll, String fileType) {
         List<Uploadfile> dbList = new ArrayList<Uploadfile>()
         int allCount = dbListAll.size()
@@ -78,7 +72,6 @@ class ListingController {
         int imageCount = 0
         int pptCount = 0
         int videoCount = 0
-
         for (Uploadfile uploadfile1 : dbListAll) {
             String fileName = uploadfile1.fileName
             String extension = fileName.substring(fileName.lastIndexOf("."))
@@ -106,3 +99,4 @@ class ListingController {
         }
         return [dbList, allCount, docCount, imageCount, pptCount, videoCount]
     }
+}
