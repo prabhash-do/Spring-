@@ -1,5 +1,7 @@
 package com.grailsapplication
 
+import com.company.SendMail
+import com.company.SendSms
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 
@@ -22,6 +24,38 @@ class UserManagementController {
             message = chainModel.get('message')
         }
         render view: '/userManagement/listUser', model: [listuser: listuser, currentuser: currentuser, message: message]
+    }
+
+    def doMailUserCreate(def userName) {
+        User user = springSecurityService.currentUser
+        String action = "user_creation"
+        SendMail.mail(userName,user.email,action)
+        log.info("Mail has been sent successfully!")
+        flash.messageemail = g.message(code: "flash.message.email")
+    }
+
+    def doSMSUserCreate(def userName) {
+        User user = springSecurityService.currentUser
+        String action = "user_creation"
+        SendSms.sendsms(userName,user.mobileNumber,action)
+        log.info("SMS has been sent successfully!")
+        flash.messagesms = g.message(code: "flash.message.sms")
+    }
+
+    def doMailResetPassword() {
+        User user = springSecurityService.currentUser
+        String action = "reset_password"
+        SendMail.mail("",user.email,action)
+        log.info("Mail has been sent successfully!")
+        flash.messageemail = g.message(code: "flash.message.email")
+    }
+
+    def doSMSResetPassword() {
+        User user = springSecurityService.currentUser
+        String action = "reset_password"
+        SendSms.sendsms("",user.email,action)
+        log.info("SMS has been sent successfully!")
+        flash.messagesms = g.message(code: "flash.message.sms")
     }
 
     def userList() {
@@ -112,6 +146,17 @@ class UserManagementController {
                 try {
                     user.password = passwordNew
                     BootStrap.userService.save(user)
+
+                    Settings settings1 = Settings.findByPropertyName("Email_Password_Change")
+                    if(settings1.propertyValue=="on"){
+                        doMailResetPassword()
+                    }
+
+                    Settings settings2 = Settings.findByPropertyName("Sms_Password_Change")
+                    if(settings2.propertyValue=="on"){
+                        doSMSResetPassword()
+                    }
+
                     log.info("Password reset Successfully")
                     message = g.message(code: "springsecurity.reset.password.success", args: [username])
                     chain(action: "index", model: [message: message])
@@ -152,6 +197,17 @@ class UserManagementController {
             Role role = Role.findById(roleId.toLong())
             u = BootStrap.userService.save(u)
             BootStrap.userRoleService.save(u, BootStrap.roleService.findByAuthority(role.authority))
+
+            Settings settings1 = Settings.findByPropertyName("Email_User_Creation")
+            if(settings1.propertyValue=="on"){
+                doMailUserCreate(userName)
+            }
+
+            Settings settings2 = Settings.findByPropertyName("Sms_User_Creation")
+            if(settings2.propertyValue=="on"){
+                doSMSUserCreate(userName)
+            }
+
             log.info("New user has been created Successfully")
             String message = g.message(code: "flash.message.create.user.success", args: [u.username])
             chain(controller:'userManagement', action: 'index', model:[message: message]);
@@ -257,7 +313,7 @@ class UserManagementController {
     }
 
     @Secured('permitAll')
-    def searchUser(params) {
+    def searchUser() {
         User user = springSecurityService.currentUser
         String searchUser = params.srch
         List<User> userList = User.listOrderByUsername()
@@ -267,7 +323,7 @@ class UserManagementController {
             for (User user1 : userList) {
                 userName.add(user1.username)
             }
-            List<User> result = null
+            List<User> result
             if (searchUser.isEmpty()) {
                 message = g.message(code: "flash.message.user.search.name.empty.warn")
                 log.info("the username to search is not specified")
@@ -286,7 +342,7 @@ class UserManagementController {
                 } else {
                     message = g.message(code: "flash.message.search.not.found.warn")
                     log.error("User not found")
-                    render(view: "listUser", model: [message: message])
+                    chain(action: "index", model: [message: message])
                 }
             }
         }

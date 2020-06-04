@@ -38,7 +38,7 @@
                 <button id="submit-values" class="buttons" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
                 </button>
             </g:form>
-            <g:form controller="userManagement" action="index" method="post" style="padding-left: 70%">
+            <g:form controller="userManagement" action="index" method="post" style="padding-left: 2.5%">
                 <button id="submit" style="width: 80px;" type="submit"><g:message code="button.list.all.users" /></button>
             </g:form>
         </div>
