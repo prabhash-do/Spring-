@@ -87,6 +87,20 @@ html, body, h1, h2, h3, h4, h5 {
 </style>
 
 <body class="w3-light-grey">
+<g:if test="${message}">
+    <asset:javascript src='jquery.alerts.js'/>
+    <asset:stylesheet src="jquery.alerts.css" />
+    <tr align="center">
+        <td>
+            <script type="text/javascript"> jAlert('${message}','',function submitAll() {
+                document.forms['all'].submit()
+            })</script>
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+</g:if>
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top: 100px;">
     <!-- Header -->
@@ -197,7 +211,7 @@ html, body, h1, h2, h3, h4, h5 {
         </div>
         <div class="w3-panel">
             <g:render template="/templates/grailstemplates"/>
-            <button class="button" value="Delete All" name="Delete All" onclick="deleteAllFile()">Delete All</button>
+            <button class="button" value="Delete All" name="Delete All" onclick="deleteAllFile()"><g:message code="default.delete.all.button"/></button>
         </div>
         <table class="table table-bordered">
             <thead>
@@ -320,7 +334,7 @@ html, body, h1, h2, h3, h4, h5 {
                                 swal({
                                     title: "${message(code: 'swal.change.delete')}",
                                     text: "${message(code:'swal.change.file.delete')}",
-                                    icon: "${message(code:'swal.change.s')}",
+                                    icon: "${message(code:'swal.change.success')}",
                                     closeOnClickOutside:false,
                                     close: false
                                 }).then(function (isConfirm) {
@@ -330,7 +344,7 @@ html, body, h1, h2, h3, h4, h5 {
                                 })
                             } else {
                                 swal('${message(code:'swal.change.cancel')}',
-                                    '${message(code:'swal.change.file.s')}',
+                                    '${message(code:'swal.change.file.safe')}',
                                     '${message(code:'swal.change.error')}'
 
                                 );
@@ -365,7 +379,7 @@ html, body, h1, h2, h3, h4, h5 {
                                 swal({
                                     title: "${message(code: 'swal.change.delete')}",
                                     text: "${message(code:'swal.change.file.delete.All')}",
-                                    icon: "${message(code:'swal.change.s')}",
+                                    icon: "${message(code:'swal.change.success')}",
                                     closeOnClickOutside:false,
                                     close: false
                                 }).then(function (isConfirm) {
