@@ -49,7 +49,6 @@ class UploadController {
     def doUpload() {
         String message;
         Settings settings = Settings.findByPropertyName("File size")
-        Double fileSize1 = settings.propertyValue.toDouble()
         try {
             def file = request.getFile('file')
             String fileName = file.originalFilename
@@ -101,7 +100,7 @@ class UploadController {
         } catch (Exception e) {
             log.error("Exception occured while Uploading file:\n", e)
         }
-        render view: "/insert/upload", model: [message: message, fileSize1: fileSize1]
+        chain( controller: 'Insert', action: 'insert', model: [message: message])
     }
 
     private static String getFileSize(Long fileSize) {
