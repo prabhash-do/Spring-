@@ -94,9 +94,9 @@
     function deleteUser(data) {
         swal({
 // options...
-            title: "Are you sure?",
-            text: "Once deleted, user will not be available!",
-            icon: "warning",
+            title: "${message(code: 'swal.change.alert')}",
+            text: "${message(code: 'swal.change.not.available.user')}",
+            icon: "${message(code: 'swal.change.warning')}",
             buttons: true,
             dangerMode: true,
             closeOnClickOutside:false,
@@ -109,9 +109,9 @@
                     url: '${createLink(controller: 'userManagement' ,action: 'deleteUser')}',
                     success: function (data) {
                         swal({
-                            title: "Deleted!",
-                            text: "User has been deleted",
-                            icon: "success",
+                            title: "${message(code: 'swal.change.delete')}",
+                            text: "${message(code:'swal.change.user.delete')}",
+                            icon: "${message(code:'swal.change.success')}",
                             closeOnClickOutside:false,
                             close: false
                         }).then(function (isConfirm) {
@@ -121,11 +121,6 @@
                         })
                     }
                 });
-            } else {
-                swal('Cancelled',
-                    'User is safe :)',
-                    'error'
-                );
             }
 
         });
