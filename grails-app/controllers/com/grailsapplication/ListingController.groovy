@@ -44,7 +44,7 @@ class ListingController {
         if (searchName.isEmpty()) {
             String message = g.message(code: "flash.message.file.search.name.empty.warn")
             log.info("File name to search is not specified")
-            chain(action: "doListing", model: [message: message])
+            render view: "/index", model: [message: message, dblist: dbListAll, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
         } else {
             List<Uploadfile> searchDbList = new ArrayList<Uploadfile>()
             for(Uploadfile file : dbListAll) {
@@ -58,7 +58,7 @@ class ListingController {
             } else {
                 log.error("File not found")
                 String message = g.message(code: "flash.message.search.not.found.warn")
-                render view: "/index", model: [message: message, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
+                render view: "/index", model: [message: message, dblist: dbListAll, numberOfAllFiles: fileCount[1], numberOfDocFiles: fileCount[2], numberOfImageFiles: fileCount[3], numberOfPptFiles: fileCount[4], numberOfVideoFiles: fileCount[5]]
             }
         }
     }

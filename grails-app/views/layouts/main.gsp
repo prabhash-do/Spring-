@@ -86,6 +86,13 @@
             <a id="createuser" name="createuser" href="<g:createLink controller='userManagement' action='create'/>"
                class="${pageProperty(name: 'page.menu.item') == "${g.message(code: 'default.button.createuser')}" ? 'w3-bar-item w3-button w3-padding w3-indigo' : 'w3-bar-item w3-button w3-padding'}"><i class="fa fa-user fa-fw"></i><g:message
                     code="default.button.createuser"/></a>
+
+            <a id="sms" name="sms" href="<g:createLink controller='settings' action='doSms'/>"
+               class="${pageProperty(name: 'page.menu.item') == "${g.message(code: 'side.bar.index.sms.title')}" ? 'w3-bar-item w3-button w3-padding w3-indigo' : 'w3-bar-item w3-button w3-padding'}"><i class="fa fa-commenting fa-fw"></i><g:message code="side.bar.index.sms.title"/></a>
+
+            <a id="email_id" name="email_id" href="<g:createLink controller='settings' action='doEmail'/>"
+               class="${pageProperty(name: 'page.menu.item') == "${g.message(code: 'side.bar.index.email.title')}" ? 'w3-bar-item w3-button w3-padding w3-indigo' : 'w3-bar-item w3-button w3-padding'}"><i class="fa fa-envelope fa-fw"></i><g:message code="side.bar.index.email.title"/></a>
+
             <a id="settings" name="settings" href="<g:createLink controller='settings' action='doSettings'/>"
                class="${pageProperty(name: 'page.menu.item') == "${g.message(code: 'side.bar.index.settings.title')}" ? 'w3-bar-item w3-button w3-padding w3-indigo' : 'w3-bar-item w3-button w3-padding'}"><i
                     class="fa fa-cogs fa-fw"></i><g:message code="side.bar.index.settings.title"/></a>
