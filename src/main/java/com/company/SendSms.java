@@ -26,6 +26,7 @@ public class SendSms {
             String to = number;
             String smsbody_upload = message.getString("sms.body.message.upload");
             String smsbody_delete = message.getString("sms.body.message.delete");
+            String smsbody_delete_all = message.getString("sms.body.message.delete.all");
             String smsbody_user_creation = message.getString("sms.body.message.user.creation");
             String smsbody_password = message.getString("sms.body.message.password");
             String smsbody_dummy = message.getString("sms.body.message.dummy");
@@ -46,10 +47,14 @@ public class SendSms {
                 smsbody_upload = MessageFormat.format(smsbody_upload, filename);
                 smsbody_upload = URLEncoder.encode(smsbody_upload, "UTF-8");
                 requestUrl = MessageFormat.format(requestUrl, smsbody_upload);
-            }else if(action=="delete"){
+            }else if(action=="delete") {
                 smsbody_delete = MessageFormat.format(smsbody_delete, filename);
                 smsbody_delete = URLEncoder.encode(smsbody_delete, "UTF-8");
                 requestUrl = MessageFormat.format(requestUrl, smsbody_delete);
+            }else if(action=="delete_all"){
+                smsbody_delete_all = MessageFormat.format(smsbody_delete_all,"");
+                smsbody_delete_all = URLEncoder.encode(smsbody_delete_all, "UTF-8");
+                requestUrl = MessageFormat.format(requestUrl, smsbody_delete_all);
             }else if (action=="user_creation"){
                 smsbody_user_creation = MessageFormat.format(smsbody_user_creation, filename);
                 smsbody_user_creation = URLEncoder.encode(smsbody_user_creation, "UTF-8");

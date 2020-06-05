@@ -39,7 +39,6 @@
                 id="sms-page"
                 autocomplete="off">
             <div class="form-group" style="margin-left: 20px">
-                <g:render template="/templates/grailstemplates"/>
                 <label for="mail"><h1><g:message code="Mail.id.dummy.email"/></h1></label>
                 <td align="left">
 

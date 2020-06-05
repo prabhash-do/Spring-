@@ -74,6 +74,11 @@ public class SendMail {
                 mail = mail.replace("#", filename);
                 message.setText(mail);
             }
+            else if(action=="delete_all"){
+                message.setSubject(AccessFile.message.getString("subject.of.mail.delete"));
+                String mail = AccessFile.message.getString("mail.body.delete.all");
+                message.setText(mail);
+            }
             else if(action=="user_creation"){
                 message.setSubject(AccessFile.message.getString("subject.of.mail.user.creation"));
                 String mail = AccessFile.message.getString("mail.body.user.creation");

@@ -39,7 +39,6 @@
                 id="sms-page"
                 autocomplete="off">
             <div class="form-group" style="margin-left: 20px">
-                <g:render template="/templates/grailstemplates"/>
                 <label for="mobilenumber"><h1><g:message code="phone.number.dummy.sms"/></h1>
                 </label>
                 <input type="text" value="${mobilenumber}" placeholder="<g:message code="phone.number.place.holder"/>"
