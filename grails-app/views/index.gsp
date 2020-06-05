@@ -21,19 +21,19 @@
         background-color: #af1b25; /* Green */
         border: none;
         color: #fbfbff;
-        padding: 8px 11px;
+        padding: 5px 5px;
         text-align: center;
         text-decoration: #f9ffeb;
         display: inline-block;
-        font-size: 15px;
-        margin: 2px 2px;
+        font-size: 12px;
+        margin: 0px 0px;
         cursor: pointer;
     }
 
     .button:hover{
-        -ms-transform: scale(1.5); /* IE 9 */
-        -webkit-transform: scale(1.5); /* Safari 3-8 */
-        transform: scale(1.5);
+        -ms-transform: scale(1.3);
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
     }
 
     .row {
@@ -185,15 +185,13 @@ html, body, h1, h2, h3, h4, h5 {
 <g:if test="${dblist}">
     <div class="w3-panel">
     <div class="w3-panel" style="margin-left:-16px;">
-    <g:form controller="listing" action="searchList" method="post">
+    <g:form controller="listing" action="searchList" method="post" style="float: left">
         <g:textField id="searchtext" class="input-xxlarge" name="srch"
                      placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
         <button id="submit-values" class="buttons" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
         </button>
     </g:form>
-    </div>
-    <div class="w3-panel" >
-        <button class="button" value="Delete All" name="Delete All" onclick="deleteAllFile()">Delete All</button>
+        <button id="deleteall" class="button" value="Delete All"  name="Delete All" onclick="deleteAllFile()">Delete All</button>
     </div>
     <table class="table table-bordered">
         <thead>
