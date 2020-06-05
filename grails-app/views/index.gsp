@@ -202,6 +202,7 @@ html, body, h1, h2, h3, h4, h5 {
     <g:if test="${dblist}">
         <div class="w3-panel">
         <div class="w3-panel" style="margin-left:-16px;">
+        <g:render template="/templates/grailstemplates"/>
         <g:form controller="listing" action="searchList" method="post">
             <g:textField id="searchtext" class="input-xxlarge" name="srch"
                          placeholder="${message(code: 'default.search.placeholder')}" value="${srch}"/>
@@ -210,7 +211,6 @@ html, body, h1, h2, h3, h4, h5 {
         </g:form>
         </div>
         <div class="w3-panel">
-            <g:render template="/templates/grailstemplates"/>
             <button class="button" value="Delete All" name="Delete All" onclick="deleteAllFile()"><g:message code="default.delete.all.button"/></button>
         </div>
         <table class="table table-bordered">

@@ -23,7 +23,6 @@
         </td>
     </tr>
 </g:if>
-<g:render template="/templates/grailstemplates"/>
 <div id="main-heading" role="main" style="margin-left:300px;margin-top:100px;">
 
     <header class="w3-container" style="padding-top:22px">
@@ -31,6 +30,7 @@
         <hr class="my-4"/>
     </header>
     <div class="w3-panel" style="margin-left:5px;">
+        <g:render template="/templates/grailstemplates"/>
         <div class="input-group mb-2 mr-sm-2">
             <g:form controller="userManagement" action="searchUser" method="post">
                 <g:textField id="searchtext" class="input-xxlarge" name="srch"

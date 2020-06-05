@@ -15,8 +15,8 @@ class SettingsController {
         String action = "dummy_mail"
         SendMail.mail("", email_id, action)
         log.info("Dummy mail has been sent successfully!")
-        flash.messageemail = g.message(code: "flash.message.dummy.email")
-        render view: "email", model: [Mail: email_id]
+        String message = g.message(code: "flash.message.dummy.email")
+        render view: "email", model: [Mail: email_id, message: message]
     }
 
     def doSMS() {
@@ -24,8 +24,8 @@ class SettingsController {
         String action = "dummy_sms"
         SendSms.sendsms("", number, action)
         log.info("Dummy SMS has been sent successfully!")
-        flash.messagesms = g.message(code: "flash.message.dummy.sms")
-        render view: "sms", model: [mobilenumber: number]
+        String message = g.message(code: "flash.message.dummy.sms")
+        render view: "sms", model: [mobilenumber: number, message: message]
     }
 
     def doSms() {
@@ -244,6 +244,6 @@ class SettingsController {
 
         Double fileSize1 = settings.propertyValue.toDouble()
         String message = g.message(code: "file.size.limit.save.alert", args: [fileSize1])
-        render view: "settings", model: [fileSize1: fileSize1, message: message]
+        render view: "settings", model: [fileSize1: fileSize1, email_upload: params.email_upload, email_delete: params.email_delete, email_user: params.email_user, email_password: params.email_password, sms_upload: params.sms_upload, sms_delete: params.sms_delete, sms_user: params.sms_user, sms_password: params.sms_password, message: message]
     }
 }
