@@ -29,7 +29,7 @@ class UserManagementController {
     def doMailUserCreate(def userName) {
         User user = springSecurityService.currentUser
         String action = "user_creation"
-        SendMail.mail(userName,user.email,action)
+        SendMail.mail(userName, user.email, action)
         log.info("Mail has been sent successfully!")
         flash.messageemail = g.message(code: "flash.message.email")
     }
@@ -37,7 +37,7 @@ class UserManagementController {
     def doSMSUserCreate(def userName) {
         User user = springSecurityService.currentUser
         String action = "user_creation"
-        SendSms.sendsms(userName,user.mobileNumber,action)
+        SendSms.sendsms(userName, user.mobileNumber, action)
         log.info("SMS has been sent successfully!")
         flash.messagesms = g.message(code: "flash.message.sms")
     }
@@ -45,7 +45,7 @@ class UserManagementController {
     def doMailResetPassword() {
         User user = springSecurityService.currentUser
         String action = "reset_password"
-        SendMail.mail("",user.email,action)
+        SendMail.mail("", user.email, action)
         log.info("Mail has been sent successfully!")
         flash.messageemail = g.message(code: "flash.message.email")
     }
@@ -53,7 +53,7 @@ class UserManagementController {
     def doSMSResetPassword() {
         User user = springSecurityService.currentUser
         String action = "reset_password"
-        SendSms.sendsms("",user.email,action)
+        SendSms.sendsms("", user.email, action)
         log.info("SMS has been sent successfully!")
         flash.messagesms = g.message(code: "flash.message.sms")
     }
@@ -156,7 +156,7 @@ class UserManagementController {
 
                     Settings settings2 = Settings.findByPropertyName("Sms_Password_Change")
                     if (settings2 != null) {
-                        if(settings2.propertyValue=="on"){
+                        if (settings2.propertyValue == "on") {
                             doSMSResetPassword()
                         }
                     }
@@ -204,7 +204,7 @@ class UserManagementController {
 
             Settings settings1 = Settings.findByPropertyName("Email_User_Creation")
             if (settings1 != null) {
-                if(settings1.propertyValue=="on") {
+                if (settings1.propertyValue == "on") {
                     doMailUserCreate(userName)
                 }
             }
@@ -218,7 +218,7 @@ class UserManagementController {
 
             log.info("New user has been created Successfully")
             String message = g.message(code: "flash.message.create.user.success", args: [u.username])
-            chain(controller:'userManagement', action: 'index', model:[message: message]);
+            chain(controller: 'userManagement', action: 'index', model: [message: message]);
         } catch (ValidationException e) {
             log.error("Fail to create new user\n", e)
             String message = g.message(code: "flash.message.create.user.fail")
@@ -270,20 +270,28 @@ class UserManagementController {
         String username = params.username
         User user = User.findByUsername(username)
         UserRole userRole = UserRole.findByUser(user)
+        Role role
+        String message
+        String userId = user.id
         String firstName = params.firstname
         String lastName = params.lastname
         String email = params.email
+        String userName = user.username
         String mobileNumber = params.mobilenumber
         String sex = params.sex
         String dateOfBirth = params.dateofbirth
         String roleId = params.roleid
-        String message
 
         if (user != null || userRole != null) {
 
-            if (firstName.isEmpty() || email.isEmpty() || sex.isEmpty()) {
+            if (firstName.isEmpty() || email.isEmpty()) {
+                String fName = user.firstName
+                String uEmail = user.email
+                String uRoleId = userRole.role.id
+                String uRoleName = userRole.role
                 message = g.message(code: "flash.message.edituser.warn")
                 log.warn("Unable to save user details.Some mandatory fields are left blank")
+                render view: "editUser", model: [firstName: fName, lastName: lastName, email: uEmail, mobileNumber: mobileNumber, sex: sex, dateOfBirth: dateOfBirth, userName: userName, userId: userId, role: uRoleName, roleId: uRoleId, message: message]
             } else {
                 user.firstName = firstName
                 user.lastName = lastName
@@ -293,12 +301,12 @@ class UserManagementController {
                 user.dateOfBirth = dateOfBirth
 
                 BootStrap.userRoleService.delete(user)
-                Role role = Role.findById(roleId.toLong())
+                role = Role.findById(roleId.toLong())
                 User u = BootStrap.userService.save(user)
                 BootStrap.userRoleService.save(u, role)
                 log.info("User Details are updated")
                 message = g.message(code: "update.user.success", args: [user.username])
-                chain(action: 'editUser', params: [username: username], model: [message: message])
+                render view: "editUser", model: [firstName: firstName, lastName: lastName, email: email, mobileNumber: mobileNumber, sex: sex, dateOfBirth: dateOfBirth, userName: userName, userId: userId, role: role, roleId: roleId, message: message]
             }
         } else {
             log.warn("No User Found")
@@ -319,6 +327,7 @@ class UserManagementController {
         redirect action: "index"
 
     }
+
     @Secured('permitAll')
     def searchUser() {
         User user = springSecurityService.currentUser
