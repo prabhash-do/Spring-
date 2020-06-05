@@ -23,7 +23,6 @@
         </td>
     </tr>
 </g:if>
-<g:render template="/templates/grailstemplates"/>
 <div id="main-heading" role="main" style="margin-left:300px;margin-top:100px;">
 
     <header class="w3-container" style="padding-top:22px">
@@ -31,6 +30,7 @@
         <hr class="my-4"/>
     </header>
     <div class="w3-panel" style="margin-left:5px;">
+        <g:render template="/templates/grailstemplates"/>
         <div class="input-group mb-2 mr-sm-2">
             <g:form controller="userManagement" action="searchUser" method="post">
                 <g:textField id="searchtext" class="input-xxlarge" name="srch"
@@ -38,7 +38,7 @@
                 <button id="submit-values" class="buttons" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
                 </button>
             </g:form>
-            <g:form controller="userManagement" action="index" method="post" style="padding-left: 70%">
+            <g:form controller="userManagement" action="index" method="post" style="padding-left: 2.5%">
                 <button id="submit" style="width: 80px;" type="submit"><g:message code="button.list.all.users" /></button>
             </g:form>
         </div>
@@ -94,9 +94,9 @@
     function deleteUser(data) {
         swal({
 // options...
-            title: "Are you sure?",
-            text: "Once deleted, user will not be available!",
-            icon: "warning",
+            title: "${message(code: 'swal.change.alert')}",
+            text: "${message(code: 'swal.change.not.available.user')}",
+            icon: "${message(code: 'swal.change.warning')}",
             buttons: true,
             dangerMode: true,
             closeOnClickOutside:false,
@@ -109,9 +109,9 @@
                     url: '${createLink(controller: 'userManagement' ,action: 'deleteUser')}',
                     success: function (data) {
                         swal({
-                            title: "Deleted!",
-                            text: "User has been deleted",
-                            icon: "success",
+                            title: "${message(code: 'swal.change.delete')}",
+                            text: "${message(code:'swal.change.user.delete')}",
+                            icon: "${message(code:'swal.change.success')}",
                             closeOnClickOutside:false,
                             close: false
                         }).then(function (isConfirm) {
@@ -121,11 +121,6 @@
                         })
                     }
                 });
-            } else {
-                swal('Cancelled',
-                    'User is safe :)',
-                    'error'
-                );
             }
 
         });

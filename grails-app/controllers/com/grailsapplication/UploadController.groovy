@@ -10,25 +10,28 @@ import com.company.CheckConnectivity
 import com.company.SendMail
 import com.company.SendSms
 import grails.plugin.springsecurity.annotation.Secured
+import org.hibernate.validator.constraints.Email
 
 @Secured(['permitAll'])
 class UploadController {
-
+    def springSecurityService
 
     def index() {
         render view: '../index'
     }
 
     def doMail(def fileName) {
-
-        SendMail.mail(fileName)
+        User user = springSecurityService.currentUser
+        String action = "upload"
+        SendMail.mail(fileName,user.email,action)
         log.info("Mail has been sent successfully!")
         flash.messageemail = g.message(code: "flash.message.email")
     }
 
     def doSMS(def fileName) {
-
-        SendSms.sendsms(fileName)
+        User user = springSecurityService.currentUser
+        String action = "upload"
+        SendSms.sendsms(fileName,user.mobileNumber,action)
         log.info("SMS has been sent successfully!")
         flash.messagesms = g.message(code: "flash.message.sms")
     }
@@ -49,7 +52,6 @@ class UploadController {
     def doUpload() {
         String message;
         Settings settings = Settings.findByPropertyName("File size")
-        Double fileSize1 = settings.propertyValue.toDouble()
         try {
             def file = request.getFile('file')
             String fileName = file.originalFilename
@@ -85,6 +87,21 @@ class UploadController {
                     message = g.message(code: "flash.message.replace.file")
                 }
             }
+
+            Settings settings1 = Settings.findByPropertyName("Email_Upload")
+            if (settings1 != null) {
+                if(settings1.propertyValue=="on"){
+                    doMail(fileName)
+                }
+            }
+
+            Settings settings2 = Settings.findByPropertyName("Sms_Upload")
+            if (settings2 != null) {
+                if(settings2.propertyValue=="on"){
+                    doSMS(fileName)
+                }
+            }
+
             /*DON'T DELETE*/
             /*if (CheckConnectivity.internetConnection()) {
                 boolean isemailchecked = params.email
@@ -101,7 +118,7 @@ class UploadController {
         } catch (Exception e) {
             log.error("Exception occured while Uploading file:\n", e)
         }
-        render view: "/insert/upload", model: [message: message, fileSize1: fileSize1]
+        chain( controller: 'Insert', action: 'insert', model: [message: message])
     }
 
     private static String getFileSize(Long fileSize) {
