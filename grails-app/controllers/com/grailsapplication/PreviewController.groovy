@@ -9,7 +9,7 @@ class PreviewController {
 
     def preview() {
         def errorMessage
-        def filename = params.filename
+        String filename = params.filename
         def ex = filename.substring(filename.lastIndexOf("."));
         if (ex.equalsIgnoreCase(".pdf")|| ex.equalsIgnoreCase(".txt")) {
 

@@ -5,7 +5,7 @@ dataSource {
     driverClassName = "org.postgresql.Driver"
     username = "postgres"
     password = "Independent12#"
-    url = "jdbc:postgresql://localhost:5432/docupload"
+    url = "jdbc:postgresql://localhost:5432/Grails_application"
 
     logSql = true
     pooled = true

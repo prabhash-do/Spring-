@@ -31,7 +31,7 @@
         cursor: pointer;
     }
 
-    .button:hover{
+    .button:hover {
         -ms-transform: scale(1.3);
         -webkit-transform: scale(1.3);
         transform: scale(1.3);
@@ -209,6 +209,7 @@ html, body, h1, h2, h3, h4, h5 {
         <button id="submit-values" class="buttons" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
         </button>
     </g:form>
+            <g:render template="/templates/grailstemplates"/>
             <button id="deleteall" class="button" value="Delete All"  name="Delete All" onclick="deleteAllFile()"><g:message code="default.delete.all.button"/></button>
         </div>
         <table class="table table-bordered">

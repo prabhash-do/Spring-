@@ -10,7 +10,7 @@ class LocaleNavbarTagLibSpec extends Specification implements TagLibUnitTest<Loc
         given:
         def uri = '/books'
         def languages = [[code: 'en', msg: 'English'],
-                         [code: 'bn', msg: 'Bengali']]
+                         [code: 'bn', msg: 'Bengali'],]
 
         when:
         def expected = ''
